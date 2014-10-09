@@ -1,0 +1,24 @@
+Initialize engine version: 4.3.4f1 (e444f76e01cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1230]
+    Renderer: AMD Radeon HD 6900 Series
+    Vendor:   ATI
+    VRAM:     2027 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=1
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+- Completed reload, in  0.058 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\Rise\Dropbox\Programing Projects\Game Development Studios\Maze2D\Maze2D\demo_Data\Managed\Boo.Lang.dll (this message is harmless)
+The server has disconnected from the client. Most likely the server has shut down.
+ 
+(Filename:  Line: 740)
+
