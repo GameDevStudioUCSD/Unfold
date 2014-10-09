@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../PluralsightUnityProject/Assets/Main/Movement.cs">
+    <Files>
+      <File FileName="../../../PluralsightUnityProject/Assets/Main/Movement.cs" Line="1" Column="1" />
+      <File FileName="../../../PluralsightUnityProject/Assets/Survival Template/Scripts/MoveAnimation.cs" Line="1" Column="1" />
+      <File FileName="../../../PluralsightUnityProject/Assets/Main/Health.cs" Line="1" Column="1" />
+      <File FileName="../../../PluralsightUnityProject/Assets/Survival Template/Scripts/AttackAnimation.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
