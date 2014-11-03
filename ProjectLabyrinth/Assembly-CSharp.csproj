@@ -46,7 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CNControls\NotImportant\Controller Examples\CameraFollowExample.cs" />
+     <Compile Include="Assets\CNControls\NotImportant\Controller Examples\Controller3DExample.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNAbstractController.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNJoystick.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNThrowableTouchpad.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNTouchpad.cs" />
      <Compile Include="Assets\Scripts\CollisionTest.cs" />
+     <Compile Include="Assets\Scripts\IFightable.cs" />
+     <Compile Include="Assets\Scripts\LockOnToEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\TriggerTest.cs" />
   </ItemGroup>
