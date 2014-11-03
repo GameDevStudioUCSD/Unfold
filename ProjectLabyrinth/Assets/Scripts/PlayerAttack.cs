@@ -11,7 +11,12 @@ public class PlayerAttack : MonoBehaviour {
 		{
 			Debug.Log ("MOUSE PRESSED");
 			if (attackVictim)
+			{
 				Debug.Log ("Attacking " + attackVictim.name);
+				attackVictim.rigidbody.AddForce(Vector3.forward * 3000f, ForceMode.Acceleration);
+				attackVictim.rigidbody.AddForce(Vector3.up * 3000f, ForceMode.Acceleration);
+				
+			}
 		}
 	}
 
