@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Maze_Generator.cs" />
+     <Compile Include="Assets\Scripts\DepthFirstMazeGenerator.cs" />
+     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
+     <Compile Include="Assets\Scripts\Maze_Generator_Controller.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Square.cs" />
   </ItemGroup>
