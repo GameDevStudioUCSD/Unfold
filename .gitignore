@@ -1,0 +1,8 @@
+ProjectLabyrinth/Library/metadata/**
+ProjectLabyrinth/Temp**
+Maze2D/**
+ProjectLabyrinth/Library/AssetVersioning.db
+ProjectLabyrinth/Library/ScriptAssemblies/**
+*.suo
+*.csproj
+*.unityproj
