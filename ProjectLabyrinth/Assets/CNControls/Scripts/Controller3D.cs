@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class Controller3D : MonoBehaviour
 {
-    public const float ROTATE_SPEED = 5f;
+    public const float ROTATE_SPEED = 1f;
 
     public float movementSpeed = 5f;
 
@@ -25,8 +25,8 @@ public class Controller3D : MonoBehaviour
 
         _characterController = GetComponent<CharacterController>();
         _mainCameraTransform = Camera.main.GetComponent<Transform>();
-        _transformCache = GetComponent<Transform>();
-        _playerTransform = _transformCache.FindChild("Player 1");
+        _transformCache = GetComponentInParent<Transform>();
+        _playerTransform = _transformCache;
     }
 
     

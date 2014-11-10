@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour {
 	
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(1))
 		{
 			Debug.Log ("MOUSE PRESSED");
 			if (attackVictim)
