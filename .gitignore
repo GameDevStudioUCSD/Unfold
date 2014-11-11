@@ -2,3 +2,4 @@ ProjectLabyrinth/Library/metadata/**
 ProjectLabyrinth/Temp**
 Maze2D/**
 ProjectLabyrinth/Library/ScriptAssemblies/**
+*.meta
