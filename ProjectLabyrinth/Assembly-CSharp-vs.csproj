@@ -46,11 +46,23 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CNControls\NotImportant\Controller Examples\CameraFollowExample.cs" />
+     <Compile Include="Assets\CNControls\NotImportant\Controller Examples\Controller3DExample.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNAbstractController.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNJoystick.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNThrowableTouchpad.cs" />
+     <Compile Include="Assets\CNControls\Scripts\CNTouchpad.cs" />
+     <Compile Include="Assets\CNControls\Scripts\Controller3D.cs" />
+     <Compile Include="Assets\Scripts\CollisionTest.cs" />
      <Compile Include="Assets\Scripts\DepthFirstMazeGenerator.cs" />
+     <Compile Include="Assets\Scripts\IFightable.cs" />
+     <Compile Include="Assets\Scripts\LockOnToEnemy.cs" />
      <Compile Include="Assets\Scripts\MazeGenerator.cs" />
      <Compile Include="Assets\Scripts\Maze_Generator_Controller.cs" />
+     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Square.cs" />
+     <Compile Include="Assets\Scripts\TriggerTest.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/Michael/Dropbox/Programing Projects/Game Development Studios/Maze2D/ProjectLabyrinth/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

@@ -5,6 +5,8 @@ Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembl
 EndProject
 Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembly-CSharp.csproj", "{82B44A8E-F17B-5D8F-DBFA-701ADF3F0D9F}"
 EndProject
+Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembly-CSharp-Editor.csproj", "{6B337279-063F-0460-F5C2-229B2B340ACA}"
+EndProject
 Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembly-UnityScript-firstpass.unityproj", "{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}"
 EndProject
 Global
@@ -21,6 +23,10 @@ Global
 		{82B44A8E-F17B-5D8F-DBFA-701ADF3F0D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82B44A8E-F17B-5D8F-DBFA-701ADF3F0D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82B44A8E-F17B-5D8F-DBFA-701ADF3F0D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B337279-063F-0460-F5C2-229B2B340ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B337279-063F-0460-F5C2-229B2B340ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B337279-063F-0460-F5C2-229B2B340ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B337279-063F-0460-F5C2-229B2B340ACA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +35,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-											GlobalSection(MonoDevelopProperties) = preSolution
+													GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
