@@ -2,11 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CNControls/Scripts/Controller3D.cs">
     <Files>
-      <File FileName="Assets/CNControls/Scripts/Controller3D.cs" Line="39" Column="32" />
-      <File FileName="Assets/CNControls/Scripts/CNJoystick.cs" Line="1" Column="1" />
+      <File FileName="Assets/CNControls/Scripts/Controller3D.cs" Line="19" Column="17" />
+      <File FileName="Assets/CNControls/Scripts/CNJoystick.cs" Line="13" Column="10" />
       <File FileName="Assets/Scripts/PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets/CNControls/Scripts/CNTouchpad.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerAttack.cs" Line="9" Column="3" />
       <File FileName="Assets/CNControls/Scripts/CNAbstractController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
