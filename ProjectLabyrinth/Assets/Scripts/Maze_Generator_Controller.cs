@@ -60,23 +60,30 @@ public class Maze_Generator_Controller : MonoBehaviour {
     // Creates the walls flagged for creation
     void createWalls()
     {
+        Stack children = new Stack();
+        GameObject child;
         for (int r = 0; r < Rows; r++)
         {
             for (int c = 0; c < Cols; c++)
             {
                 Square curr = walls[r, c];
                 if(curr.hasNorth)
-                    Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    children.Push(Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.hasSouth)
-                    Instantiate(SouthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    children.Push(Instantiate(SouthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.hasEast)
-                    Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    children.Push(Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.hasWest)
-                    Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.start)
                     Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
                 if(curr.exit)
-                    Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity); 
+                    children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
+                while (children.Count > 0)
+                {
+                    child = (GameObject)children.Pop();
+                    child.transform.parent = transform;
+                }
             }
         }
         

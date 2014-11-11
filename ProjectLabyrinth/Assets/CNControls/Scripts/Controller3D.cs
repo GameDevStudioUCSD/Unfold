@@ -9,6 +9,8 @@ public class Controller3D : MonoBehaviour
 
     public float movementSpeed = 5f;
 
+    public bool iWantBugs = true;
+
     public CNAbstractController MovementJoystick;
 
     private CharacterController _characterController;
@@ -25,8 +27,13 @@ public class Controller3D : MonoBehaviour
 
         _characterController = GetComponent<CharacterController>();
         _mainCameraTransform = Camera.main.GetComponent<Transform>();
-        _transformCache = GetComponentInParent<Transform>();
+
+        if (iWantBugs)
+            _transformCache = GetComponentInParent<Transform>();
+       
+
         _playerTransform = _transformCache;
+        Debug.Log(_playerTransform);
     }
 
     
