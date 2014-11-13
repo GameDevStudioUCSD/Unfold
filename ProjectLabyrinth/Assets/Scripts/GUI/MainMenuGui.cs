@@ -2,12 +2,15 @@
 using System.Collections;
 
 public class MainMenuGui : MonoBehaviour {
-    public static float wRatio = .666f;
-    public static float hRatio = .5f;
+    
 
+    public GameObject loadPlay;
+    public GameObject loadPractice;
+    public GameObject loadOptions;
+    static float wRatio = .666f;
+    static float hRatio = .5f;
     static float w = Screen.width;
     static float h = Screen.height;
-
     static float frameWidth = w * wRatio;
     static float frameHeight = h * hRatio;
 
@@ -33,9 +36,12 @@ public class MainMenuGui : MonoBehaviour {
         GUI.Box(gameFrame, "Main Menu");
 
         //Results screen buttons
-        GUI.Button(playAgain, "Play Again");
+        if (GUI.Button(playAgain, "Play!"))
+        {
+            Instantiate(loadPlay, new Vector3(0, 0, 0), Quaternion.identity);
+        }
         
-        GUI.Button(mainMenu, "Main Menu");
+        GUI.Button(mainMenu, "Practice");
 
     }
 	
