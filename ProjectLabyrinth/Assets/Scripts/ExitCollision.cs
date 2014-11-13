@@ -9,13 +9,16 @@ public class ExitCollision : MonoBehaviour {
 	private Collider collider;
 	void Start() 
 	{
-		
+        Debug.Log("Public Player Var: " + player);
 	}
-	void OnCollisionEnter (Collision other)
+	void OnTriggerEnter (Collider other)
 	{
-		if(other.gameObject.name == "First Person Controller")
-			Debug.Log ("Player Entered the Collision");
-		Debug.Log ("Trigger is working");
+        Debug.Log("Trigger is working");
+        Debug.Log("Object: " + other.gameObject);
+        if (other.gameObject.name == player.name)
+        {
+            Debug.Log("Player Entered the Collision");
+        }
 	}
 	
 	/*void OnCollisionStay (Collision other)

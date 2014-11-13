@@ -76,13 +76,17 @@ public class Maze_Generator_Controller : MonoBehaviour {
                 if (curr.hasWest)
                     children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.start)
-                    Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                {
+                    child = (GameObject)Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    child.name = child.name.Replace("(Clone)", "");
+                }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
                 while (children.Count > 0)
                 {
                     child = (GameObject)children.Pop();
                     child.transform.parent = transform;
+                    child.name = child.name.Replace("(Clone)", "");
                 }
             }
         }
