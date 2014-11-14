@@ -29,7 +29,7 @@ public class Controller3D : MonoBehaviour
         _mainCameraTransform = Camera.main.GetComponent<Transform>();
 
         if (iWantBugs)
-            _transformCache = GetComponentInParent<Transform>();
+            _transformCache = GetComponent<Transform>();
        
 
         _playerTransform = _transformCache;

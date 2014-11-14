@@ -25,6 +25,16 @@ public abstract class MazeGenerator : MonoBehaviour
      * in the Square that represents the exit in your algorithm.
      */
     public abstract void run(Square[,] cells, Square end);
+    protected void createSquares(bool wallsUp)
+    {
+        for (int r = 0; r < Rows; r++)
+        {
+            for (int c = 0; c < Cols; c++)
+            {
+                walls[r, c] = new Square(r, c, wallsUp);
+            }
+        }
+    }
 
     /* This function to prevent individual walls from generating at runtime.
      * @param cell - Cell in which walls are stored.

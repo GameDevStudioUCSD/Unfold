@@ -19,6 +19,7 @@ public class Maze_Generator_Controller : MonoBehaviour {
     const int WEST = 3;
     //Define new algorithm types here
     const int DepthFirst = 0;
+    const int Recursive = 1;
 
     public int Rows = 10;
     public int Cols = 10;
@@ -35,18 +36,15 @@ public class Maze_Generator_Controller : MonoBehaviour {
         //Debug.Log("Started script");
         //Creates the walls matrix
         walls = new Square[Rows,Cols];
-        for (int r = 0; r < Rows; r++)
-        {
-            for (int c = 0; c < Cols; c++)
-            {
-                walls[r, c] = new Square(r, c);
-            }
-        }
+        
         // Add new algorithm cases here
         switch(algorithm)
         {
             case DepthFirst:
                 generator = new DepthFirstMazeGenerator(Rows, Cols);
+                break;
+            case Recursive:
+                generator = new RecursiveMaze(Rows, Cols);
                 break;
             default:
                 Debug.LogError("Algorithm not defined");

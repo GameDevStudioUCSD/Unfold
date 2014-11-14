@@ -18,6 +18,7 @@ public class DepthFirstMazeGenerator : MazeGenerator
     {
         this.exit = end;
         this.walls = cells;
+        createSquares(true);
         selectEntrance();
     }
 

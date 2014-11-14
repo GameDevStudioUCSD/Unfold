@@ -26,14 +26,20 @@ public class Square
     // destroyed as well.
     private int wallToDestroy;
 	public Square(int r, int c)
+        :this(r,c,true)
 	{
+        
+	}
+    public Square(int r, int c, bool wallsUp)
+    {
         row = r;
         col = c;
-        hasNorth = true;
-        hasSouth = true;
-        hasWest = true;
-        hasEast = true;
-	}
+        hasNorth = wallsUp;
+        hasSouth = wallsUp;
+        hasWest = wallsUp;
+        hasEast = wallsUp;
+
+    }
     public int getRow() { return row; }
     public int getCol() { return col; }
     public int getWallToDestroy() { return wallToDestroy;  }
