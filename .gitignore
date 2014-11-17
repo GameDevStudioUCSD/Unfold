@@ -3,3 +3,4 @@ ProjectLabyrinth/Temp**
 Maze2D/**
 ProjectLabyrinth/Library/ScriptAssemblies/**
 *.meta
+*.csproj
