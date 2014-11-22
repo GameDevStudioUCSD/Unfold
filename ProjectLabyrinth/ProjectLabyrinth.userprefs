@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Maze\MazeGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUI\HUD.cs">
     <Files>
-      <File FileName="Assets\Scripts\ExitCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Maze\RecursiveMaze.cs" Line="42" Column="41" />
-      <File FileName="Assets\Scripts\Maze\MazeGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUI\GameSelectionGUI.cs" Line="12" Column="5" />
+      <File FileName="Assets\Scripts\GUI\MainMenuGui.cs" Line="28" Column="41" />
+      <File FileName="Assets\Scripts\GUI\HUD.cs" Line="10" Column="1" />
+      <File FileName="Assets\AbstractGUI.cs" Line="22" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

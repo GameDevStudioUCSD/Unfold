@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AbstractGUI.cs" />
      <Compile Include="Assets\CNControls\NotImportant\Controller Examples\CameraFollowExample.cs" />
      <Compile Include="Assets\CNControls\NotImportant\Controller Examples\Controller3DExample.cs" />
      <Compile Include="Assets\CNControls\Scripts\CNAbstractController.cs" />
@@ -53,9 +54,9 @@
      <Compile Include="Assets\CNControls\Scripts\CNThrowableTouchpad.cs" />
      <Compile Include="Assets\CNControls\Scripts\CNTouchpad.cs" />
      <Compile Include="Assets\CNControls\Scripts\Controller3D.cs" />
-     <Compile Include="Assets\HUD.cs" />
      <Compile Include="Assets\Scripts\ExitCollision.cs" />
      <Compile Include="Assets\Scripts\GUI\GameSelectionGUI.cs" />
+     <Compile Include="Assets\Scripts\GUI\HUD.cs" />
      <Compile Include="Assets\Scripts\GUI\LoadLevel.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenuGui.cs" />
      <Compile Include="Assets\Scripts\GUI\ResultsGUI.cs" />
