@@ -13,7 +13,8 @@ public class Controller3D : MonoBehaviour
 
     public CNAbstractController MovementJoystick;
 
-    private CharacterController _characterController;
+    public CharacterController _characterController;
+    
     private Transform _mainCameraTransform;
     private Transform _transformCache;
     private Transform _playerTransform;
@@ -29,7 +30,7 @@ public class Controller3D : MonoBehaviour
         _mainCameraTransform = Camera.main.GetComponent<Transform>();
 
         if (iWantBugs)
-            _transformCache = GetComponentInParent<Transform>();
+            _transformCache = GetComponent<Transform>();
        
 
         _playerTransform = _transformCache;

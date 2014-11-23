@@ -9,6 +9,8 @@ Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembl
 EndProject
 Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembly-UnityScript-firstpass.unityproj", "{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}"
 EndProject
+Project("{23BE340B-D86A-734B-E61C-33187646F7C5}") = "ProjectLabyrinth", "Assembly-UnityScript.unityproj", "{4B18D8F1-C20D-8916-370C-2ABB3D5FE218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,11 +33,15 @@ Global
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEAE009A-08DE-B0C3-3BDC-FFD566CA15A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B18D8F1-C20D-8916-370C-2ABB3D5FE218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B18D8F1-C20D-8916-370C-2ABB3D5FE218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B18D8F1-C20D-8916-370C-2ABB3D5FE218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B18D8F1-C20D-8916-370C-2ABB3D5FE218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																	GlobalSection(MonoDevelopProperties) = preSolution
+																								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

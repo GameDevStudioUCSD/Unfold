@@ -24,7 +24,7 @@ public class Maze_Generator_Controller : MonoBehaviour {
     public int Cols = 10;
     public int wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, /*CNController, /*CNJoystick, */ExitMarker;
 
 
     private Square[,] walls;
@@ -76,7 +76,11 @@ public class Maze_Generator_Controller : MonoBehaviour {
                 if (curr.hasWest)
                     children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.start)
+                {
                     Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+					//Instantiate(CNController, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+					//Instantiate(CNJoystick, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 while (children.Count > 0)
