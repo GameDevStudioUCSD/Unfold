@@ -4,86 +4,90 @@ using System.Collections;
 public class PlayerAttack : MonoBehaviour {
 
 	public int AttackDamage;
+	public int AttackDelay;
 
 	private Collider attackCollider;
 	private GameObject attackObject;
 	private Touch initialTouch = new Touch();
 	private bool hasSwiped = false;
 	private float distance = 0;
+	private float nextAttackTime = 0;
 	
 	void FixedUpdate()
 	{
-		foreach(Touch t in Input.touches)
+		if (Time.time > nextAttackTime)
 		{
-			if (t.phase== TouchPhase.Began)
+			foreach(Touch t in Input.touches)
 			{
-				initialTouch = t;
-			}
-			else if (t.phase == TouchPhase.Moved)
-			{
-				float deltaX = initialTouch.position.x - t.position.x;
-				float deltaY = initialTouch.position.y - t.position.y;
-				distance = Mathf.Sqrt((deltaX*deltaX) + (deltaY*deltaY));
-				bool swipedHorizontally = Mathf.Abs(deltaY/deltaX) < .2f;
-				bool swipedVertically = Mathf.Abs(deltaY/deltaX) > 5f;
-				
-				
-				if (distance > 100f)
+				if (t.phase== TouchPhase.Began)
 				{
-					if (swipedHorizontally && deltaX > 0) //swiped right
-					{
-						Attack (1);
-					}
-					else if (swipedHorizontally && deltaX <= 0) //swiped left
-					{
-						Attack (1);
-					}
-					else if (swipedVertically && deltaY > 0) //swiped up
-					{
-						Attack (2);
-					}
-					else if (swipedVertically && deltaY <= 0) //swiped down
-					{
-						Attack (2);
-					}
-					else if (!swipedVertically && !swipedHorizontally && deltaX <= 0) //swiped diagonal1
-					{
-						Attack (4);
-					}
-					else if (!swipedVertically && !swipedHorizontally && deltaX < 0) //swiped diagonal2
-					{
-						Attack (8);
-					}
+					initialTouch = t;
+				}
+				else if (t.phase == TouchPhase.Moved)
+				{
+					float deltaX = initialTouch.position.x - t.position.x;
+					float deltaY = initialTouch.position.y - t.position.y;
+					distance = Mathf.Sqrt((deltaX*deltaX) + (deltaY*deltaY));
+					bool swipedHorizontally = Mathf.Abs(deltaY/deltaX) < .2f;
+					bool swipedVertically = Mathf.Abs(deltaY/deltaX) > 5f;
 					
-					hasSwiped = true;
+					
+					if (distance > 100f)
+					{
+						if (swipedHorizontally && deltaX > 0) //swiped right
+						{
+							Attack (1);
+						}
+						else if (swipedHorizontally && deltaX <= 0) //swiped left
+						{
+							Attack (1);
+						}
+						else if (swipedVertically && deltaY > 0) //swiped up
+						{
+							Attack (2);
+						}
+						else if (swipedVertically && deltaY <= 0) //swiped down
+						{
+							Attack (2);
+						}
+						else if (!swipedVertically && !swipedHorizontally && deltaX <= 0) //swiped diagonal1
+						{
+							Attack (4);
+						}
+						else if (!swipedVertically && !swipedHorizontally && deltaX < 0) //swiped diagonal2
+						{
+							Attack (8);
+						}
+						hasSwiped = true;
+					}
+				}
+				else if (t.phase == TouchPhase.Ended)
+				{
+					initialTouch = new Touch();
+					hasSwiped = false;
 				}
 			}
-			else if (t.phase == TouchPhase.Ended)
-			{
-				initialTouch = new Touch();
-				hasSwiped = false;
-			}
-		}
 		
-		if (Input.GetKeyUp(KeyCode.Alpha1))
-		{
-			Debug.Log ("1 Pressed");
-			Attack (1);
-		}
-		if (Input.GetKeyUp(KeyCode.Alpha2))
-		{
-			Debug.Log ("2 Pressed");
-			Attack (2);
-		}
-		if (Input.GetKeyUp(KeyCode.Alpha3))
-		{
-			Debug.Log ("3 Pressed");
-			Attack (4);
-		}
-		if (Input.GetKeyUp(KeyCode.Alpha4))
-		{
-			Debug.Log ("4 Pressed");
-			Attack (8);
+			if (Input.GetKeyUp(KeyCode.Alpha1))
+			{
+				Debug.Log ("1 Pressed");
+				Attack (1);
+			}
+			if (Input.GetKeyUp(KeyCode.Alpha2))
+			{
+				Debug.Log ("2 Pressed");
+				Attack (2);
+			}
+			if (Input.GetKeyUp(KeyCode.Alpha3))
+			{
+				Debug.Log ("3 Pressed");
+				Attack (4);
+			}
+			if (Input.GetKeyUp(KeyCode.Alpha4))
+			{
+				Debug.Log ("4 Pressed");
+				Attack (8);
+			}
 		}
 	}
 	
@@ -98,18 +102,22 @@ public class PlayerAttack : MonoBehaviour {
 			if (target)
 				target.Attacked(AttackDamage, attackType);
 		}
+		nextAttackTime = Time.time + AttackDelay;
+		Debug.Log ("nextAttackTime: " + nextAttackTime + " CurrentTime: " + Time.time);
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
 		attackCollider = other;
 		attackObject = attackCollider.gameObject;
+		Debug.Log ("Collider set to " + attackCollider.name);
 	}
 	
 	void OnTriggerExit(Collider other)
 	{
 		attackCollider = null;
 		attackObject = null;
+		Debug.Log ("Collider set to null");
 	}
 	
 }
