@@ -3,29 +3,44 @@ using System.Collections;
 
 public class IFightable : MonoBehaviour {
 
-	//GameObject lockOnArrow;
 	public int health;
-
-	// Use this for initialization
-	void Start () {
+	
+	/*
+	0000 = no weaknesses
+	0001 = horizontal weakness
+	0010 = vertical weakness
+	0100 = diagonal1 weakness (topright -> bottomleft)
+	1000 = diagonal2 weakness (topleft -> bottomright)
+	*/
+	public int weakness;
+	
+	/*
+		damage is the damage the player attempts to afflict onto the object
+		attackType is the direction of the sword slash:
+		1 = horizontal
+		2 = vertical
+		4 = diagonal1 (topright -> bottomleft)
+		8 = diagonal2 (topleft -> bottomright)
+	*/
+	public void Attacked (int damage, int attackType)
+	{
+		if ((attackType & weakness) == 0)
+			damage /= 2;
 		
+		DecrementHealth(damage);
 	}
 	
-	// Update is called once per frame
-	/*void Update () {
-	
-	}*/
-	
-	public void DecrementHealth (int damage)
+	void DecrementHealth (int damage)
 	{
-		Debug.Log("Taking " + damage + " damage! " + health + " health remaining.");
 		health -= damage;
+		Debug.Log("Taking " + damage + " damage! " + health + " health remaining.");
 		if (health <= 0)
 			Die();
 	}
 	
 	void Die ()
 	{
+		Destroy(gameObject);
 		Debug.Log("DEAD!");
 	}
 }
