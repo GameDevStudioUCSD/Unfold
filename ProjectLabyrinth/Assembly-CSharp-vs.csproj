@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AbstractGUI.cs" />
      <Compile Include="Assets\CNControls\NotImportant\Controller Examples\CameraFollowExample.cs" />
      <Compile Include="Assets\CNControls\NotImportant\Controller Examples\Controller3DExample.cs" />
      <Compile Include="Assets\CNControls\Scripts\CNAbstractController.cs" />
@@ -55,6 +54,7 @@
      <Compile Include="Assets\CNControls\Scripts\CNTouchpad.cs" />
      <Compile Include="Assets\CNControls\Scripts\Controller3D.cs" />
      <Compile Include="Assets\Scripts\ExitCollision.cs" />
+     <Compile Include="Assets\Scripts\GUI\AbstractGUI.cs" />
      <Compile Include="Assets\Scripts\GUI\GameSelectionGUI.cs" />
      <Compile Include="Assets\Scripts\GUI\HUD.cs" />
      <Compile Include="Assets\Scripts\GUI\LoadLevel.cs" />
@@ -76,7 +76,7 @@
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/KTTV/GameDevelopmentStudio/ProjectLabyrinth/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/Michael/Dropbox/Programing Projects/Game Development Studios/ProjectLabyrinth/GameDevelopmentStudio/ProjectLabyrinth/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

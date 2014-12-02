@@ -1,52 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ResultsGUI: MonoBehaviour {
-    public static float wRatio = .666f;
-    public static float hRatio = .5f;
-
+public class ResultsGUI: AbstractGUI {
     public GameObject loadPlay;
     public GameObject loadMainMenu;
-
-    static float w = Screen.width;
-    static float h = Screen.height;
-
-    static float frameWidth = w * wRatio;
-    static float frameHeight = h * hRatio;
-
-    static float frameX = w * (1 - wRatio) / 2;
-    static float frameY = h * (1 - hRatio) / 2;
-
-
-
-   //Instantiated gameFrame for Main Menu
-    Rect gameFrame = new Rect(frameX, frameY, frameWidth, frameHeight);
 
     /* For the results screen
      * Still need to set padding, height, width of buttons 
      * since they are currently hardcoded
      */
-    Rect playAgain = new Rect(frameX + 50, frameHeight/2 + frameY, 100, 100);
-    Rect mainMenu = new Rect(frameWidth + frameX - 150, frameHeight / 2 + frameY, 100, 100);
+    private static float yLocPlayButton = yLocButton1;
+    private static float yLocMenuButton = yLocButton3;
+
+    Rect playAgain = new Rect(frameX + marginX, yLocPlayButton + marginY, xSizeMenuButton, ySizeMenuButton);
+    Rect mainMenu = new Rect(frameX + marginX, yLocMenuButton + marginY, xSizeMenuButton, ySizeMenuButton);
     
 	// Use this for initialization
     void OnGUI()
     {
-        Debug.Log("Height " + hRatio + " Width " + wRatio);
         GUI.Box(gameFrame, "Results");
-
         //Results screen buttons
         if (GUI.Button(playAgain, "Play Again"))
         {
             Instantiate(loadPlay, new Vector3(0, 0, 0), Quaternion.identity);
         }
-
         if(GUI.Button(mainMenu, "Main Menu"))
         {
             Instantiate(loadMainMenu, new Vector3(0, 0, 0), Quaternion.identity);
         }
-
     }
-	
-
 }

@@ -1,33 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMenuGui : MonoBehaviour {
+public class MainMenuGui : AbstractGUI {
     
 
     public GameObject loadPlay;
     public GameObject loadPractice;
     public GameObject loadOptions;
-    static float wRatio = .666f;
-    static float hRatio = .5f;
-    static float w = Screen.width;
-    static float h = Screen.height;
-    static float frameWidth = w * wRatio;
-    static float frameHeight = h * hRatio;
-
-    static float frameX = w * (1 - wRatio) / 2;
-    static float frameY = h * (1 - hRatio) / 2;
-
-
-
-   //Instantiated gameFrame for Main Menu
-    Rect gameFrame = new Rect(frameX, frameY, frameWidth, frameHeight);
 
     /* For the results screen
      * Still need to set padding, height, width of buttons 
      * since they are currently hardcoded
      */
-    Rect playAgain = new Rect(frameX + 50, frameHeight/2 + frameY, 100, 100);
-    Rect mainMenu = new Rect(frameWidth + frameX - 150, frameHeight / 2 + frameY, 100, 100);
+    private static float yLocPlayButton = yLocButton1;
+    private static float yLocPracticeButton = yLocButton2;
+    private static float yLocOptionsButton = yLocButton3;
+
+    static Rect playButton = new Rect(frameX + marginX, yLocPlayButton + marginY, xSizeMenuButton, ySizeMenuButton);
+    static Rect practiceButton = new Rect(frameX + marginX, yLocPracticeButton + marginY, xSizeMenuButton, ySizeMenuButton);
+    static Rect optionsButton = new Rect(frameX + marginX, yLocOptionsButton + marginY, xSizeMenuButton, ySizeMenuButton);
     
 	// Use this for initialization
     void OnGUI()
@@ -36,12 +27,13 @@ public class MainMenuGui : MonoBehaviour {
         GUI.Box(gameFrame, "Main Menu");
 
         //Results screen buttons
-        if (GUI.Button(playAgain, "Play!"))
+        if (GUI.Button(playButton, "Play!"))
         {
             Instantiate(loadPlay, new Vector3(0, 0, 0), Quaternion.identity);
         }
         
-        GUI.Button(mainMenu, "Practice");
+        GUI.Button(practiceButton, "Practice");
+        GUI.Button(optionsButton, "Options");
 
     }
 	

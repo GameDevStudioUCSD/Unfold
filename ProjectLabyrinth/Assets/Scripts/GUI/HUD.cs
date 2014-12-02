@@ -7,20 +7,22 @@ using System.Collections;
  */
 public class HUD : AbstractGUI {
 
-	private static float buttonOffset = frameHeight / 4;
+	//private static float buttonOffset = frameHeight / 4;
+
 	private static float sizePauseButton = Screen.width / 10;
-	private static float xSizeMenuButton = frameWidth - (2*margin);
-	private static float ySizeMenuButton = buttonOffset - margin;
 	private static float xLocPauseButton = Screen.width - sizePauseButton;
-	private static float yLocResumeButton = frameY + buttonOffset;
-	private static float yLocOptionsButton = frameY + (buttonOffset * 2);
-	private static float yLocExitButton = frameY + (3 * buttonOffset);
+
+    private static float yLocResumeButton = yLocButton1;
+    private static float yLocOptionsButton = yLocButton2;
+    private static float yLocExitButton = yLocButton3;
+
 	private bool isPaused;
 	static Rect pauseButton = new Rect(xLocPauseButton, 0, sizePauseButton, sizePauseButton);
-	static Rect resumeButton = new Rect(frameX + margin, yLocResumeButton + margin, xSizeMenuButton, ySizeMenuButton);
-	static Rect optionsButton = new Rect(frameX + margin, yLocOptionsButton + margin, xSizeMenuButton, ySizeMenuButton);
-	static Rect exitButton = new Rect(frameX + margin, yLocExitButton + margin, xSizeMenuButton, ySizeMenuButton);
-	static Rect gameFrame = new Rect(frameX, frameY, frameWidth, frameHeight);
+
+	static Rect resumeButton = new Rect(frameX + marginX, yLocResumeButton + marginY, xSizeMenuButton, ySizeMenuButton);
+	static Rect optionsButton = new Rect(frameX + marginX, yLocOptionsButton + marginY, xSizeMenuButton, ySizeMenuButton);
+	static Rect exitButton = new Rect(frameX + marginX, yLocExitButton + marginY, xSizeMenuButton, ySizeMenuButton);
+	//static Rect gameFrame = new Rect(frameX, frameY, frameWidth, frameHeight);
 	public GameObject loadMainMenu;
 
 	void OnGUI()

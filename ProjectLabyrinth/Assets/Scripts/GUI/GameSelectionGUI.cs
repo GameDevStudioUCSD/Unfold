@@ -11,12 +11,11 @@ public class GameSelectionGUI : AbstractGUI {
     public GameObject loadDepthFirstMaze;
     public GameObject loadMainMenu;
 
-   //Instantiated gameFrame for Main Menu
-    Rect gameFrame = new Rect(frameX, frameY, frameWidth, frameHeight);
+    private static float yLocRecursiveButton = yLocButton1;
+    private static float yLocDFButton = yLocButton3;
 
-
-    Rect recursiveMaze = new Rect(frameX + 50, frameHeight/2 + frameY, 100, 100);
-    Rect depthFirstMaze = new Rect(frameWidth + frameX - 150, frameHeight / 2 + frameY, 100, 100);
+    Rect recursiveMaze = new Rect(frameX + marginX, yLocRecursiveButton + marginY, xSizeMenuButton, ySizeMenuButton);
+    Rect depthFirstMaze = new Rect(frameX + marginX, yLocDFButton + marginY, xSizeMenuButton, ySizeMenuButton);
     
 	// Use this for initialization
     void OnGUI()
