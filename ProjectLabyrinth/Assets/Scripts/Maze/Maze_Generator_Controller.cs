@@ -75,14 +75,8 @@ public class Maze_Generator_Controller : MonoBehaviour {
                     children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.start)
                 {
-<<<<<<< HEAD:ProjectLabyrinth/Assets/Scripts/Maze_Generator_Controller.cs
-                    Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
-					//Instantiate(CNController, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
-					//Instantiate(CNJoystick, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
-=======
-                    child = (GameObject)Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+                    child = (GameObject) Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
                     child.name = child.name.Replace("(Clone)", "");
->>>>>>> GUI_Flow_Arm:ProjectLabyrinth/Assets/Scripts/Maze/Maze_Generator_Controller.cs
                 }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
