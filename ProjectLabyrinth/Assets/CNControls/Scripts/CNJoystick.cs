@@ -32,7 +32,8 @@ public class CNJoystick : CNAbstractController
     [SerializeField]
     [HideInInspector]
     private bool _isHiddenIfNotTweaking;
-
+    private Animator animator;
+    private Transform animatorComponent;
     // Runtime used fields
     /// <summary>
     /// Transform component of a stick
@@ -54,6 +55,16 @@ public class CNJoystick : CNAbstractController
     /// <summary>
     /// Neat initialization method
     /// </summary>
+    void Start()
+    {
+        animatorComponent = this.transform.root;
+        Debug.Log(animatorComponent);
+        animatorComponent = animatorComponent.Find("Player Avatar/PlayerCharacter5");
+        Debug.Log(animatorComponent);
+        Debug.Log(animatorComponent.gameObject);
+        animator = animatorComponent.gameObject.GetComponent<Animator>();
+        Debug.Log(animator);
+    }
     public override void OnEnable()
     {
         base.OnEnable();
@@ -127,9 +138,18 @@ public class CNJoystick : CNAbstractController
 
         Touch currentTouch;
         if (IsTouchCaptured(out currentTouch))
+        {
             // Place joystick under the finger 
             // "No jumping" logic is also in this method
             PlaceJoystickBaseUnderTheFinger(currentTouch);
+            animator.SetBool("Walking", true);
+            Debug.Log("Walk!");
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+            Debug.Log("Stand!");
+        }
     }
 
     /// <summary>
