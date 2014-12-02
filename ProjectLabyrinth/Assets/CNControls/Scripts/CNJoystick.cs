@@ -179,7 +179,10 @@ public class CNJoystick : CNAbstractController
     protected virtual void PlaceJoystickBaseUnderTheFinger(Touch touch)
     {
         if (!_snapsToFinger) return;
+<<<<<<< HEAD
         _touchZone = CalculatedTouchZone;
+=======
+>>>>>>> GUI_Flow_Arm
         _stickTransform.position = 
             _baseTransform.position = ParentCamera.ScreenToWorldPoint(touch.position);
     }
