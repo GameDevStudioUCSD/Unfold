@@ -21,8 +21,8 @@ public class Maze_Generator_Controller : MonoBehaviour {
     const int DepthFirst = 0;
     const int Recursive = 1;
 
-    public int Rows = 10;
-    public int Cols = 10;
+    public int Rows = 20;
+    public int Cols = 20;
     public int wallSize = 10;
     public int algorithm = DepthFirst;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, /*CNController, /*CNJoystick, */ExitMarker;
@@ -41,7 +41,7 @@ public class Maze_Generator_Controller : MonoBehaviour {
         switch(algorithm)
         {
             case DepthFirst:
-                generator = new DepthFirstMazeGenerator(Rows, Cols);
+                generator = new WorkingDepthFirstMazeGenerator(Rows, Cols);
                 break;
             case Recursive:
                 generator = new RecursiveMaze(Rows, Cols);

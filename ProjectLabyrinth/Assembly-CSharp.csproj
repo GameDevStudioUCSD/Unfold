@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Maze\Maze_Generator_Controller.cs" />
      <Compile Include="Assets\Scripts\Maze\RecursiveMaze.cs" />
      <Compile Include="Assets\Scripts\Maze\Square.cs" />
+     <Compile Include="Assets\Scripts\Maze\WorkingDepthFirstMazeGenerator.cs" />
      <Compile Include="Assets\Scripts\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\TestScripts\CollisionTest.cs" />
      <Compile Include="Assets\Scripts\TestScripts\PlayerMovement.cs" />
