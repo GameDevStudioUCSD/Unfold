@@ -1,18 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Maze\Maze_Generator_Controller.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerAttack.cs" Line="90" Column="29" />
-      <File FileName="Assets/Scripts/IFightable.cs" Line="20" Column="17" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUI\HUD.cs">
-    <Files>
-      <File FileName="Assets\Scripts\GUI\GameSelectionGUI.cs" Line="12" Column="5" />
-      <File FileName="Assets\Scripts\GUI\MainMenuGui.cs" Line="28" Column="41" />
-      <File FileName="Assets\Scripts\GUI\HUD.cs" Line="10" Column="1" />
-      <File FileName="Assets\AbstractGUI.cs" Line="22" Column="12" />
->>>>>>> GUI_Flow_Arm
+      <File FileName="Assets\Scripts\Maze\DepthFirstMazeGenerator.cs" Line="128" Column="17" />
+      <File FileName="Assets\Scripts\Maze\WorkingDepthFirstMazeGenerator.cs" Line="10" Column="20" />
+      <File FileName="Assets\Scripts\Maze\Maze_Generator_Controller.cs" Line="32" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
