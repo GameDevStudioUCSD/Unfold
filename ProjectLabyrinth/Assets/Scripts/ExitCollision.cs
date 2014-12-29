@@ -18,7 +18,7 @@ public class ExitCollision : MonoBehaviour {
     static float frameHeight = h * hRatio;
 
     static float frameX = w * (1 - wRatio) / 2;
-    static float frameY = h * (1 - hRatio) / 2;
+    //static float frameY = h * (1 - hRatio) / 2;
     Rect win = new Rect(frameX + frameWidth/2, frameHeight / 2, 100, 100);
 	void Start() 
 	{

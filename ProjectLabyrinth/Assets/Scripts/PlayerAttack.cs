@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour {
 				{
 					initialTouch = t;
 				}
-				else if (t.phase == TouchPhase.Moved)
+				else if (t.phase == TouchPhase.Moved && !hasSwiped)
 				{
 					float deltaX = initialTouch.position.x - t.position.x;
 					float deltaY = initialTouch.position.y - t.position.y;

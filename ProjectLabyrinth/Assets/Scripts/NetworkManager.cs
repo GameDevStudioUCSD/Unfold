@@ -20,7 +20,7 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnServerInitialized()
 	{
-		if (debug_On);
+		if (debug_On)
 			Debug.Log ("Server Initialized");
 		SpawnPlayer();
 	}

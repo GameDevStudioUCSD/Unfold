@@ -51,7 +51,7 @@ public class CNJoystick : CNAbstractController
     /// GameObject of a stick. Used for hiding
     /// </summary>
     private GameObject _baseGameObject;
-    private Rect _touchZone;
+    //private Rect _touchZone;
     /// <summary>
     /// Neat initialization method
     /// </summary>
@@ -76,7 +76,7 @@ public class CNJoystick : CNAbstractController
 
         _stickGameObject = _stickTransform.gameObject;
         _baseGameObject = _baseTransform.gameObject;
-        _touchZone = CalculatedTouchZone;
+        //_touchZone = CalculatedTouchZone;
 
         // Initial hiding of we should hide it
         if (IsHiddenIfNotTweaking)
@@ -200,7 +200,7 @@ public class CNJoystick : CNAbstractController
     {
         if (!_snapsToFinger) return;
 
-             _touchZone = CalculatedTouchZone;
+             //_touchZone = CalculatedTouchZone;
 
             _baseTransform.position = ParentCamera.ScreenToWorldPoint(touch.position);
     }
