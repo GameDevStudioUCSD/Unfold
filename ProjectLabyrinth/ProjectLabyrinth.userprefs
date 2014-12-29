@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Maze\Maze_Generator_Controller.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CNControls/Scripts/CNJoystick.cs">
     <Files>
-      <File FileName="Assets\Scripts\Maze\DepthFirstMazeGenerator.cs" Line="128" Column="17" />
-      <File FileName="Assets\Scripts\Maze\WorkingDepthFirstMazeGenerator.cs" Line="10" Column="20" />
-      <File FileName="Assets\Scripts\Maze\Maze_Generator_Controller.cs" Line="32" Column="25" />
+      <File FileName="Assets/Scripts/NetworkManager.cs" Line="72" Column="51" />
+      <File FileName="Assets/CNControls/Scripts/CNJoystick.cs" Line="73" Column="47" />
+      <File FileName="Assets/CNControls/Scripts/Controller3D.cs" Line="48" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

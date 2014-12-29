@@ -21,6 +21,7 @@ public class Maze_Generator_Controller : MonoBehaviour {
     const int DepthFirst = 0;
     const int Recursive = 1;
 
+
     public int Rows = 20;
     public int Cols = 20;
     public int wallSize = 10;

@@ -58,12 +58,12 @@ public class CNJoystick : CNAbstractController
     void Start()
     {
         animatorComponent = this.transform.root;
-        Debug.Log(animatorComponent);
+        //Debug.Log(animatorComponent);
         animatorComponent = animatorComponent.Find("Player Avatar/PlayerCharacter5");
-        Debug.Log(animatorComponent);
-        Debug.Log(animatorComponent.gameObject);
+        //Debug.Log(animatorComponent);
+        //Debug.Log(animatorComponent.gameObject);
         animator = animatorComponent.gameObject.GetComponent<Animator>();
-        Debug.Log(animator);
+        //Debug.Log(animator);
     }
     public override void OnEnable()
     {
@@ -143,12 +143,12 @@ public class CNJoystick : CNAbstractController
             // "No jumping" logic is also in this method
             PlaceJoystickBaseUnderTheFinger(currentTouch);
             animator.SetBool("Walking", true);
-            Debug.Log("Walk!");
+            //Debug.Log("Walk!");
         }
         else
         {
             animator.SetBool("Walking", false);
-            Debug.Log("Stand!");
+            //Debug.Log("Stand!");
         }
     }
 

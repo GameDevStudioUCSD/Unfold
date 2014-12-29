@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class Controller3D : MonoBehaviour
 {
-    public const float ROTATE_SPEED = 1f;
+    public const float ROTATE_SPEED = 2f;
 
     public float movementSpeed = 5f;
 
@@ -34,7 +34,7 @@ public class Controller3D : MonoBehaviour
        
 
         _playerTransform = _transformCache;
-        Debug.Log(_playerTransform);
+        //Debug.Log(_playerTransform);
     }
 
     
@@ -45,8 +45,8 @@ public class Controller3D : MonoBehaviour
             MovementJoystick.GetAxis("Horizontal"),
             0f,
             MovementJoystick.GetAxis("Vertical"));
-
-        CommonMovementMethod(movement);
+		//if (networkView.isMine)
+        	CommonMovementMethod(movement);
     }
 
     private void MoveWithEvent(Vector3 inputMovement)
