@@ -1,9 +1,11 @@
-﻿using System;
+﻿#define FOR_MOUSE
+
+using System;
 using UnityEngine;
+using System.Reflection;
 
 #if UNITY_EDITOR
 using UnityEditor;
-using System.Reflection;
 #endif
 
 /// <summary>
@@ -210,7 +212,7 @@ public abstract class CNAbstractController : MonoBehaviour
     /// <returns>null if no touch found, returns a Touch if it's found</returns>
     protected virtual Touch? GetTouchByFingerId(int fingerId)
     {
-#if UNITY_EDITOR
+#if FOR_MOUSE
         // If we're in the editor, we also take our mouse as input
         // Let's say it's fingerId is 255;
         if (fingerId == 255)
@@ -365,7 +367,7 @@ public abstract class CNAbstractController : MonoBehaviour
         // Some optimization things
         int touchCount = Input.touchCount;
 
-#if UNITY_EDITOR
+#if FOR_MOUSE
         // If we're in the editor, we add another touch to the list - the mouse cursor
         int actualTouchCount = touchCount;
         touchCount++;
@@ -374,7 +376,7 @@ public abstract class CNAbstractController : MonoBehaviour
         // For every touch out there
         for (int i = 0; i < touchCount; i++)
         {
-#if UNITY_EDITOR
+#if FOR_MOUSE
             // If we got all touches from Input.GetTouch, we need to feed a new touch based on mouse input
             // Check ConstructTouchFromMouseInput() method for more info
             Touch currentTouch = i >= actualTouchCount ? ConstructTouchFromMouseInput() : Input.GetTouch(i);
@@ -427,12 +429,13 @@ public abstract class CNAbstractController : MonoBehaviour
     protected abstract void TweakControl(Vector2 touchPosition);
 
     // Some editor-only stuff. It won't compile to any of the builds
-#if UNITY_EDITOR
+#if FOR_MOUSE
     /// <summary>
     /// Your old DrawGizmosSelected method
     /// It allows you to change properties of the control in the inspector 
     /// - it will recalculate all needed properties
     /// </summary>
+#if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
     {
         TransformCache = GetComponent<Transform>();
@@ -459,6 +462,7 @@ public abstract class CNAbstractController : MonoBehaviour
         // It's rarely an issue though
         Gizmos.color = color;
     }
+#endif
 
     /// <summary>
     /// Utility method. It gets current MouseInput (left mouse button) 

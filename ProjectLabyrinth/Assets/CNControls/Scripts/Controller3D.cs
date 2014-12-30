@@ -5,9 +5,9 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class Controller3D : MonoBehaviour
 {
-    public const float ROTATE_SPEED = 2f;
+    public const float ROTATE_SPEED = 2.5f;
 
-    public float movementSpeed = 5f;
+    public const float movementSpeed = 20;
 
     public bool iWantBugs = true;
 
