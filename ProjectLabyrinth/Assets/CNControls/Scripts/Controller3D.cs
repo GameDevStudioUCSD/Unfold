@@ -5,9 +5,9 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class Controller3D : MonoBehaviour
 {
-    public const float ROTATE_SPEED = 2f;
+    public const float ROTATE_SPEED = 2.5f;
 
-    public float movementSpeed = 5f;
+    public float movementSpeed = 20f;
 
     public bool iWantBugs = true;
 
@@ -41,7 +41,7 @@ public class Controller3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (networkView.isMine)
+		//if (networkView.isMine)
         {
         	var movement = new Vector3(
             MovementJoystick.GetAxis("Horizontal"),

@@ -76,8 +76,7 @@ public class Maze_Generator_Controller : MonoBehaviour {
                     children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
                 if (curr.start)
                 {
-                    child = (GameObject) Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
-                    child.name = child.name.Replace("(Clone)", "");
+                    createPlayer (curr);
                 }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
@@ -90,5 +89,12 @@ public class Maze_Generator_Controller : MonoBehaviour {
             }
         }
         
+    }
+    
+    void createPlayer(Square curr)
+    {
+    	GameObject child;
+		child = (GameObject) Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
+		child.name = child.name.Replace("(Clone)", "");
     }
 }

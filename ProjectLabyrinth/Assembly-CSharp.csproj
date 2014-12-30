@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Maze\RecursiveMaze.cs" />
      <Compile Include="Assets\Scripts\Maze\Square.cs" />
      <Compile Include="Assets\Scripts\Maze\WorkingDepthFirstMazeGenerator.cs" />
+     <Compile Include="Assets\Scripts\NetworkCamera.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\TestScripts\CollisionTest.cs" />
