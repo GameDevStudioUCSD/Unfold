@@ -41,12 +41,14 @@ public class Controller3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var movement = new Vector3(
+		if (networkView.isMine)
+        {
+        	var movement = new Vector3(
             MovementJoystick.GetAxis("Horizontal"),
             0f,
             MovementJoystick.GetAxis("Vertical"));
-		//if (networkView.isMine)
         	CommonMovementMethod(movement);
+        }
     }
 
     private void MoveWithEvent(Vector3 inputMovement)
