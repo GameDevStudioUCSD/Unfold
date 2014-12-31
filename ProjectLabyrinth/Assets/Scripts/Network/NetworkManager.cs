@@ -5,6 +5,9 @@ public class NetworkManager : MonoBehaviour {
 
 	public bool debug_On;
 	public GameObject playerPrefab;
+	public GameObject mazeGenerator;
+
+	private Maze_Generator_Controller mapCreator;
 
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "RoomName";
@@ -16,13 +19,17 @@ public class NetworkManager : MonoBehaviour {
 	{
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
+		mapCreator = (Maze_Generator_Controller)mazeGenerator.GetComponent(typeof(Maze_Generator_Controller));
+		mapCreator.Start();
+		mapCreator.createWalls();
+		SpawnPlayer();
 	}
 	
 	void OnServerInitialized()
 	{
 		if (debug_On)
 			Debug.Log ("Server Initialized");
-		SpawnPlayer();
+		//SpawnPlayer();
 	}
 	
 	void OnGUI()
@@ -69,7 +76,8 @@ public class NetworkManager : MonoBehaviour {
 	
 	private void SpawnPlayer()
 	{
-		Network.Instantiate (playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+		//mapCreator.createPlayer();
+		Network.Instantiate (playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
 	}
 	
 	

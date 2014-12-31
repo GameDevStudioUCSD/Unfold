@@ -6,10 +6,9 @@ using System.Collections;
 public class Controller3D : MonoBehaviour
 {
     public const float ROTATE_SPEED = 2.5f;
-
     public float movementSpeed = 20f;
-
     public bool iWantBugs = true;
+    public bool debug_On;
 
     public CNAbstractController MovementJoystick;
 
@@ -41,13 +40,20 @@ public class Controller3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		//if (networkView.isMine)
+		if (networkView.isMine)
         {
+        	if (debug_On)
+        		Debug.Log ("Controller is Mine");
         	var movement = new Vector3(
             MovementJoystick.GetAxis("Horizontal"),
             0f,
             MovementJoystick.GetAxis("Vertical"));
         	CommonMovementMethod(movement);
+        }
+        else
+        {
+        	if (!debug_On)
+        		Debug.Log ("Controller is not Mine");
         }
     }
 

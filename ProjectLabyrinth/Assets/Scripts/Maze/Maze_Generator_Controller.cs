@@ -26,14 +26,15 @@ public class Maze_Generator_Controller : MonoBehaviour {
     public int Cols = 20;
     public int wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, /*CNController, /*CNJoystick, */ExitMarker;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
 
 
     private Square[,] walls;
     private Square exit;
+    private Square curr;
     private MazeGenerator generator;
 	// Use this for initialization
-	void Start () {
+	public void Start () {
         //Debug.Log("Started script");
         //Creates the walls matrix
         walls = new Square[Rows,Cols];
@@ -52,12 +53,12 @@ public class Maze_Generator_Controller : MonoBehaviour {
                 return;
         }
                     generator.run(walls, exit);
-        createWalls();
+        //createWalls();
 	
 	}
     
     // Creates the walls flagged for creation
-    void createWalls()
+    public void createWalls()
     {
         Stack children = new Stack();
         GameObject child;
@@ -65,25 +66,25 @@ public class Maze_Generator_Controller : MonoBehaviour {
         {
             for (int c = 0; c < Cols; c++)
             {
-                Square curr = walls[r, c];
+                curr = walls[r, c];
                 if(curr.hasNorth)
-                    children.Push(Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
+                    children.Push(Network.Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.hasSouth)
-                    children.Push(Instantiate(SouthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
+                    children.Push(Network.Instantiate(SouthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.hasEast)
-                    children.Push(Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
+                    children.Push(Network.Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.hasWest)
-                    children.Push(Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity));
+                    children.Push(Network.Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.start)
                 {
-                    createPlayer (curr);
+                    //createPlayer ();
                 }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
                 while (children.Count > 0)
                 {
                     child = (GameObject)children.Pop();
-                    child.transform.parent = transform;
+                    //child.transform.parent = transform;
                     child.name = child.name.Replace("(Clone)", "");
                 }
             }
@@ -91,10 +92,10 @@ public class Maze_Generator_Controller : MonoBehaviour {
         
     }
     
-    void createPlayer(Square curr)
+    public void createPlayer()
     {
-    	GameObject child;
-		child = (GameObject) Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity);
-		child.name = child.name.Replace("(Clone)", "");
+    	//GameObject child;
+		/*child = (GameObject) Network.Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity, 0);
+		//child.name = child.name.Replace("(Clone)", "");*/
     }
 }
