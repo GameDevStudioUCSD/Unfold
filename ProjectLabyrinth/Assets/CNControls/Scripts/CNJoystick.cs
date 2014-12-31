@@ -5,6 +5,7 @@
 [ExecuteInEditMode]
 public class CNJoystick : CNAbstractController
 {
+    public bool debugMessagesOn;
     // ---------------------------------
     // Editor visible public properties
     // ---------------------------------
@@ -57,13 +58,16 @@ public class CNJoystick : CNAbstractController
     /// </summary>
     void Start()
     {
-        Debug.Log("This is: " + this);
+        if(debugMessagesOn)
+            Debug.Log("This is: " + this);
         // Get a reference to the parent CNControlCamera
         animatorComponent = this.transform.parent;
-        Debug.Log("The parent is: " + animatorComponent.gameObject.name);
+        if (debugMessagesOn)
+            Debug.Log("The parent is: " + animatorComponent.gameObject.name);
         // Get a reference to the parent Player
         animatorComponent = animatorComponent.transform.parent;
-        Debug.Log("The parent is: " + animatorComponent.gameObject.name);
+        if (debugMessagesOn)
+            Debug.Log("The parent is: " + animatorComponent.gameObject.name);
         // Find the Player Avatar and save a reference to it
         animatorComponent = animatorComponent.Find("Player Avatar/PlayerCharacter5");
         // Set the animator
