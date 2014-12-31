@@ -7,7 +7,6 @@ public class Controller3D : MonoBehaviour
 {
     public const float ROTATE_SPEED = 2.5f;
     public float movementSpeed = 20f;
-    public bool iWantBugs = true;
     public bool debug_On;
 
     public CNAbstractController MovementJoystick;
@@ -17,6 +16,12 @@ public class Controller3D : MonoBehaviour
     private Transform _mainCameraTransform;
     private Transform _transformCache;
     private Transform _playerTransform;
+    
+    private float lastSynchronizationTime = 0f;
+    private float syncDelay = 0f;
+    private float syncTime = 0f;
+    private Vector3 syncStartPosition = Vector3.zero;
+    private Vector3 syncEndPosition = Vector3.zero;
 
     void Start()
     {
@@ -27,13 +32,8 @@ public class Controller3D : MonoBehaviour
 
         _characterController = GetComponent<CharacterController>();
         _mainCameraTransform = Camera.main.GetComponent<Transform>();
-
-        if (iWantBugs)
-            _transformCache = GetComponent<Transform>();
-       
-
+        _transformCache = GetComponent<Transform>();
         _playerTransform = _transformCache;
-        //Debug.Log(_playerTransform);
     }
 
     
@@ -54,7 +54,15 @@ public class Controller3D : MonoBehaviour
         {
         	if (!debug_On)
         		Debug.Log ("Controller is not Mine");
+        		
+        	//SyncedMovement();
         }
+    }
+    
+    private void SyncedMovement()
+    {
+    	syncTime += Time.deltaTime;
+    	rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime/syncDelay);
     }
 
     private void MoveWithEvent(Vector3 inputMovement)
@@ -95,5 +103,26 @@ public class Controller3D : MonoBehaviour
         }
         while ((direction - _playerTransform.forward).sqrMagnitude > 0.2f);
     }
+    
+    /*void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+    	Vector3 syncPosition = Vector3.zero;
+    	if (stream.isWriting)
+    	{
+    		syncPosition = rigidbody.position;
+    		stream.Serialize(ref syncPosition);
+    	}
+    	else
+    	{
+    		stream.Serialize (ref syncPosition);
+    		
+    		syncTime = 0f;
+    		syncDelay = Time.time - lastSynchronizationTime;
+    		lastSynchronizationTime = Time.time;
+    		
+    		syncStartPosition = rigidbody.position;
+    		syncEndPosition = syncPosition;
+    	}
+    }*/
 
 }

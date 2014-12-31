@@ -12,7 +12,7 @@ using System.Collections;
  *                 (CURRENTLY ONLY WORKS WITH ONE GAMEOBJECT)
  * @param exit - GameObject to signify the end of the maze
  */
-public class Maze_Generator_Controller : MonoBehaviour {
+public class MazeGeneratorController : MonoBehaviour {
     const int NORTH = 0;
     const int SOUTH = 1;
     const int EAST = 2;

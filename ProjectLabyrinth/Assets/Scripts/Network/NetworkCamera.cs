@@ -8,12 +8,12 @@ public class NetworkCamera : MonoBehaviour {
 		if (networkView.isMine)
 		{
 			camera.enabled = true;
-			audio.enabled = true;
+			//audio.enabled = true;
 		}
 		else
 		{
 			camera.enabled = false;
-			audio.enabled = false;
+			//audio.enabled = false;
 		}
 	}
 	

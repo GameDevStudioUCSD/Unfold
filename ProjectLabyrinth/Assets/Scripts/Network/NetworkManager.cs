@@ -7,7 +7,7 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	public GameObject mazeGenerator;
 
-	private Maze_Generator_Controller mapCreator;
+	private MazeGeneratorController mapCreator;
 
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "RoomName";
@@ -19,7 +19,7 @@ public class NetworkManager : MonoBehaviour {
 	{
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
-		mapCreator = (Maze_Generator_Controller)mazeGenerator.GetComponent(typeof(Maze_Generator_Controller));
+		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
 		mapCreator.Start();
 		mapCreator.createWalls();
 		SpawnPlayer();
