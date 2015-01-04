@@ -40,6 +40,10 @@ public class Square
         hasEast = wallsUp;
 
     }
+    public override string ToString()
+    {
+        return "Cell: " + row.ToString() + " , " + col.ToString();
+    }
     public int getRow() { return row; }
     public int getCol() { return col; }
     public int getWallToDestroy() { return wallToDestroy;  }

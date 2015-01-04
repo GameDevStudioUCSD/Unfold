@@ -20,8 +20,10 @@ public class NetworkManager : MonoBehaviour {
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
+        //mapCreator = new MazeGeneratorController(MazeGeneratorController.DepthFirst);
 		mapCreator.Start();
 		mapCreator.createWalls();
+        //Debug.Log(mapCreator.getStartSquare());
 		SpawnPlayer();
 	}
 	

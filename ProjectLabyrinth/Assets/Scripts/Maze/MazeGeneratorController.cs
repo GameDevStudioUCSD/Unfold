@@ -18,8 +18,8 @@ public class MazeGeneratorController : MonoBehaviour {
     const int EAST = 2;
     const int WEST = 3;
     //Define new algorithm types here
-    const int DepthFirst = 0;
-    const int Recursive = 1;
+    public const int DepthFirst = 0;
+    public const int Recursive = 1;
 
 
     public int Rows = 20;
@@ -28,11 +28,15 @@ public class MazeGeneratorController : MonoBehaviour {
     public int algorithm = DepthFirst;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
 
-
     private Square[,] walls;
     private Square exit;
+    private Square start;
     private Square curr;
     private MazeGenerator generator;
+    public MazeGeneratorController(int algorithm)
+    {
+        algorithm = this.algorithm;
+    }
 	// Use this for initialization
 	public void Start () {
         //Debug.Log("Started script");
@@ -77,7 +81,7 @@ public class MazeGeneratorController : MonoBehaviour {
                     children.Push(Network.Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.start)
                 {
-                    //createPlayer ();
+                    start = curr;
                 }
                 if(curr.exit)
                     children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
@@ -91,7 +95,10 @@ public class MazeGeneratorController : MonoBehaviour {
         }
         
     }
-    
+    public Square getStartSquare()
+    {
+        return start;
+    }
     public void createPlayer()
     {
     	//GameObject child;
