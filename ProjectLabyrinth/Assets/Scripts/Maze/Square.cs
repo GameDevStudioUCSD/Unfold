@@ -18,6 +18,10 @@ public class Square
     private int row; // R index in walls matrix 
     private int col; // C index in walls matrix
 
+    public int numOfWalls; // Number of walls adjacent to this cell
+    public float weight; // Value to help determine type and chance within the
+                          // spawning methods
+
     // You can be creative with this one. It ensures both adjacent walls are
     // destroyed in the DepthFirst algorithm. For example, say the next wall to 
     // destroy is to the North of the current square. In this algorithm, this 
