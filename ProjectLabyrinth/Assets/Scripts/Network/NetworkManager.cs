@@ -12,6 +12,14 @@ public class NetworkManager : MonoBehaviour {
 	private bool serverStarted;
 	private bool matchStarted;
 	private bool gameList;
+	private bool serverJoined;
+	
+	private const int NONE_UI = 0;
+	private const int START_UI = 1;
+	private const int LOBBYHOST_UI = 6;
+	private const int LOBBY_UI = 10;
+	private const int GAMELIST_UI = 16;
+	private int UIStatus = 1;
 
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "RoomName";
@@ -25,20 +33,16 @@ public class NetworkManager : MonoBehaviour {
 	{
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
-		/*mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
-		mapCreator.Start();
-		mapCreator.createWalls();*/
 		if(Network.isServer)
 			nView.RPC("updatePlayerList",RPCMode.All);
-		
-		serverStarted = true;
-        
-		//SpawnPlayer();
+
+        UIStatus = LOBBYHOST_UI;
 	}
 	
 	private void RefreshHostList()
 	{
 		MasterServer.RequestHostList (typeName);
+		UIStatus = GAMELIST_UI;
 	}
 	
 	void OnMasterServerEvent(MasterServerEvent msEvent)
@@ -52,6 +56,7 @@ public class NetworkManager : MonoBehaviour {
 	private void JoinServer(HostData hostData)
 	{
 		Network.Connect(hostData);
+		UIStatus = LOBBY_UI;
 	}
 	
 	void OnConnectedToServer()
@@ -66,39 +71,46 @@ public class NetworkManager : MonoBehaviour {
 	{
 		if (debug_On)
 			Debug.Log ("Server Initialized");
-		//SpawnPlayer();
 	}
 	
 	void OnGUI()
 	{
-		if (!matchStarted/*!Network.isClient && !Network.isServer*/)
+		/*START MENU*/
+		if (UIStatus == START_UI)
 		{
-			if (!serverStarted && !gameList)
+			if (GUI.Button(new Rect(100, 100, 250, 100), "Create Game"))
+				StartServer();
+			if (GUI.Button(new Rect(100, 300, 250, 100), "Join Game"))
 			{
-				if (GUI.Button(new Rect(100, 100, 250, 100), "Create Game"))
-					StartServer();
-				if (GUI.Button(new Rect(100, 300, 250, 100), "Join Game"))
-				{
-					RefreshHostList();
-					gameList = true;
-				}
+				RefreshHostList();
 			}
-			if (hostList != null && gameList == true)
+		}
+		
+		/*GAME LIST MENU*/
+		if (hostList != null && UIStatus == GAMELIST_UI)
+		{
+			for (int i = 0; i < hostList.Length; i++)
 			{
-				for (int i = 0; i < hostList.Length; i++)
-				{
-					if (GUI.Button(new Rect(100, 100+(110*i), 300, 100), hostList[i].gameName))
-						JoinServer(hostList[i]);
-				}
-				if (GUI.Button (new Rect(100, 500, 250, 100), "Back"))
-					gameList = false;
+				if (GUI.Button(new Rect(100, 100+(110*i), 250, 100), hostList[i].gameName))
+					JoinServer(hostList[i]);
 			}
-			
-			if (serverStarted)
+			if (GUI.Button (new Rect(100, 500, 250, 100), "Back"))
+				UIStatus = START_UI;
+		}
+		
+		/*LOBBY MENU*/
+		if (UIStatus == LOBBY_UI)
+		{
+			UIStatus = NONE_UI;
+		}
+		
+		/*LOBBY MENU AS HOST*/
+		if (UIStatus == LOBBYHOST_UI)
+		{
+			if (GUI.Button(new Rect(100, 300, 250, 100), "Start Game"))
 			{
-				if (GUI.Button(new Rect(100, 500, 250, 100), "Start Game"))
-					StartMatch ();
-				
+				UIStatus = NONE_UI;
+				StartMatch ();
 			}
 		}
 	}
@@ -125,11 +137,9 @@ public class NetworkManager : MonoBehaviour {
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
 		mapCreator.Start();
 		mapCreator.createWalls();
-		//updateMatchStatus(true);
 		if(Network.isServer)
 			nView.RPC("updateMatchStatus",RPCMode.All, true);
 		SpawnPlayer ();
-		
 	}
 	
 	private void SpawnPlayer()
