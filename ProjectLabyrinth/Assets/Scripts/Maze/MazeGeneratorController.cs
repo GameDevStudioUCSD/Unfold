@@ -26,7 +26,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Cols = 20;
     public int wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, Bird;
 
     private Square[,] walls;
     private Square exit;
@@ -59,6 +59,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     generator.run(walls, exit);
         //createWalls();
 	
+		Square enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
+		Network.Instantiate (Bird, new Vector3 (enemy.getRow () * wallSize, 1, enemy.getCol () * wallSize), Quaternion.identity, 0);
 	}
     
     // Creates the walls flagged for creation
@@ -99,6 +101,12 @@ public class MazeGeneratorController : MonoBehaviour {
     {
         return start;
     }
+
+	public Square[,] getWalls()
+	{
+		return walls;
+	}
+
     public void createPlayer()
     {
     	//GameObject child;
