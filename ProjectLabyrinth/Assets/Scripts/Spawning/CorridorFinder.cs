@@ -32,6 +32,40 @@ public class CorridorFinder : MonoBehaviour
 
     private static int GetAdjacentWalls(Square cell)
     {
-        return 0;
+		int adjacentWalls = 0;
+		if (cell.hasNorth)
+			adjacentWalls++;
+		if (cell.hasSouth)
+			adjacentWalls++;
+		if (cell.hasWest)
+			adjacentWalls++;
+		if (cell.hasEast)
+			adjacentWalls++;
+
+		return adjacentWalls;
     }
+
+	private static void SetAdjacentWalls(Square[,] maze, int rows, int cols){
+		for (int r=0; r < rows-1; r++) {
+			for(int c=0; c < cols-1; c++){
+				Square temp = maze[r,c];
+				if(temp.hasNorth && c>0){
+					temp = maze[r,c-1];
+					temp.hasSouth = true;
+				}
+				if(temp.hasSouth && c<cols){
+					temp = maze[r,c+1];
+					temp.hasNorth = true;
+				}
+				if(temp.hasWest && r>0){
+					temp = maze[r-1,c];
+					temp.hasWest = true;
+				}
+				if(temp.hasEast && r<rows){
+					temp = maze[r+1,c];
+					temp.hasSouth = true;
+				}
+			}
+		}
+	}
 }
