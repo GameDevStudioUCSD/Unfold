@@ -59,8 +59,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     generator.run(walls, exit);
         //createWalls();
 	
-		Square enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
-		Network.Instantiate (Bird, new Vector3 (enemy.getRow () * wallSize, 1, enemy.getCol () * wallSize), Quaternion.identity, 0);
+		//Square enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
+		//
 	}
     
     // Creates the walls flagged for creation
@@ -94,6 +94,17 @@ public class MazeGeneratorController : MonoBehaviour {
                     child.name = child.name.Replace("(Clone)", "");
                 }
             }
+        }
+        
+    }
+    public void SetSpawnLocations()
+    {
+        ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
+        Square curr;
+        for (int i = 0; i < corridors.Count; i++ )
+        {
+            curr = (Square)corridors[i];
+            Network.Instantiate(Bird, new Vector3(curr.getRow() * wallSize, 1, curr.getCol() * wallSize), Quaternion.identity, 0);
         }
         
     }

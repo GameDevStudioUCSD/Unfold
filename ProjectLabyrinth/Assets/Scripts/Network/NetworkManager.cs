@@ -138,6 +138,8 @@ public class NetworkManager : MonoBehaviour {
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
 		mapCreator.Start();
 		mapCreator.createWalls();
+        mapCreator.SetSpawnLocations();
+        
 		if(Network.isServer)
 			nView.RPC("updateMatchStatus",RPCMode.All, true);
 		SpawnPlayer ();

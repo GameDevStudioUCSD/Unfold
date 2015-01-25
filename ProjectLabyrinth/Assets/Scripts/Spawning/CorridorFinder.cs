@@ -9,6 +9,7 @@ public class CorridorFinder : MonoBehaviour
 	public static ArrayList FindCorridors (Square[,] maze, int rows, int cols)
 	{
         ArrayList listOfCorridors = new ArrayList();
+        SetAdjacentWalls(maze, rows, cols);
         for (int r = 0; r < rows; r++ )
         {
             for( int c = 0; c < cols; c++)
@@ -27,6 +28,7 @@ public class CorridorFinder : MonoBehaviour
 	// adjacent to it), and returns the length of that corridor.
 	private static int CorridorWalker (Square endOfCorridor)
 	{
+        endOfCorridor.weight += 5;
 		return 0;
 	}
 
@@ -45,23 +47,30 @@ public class CorridorFinder : MonoBehaviour
 		return adjacentWalls;
     }
 
-	private static void SetAdjacentWalls(Square[,] maze, int rows, int cols){
-		for (int r=0; r < rows-1; r++) {
-			for(int c=0; c < cols-1; c++){
+	private static void SetAdjacentWalls(Square[,] maze, int rows, int cols)
+    {
+		for (int r=0; r < rows-1; r++) 
+        {
+			for(int c=0; c < cols-1; c++)
+            {
 				Square temp = maze[r,c];
-				if(temp.hasNorth && c>0){
+				if(temp.hasNorth && c>0)
+                {
 					temp = maze[r,c-1];
 					temp.hasSouth = true;
 				}
-				if(temp.hasSouth && c<cols){
+				if(temp.hasSouth && c<cols)
+                {
 					temp = maze[r,c+1];
 					temp.hasNorth = true;
 				}
-				if(temp.hasWest && r>0){
+				if(temp.hasWest && r>0)
+                {
 					temp = maze[r-1,c];
 					temp.hasWest = true;
 				}
-				if(temp.hasEast && r<rows){
+				if(temp.hasEast && r<rows)
+                {
 					temp = maze[r+1,c];
 					temp.hasSouth = true;
 				}
