@@ -27,10 +27,11 @@ public class NetworkManager : MonoBehaviour {
 	private NetworkPlayer[] playerList;
 	private int playerCount;
 	
-	//MasterServer.ipAddress = "127.0.0.1";
+
 	
 	private void StartServer()
 	{
+		//MasterServer.ipAddress = "127.0.0.1";
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 		if(Network.isServer)

@@ -1,4 +1,4 @@
-﻿#define FOR_MOUSE
+#define FOR_MOUSE
 
 using System;
 using UnityEngine;
