@@ -19,7 +19,7 @@ public class MonsterMovement : MonoBehaviour {
 
 		bool[] sides = getSides (initSqr);
 
-		direction = 0;
+		direction = 3;
 
 		bool found = false;
 		while (!found) {
@@ -27,16 +27,14 @@ public class MonsterMovement : MonoBehaviour {
 			found = !sides [side];
 		
 			if (found) {
-				direction = side;
+				turn (side);
 			}
 		}
-
-		turn (direction);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (xdir, 0, zdir);
+		transform.Translate (Vector3.forward * SPEED);
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
@@ -50,11 +48,9 @@ public class MonsterMovement : MonoBehaviour {
 					found = !sides[side];
 
 					if (found) {
-						direction = side;
+						turn (side);
 					}
 				}
-
-				turn (direction);
 			} else if (isCorner(sides)) {
 				sides[(direction + 2) % 4] = true;
 
@@ -147,6 +143,8 @@ public class MonsterMovement : MonoBehaviour {
 		if (dir == 3) {
 			zdir = SPEED;
 		}
+
+		transform.Rotate (Vector3.up * 90 * ((dir - direction) % 4));
 		
 		canTurn = false;
 		direction = dir;
