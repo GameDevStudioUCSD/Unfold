@@ -51,34 +51,50 @@ public class CorridorFinder : MonoBehaviour
 			// Or make the booleans update with neighboring walls
 
 			// Potential issues with counting rows/columns. Double check that this is right!!!
-			// TODO: Check for bounds on edges
 
-			Square eastWall = maze[current.getRow(), current.getCol() + 1];
-			Square westWall = maze[current.getRow(), current.getCol() - 1];
-			Square northWall = maze[current.getRow() - 1, current.getCol()];
-			Square southWall = maze[current.getRow() + 1, current.getCol()];
+			Square eastWall = null;
+			Square westWall = null;
+			Square northWall = null;
+			Square southWall = null;
+
+			if (current.getCol() + 1 < maze.GetLength(1))
+			{
+				eastWall = maze[current.getRow(), current.getCol() + 1];
+			}
+			if (current.getCol() - 1 >= 0)
+			{
+				westWall = maze[current.getRow(), current.getCol() - 1];
+			}
+			if (current.getRow() + 1 < maze.GetLength(1))
+			{
+				southWall = maze[current.getRow() + 1, current.getCol()];
+			}
+			if (current.getRow() - 1 >= 0)
+			{
+				northWall = maze[current.getRow() - 1, current.getCol()];
+			}
 
 			// Check to see if there is no east wall and if prev != the east Square
 			// AKA, check to see if the east Square is legal to move to
-			if (!current.hasEast && prev != eastWall)
+			if (!current.hasEast && prev != eastWall && eastWall != null)
 			{
 				prev = current;
 				current = eastWall;
 				corridorLength++;
 			}
-			else if (!current.hasWest && prev != westWall)
+			else if (!current.hasWest && prev != westWall && westWall != null)
 			{
 				prev = current;
 				current = westWall;
 				corridorLength++;
 			}
-			else if (!current.hasNorth && prev != northWall)
+			else if (!current.hasNorth && prev != northWall && northWall != null)
 			{
 				prev = current;
 				current = northWall;
 				corridorLength++;
 			}
-			else if (!current.hasSouth && prev != southWall)
+			else if (!current.hasSouth && prev != southWall && southWall != null)
 			{
 				prev = current;
 				current = southWall;
@@ -87,8 +103,8 @@ public class CorridorFinder : MonoBehaviour
 			else
 			{
 				// No legal moves, something went wrong
-				// Throw or return 0
-				return 0;
+				// Throw or return
+				return corridorLength;
 			}
 		}
 
