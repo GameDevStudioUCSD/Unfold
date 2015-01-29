@@ -42,6 +42,7 @@ public class Square
         hasSouth = wallsUp;
         hasWest = wallsUp;
         hasEast = wallsUp;
+        weight = 1;
 
     }
     public override string ToString()
