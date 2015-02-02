@@ -26,7 +26,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Cols = 20;
     public int wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, Bird;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, Bird, Spider;
 
     private Square[,] walls;
     private Square exit;
@@ -60,7 +60,10 @@ public class MazeGeneratorController : MonoBehaviour {
         //createWalls();
 	
 		Square enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
-		Network.Instantiate (Bird, new Vector3 (enemy.getRow () * wallSize, 1, enemy.getCol () * wallSize), Quaternion.identity, 0);
+		Network.Instantiate (Bird, new Vector3 (enemy.getRow () * wallSize, 5, enemy.getCol () * wallSize), Quaternion.identity, 0);
+
+		enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
+		Network.Instantiate (Spider, new Vector3 (enemy.getRow () * wallSize, 0, enemy.getCol () * wallSize), Quaternion.identity, 0);
 	}
     
     // Creates the walls flagged for creation
