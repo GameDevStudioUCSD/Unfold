@@ -24,7 +24,7 @@ public class MazeGeneratorController : MonoBehaviour {
 
     public int Rows = 20;
     public int Cols = 20;
-    public int wallSize = 10;
+    public float wallSize = 10;
     public int algorithm = DepthFirst;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, Bird, Spider;
 
