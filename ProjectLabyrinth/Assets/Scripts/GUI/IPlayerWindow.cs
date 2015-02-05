@@ -1,3 +1,4 @@
+/*
 using System;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
  *
  * Sets some basic constants to control certain aspects of the screen.
  */
+/*
 public interface IPlayerWindow : MonoBehaviour {
 	// Sets the ratios for the screen width and height
 	protected static float wRatio = .666f;
@@ -23,3 +25,4 @@ public interface IPlayerWindow : MonoBehaviour {
 	protected static float frameX = Screen.width * (1 - wRatio) / 2;
 	protected static float frameY = Screen.height * (1 - hRatio) / 2 + marginY;
 }
+*/

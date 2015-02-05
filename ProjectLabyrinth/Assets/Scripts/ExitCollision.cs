@@ -2,14 +2,14 @@
 using System.Collections;
 
 
-public class ExitCollision : IPlayerWindow {
+public class ExitCollision : AbstractGUI {
 
 	public GameObject player;
     public GameObject loadResult;
 	private Collider collider;
     private bool hasReached;
 
-    static float frameX = w * (1 - wRatio) / 2;
+    static float frameX = Screen.width * (1 - wRatio) / 2;
     //static float frameY = h * (1 - hRatio) / 2;
     Rect win = new Rect(frameX + frameWidth/2, frameHeight / 2, 100, 100);
 	void Start() 

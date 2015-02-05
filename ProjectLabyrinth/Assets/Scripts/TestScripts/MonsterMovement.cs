@@ -17,7 +17,7 @@ public class MonsterMovement : MonoBehaviour {
 		walls = mazeGen.getWalls ();
 		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr);
+		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
 
 		direction = 3;
 
@@ -38,7 +38,7 @@ public class MonsterMovement : MonoBehaviour {
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
-			bool[] sides = getSides (curr);
+			bool[] sides = getSides (curr, transform.position.x, transform.position.z);
 			if (isFork (sides)) {
 				bool found = false;
 				sides[(direction + 2) % 4] = true; // Don't want to turn around
@@ -75,10 +75,15 @@ public class MonsterMovement : MonoBehaviour {
 	}
 
 	bool isInCenter() {
-		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .2 &&
-		    Mathf.Round (transform.position.x) % 10 == 0 && 
-		    Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .2 &&
-		    Mathf.Round (transform.position.z) % 10 == 0) {
+		float diffx = Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x));
+		float diffz = Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z));
+		float xpos = Mathf.Round (transform.position.x);
+		float zpos = Mathf.Round (transform.position.z);
+
+		if (diffx <= .25 &&
+		    xpos % mazeGen.wallSize == 0 && 
+		    diffz <= .25 &&
+		    zpos % mazeGen.wallSize == 0) {
 			
 			return true;
 		}
@@ -150,8 +155,29 @@ public class MonsterMovement : MonoBehaviour {
 		direction = dir;
 	}
 
-	private bool[] getSides(Square s) {
-		return new[] {s.hasSouth, s.hasWest, s.hasNorth, s.hasEast};
+	private bool[] getSides(Square s, float x, float z) {
+		bool south, west, north, east;
+		if (Mathf.Round (x / mazeGen.wallSize + 1) < mazeGen.Rows)
+			south = getCurrSquare (x + mazeGen.wallSize, z).hasNorth;
+		else
+			south = true;
+
+		if (Mathf.Round (x / mazeGen.wallSize - 1) >= 0)
+			north = getCurrSquare (x - mazeGen.wallSize, z).hasSouth;
+		else
+			north = true;
+
+		if (Mathf.Round (z / mazeGen.wallSize - 1) >= 0)
+			west = getCurrSquare (x, z - mazeGen.wallSize).hasEast;
+		else
+			west = true;
+
+		if (Mathf.Round (z / mazeGen.wallSize + 1) < mazeGen.Cols)
+			east = getCurrSquare (x, z + mazeGen.wallSize).hasWest;
+		else
+			east = true;
+
+		return new[] {s.hasSouth || south, s.hasWest || west, s.hasNorth || north, s.hasEast || east};
 	}
 
 	private Square getCurrSquare(float x, float z) {
