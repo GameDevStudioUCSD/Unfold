@@ -2,20 +2,12 @@
 using System.Collections;
 
 
-public class ExitCollision : MonoBehaviour {
-
+public class ExitCollision : IPlayerWindow {
 
 	public GameObject player;
     public GameObject loadResult;
 	private Collider collider;
     private bool hasReached;
-
-    static float wRatio = .666f;
-    static float hRatio = .5f;
-    static float w = Screen.width;
-    static float h = Screen.height;
-    static float frameWidth = w * wRatio;
-    static float frameHeight = h * hRatio;
 
     static float frameX = w * (1 - wRatio) / 2;
     //static float frameY = h * (1 - hRatio) / 2;
