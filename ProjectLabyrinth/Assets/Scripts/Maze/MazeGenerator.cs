@@ -8,7 +8,7 @@ using System.Collections; //Inherits Random class
  * abstract or protected constructor. This is to encourage creativity and allow
  * flexibility in the masterpiece you're bound to make :)
  */
-public abstract class MazeGenerator : MonoBehaviour
+public abstract class MazeGenerator
 {
     protected const int NORTH = 0;
     protected const int SOUTH = 1;
