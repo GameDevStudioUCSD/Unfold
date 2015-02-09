@@ -16,8 +16,8 @@ public class CorridorFinder : MonoBehaviour
             {
                 if( GetAdjacentWalls(maze[r,c]) == 3)
                 {
+                    maze[r, c].weight = CorridorWalker(maze[r, c], maze);
                     listOfCorridors.Add(maze[r, c]);
-                    CorridorWalker(maze[r, c], maze);
                 }
             }
         }
@@ -57,7 +57,7 @@ public class CorridorFinder : MonoBehaviour
 			Square northWall = null;
 			Square southWall = null;
 
-			if (current.getCol() + 1 < maze.GetLength(1))
+			if (current.getCol() + 1 < maze.GetLength(0))
 			{
 				eastWall = maze[current.getRow(), current.getCol() + 1];
 			}

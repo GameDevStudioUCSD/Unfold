@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-    const int SPAWNCHANCE = 50;
+    const int SPAWNCHANCE = 30;
 	// Calculates the chance whether a monster should spawn in a given square 
     // Returns true if a monster should spawn, else returns false
 	private static bool CalculateSpawnChance(Square cell)
