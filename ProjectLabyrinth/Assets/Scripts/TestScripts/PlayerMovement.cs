@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 	float xAxis, zAxis = 0.0f;
 	
 	float xAngle, zAngle = 0.0f;
-	float zVelocity = 0.0f;
+	// float zVelocity = 0.0f;
 
 	// Use this for initialization
 	void Start () {

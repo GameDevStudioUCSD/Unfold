@@ -50,14 +50,22 @@ public class RecursiveMaze : MazeGenerator {
             generateMaze(r0, cR, rR, cN);
             generateMaze(rR, cR, rN, cN);
             int omitDoor = randomEdge();
-            if (omitDoor != NORTH)
-                walls[Random.Range(r0, rR), cR].hasWest = false;
-            if (omitDoor != SOUTH)
-                walls[Random.Range(rR, rN), cR].hasWest = false;
-            if (omitDoor != WEST)
-                walls[rR, Random.Range(c0, cR)].hasNorth = false;
-            if (omitDoor != EAST)
-                walls[rR, Random.Range(cR, cN)].hasNorth = false;
+            if (omitDoor != NORTH) {
+				int r = Random.Range(r0, rR);
+                walls[r, cR].hasWest = false;
+			}
+            if (omitDoor != SOUTH) {
+				int r = Random.Range(rR, rN);
+                walls[r, cR].hasWest = false;
+			}
+            if (omitDoor != WEST) {
+				int r = Random.Range (c0, cR);
+                walls[rR, r].hasNorth = false;
+			}
+            if (omitDoor != EAST) {
+				int r = Random.Range (cR, cN);
+                walls[rR, r].hasNorth = false;
+			}
         }
         else if (!hasEntrance && r0 < (Rows * .2) && c0 < (Cols * .2))
         {
