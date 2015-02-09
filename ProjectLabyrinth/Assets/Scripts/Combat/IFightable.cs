@@ -38,7 +38,7 @@ public class IFightable : MonoBehaviour {
 			Die();
 	}
 	
-	void Die ()
+	public void Die ()
 	{
 		Destroy(gameObject);
 		Debug.Log("DEAD!");
