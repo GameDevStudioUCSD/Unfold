@@ -100,7 +100,10 @@ public class PlayerAttack : MonoBehaviour {
 			attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			IFightable target = (IFightable)attackObject.GetComponent("IFightable");
 			if (target)
+			{
+				Debug.Log ("Ouch!");
 				target.Attacked(AttackDamage, attackType);
+			}
 		}
 		nextAttackTime = Time.time + AttackDelay;
 		Debug.Log ("nextAttackTime: " + nextAttackTime + " CurrentTime: " + Time.time);
