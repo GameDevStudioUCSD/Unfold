@@ -34,7 +34,7 @@ public class MonsterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (Vector3.forward * SPEED);
+		rigidbody.AddForce (Vector3.forward * SPEED);
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
