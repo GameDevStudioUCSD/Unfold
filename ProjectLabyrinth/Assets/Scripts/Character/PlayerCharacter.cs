@@ -73,6 +73,10 @@ public class PlayerCharacter : Character {
 	}
 
 	public override void TakeDamage(int enDamage, int enAttackType) {
+		if (enAttackType == 15) {
+			enDamage = enDamage * 2;
+		}
+
 		this.health = this.health - enDamage;
 		if (this.health <= 0) {
 			this.Die();
