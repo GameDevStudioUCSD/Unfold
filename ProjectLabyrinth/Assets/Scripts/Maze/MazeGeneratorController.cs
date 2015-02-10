@@ -26,7 +26,8 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Cols = 20;
     public float wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, Bird, Spider;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
+    public GameObject[] spawnList;
 
     private Square[,] walls;
     private Square exit;
@@ -57,13 +58,7 @@ public class MazeGeneratorController : MonoBehaviour {
                 return;
         }
                     generator.run(walls, exit);
-        //createWalls();
 	
-		Square enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
-		Network.Instantiate (Bird, new Vector3 (enemy.getRow () * wallSize, 5, enemy.getCol () * wallSize), Quaternion.identity, 0);
-
-		enemy = walls [Random.Range (0, Rows), Random.Range (0, Cols)];
-		Network.Instantiate (Spider, new Vector3 (enemy.getRow () * wallSize, 0, enemy.getCol () * wallSize), Quaternion.identity, 0);
 	}
     
     // Creates the walls flagged for creation
@@ -96,6 +91,23 @@ public class MazeGeneratorController : MonoBehaviour {
                     //child.transform.parent = transform;
                     child.name = child.name.Replace("(Clone)", "");
                 }
+            }
+        }
+        
+    }
+    public void SetSpawnLocations()
+    {
+        ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
+        Square curr;
+        for (int i = 0; i < corridors.Count; i++ )
+        {
+            curr = (Square)corridors[i];
+            GameObject monsterToSpawn = Spawner.NextSpawn(curr, spawnList);
+            if (monsterToSpawn != null)
+            {
+                int r = curr.getRow();
+                int c = curr.getCol();
+                Network.Instantiate(monsterToSpawn, new Vector3(r * wallSize, 1, c * wallSize), Quaternion.identity, 0);
             }
         }
         
