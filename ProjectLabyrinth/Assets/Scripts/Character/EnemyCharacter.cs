@@ -19,6 +19,9 @@ public class EnemyCharacter : Character {
 	 * 1000 = diagonal2 weakness (topleft -> bottomright)
 	 */
 	public int weakness;
+
+	// The particular item this enemy drops when killed
+	public GameObject Item;
 	
 	void Start() {
 	}
@@ -56,5 +59,6 @@ public class EnemyCharacter : Character {
 	
 	public override void Die() {
 		Destroy(this.gameObject);
+		Instantiate(Item, this.transform.position, Quaternion.identity);
 	}
 }

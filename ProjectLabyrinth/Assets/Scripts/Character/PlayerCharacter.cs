@@ -18,9 +18,7 @@ public class PlayerCharacter : Character {
 	void FixedUpdate() {
 
 		if (Time.time > nextAttackTime) {
-
 			foreach (Touch t in Input.touches) {
-
 				if (t.phase == TouchPhase.Began) {
 					this.initialTouch = t;
 				} else if (t.phase == TouchPhase.Moved) {
@@ -45,7 +43,6 @@ public class PlayerCharacter : Character {
 				} else if (t.phase == TouchPhase.Ended) {
 					this.initialTouch = new Touch();
 				}
-
 			}
 
 			if (Input.GetKeyUp(KeyCode.Alpha1)) {
