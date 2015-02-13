@@ -26,8 +26,9 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Cols = 20;
     public float wallSize = 10;
     public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, DebugSphere;
     public GameObject[] spawnList;
+    public bool debug_ON = false;
 
     private Square[,] walls;
     private Square exit;
@@ -103,10 +104,12 @@ public class MazeGeneratorController : MonoBehaviour {
         {
             curr = (Square)corridors[i];
             GameObject monsterToSpawn = Spawner.NextSpawn(curr, spawnList);
+            int r = curr.getRow();
+            int c = curr.getCol();
+            if(debug_ON)
+                Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 10, c * wallSize), Quaternion.identity, 0);
             if (monsterToSpawn != null)
             {
-                int r = curr.getRow();
-                int c = curr.getCol();
                 Network.Instantiate(monsterToSpawn, new Vector3(r * wallSize, 1, c * wallSize), Quaternion.identity, 0);
             }
         }

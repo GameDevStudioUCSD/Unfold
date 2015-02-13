@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-    const int SPAWNCHANCE = 30;
+    const int SPAWNCHANCE = 7;
+    public static bool debug_ON = true;
 	// Calculates the chance whether a monster should spawn in a given square 
     // Returns true if a monster should spawn, else returns false
 	private static bool CalculateSpawnChance(Square cell)
@@ -12,6 +13,8 @@ public class Spawner : MonoBehaviour {
         float seed = 1;
         seed *= cell.weight;
         seed *= CorridorFinder.GetAdjacentWalls(cell);
+        if (debug_ON)
+            Debug.Log("Seed: " + seed);
         if (seed > Random.Range(1, SPAWNCHANCE))
             willSpawn = true;
         return willSpawn;

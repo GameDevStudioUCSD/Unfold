@@ -53,4 +53,14 @@ public class Square
     public int getCol() { return col; }
     public int getWallToDestroy() { return wallToDestroy;  }
     public void setWallToDestroy(int w2d) { wallToDestroy = w2d; }
+    public static void ResetVisitedFlags( Square cell )
+    {
+        cell.visited = false;
+    }
+    public static void ResetVisitedFlags (Square[,] cells )
+    {
+        for (int x = 0; x < cells.GetLength(0); x++)
+            for (int y = 0; y < cells.GetLength(1); y++)
+                cells[x, y].visited = false;
+    }
 }

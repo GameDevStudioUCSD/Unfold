@@ -6,10 +6,11 @@ public class CorridorFinder : MonoBehaviour
 	// Walks through a maze and builds a list of Squares and their
 	// corridor's length. The length of each corridor will be used
 	// as a weight for spawning monsters.
+    public static bool debug_ON = true;
 	public static ArrayList FindCorridors (Square[,] maze, int rows, int cols)
 	{
         ArrayList listOfCorridors = new ArrayList();
-        SetAdjacentWalls(maze, rows, cols);
+        //SetAdjacentWalls(maze, rows, cols);
         for (int r = 0; r < rows; r++ )
         {
             for( int c = 0; c < cols; c++)
@@ -40,24 +41,31 @@ public class CorridorFinder : MonoBehaviour
 	*/
 	private static int CorridorWalker (Square endOfCorridor, Square[,] maze)
 	{
+        if (debug_ON)
+            Debug.Log("Running CorridorWalker(" + endOfCorridor.ToString() + ", " + maze.ToString() + ")");
 		Square current = endOfCorridor;
 		Square prev = null;
 		int corridorLength = 0;
-
-		while (GetAdjacentWalls(current) >= 2)
+        int visitedCells = 0;
+        int totalCells = maze.Length;
+        Square.ResetVisitedFlags(maze);
+		while (GetAdjacentWalls(current) >= 2 && visitedCells < totalCells )
 		{
 			// NOTE:
 			// hasEast, West, North, and South functions make this code a lot easier
 			// Or make the booleans update with neighboring walls
 
 			// Potential issues with counting rows/columns. Double check that this is right!!!
-
+            if (debug_ON)
+                Debug.Log("Depth of CorridorFinder: " + visitedCells);
 			Square eastWall = null;
 			Square westWall = null;
 			Square northWall = null;
 			Square southWall = null;
-
-			if (current.getCol() + 1 < maze.GetLength(0))
+            if (current.visited)
+                break;
+            current.visited = true;
+			if (current.getCol() + 1 < maze.GetLength(1))
 			{
 				eastWall = maze[current.getRow(), current.getCol() + 1];
 			}
@@ -65,7 +73,7 @@ public class CorridorFinder : MonoBehaviour
 			{
 				westWall = maze[current.getRow(), current.getCol() - 1];
 			}
-			if (current.getRow() + 1 < maze.GetLength(1))
+			if (current.getRow() + 1 < maze.GetLength(0))
 			{
 				southWall = maze[current.getRow() + 1, current.getCol()];
 			}
@@ -106,8 +114,10 @@ public class CorridorFinder : MonoBehaviour
 				// Throw or return
 				return corridorLength;
 			}
+            visitedCells++;
 		}
-
+        if (debug_ON)
+            Debug.Log("Corridor Length: " + corridorLength);
 		return corridorLength;
 	}
 
