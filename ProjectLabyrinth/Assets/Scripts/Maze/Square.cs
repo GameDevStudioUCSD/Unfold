@@ -18,6 +18,10 @@ public class Square
     private int row; // R index in walls matrix 
     private int col; // C index in walls matrix
 
+    public int numOfWalls; // Number of walls adjacent to this cell
+    public float weight; // Value to help determine type and chance within the
+                          // spawning methods
+
     // You can be creative with this one. It ensures both adjacent walls are
     // destroyed in the DepthFirst algorithm. For example, say the next wall to 
     // destroy is to the North of the current square. In this algorithm, this 
@@ -38,6 +42,7 @@ public class Square
         hasSouth = wallsUp;
         hasWest = wallsUp;
         hasEast = wallsUp;
+        weight = 1;
 
     }
     public override string ToString()
@@ -48,4 +53,14 @@ public class Square
     public int getCol() { return col; }
     public int getWallToDestroy() { return wallToDestroy;  }
     public void setWallToDestroy(int w2d) { wallToDestroy = w2d; }
+    public static void ResetVisitedFlags( Square cell )
+    {
+        cell.visited = false;
+    }
+    public static void ResetVisitedFlags (Square[,] cells )
+    {
+        for (int x = 0; x < cells.GetLength(0); x++)
+            for (int y = 0; y < cells.GetLength(1); y++)
+                cells[x, y].visited = false;
+    }
 }

@@ -210,6 +210,8 @@ public class NetworkManager : MonoBehaviour {
 
 			if (GUI.Button(new Rect(100, 300, 250, 100), "Start Game"))
 			{
+                if (debug_On)
+                    Debug.Log("Start Game button clicked");
 				UIStatus = NONE_UI;
 				StartMatch ();
 			}
@@ -237,9 +239,19 @@ public class NetworkManager : MonoBehaviour {
 	
 	private void StartMatch()
 	{
+        if (debug_On)
+            Debug.Log("Tried to start match\nGetting MazeGeneratorController script");
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
+        if (debug_On)
+            Debug.Log("Running Start() on MazeGeneratorController");
 		mapCreator.Start();
+        if (debug_On)
+            Debug.Log("Running createWalls() on MazeGeneratorController");
 		mapCreator.createWalls();
+        if (debug_On)
+            Debug.Log("Running SetSpawnLocations() on MazeGeneratorController");
+        mapCreator.SetSpawnLocations();
+        
 		if(Network.isServer)
 			nView.RPC("updateMatchStatus",RPCMode.All, true);
 		SpawnPlayer ();
