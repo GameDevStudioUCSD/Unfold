@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IFightable : MonoBehaviour {
+abstract public class IFightable : MonoBehaviour {
 
 	public int health;
 	
@@ -38,9 +38,5 @@ public class IFightable : MonoBehaviour {
 			Die();
 	}
 	
-	public void Die ()
-	{
-		Destroy(gameObject);
-		Debug.Log("DEAD!");
-	}
+	abstract public void Die ();
 }
