@@ -36,8 +36,8 @@ public abstract class Character : MonoBehaviour {
 	 */
 	public void Attack() {
 		if (this.attackCollider) {
-			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
-			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
+			/*this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
+			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);*/
 			Character target = (Character)this.attackCollider.gameObject.GetComponent("Character");
 			if (target) {
 				target.TakeDamage(this.damage, this.attackType);
