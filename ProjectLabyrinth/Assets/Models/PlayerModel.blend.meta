@@ -1,58 +1,35 @@
 fileFormatVersion: 2
-guid: b2ba33f3dc1ef4e69ada84ede9e7d03f
+guid: 54da4eea75e39b04fa90587e7249d12e
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: Armature
     100002: Body
-    100004: Cube_000
-    100006: Cube_001
-    100008: Cube_002
-    100010: Cube_003
-    100012: Cube_004
-    100014: Cube_005
-    100016: Cube_006
-    100018: Head
-    100020: Left_Arm
-    100022: Left_Leg
-    100024: //RootNode
-    100026: Right_Arm
-    100028: Right_Leg
-    100030: WGT-root
+    100004: Cube_001
+    100006: Head
+    100008: Left_Arm
+    100010: Left_Leg
+    100012: //RootNode
+    100014: Right_Arm
+    100016: Right_Leg
+    100018: WGT-root
     400000: Armature
     400002: Body
-    400004: Cube_000
-    400006: Cube_001
-    400008: Cube_002
-    400010: Cube_003
-    400012: Cube_004
-    400014: Cube_005
-    400016: Cube_006
-    400018: Head
-    400020: Left_Arm
-    400022: Left_Leg
-    400024: //RootNode
-    400026: Right_Arm
-    400028: Right_Leg
-    400030: WGT-root
+    400004: Cube_001
+    400006: Head
+    400008: Left_Arm
+    400010: Left_Leg
+    400012: //RootNode
+    400014: Right_Arm
+    400016: Right_Leg
+    400018: WGT-root
     2300000: WGT-root
     3300000: WGT-root
-    4300002: Cube_006
-    4300004: Cube_005
-    4300006: Cube_004
-    4300008: Cube_003
-    4300010: Cube_002
-    4300012: Cube_000
+    4300002: Cube_001
     7400000: Default Take
-    7400002: ArmatureAction_002
+    7400002: ArmatureAction_001
     9500000: //RootNode
-    13700000: Cube_000
-    13700002: Cube_001
-    13700004: Cube_002
-    13700006: Cube_003
-    13700008: Cube_004
-    13700010: Cube_005
-    13700012: Cube_006
+    13700000: Cube_001
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,15 +49,15 @@ ModelImporter:
     - serializedVersion: 16
       name: Default Take
       takeName: Default Take
-      firstFrame: 6
-      lastFrame: 24
+      firstFrame: 15
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -109,36 +86,24 @@ ModelImporter:
         weight: 1
       - path: Armature/Right_Leg
         weight: 1
-      - path: Cube_000
-        weight: 1
       - path: Cube_001
-        weight: 1
-      - path: Cube_002
-        weight: 1
-      - path: Cube_003
-        weight: 1
-      - path: Cube_004
-        weight: 1
-      - path: Cube_005
-        weight: 1
-      - path: Cube_006
         weight: 1
       - path: WGT-root
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: ArmatureAction_002
-      takeName: ArmatureAction_002
+      name: ArmatureAction_001
+      takeName: ArmatureAction_001
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -167,19 +132,7 @@ ModelImporter:
         weight: 1
       - path: Armature/Right_Leg
         weight: 1
-      - path: Cube_000
-        weight: 1
       - path: Cube_001
-        weight: 1
-      - path: Cube_002
-        weight: 1
-      - path: Cube_003
-        weight: 1
-      - path: Cube_004
-        weight: 1
-      - path: Cube_005
-        weight: 1
-      - path: Cube_006
         weight: 1
       - path: WGT-root
         weight: 1
