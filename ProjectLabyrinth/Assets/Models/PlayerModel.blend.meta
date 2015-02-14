@@ -13,6 +13,7 @@ ModelImporter:
     100014: Right_Arm
     100016: Right_Leg
     100018: WGT-root
+    100020: Armature_001
     400000: Armature
     400002: Body
     400004: Cube_001
@@ -23,6 +24,7 @@ ModelImporter:
     400014: Right_Arm
     400016: Right_Leg
     400018: WGT-root
+    400020: Armature_001
     2300000: WGT-root
     3300000: WGT-root
     4300002: Cube_001

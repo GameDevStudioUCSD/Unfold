@@ -110,7 +110,12 @@ public class MazeGeneratorController : MonoBehaviour {
                 Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 10, c * wallSize), Quaternion.identity, 0);
             if (monsterToSpawn != null)
             {
-                Network.Instantiate(monsterToSpawn, new Vector3(r * wallSize, 1, c * wallSize), Quaternion.identity, 0);
+				float monsterHeight = 1;
+				if( monsterToSpawn.GetComponent<BirdMovement> () != null) {
+					monsterHeight = 4;
+				}
+
+                Network.Instantiate(monsterToSpawn, new Vector3(r * wallSize, monsterHeight, c * wallSize), Quaternion.identity, 0);
             }
         }
         
