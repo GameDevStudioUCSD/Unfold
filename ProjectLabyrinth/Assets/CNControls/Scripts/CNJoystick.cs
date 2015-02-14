@@ -153,12 +153,14 @@ public class CNJoystick : CNAbstractController
             // "No jumping" logic is also in this method
             PlaceJoystickBaseUnderTheFinger(currentTouch);
             animator.SetBool("Walking", true);
-            Debug.Log("Walk!");
+            if(debugMessagesOn)
+                Debug.Log("Walk!");
         }
         else
         {
             animator.SetBool("Walking", false);
-            Debug.Log("Stand!");
+            if(debugMessagesOn)
+                Debug.Log("Stand!");
         }
     }
 
