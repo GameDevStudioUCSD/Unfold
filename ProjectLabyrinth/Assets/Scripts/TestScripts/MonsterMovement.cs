@@ -7,8 +7,9 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	public MazeGeneratorController mazeGen;
 	private Square[,] walls;
-	bool canTurn = false;
-	int direction;
+	protected bool canTurn = false;
+	protected int direction;
+
 	// Use this for initialization
 	void Start () {
 		walls = mazeGen.getWalls ();
@@ -31,6 +32,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+            /*
 		transform.Translate (Vector3.forward * SPEED);
 
 		if (canTurn && isInCenter ()) {
@@ -68,13 +70,15 @@ abstract public class MonsterMovement : MonoBehaviour {
 			Mathf.Round (transform.position.z) % mazeGen.wallSize == Mathf.Round(mazeGen.wallSize / 2)) {
 
 			canTurn = true;
-		}
+		} */
+		AI ();
 		maneuver ();
 	}
 
 	abstract public void maneuver ();
+	abstract public void AI ();
 
-	bool isInCenter() {
+	protected bool isInCenter() {
 		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .25 &&
 		    Mathf.Round (transform.position.x) % mazeGen.wallSize == 0 && 
 		    Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .25 &&
@@ -86,13 +90,13 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return false;
 	}
 
-	bool isFork(bool[] sides) {
+	protected bool isFork(bool[] sides) {
 		int falseCount = sideCount (sides);
 
 		return falseCount > 2;
 	}
 
-	bool isCorner(bool[] sides) {
+	protected bool isCorner(bool[] sides) {
 
 		if (sideCount(sides) == 2) {
 			return sides[direction]; // If there is no wall going forward, then this is not a corner.
@@ -101,20 +105,20 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return false;
 	}
 
-	bool isDeadEnd(bool[] sides) {
+	protected bool isDeadEnd(bool[] sides) {
 		return sideCount (sides) == 1;
 	}
 
-	bool movingVert() {
+	protected bool movingVert() {
 		return direction % 2 == 0;
 	}
 
-	bool movingHoriz() {
+	protected bool movingHoriz() {
 		return direction % 2 == 1;
 	}
 
 	// Actually, returns the amount of missing sides.
-	int sideCount(bool[] sides) {
+	protected int sideCount(bool[] sides) {
 		int falseCount = 0;
 		for (int i = 0; i < sides.Length; i++) {
 			if(!sides[i]) {
@@ -124,8 +128,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return falseCount;
 	}
 
-	void turn(int dir) {
-
+	protected void turn(int dir) {
 		transform.Rotate (Vector3.up * 90 * ((dir - direction) % 4));
 		
 		canTurn = false;
@@ -134,11 +137,11 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	}
 
-	private bool[] getSides(Square s) {
+	protected bool[] getSides(Square s) {
 		return new[] {s.hasSouth, s.hasWest, s.hasNorth, s.hasEast};
 	}
 
-	private Square getCurrSquare(float x, float z) {
+	protected Square getCurrSquare(float x, float z) {
 		int initRow = (int) Mathf.Round (x / mazeGen.wallSize);
 		int initCol = (int) Mathf.Round (z / mazeGen.wallSize);
 		return walls [initRow, initCol];
