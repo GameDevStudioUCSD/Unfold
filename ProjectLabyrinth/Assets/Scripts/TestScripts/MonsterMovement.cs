@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MonsterMovement : MonoBehaviour {
 
-	public float SPEED = 0.1f;
+	public float SPEED = 5f;
 
 	public MazeGeneratorController mazeGen;
 	private Square[,] walls;
@@ -11,6 +11,7 @@ public class MonsterMovement : MonoBehaviour {
 	float zdir;
 	bool canTurn = false;
 	int direction;
+	Vector3[] dirs = {Vector3.right, Vector3.back, Vector3.left, Vector3.forward};
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +35,7 @@ public class MonsterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		rigidbody.AddForce (Vector3.forward * SPEED);
+
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
@@ -149,10 +150,14 @@ public class MonsterMovement : MonoBehaviour {
 			zdir = SPEED;
 		}
 
+		rigidbody.velocity = Vector3.zero;
+
 		transform.Rotate (Vector3.up * 90 * ((dir - direction) % 4));
 		
 		canTurn = false;
 		direction = dir;
+
+		rigidbody.velocity = dirs [direction] * SPEED;
 	}
 
 	private bool[] getSides(Square s, float x, float z) {
