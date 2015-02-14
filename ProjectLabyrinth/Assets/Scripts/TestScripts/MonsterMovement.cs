@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MonsterMovement : MonoBehaviour {
 
-	public float SPEED = 5f;
+	public float SPEED;
 
 	public MazeGeneratorController mazeGen;
 	private Square[,] walls;
@@ -34,8 +34,8 @@ public class MonsterMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-
+	void Update () {
+		transform.Translate(Vector3.forward * SPEED);
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
@@ -65,11 +65,11 @@ public class MonsterMovement : MonoBehaviour {
 			}
 			canTurn = false;
 		} else if (!canTurn && movingVert () && Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .2 && 
-			Mathf.Round (transform.position.x) % 10 == 5) {
+			Mathf.Round (transform.position.x) % mazeGen.wallSize == Mathf.Round(mazeGen.wallSize / 2)) {
 
 			canTurn = true;
 		} else if (!canTurn && movingHoriz () && Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .2 && 
-			Mathf.Round (transform.position.z) % 10 == 5) {
+			Mathf.Round (transform.position.z) % mazeGen.wallSize == Mathf.Round(mazeGen.wallSize / 2)) {
 
 			canTurn = true;
 		}
@@ -150,14 +150,13 @@ public class MonsterMovement : MonoBehaviour {
 			zdir = SPEED;
 		}
 
-		rigidbody.velocity = Vector3.zero;
 
 		transform.Rotate (Vector3.up * 90 * ((dir - direction) % 4));
 		
 		canTurn = false;
 		direction = dir;
 
-		rigidbody.velocity = dirs [direction] * SPEED;
+
 	}
 
 	private bool[] getSides(Square s, float x, float z) {
