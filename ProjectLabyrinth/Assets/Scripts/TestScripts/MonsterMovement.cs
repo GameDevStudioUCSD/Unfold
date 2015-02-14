@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class MonsterMovement : MonoBehaviour {
+abstract public class MonsterMovement : MonoBehaviour {
 
 	public float SPEED = 0.1f;
 
@@ -17,7 +17,7 @@ public class MonsterMovement : MonoBehaviour {
 		walls = mazeGen.getWalls ();
 		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
+		bool[] sides = getSides (initSqr);
 
 		direction = 3;
 
@@ -34,11 +34,11 @@ public class MonsterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rigidbody.AddForce (Vector3.forward * SPEED);
+		transform.Translate (Vector3.forward * SPEED);
 
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
-			bool[] sides = getSides (curr, transform.position.x, transform.position.z);
+			bool[] sides = getSides (curr);
 			if (isFork (sides)) {
 				bool found = false;
 				sides[(direction + 2) % 4] = true; // Don't want to turn around
@@ -72,18 +72,16 @@ public class MonsterMovement : MonoBehaviour {
 
 			canTurn = true;
 		}
+		maneuver ();
 	}
 
-	bool isInCenter() {
-		float diffx = Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x));
-		float diffz = Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z));
-		float xpos = Mathf.Round (transform.position.x);
-		float zpos = Mathf.Round (transform.position.z);
+	abstract public void maneuver ();
 
-		if (diffx <= .25 &&
-		    xpos % mazeGen.wallSize == 0 && 
-		    diffz <= .25 &&
-		    zpos % mazeGen.wallSize == 0) {
+	bool isInCenter() {
+		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .25 &&
+		    Mathf.Round (transform.position.x) % 10 == 0 && 
+		    Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .25 &&
+		    Mathf.Round (transform.position.z) % 10 == 0) {
 			
 			return true;
 		}
@@ -98,9 +96,8 @@ public class MonsterMovement : MonoBehaviour {
 	}
 
 	bool isCorner(bool[] sides) {
-		int falseCount = sideCount (sides);
 
-		if (falseCount == 2) {
+		if (sideCount(sides) == 2) {
 			return sides[direction]; // If there is no wall going forward, then this is not a corner.
 		}
 
@@ -112,11 +109,11 @@ public class MonsterMovement : MonoBehaviour {
 	}
 
 	bool movingVert() {
-		return direction == 0 || direction == 2;
+		return direction % 2 == 0;
 	}
 
 	bool movingHoriz() {
-		return direction == 1 || direction == 3;
+		return direction % 2 == 1;
 	}
 
 	// Actually, returns the amount of missing sides.
@@ -155,29 +152,8 @@ public class MonsterMovement : MonoBehaviour {
 		direction = dir;
 	}
 
-	private bool[] getSides(Square s, float x, float z) {
-		bool south, west, north, east;
-		if (Mathf.Round (x / mazeGen.wallSize + 1) < mazeGen.Rows)
-			south = getCurrSquare (x + mazeGen.wallSize, z).hasNorth;
-		else
-			south = true;
-
-		if (Mathf.Round (x / mazeGen.wallSize - 1) >= 0)
-			north = getCurrSquare (x - mazeGen.wallSize, z).hasSouth;
-		else
-			north = true;
-
-		if (Mathf.Round (z / mazeGen.wallSize - 1) >= 0)
-			west = getCurrSquare (x, z - mazeGen.wallSize).hasEast;
-		else
-			west = true;
-
-		if (Mathf.Round (z / mazeGen.wallSize + 1) < mazeGen.Cols)
-			east = getCurrSquare (x, z + mazeGen.wallSize).hasWest;
-		else
-			east = true;
-
-		return new[] {s.hasSouth || south, s.hasWest || west, s.hasNorth || north, s.hasEast || east};
+	private bool[] getSides(Square s) {
+		return new[] {s.hasSouth, s.hasWest, s.hasNorth, s.hasEast};
 	}
 
 	private Square getCurrSquare(float x, float z) {
