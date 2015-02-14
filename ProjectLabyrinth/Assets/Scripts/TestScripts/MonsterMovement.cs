@@ -7,12 +7,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	public MazeGeneratorController mazeGen;
 	private Square[,] walls;
-	float xdir;
-	float zdir;
 	bool canTurn = false;
 	int direction;
-	Vector3[] dirs = {Vector3.right, Vector3.back, Vector3.left, Vector3.forward};
-
 	// Use this for initialization
 	void Start () {
 		walls = mazeGen.getWalls ();
@@ -80,9 +76,9 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	bool isInCenter() {
 		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .25 &&
-		    Mathf.Round (transform.position.x) % 10 == 0 && 
+		    Mathf.Round (transform.position.x) % mazeGen.wallSize == 0 && 
 		    Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .25 &&
-		    Mathf.Round (transform.position.z) % 10 == 0) {
+		    Mathf.Round (transform.position.z) % mazeGen.wallSize == 0) {
 			
 			return true;
 		}
@@ -129,24 +125,6 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	void turn(int dir) {
-		xdir = 0;
-		zdir = 0;
-		if (dir == 0) {
-			xdir = SPEED;
-		}
-
-		if (dir == 1) {
-			zdir = -SPEED;
-		}
-
-		if (dir == 2) {
-			xdir = -SPEED;
-		}
-
-		if (dir == 3) {
-			zdir = SPEED;
-		}
-
 
 		transform.Rotate (Vector3.up * 90 * ((dir - direction) % 4));
 		
