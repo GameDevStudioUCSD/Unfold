@@ -7,10 +7,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	public MazeGeneratorController mazeGen;
 	private Square[,] walls;
-	float xdir;
-	float zdir;
-	bool canTurn = false;
-	int direction;
+	protected float xdir;
+	protected float zdir;
+	protected bool canTurn = false;
+	protected int direction;
 
 	// Use this for initialization
 	void Start () {
@@ -34,50 +34,14 @@ abstract public class MonsterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (Vector3.forward * SPEED);
-
-		if (canTurn && isInCenter ()) {
-			Square curr = getCurrSquare(transform.position.x, transform.position.z);
-			bool[] sides = getSides (curr);
-			if (isFork (sides)) {
-				bool found = false;
-				sides[(direction + 2) % 4] = true; // Don't want to turn around
-
-				while (!found) {
-					int side = Random.Range (0, 4);
-					found = !sides[side];
-
-					if (found) {
-						turn (side);
-					}
-				}
-			} else if (isCorner(sides)) {
-				sides[(direction + 2) % 4] = true;
-
-				if(sides[(direction + 1) % 4]) {
-					turn ((direction + 3) % 4);
-				} else {
-					turn ((direction + 1) % 4);
-				}
-			} else if (isDeadEnd(sides)) {
-				turn ((direction + 2) % 4);
-			}
-			canTurn = false;
-		} else if (!canTurn && movingVert () && Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .2 && 
-			Mathf.Round (transform.position.x) % 10 == 5) {
-
-			canTurn = true;
-		} else if (!canTurn && movingHoriz () && Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .2 && 
-			Mathf.Round (transform.position.z) % 10 == 5) {
-
-			canTurn = true;
-		}
+		AI ();
 		maneuver ();
 	}
 
 	abstract public void maneuver ();
+	abstract public void AI ();
 
-	bool isInCenter() {
+	protected bool isInCenter() {
 		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .25 &&
 		    Mathf.Round (transform.position.x) % 10 == 0 && 
 		    Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .25 &&
@@ -89,13 +53,13 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return false;
 	}
 
-	bool isFork(bool[] sides) {
+	protected bool isFork(bool[] sides) {
 		int falseCount = sideCount (sides);
 
 		return falseCount > 2;
 	}
 
-	bool isCorner(bool[] sides) {
+	protected bool isCorner(bool[] sides) {
 
 		if (sideCount(sides) == 2) {
 			return sides[direction]; // If there is no wall going forward, then this is not a corner.
@@ -104,20 +68,20 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return false;
 	}
 
-	bool isDeadEnd(bool[] sides) {
+	protected bool isDeadEnd(bool[] sides) {
 		return sideCount (sides) == 1;
 	}
 
-	bool movingVert() {
+	protected bool movingVert() {
 		return direction % 2 == 0;
 	}
 
-	bool movingHoriz() {
+	protected bool movingHoriz() {
 		return direction % 2 == 1;
 	}
 
 	// Actually, returns the amount of missing sides.
-	int sideCount(bool[] sides) {
+	protected int sideCount(bool[] sides) {
 		int falseCount = 0;
 		for (int i = 0; i < sides.Length; i++) {
 			if(!sides[i]) {
@@ -127,7 +91,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 		return falseCount;
 	}
 
-	void turn(int dir) {
+	protected void turn(int dir) {
 		xdir = 0;
 		zdir = 0;
 		if (dir == 0) {
@@ -152,11 +116,11 @@ abstract public class MonsterMovement : MonoBehaviour {
 		direction = dir;
 	}
 
-	private bool[] getSides(Square s) {
+	protected bool[] getSides(Square s) {
 		return new[] {s.hasSouth, s.hasWest, s.hasNorth, s.hasEast};
 	}
 
-	private Square getCurrSquare(float x, float z) {
+	protected Square getCurrSquare(float x, float z) {
 		int initRow = (int) Mathf.Round (x / mazeGen.wallSize);
 		int initCol = (int) Mathf.Round (z / mazeGen.wallSize);
 		return walls [initRow, initCol];
