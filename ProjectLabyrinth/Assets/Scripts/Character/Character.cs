@@ -41,10 +41,6 @@ public abstract class Character : MonoBehaviour {
 			Character target = (Character)this.attackCollider.gameObject.GetComponent("Character");
 			if (target) {
 				target.TakeDamage(this.damage, this.attackType);
-				if(target.GetComponent<EnemyCharacter>() != null) {
-					MonsterMovement move = (MonsterMovement)target.gameObject.GetComponent ("MonsterMovement");
-					move.stun ();
-				}
 			}
 		}
 

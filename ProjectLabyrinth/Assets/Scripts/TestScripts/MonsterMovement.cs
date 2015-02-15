@@ -9,8 +9,6 @@ abstract public class MonsterMovement : MonoBehaviour {
 	private Square[,] walls;
 	protected bool canTurn = false;
 	protected int direction;
-	public int stunTime;
-	private int stunned = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -73,12 +71,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 			canTurn = true;
 		} */
-		if (stunned == 0) {
-			AI ();
-			maneuver ();
-		} else {
-			stunned -= 1;
-		}
+		AI ();
+		maneuver ();
 	}
 
 	abstract public void maneuver ();
@@ -151,9 +145,5 @@ abstract public class MonsterMovement : MonoBehaviour {
 		int initRow = (int) Mathf.Round (x / mazeGen.wallSize);
 		int initCol = (int) Mathf.Round (z / mazeGen.wallSize);
 		return walls [initRow, initCol];
-	}
-
-	public void stun() {
-		stunned = stunTime;
 	}
 }
