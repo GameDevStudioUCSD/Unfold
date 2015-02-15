@@ -259,12 +259,8 @@ public class NetworkManager : MonoBehaviour {
 	
 	private void SpawnPlayer()
 	{
-<<<<<<< HEAD
         Square start = mapCreator.getStartSquare();
 		Network.Instantiate (playerPrefab, new Vector3( start.getRow(), 1f, start.getCol()), Quaternion.identity, 0);
-=======
-		Network.Instantiate (playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
->>>>>>> 60593951e42047fab191fd1045ad5cefb857b52e
 	}
 	
 	

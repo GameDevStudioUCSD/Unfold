@@ -19,15 +19,11 @@ public class EnemyCharacter : Character {
 	 * 1000 = diagonal2 weakness (topleft -> bottomright)
 	 */
 	public int weakness;
-	
+
 	// The particular item this enemy drops when killed
 	public GameObject Item;
 	
 	void Start() {
-		this.health = 40;
-		this.damage = 5;
-		this.attackDelay = 2;
-		this.moveSpeed = 8;
 	}
 	
 	void FixedUpdate() {
