@@ -61,6 +61,9 @@ public class EnemyCharacter : Character {
 		if (this.health <= 0) {
 			this.Die();
 		}
+
+		MonsterMovement mov = (MonsterMovement)GetComponent<MonsterMovement> ();
+		mov.stun ();
 		Debug.Log("Damage: " + enDamage);
 	}
 	

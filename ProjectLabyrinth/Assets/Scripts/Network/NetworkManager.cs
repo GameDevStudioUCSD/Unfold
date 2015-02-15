@@ -262,7 +262,7 @@ public class NetworkManager : MonoBehaviour {
         Square start = mapCreator.getStartSquare();
 
 		GameObject player = (GameObject) Network.Instantiate (playerPrefab, new Vector3( start.getRow() * mapCreator.wallSize, 0f, start.getCol() * mapCreator.wallSize), Quaternion.identity, 0);
-		Vector3 spawnPoint = new Vector3 (start.getRow(), 1.5f, start.getCol());
+		Vector3 spawnPoint = new Vector3 (start.getRow() * mapCreator.wallSize, 1.5f, start.getCol() * mapCreator.wallSize);
 		player.GetComponentInChildren<PlayerCharacter> ().setSpawn (spawnPoint);
 	}
 	
