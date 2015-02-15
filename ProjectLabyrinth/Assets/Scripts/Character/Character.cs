@@ -11,7 +11,8 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour {
 
 	// Character HP
-	public int health;
+	protected int health;
+	public int startHealth;
 
 	// Amount of damage the character deals
 	public int damage;
@@ -39,12 +40,14 @@ public abstract class Character : MonoBehaviour {
 			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
 			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			Character target = (Character)this.attackCollider.gameObject.GetComponent("Character");
+			if (!target)
+				target = (Character)this.attackCollider.GetComponentInParent<Character>();
+
 			if (target) {
 				target.TakeDamage(this.damage, this.attackType);
 			}
+			this.nextAttackTime = Time.time + attackDelay;
 		}
-
-		this.nextAttackTime = Time.time + attackDelay;
 	}
 
 	/**
@@ -59,4 +62,16 @@ public abstract class Character : MonoBehaviour {
 	 * Controls character death behavior
 	 */
 	public abstract void Die();
+
+	public void setAttackCollider(Collider col) {
+		this.attackCollider = col;
+	}
+
+	public int getHealth() {
+		return this.health;
+	}
+
+	public void setHealth(int h) {
+		this.health = h;
+	}
 }

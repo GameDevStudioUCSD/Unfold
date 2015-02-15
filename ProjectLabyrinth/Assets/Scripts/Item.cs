@@ -9,10 +9,13 @@ using UnityEngine;
 public class Item : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
-		PlayerCharacter player = (PlayerCharacter)other.gameObject.GetComponent("PlayerCharacter");
-		if (player) {
-			Destroy(this.gameObject);
-			player.health = 9000;
+		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
+		if (hitDetector) {
+			PlayerCharacter player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
+			if(player) {
+				Destroy(this.gameObject);
+				player.setHealth(9000);
+			}
 		}
 	}
 }

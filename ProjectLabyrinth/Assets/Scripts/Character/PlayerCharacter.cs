@@ -8,15 +8,16 @@ using UnityEngine;
  * Represents player stats and things the player can do
  */
 public class PlayerCharacter : Character {
+	private Vector3 spawn;
 
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
 
 	void Start() {
-        this.health = 20;
-        this.damage = 10;
-        this.attackDelay = 1;
-        this.moveSpeed = 10;
+		this.health = startHealth;
+		this.damage = 10;
+		this.attackDelay = 1;
+		this.moveSpeed = 10;
 	}
 
 	void FixedUpdate() {
@@ -64,14 +65,15 @@ public class PlayerCharacter : Character {
 			}
 		}
 	}
-	
+
+	/*
 	void OnTriggerEnter(Collider other) {
 		this.attackCollider = other;
 	}
 	
 	void OnTriggerExit(Collider other) {
 		this.attackCollider = null;
-	}
+	}*/
 
 	public override void TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
@@ -79,11 +81,19 @@ public class PlayerCharacter : Character {
 		}
 
 		this.health = this.health - enDamage;
+		Debug.Log ("I've been got!");
 		if (this.health <= 0) {
 			this.Die();
 		}
 	}
 
 	public override void Die() {
+		Debug.Log ("I am dead.");
+		transform.position = spawn;
+		this.health = startHealth;
+	}
+
+	public void setSpawn(Vector3 start) {
+		spawn = start;
 	}
 }

@@ -24,15 +24,15 @@ public class EnemyCharacter : Character {
 	public GameObject Item;
 	
 	void Start() {
-        this.health = 40;
-        this.damage = 5;
-        this.attackDelay = 2;
-        this.moveSpeed = 8;
+		this.health = startHealth;
+		this.damage = 5;
+		this.attackDelay = 2;
+		this.moveSpeed = 8;
 	}
 	
 	void FixedUpdate() {
 		
-		if (Time.time > nextAttackTime) {
+		if (Time.time > nextAttackTime && attackCollider != null) {
 			// 10% chance for critical strikes
 			if (UnityEngine.Random.Range(0, 100) < 10) {
 				this.attackType = 15;
@@ -42,7 +42,10 @@ public class EnemyCharacter : Character {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		this.attackCollider = other;
+		if (other.GetComponent<HitDetector> () != null) {
+			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
+			this.attackCollider = other;
+		}
 	}
 	
 	void OnTriggerExit(Collider other) {
@@ -63,6 +66,6 @@ public class EnemyCharacter : Character {
 	
 	public override void Die() {
 		Destroy(this.gameObject);
-		Instantiate(Item, this.transform.position, Quaternion.identity);
+		Instantiate(Item, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
 	}
 }
