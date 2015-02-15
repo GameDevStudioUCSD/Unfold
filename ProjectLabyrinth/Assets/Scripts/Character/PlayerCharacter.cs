@@ -8,6 +8,7 @@ using UnityEngine;
  * Represents player stats and things the player can do
  */
 public class PlayerCharacter : Character {
+    public AudioClip[] attackSound;
 	private Vector3 spawn;
 
 	// Helps correlate user input to attack calculation
@@ -74,7 +75,13 @@ public class PlayerCharacter : Character {
 	void OnTriggerExit(Collider other) {
 		this.attackCollider = null;
 	}*/
-
+    public override bool Attack()
+    {
+        bool hasAttacked = base.Attack();
+        if(hasAttacked)
+            SoundController.PlaySound(audio, attackSound);
+        return hasAttacked;
+    }
 	public override void TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
 			enDamage = enDamage * 2;

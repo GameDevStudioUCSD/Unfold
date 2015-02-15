@@ -34,23 +34,31 @@ public abstract class Character : MonoBehaviour {
 
 	/**
 	 * Controls character attack patterns
+     * Returns true if target takes damage
+     * Else, returns false
 	 */
-	public void Attack() {
+	public virtual bool Attack() {
+        bool hasAttacked = false;
 		if (this.attackCollider) {
 			/*
 			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
 			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			*/
-
+            
 			Character target = (Character)this.attackCollider.gameObject.GetComponent("Character");
-			if (!target)
-				target = (Character)this.attackCollider.GetComponentInParent<Character>();
+            if (!target)
+            {
+                target = (Character)this.attackCollider.GetComponentInParent<Character>(); 
+            }
 
 			if (target) {
 				target.TakeDamage(this.damage, this.attackType);
+                hasAttacked = true;
 			}
 			this.nextAttackTime = Time.time + attackDelay;
+            
 		}
+        return hasAttacked;
 	}
 
 	/**
