@@ -13,6 +13,10 @@ public class PlayerCharacter : Character {
 	private Touch initialTouch;
 
 	void Start() {
+        this.health = 20;
+        this.damage = 10;
+        this.attackDelay = 1;
+        this.moveSpeed = 10;
 	}
 
 	void FixedUpdate() {
