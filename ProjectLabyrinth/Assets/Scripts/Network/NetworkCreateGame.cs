@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 
+/// Handles the server initialization and player disconnects.
+/// 
+/// </summary>
 public class NetworkCreateGame : MonoBehaviour
 {
     public bool debug = false;
@@ -10,27 +15,12 @@ public class NetworkCreateGame : MonoBehaviour
 
     public string nextScene = "LobbyScene";
 
-    private static NetworkCreateGame networkInstance;
-
-    void Awake()
-    {
-        if (networkInstance == null)
-        {
-            networkInstance = this;
-        }
-
-        if (networkInstance != this)
-        {
-            DestroyObject(this.gameObject);
-        }
-
-        // This object will persist through the scenes
-        DontDestroyOnLoad(transform.gameObject);
-    }
-
     void OnTriggerEnter(Collider collider)
     {
-        StartServer();
+        if(collider.tag == "Player")
+        {
+            StartServer();
+        }
 
         //Goes to OnServerInitialized afterwards
     }
@@ -56,15 +46,5 @@ public class NetworkCreateGame : MonoBehaviour
         Network.RemoveRPCs(networkPlayer);
 
         Network.DestroyPlayerObjects(networkPlayer);
-    }
-
-    void OnDisconnectedFromServer()
-    {
-        if (debug)
-        {
-            Debug.Log("Disconnected from Server");
-        }
-
-        DestroyObject(this.gameObject);
     }
 }

@@ -5,16 +5,19 @@ public class NetworkLeaveGame : MonoBehaviour {
 
     public string nextScene = "MultiplayerMenu";
 
-	void OnTriggerEnter(Collider collider)
+	void OnTriggerEnter(Collider other)
     {
-        if(Network.isClient)
+        if(other.tag == "Player")
         {
-            Network.CloseConnection(Network.connections[0], true);
-        }
+            if (Network.isClient)
+            {
+                Network.CloseConnection(Network.connections[0], true);
+            }
 
-        if(Network.isServer)
-        {
-            Network.Disconnect();
+            if (Network.isServer)
+            {
+                Network.Disconnect();
+            }
         }
     }
 
