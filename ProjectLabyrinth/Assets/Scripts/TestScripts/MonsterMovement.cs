@@ -17,7 +17,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 		walls = mazeGen.getWalls ();
 		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr);
+		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);;
 
 		direction = 3;
 
