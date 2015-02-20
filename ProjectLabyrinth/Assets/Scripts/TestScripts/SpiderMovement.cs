@@ -14,7 +14,7 @@ public class SpiderMovement : MonsterMovement {
 		
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
-			bool[] sides = getSides (curr);
+			bool[] sides = getSides (curr, transform.position.x, transform.position.z);
 			if (isFork (sides)) {
 				bool found = false;
 				sides[(direction + 2) % 4] = true; // Don't want to turn around
