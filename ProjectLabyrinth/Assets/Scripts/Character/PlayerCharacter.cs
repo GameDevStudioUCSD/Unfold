@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * PlayerCharacter class
@@ -10,6 +11,9 @@ using UnityEngine;
 public class PlayerCharacter : Character {
     public AudioClip[] attackSound;
 	private Vector3 spawn;
+
+	// Player health bar object
+	public Slider healthBar;
 
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
@@ -65,6 +69,8 @@ public class PlayerCharacter : Character {
 				this.Attack();
 			}
 		}
+
+		this.healthBar.value = this.health;
 	}
 
 	/*
