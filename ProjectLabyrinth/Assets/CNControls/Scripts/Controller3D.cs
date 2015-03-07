@@ -10,7 +10,6 @@ public class Controller3D : MonoBehaviour
     public bool debug_On;
 
     public CNAbstractController MovementJoystick;
-
     public CharacterController _characterController;
     
     private Transform _mainCameraTransform;
@@ -57,6 +56,11 @@ public class Controller3D : MonoBehaviour
         		
         	//SyncedMovement();
         }
+    }
+    
+    public void setMovementSpeed(float speed)
+    {
+    	movementSpeed = speed;
     }
     
     private void SyncedMovement()

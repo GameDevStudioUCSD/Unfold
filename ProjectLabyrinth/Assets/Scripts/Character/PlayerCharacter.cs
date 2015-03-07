@@ -11,6 +11,8 @@ using UnityEngine.UI;
 public class PlayerCharacter : Character {
     public AudioClip[] attackSound;
 	private Vector3 spawn;
+	
+	public Controller3D movementController;
 
 	// Player health bar object
 	public Slider healthBar;
@@ -81,14 +83,6 @@ public class PlayerCharacter : Character {
 		this.healthBar.value = this.health;
 	}
 
-	/*
-	void OnTriggerEnter(Collider other) {
-		this.attackCollider = other;
-	}
-	
-	void OnTriggerExit(Collider other) {
-		this.attackCollider = null;
-	}*/
     public override bool Attack()
     {
         bool hasAttacked = base.Attack();
@@ -118,5 +112,30 @@ public class PlayerCharacter : Character {
 
 	public void setSpawn(Vector3 start) {
 		spawn = start;
+	}
+	
+	public void addHealth(int h)
+	{
+		if (this.health + h <= maxHealth)
+			this.health += h;
+		else
+			this.health = maxHealth;
+	}
+	
+	public void addSpeed(float s)
+	{
+		this.moveSpeed += s;
+		movementController.setMovementSpeed(this.moveSpeed);
+	}
+	
+	public void addMaxHealth(int mh)
+	{
+		maxHealth += mh;
+		health += mh;
+	}
+	
+	public void addDamage(int d)
+	{
+		damage += d;
 	}
 }

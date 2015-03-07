@@ -6,9 +6,10 @@ using UnityEngine;
  *
  * Represents items that may randomly drop from dead enemies.
  */
-public abstract class Pickup : MonoBehaviour {
+public class Pickup : MonoBehaviour {
     public AudioClip pickUpSound;
-    public bool debugON;
+    public bool debug_On;
+    public int type;
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
@@ -17,7 +18,7 @@ public abstract class Pickup : MonoBehaviour {
 		if (hitDetector) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
 			if(player && !hasPickedUp) {
-                if (debugON)
+                if (debug_On)
                     Debug.Log("Tried to play pickup sound!");
                 SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
                 GetComponent<MeshRenderer>().enabled = false;
@@ -29,5 +30,34 @@ public abstract class Pickup : MonoBehaviour {
 		}
 	}
 	
-	public abstract void pickedUp();
+	void pickedUp()
+	{
+		switch (type)
+		{
+			/*health*/
+			case 0:
+				if (debug_On)
+					Debug.Log("Adding health");
+				player.addHealth(5);
+				break;
+			/*speed upgrade*/
+			case 1:
+				if (debug_On)
+					Debug.Log("Adding speed");
+				player.addSpeed(5);
+				break;
+			/*max health upgrade*/
+			case 2:
+				if (debug_On)
+					Debug.Log("Adding maxHealth");
+				player.addMaxHealth(5);
+				break;
+			/*damage upgrade*/
+			case 3:
+				if (debug_On)
+					Debug.Log("Adding damage");
+				player.addDamage(5);
+				break;
+		}
+	}
 }

@@ -88,16 +88,4 @@ public abstract class Character : MonoBehaviour {
 		this.health = h;
 	}
 	
-	public void addHealth(int h)
-	{
-		if (this.health + h <= maxHealth)
-			this.health += h;
-		else
-			this.health = maxHealth;
-	}
-	
-	public void addSpeed(int s)
-	{
-		moveSpeed += s;
-	}
 }

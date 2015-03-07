@@ -21,7 +21,10 @@ public class EnemyCharacter : Character {
 	public int weakness;
 
 	// The particular item this enemy drops when killed
-	public GameObject Item;
+	public GameObject healthGlobe;
+	public GameObject upgradeSpeed;
+	public GameObject upgradeMaxHealth;
+	public GameObject upgradeDamage;
 	
 	void Start() {
 		this.health = maxHealth;
@@ -69,6 +72,23 @@ public class EnemyCharacter : Character {
 	
 	public override void Die() {
 		Destroy(this.gameObject);
-		Instantiate(Item, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+		System.Random rnd = new System.Random();
+		int rand = rnd.Next(0,4);
+		//int rand = 1;
+		switch (rand)
+		{
+			case 0:
+				Instantiate(healthGlobe, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+				break;
+			case 1:
+				Instantiate(upgradeSpeed, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+				break;
+			case 2:
+				Instantiate(upgradeMaxHealth, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+				break;
+			case 3:
+				Instantiate(upgradeDamage, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+				break;
+		}
 	}
 }
