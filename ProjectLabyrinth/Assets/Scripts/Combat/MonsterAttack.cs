@@ -35,8 +35,8 @@ public class MonsterAttack : MonoBehaviour {
 		if (attackCollider && attackObject)
 		{
 			Debug.Log ("Attacking " + attackCollider.name);
-			attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
-			attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
+			attackCollider.GetComponent<Rigidbody>().AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
+			attackCollider.GetComponent<Rigidbody>().AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			IFightable target = (IFightable)attackObject.GetComponent("IFightable");
 			if (target)
 			{

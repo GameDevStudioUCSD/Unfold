@@ -52,7 +52,7 @@ public class Controller3DLocal : MonoBehaviour
     private void SyncedMovement()
     {
     	syncTime += Time.deltaTime;
-    	rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime/syncDelay);
+    	GetComponent<Rigidbody>().position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime/syncDelay);
     }
 
     private void MoveWithEvent(Vector3 inputMovement)

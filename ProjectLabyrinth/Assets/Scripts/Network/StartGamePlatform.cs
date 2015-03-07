@@ -37,7 +37,7 @@ public class StartGamePlatform : MonoBehaviour {
     {
         if(numberOfPlayers >= Network.connections.Length + 1)
         {
-            networkView.RPC("StartGame", RPCMode.All);
+            GetComponent<NetworkView>().RPC("StartGame", RPCMode.All);
         }
     }
 

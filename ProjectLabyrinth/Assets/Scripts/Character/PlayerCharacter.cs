@@ -93,7 +93,7 @@ public class PlayerCharacter : Character {
     {
         bool hasAttacked = base.Attack();
         if(hasAttacked)
-            SoundController.PlaySound(audio, attackSound);
+            SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
         return hasAttacked;
     }
 	public override void TakeDamage(int enDamage, int enAttackType) {

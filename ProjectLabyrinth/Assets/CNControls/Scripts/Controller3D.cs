@@ -40,7 +40,7 @@ public class Controller3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (networkView.isMine)
+		if (GetComponent<NetworkView>().isMine)
         {
         	if (debug_On)
         		Debug.Log ("Controller is Mine");
@@ -62,7 +62,7 @@ public class Controller3D : MonoBehaviour
     private void SyncedMovement()
     {
     	syncTime += Time.deltaTime;
-    	rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime/syncDelay);
+    	GetComponent<Rigidbody>().position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime/syncDelay);
     }
 
     private void MoveWithEvent(Vector3 inputMovement)

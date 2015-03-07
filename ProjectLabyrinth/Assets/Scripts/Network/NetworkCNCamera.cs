@@ -7,14 +7,14 @@ public class NetworkCNCamera : MonoBehaviour {
     private AudioListener audio;
 	void Start () {
         //audio = GetComponent<AudioListener>();
-		if (networkView.isMine)
+		if (GetComponent<NetworkView>().isMine)
 		{
-			camera.enabled = true;
+			GetComponent<Camera>().enabled = true;
             //audio.enabled = true;
 		}
 		else
 		{
-			camera.enabled = false;
+			GetComponent<Camera>().enabled = false;
 			//audio.enabled = false;
 		}
 	}

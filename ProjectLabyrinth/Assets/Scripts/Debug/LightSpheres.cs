@@ -14,7 +14,7 @@ public class LightSpheres : MonoBehaviour {
         savedB = blue;
         savedG = green;
         color = new Color(savedR, savedG, savedB);
-        light.color = color;
+        GetComponent<Light>().color = color;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +38,7 @@ public class LightSpheres : MonoBehaviour {
         if( hasUpdated )
         {
             color = new Color(savedR, savedG, savedB);
-            light.color = color;
+            GetComponent<Light>().color = color;
         }
 	}
     public static float CalculateRGBValue( int value, int maxValue )

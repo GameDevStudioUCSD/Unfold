@@ -102,7 +102,7 @@ public class NetworkManager : MonoBehaviour {
         * The player's name is also sent to everyone.
         * If you want only the server to receive the RPC, then change RPCMode.
         */
-        networkView.RPC("updatePlayerList", RPCMode.Server, playerName);
+        GetComponent<NetworkView>().RPC("updatePlayerList", RPCMode.Server, playerName);
 	}
 	
 	void OnServerInitialized()
@@ -244,7 +244,9 @@ public class NetworkManager : MonoBehaviour {
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
         if (debug_On)
             Debug.Log("Running Start() on MazeGeneratorController");
+            
 		mapCreator.Start();
+		
         if (debug_On)
             Debug.Log("Running createWalls() on MazeGeneratorController");
 		mapCreator.createWalls();

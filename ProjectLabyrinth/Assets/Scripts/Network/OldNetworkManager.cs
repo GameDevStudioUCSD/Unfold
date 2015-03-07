@@ -108,7 +108,7 @@ public class OldNetworkManager : MonoBehaviour {
         * The player's name is also sent to everyone.
         * If you want only the server to receive the RPC, then change RPCMode.
         */
-        networkView.RPC("updatePlayerList", RPCMode.Server, playerName);
+        GetComponent<NetworkView>().RPC("updatePlayerList", RPCMode.Server, playerName);
     }
 
     void OnServerInitialized()

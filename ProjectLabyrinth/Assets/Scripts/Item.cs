@@ -17,7 +17,7 @@ public class Item : MonoBehaviour {
 			if(player && !hasPickedUp) {
                 if (debugON)
                     Debug.Log("Tried to play pickup sound!");
-                SoundController.PlaySound(audio, pickUpSound);
+                SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
                 GetComponent<MeshRenderer>().enabled = false;
                 hasPickedUp = !hasPickedUp;
 				player.setHealth(9000);

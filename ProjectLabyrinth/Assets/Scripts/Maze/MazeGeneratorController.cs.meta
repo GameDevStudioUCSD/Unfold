@@ -1,8 +1,20 @@
 fileFormatVersion: 2
 guid: 129559063d706ca43808b229aa80d9b2
+timeCreated: 1425699240
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - NorthWall: {fileID: 100000, guid: 1c00f795116357d47a1a670675ec39bf, type: 2}
+  - SouthWall: {fileID: 100002, guid: fd91a786e40399842bcd3738057d79ce, type: 2}
+  - EastWall: {fileID: 100000, guid: 1b57b9438873f2c4091b8016a1d75c1d, type: 2}
+  - WestWall: {fileID: 100000, guid: 0e35b27b445676c448d738fca2f2ff2e, type: 2}
+  - Floor: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - ExitMarker: {instanceID: 0}
+  - DebugSphere: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
