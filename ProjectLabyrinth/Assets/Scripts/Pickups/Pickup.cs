@@ -22,7 +22,7 @@ public abstract class Pickup : MonoBehaviour {
                 SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
                 GetComponent<MeshRenderer>().enabled = false;
                 hasPickedUp = !hasPickedUp;
-				player.setHealth(9000);
+				pickedUp();
 			}
             else if(player && hasPickedUp)
                 Destroy(this.gameObject);
