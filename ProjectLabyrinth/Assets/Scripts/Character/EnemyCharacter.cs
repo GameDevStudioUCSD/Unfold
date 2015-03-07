@@ -24,7 +24,7 @@ public class EnemyCharacter : Character {
 	public GameObject Item;
 	
 	void Start() {
-		this.health = startHealth;
+		this.health = maxHealth;
 		this.damage = 5;
 		this.attackDelay = 2;
 		this.moveSpeed = 8;

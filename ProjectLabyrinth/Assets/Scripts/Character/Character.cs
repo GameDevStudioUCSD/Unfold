@@ -10,9 +10,11 @@ using UnityEngine;
  */
 public abstract class Character : MonoBehaviour {
 
+	public bool debug_On;
+	
 	// Character HP
 	protected int health;
-	public int startHealth;
+	public int maxHealth;
 
 	// Amount of damage the character deals
 	public int damage;
@@ -84,5 +86,18 @@ public abstract class Character : MonoBehaviour {
 
 	public void setHealth(int h) {
 		this.health = h;
+	}
+	
+	public void addHealth(int h)
+	{
+		if (this.health + h <= maxHealth)
+			this.health += h;
+		else
+			this.health = maxHealth;
+	}
+	
+	public void addSpeed(int s)
+	{
+		moveSpeed += s;
 	}
 }

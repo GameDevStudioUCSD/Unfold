@@ -19,7 +19,7 @@ public class PlayerCharacter : Character {
 	private Touch initialTouch;
 
 	void Start() {
-		this.health = startHealth;
+		this.health = maxHealth;
 		this.damage = 10;
 		this.attackDelay = 1;
 		this.moveSpeed = 10;
@@ -102,16 +102,18 @@ public class PlayerCharacter : Character {
 		}
 
 		this.health = this.health - enDamage;
-		Debug.Log ("I've been got!");
+		if (debug_On)
+			Debug.Log ("I've been got!");
 		if (this.health <= 0) {
 			this.Die();
 		}
 	}
 
 	public override void Die() {
-		Debug.Log ("I am dead.");
+		if (debug_On)
+			Debug.Log ("I am dead.");
 		transform.position = spawn;
-		this.health = startHealth;
+		this.health = maxHealth;
 	}
 
 	public void setSpawn(Vector3 start) {
