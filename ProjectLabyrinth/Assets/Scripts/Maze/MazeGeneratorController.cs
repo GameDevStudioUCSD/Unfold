@@ -48,7 +48,6 @@ public class MazeGeneratorController : MonoBehaviour {
     }
 	// Use this for initialization
 	public void Start () {
-        //Debug.Log("Started script");
         //Creates the walls matrix
         walls = new Square[Rows,Cols];
         
@@ -65,13 +64,16 @@ public class MazeGeneratorController : MonoBehaviour {
                 Debug.LogError("Algorithm not defined");
                 return;
         }
-                    generator.run(walls, exit);
+        //generator = new WorkingDepthFirstMazeGenerator(Rows,Cols);
+        generator.run(walls, exit);
+        Debug.Log ("ASDF");
 	
 	}
     
     // Creates the walls flagged for creation
     public void createWalls()
     {
+    	Debug.Log ("TEST");
         Stack children = new Stack();
         TextureController textureController = new TextureController(levelType);
         GameObject child;

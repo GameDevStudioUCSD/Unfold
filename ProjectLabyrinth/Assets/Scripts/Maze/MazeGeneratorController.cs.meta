@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 129559063d706ca43808b229aa80d9b2
-timeCreated: 1425699240
+timeCreated: 1425700037
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -9,10 +9,10 @@ MonoImporter:
   - SouthWall: {fileID: 100002, guid: fd91a786e40399842bcd3738057d79ce, type: 2}
   - EastWall: {fileID: 100000, guid: 1b57b9438873f2c4091b8016a1d75c1d, type: 2}
   - WestWall: {fileID: 100000, guid: 0e35b27b445676c448d738fca2f2ff2e, type: 2}
-  - Floor: {instanceID: 0}
-  - Player: {instanceID: 0}
-  - ExitMarker: {instanceID: 0}
-  - DebugSphere: {instanceID: 0}
+  - Floor: {fileID: 100000, guid: f91631bff8e9d954193658999817eb6c, type: 2}
+  - Player: {fileID: 100000, guid: 9b9d5055b9e28408ab5c3205eeeaa2a0, type: 2}
+  - ExitMarker: {fileID: 100000, guid: 865a961387e4ff54a943aa9a12967b9c, type: 2}
+  - DebugSphere: {fileID: 100002, guid: 31b204becf5f6c043adc789ea45842ce, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

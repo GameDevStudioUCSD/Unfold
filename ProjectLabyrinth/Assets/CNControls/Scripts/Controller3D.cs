@@ -52,7 +52,7 @@ public class Controller3D : MonoBehaviour
         }
         else
         {
-        	if (!debug_On)
+        	if (debug_On)
         		Debug.Log ("Controller is not Mine");
         		
         	//SyncedMovement();
