@@ -5,8 +5,11 @@ public class MultiplayerBack : MonoBehaviour {
 
     public string nextScene = "MainMenu";
 
-	void OnTriggerEnter()
+	void OnTriggerEnter(Collider other)
     {
-        Application.LoadLevel(nextScene);
+        if (other.tag == "Player")
+        {
+            Application.LoadLevel(nextScene);
+        }
     }
 }

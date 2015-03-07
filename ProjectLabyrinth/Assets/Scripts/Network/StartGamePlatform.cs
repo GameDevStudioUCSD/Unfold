@@ -6,8 +6,7 @@ using System.Collections;
 /// then the server is notified.  If the player leaves, then the server is notified.
 /// 
 /// Once the required number of players enters the platform, the server will load
-/// the game level.  Only the server receives the RPC calls so only the server
-/// should be able to start the game.
+/// the game level.
 /// 
 /// </summary>
 public class StartGamePlatform : MonoBehaviour {
@@ -22,12 +21,7 @@ public class StartGamePlatform : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            if(Network.isServer)
-            {
-                numberOfPlayers++;
-            }
-
-            networkView.RPC("AddPlayer", RPCMode.Server);
+            numberOfPlayers++;
         }
     }
 
@@ -35,44 +29,16 @@ public class StartGamePlatform : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            if(Network.isServer)
-            {
-                numberOfPlayers--;
-            }
-
-            networkView.RPC("SubtractPlayer", RPCMode.Server);
+            numberOfPlayers--;
         }
     }
 
     void Update()
     {
-        /* Server player does not count as a connection so use length + 1 */
-        if(numberOfPlayers == Network.connections.Length + 1)
+        if(numberOfPlayers >= Network.connections.Length + 1)
         {
             networkView.RPC("StartGame", RPCMode.All);
         }
-    }
-
-    [RPC]
-    void AddPlayer()
-    {
-        if(debug)
-        {
-            Debug.Log("Add Player");
-        }
-        
-        numberOfPlayers++;
-    }
-
-    [RPC]
-    void SubtractPlayer()
-    {
-        if(debug)
-        {
-            Debug.Log("Subtract Player");
-        }
-
-        numberOfPlayers--;
     }
 
     [RPC]

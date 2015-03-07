@@ -25,8 +25,15 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Rows = 20;
     public int Cols = 20;
     public float wallSize = 10;
-    public int algorithm = DepthFirst;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Player, ExitMarker, DebugSphere;
+    public enum AlgorithmChoice
+    {
+        DepthFirst,
+        Recursive
+    };
+    
+    public AlgorithmChoice algorithm;
+    public TextureController.TextureChoice levelType;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Player, ExitMarker, DebugSphere;
     public GameObject[] spawnList;
     public bool debug_ON = false;
 
@@ -35,7 +42,7 @@ public class MazeGeneratorController : MonoBehaviour {
     private Square start;
     private Square curr;
     private MazeGenerator generator;
-    public MazeGeneratorController(int algorithm)
+    public MazeGeneratorController(AlgorithmChoice algorithm)
     {
         algorithm = this.algorithm;
     }
@@ -48,10 +55,10 @@ public class MazeGeneratorController : MonoBehaviour {
         // Add new algorithm cases here
         switch(algorithm)
         {
-            case DepthFirst:
+            case AlgorithmChoice.DepthFirst:
                 generator = new WorkingDepthFirstMazeGenerator(Rows, Cols);
                 break;
-            case Recursive:
+            case AlgorithmChoice.Recursive:
                 generator = new RecursiveMaze(Rows, Cols);
                 break;
             default:
@@ -66,7 +73,13 @@ public class MazeGeneratorController : MonoBehaviour {
     public void createWalls()
     {
         Stack children = new Stack();
+        TextureController textureController = new TextureController(levelType);
         GameObject child;
+        Transform trans;
+        Renderer wallRenderer;
+        child = (GameObject)Network.Instantiate(Floor, new Vector3(Rows * wallSize / 2, 0 , Cols * wallSize / 2), Quaternion.identity, 0);
+        child.transform.localScale  += new Vector3(wallSize * Rows/10, 0, wallSize * Cols/10);
+        child.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
         for (int r = 0; r < Rows; r++)
         {
             for (int c = 0; c < Cols; c++)
@@ -89,6 +102,15 @@ public class MazeGeneratorController : MonoBehaviour {
                 while (children.Count > 0)
                 {
                     child = (GameObject)children.Pop();
+                    trans = child.transform.Find("InnerWall");
+                    if(trans != null)
+                    {
+                        if (debug_ON)
+                            Debug.Log("Trying to set texture at: " + r + ", " + c);
+                        wallRenderer = trans.gameObject.GetComponent<Renderer>();
+                        wallRenderer.material.mainTexture = textureController.GetRandomWall();
+                    }
+                    
                     //child.transform.parent = transform;
                     child.name = child.name.Replace("(Clone)", "");
                 }
