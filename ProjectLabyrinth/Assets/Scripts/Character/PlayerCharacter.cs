@@ -20,11 +20,23 @@ public class PlayerCharacter : Character {
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
 
+
+	
+	private int bonusDamage;       //from weapon class
+	private int bonusMaxHealth;        //from weapon class
+	private float bonusSpeed;      //from boot
+
+	private GameObject weapon;
+
+
 	void Start() {
-		this.health = maxHealth;
-		this.damage = 10;
+		this.currentHealth = baseMaxHealth;
+		this.baseDamage = 10;
 		this.attackDelay = 1;
-		this.moveSpeed = 10;
+		this.baseMoveSpeed = 10;
+		this.bonusDamage = 0;
+		this.bonusMaxHealth = 0;
+		this.bonusSpeed = 0;
 	}
 
 	void FixedUpdate() {
@@ -80,7 +92,7 @@ public class PlayerCharacter : Character {
 			}
 		}
 
-		this.healthBar.value = this.health;
+		this.healthBar.value = this.currentHealth;
 	}
 
     public override bool Attack()
@@ -95,10 +107,10 @@ public class PlayerCharacter : Character {
 			enDamage = enDamage * 2;
 		}
 
-		this.health = this.health - enDamage;
+		this.currentHealth = this.currentHealth - enDamage;
 		if (debug_On)
 			Debug.Log ("I've been got!");
-		if (this.health <= 0) {
+		if (this.currentHealth <= 0) {
 			this.Die();
 		}
 	}
@@ -107,7 +119,7 @@ public class PlayerCharacter : Character {
 		if (debug_On)
 			Debug.Log ("I am dead.");
 		transform.position = spawn;
-		this.health = maxHealth;
+		this.currentHealth = this.maxHealth;
 	}
 
 	public void setSpawn(Vector3 start) {
@@ -116,26 +128,43 @@ public class PlayerCharacter : Character {
 	
 	public void addHealth(int h)
 	{
-		if (this.health + h <= maxHealth)
-			this.health += h;
+		if (this.currentHealth + h <= baseMaxHealth)
+			this.currentHealth += h;
 		else
-			this.health = maxHealth;
+			this.currentHealth = baseMaxHealth;
 	}
 	
 	public void addSpeed(float s)
 	{
-		this.moveSpeed += s;
-		movementController.setMovementSpeed(this.moveSpeed);
+		this.baseMoveSpeed += s;
+		movementController.setMovementSpeed(this.baseMoveSpeed);
 	}
 	
 	public void addMaxHealth(int mh)
 	{
+		baseMaxHealth += mh;
 		maxHealth += mh;
-		health += mh;
 	}
 	
 	public void addDamage(int d)
 	{
-		damage += d;
+		baseDamage += d;
 	}
-}
+
+	public void changeItem(int bonusDamage, int bonusMaxHealth, float bonusSpeed){
+		this.bonusDamage = bonusDamage;
+		this.bonusMaxHealth = bonusMaxHealth;
+		this.bonusSpeed = bonusSpeed;
+		this.bonusMaxHealth = bonusMaxHealth;
+		this.damage = this.baseDamage + this.bonusDamage;
+		this.maxHealth = this.baseMaxHealth  + bonusMaxHealth;
+		this.moveSpeed = this.baseMoveSpeed - this.bonusSpeed + bonusSpeed;
+
+	}
+
+	public void setWeapon(GameObject newWeapon){
+		this.weapon = newWeapon;
+	}
+}   
+ 
+

@@ -13,17 +13,26 @@ public abstract class Character : MonoBehaviour {
 	public bool debug_On;
 	
 	// Character HP
-	protected int health;
-	public int maxHealth;
 
+
+	protected int currentHealth;
+	protected int baseMaxHealth;
+
+
+
+	
+	protected int damage;
+	protected int maxHealth;
+	protected float moveSpeed;
 	// Amount of damage the character deals
-	public int damage;
+	public int baseDamage;
+
 
 	// Cooldown time between attacks
 	public float attackDelay;
 
 	// How fast the character can navigate the maze
-	public float moveSpeed;
+	public float baseMoveSpeed;
 	
 	// Hitbox of the opposing target character
 	protected Collider attackCollider;
@@ -80,12 +89,12 @@ public abstract class Character : MonoBehaviour {
 		this.attackCollider = col;
 	}
 
-	public int getHealth() {
-		return this.health;
+	public int getCurrentHealth() {
+		return this.currentHealth;
 	}
 
-	public void setHealth(int h) {
-		this.health = h;
+	public void setCurrentHealth(int h) {
+		this.currentHealth = h;
 	}
 	
 }

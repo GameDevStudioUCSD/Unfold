@@ -27,10 +27,10 @@ public class EnemyCharacter : Character {
 	public GameObject upgradeDamage;
 	
 	void Start() {
-		this.health = maxHealth;
-		this.damage = 5;
+		this.currentHealth = baseMaxHealth;
+		this.baseDamage = 5;
 		this.attackDelay = 2;
-		this.moveSpeed = 8;
+		this.baseMoveSpeed = 8;
 	}
 	
 	void FixedUpdate() {
@@ -60,8 +60,8 @@ public class EnemyCharacter : Character {
 			enDamage = enDamage * 2;
 		}
 		
-		this.health = this.health - enDamage;
-		if (this.health <= 0) {
+		this.currentHealth = this.currentHealth - enDamage;
+		if (this.currentHealth <= 0) {
 			this.Die();
 		}
 
