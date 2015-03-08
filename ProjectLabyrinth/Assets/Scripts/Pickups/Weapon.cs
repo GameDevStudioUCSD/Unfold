@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour {
 	public AudioClip pickUpSound;
 	public int itemVal; 
 	public int bonusDamage;
-	public int bonusArmor;
+	public int bonusMaxHealth;
 	public float bonusSpeed;
 
 	public bool debug_On;
@@ -32,8 +32,7 @@ public class Weapon : MonoBehaviour {
 	}
 
 	void pickedUp(){
-
-
+		this.player.changeItem(bonusDamage,bonusMaxHealth, bonusSpeed);
 	}
 
 }

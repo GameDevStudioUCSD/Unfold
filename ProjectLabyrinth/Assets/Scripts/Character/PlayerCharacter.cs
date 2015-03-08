@@ -20,14 +20,12 @@ public class PlayerCharacter : Character {
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
 
-
-	
+	/*bonus stats are temporary upgrades that are gained from items, are removed once item changes or player dies*/
 	private int bonusDamage;       //from weapon class
-	private int bonusMaxHealth;        //from weapon class
+	private int bonusMaxHealth;        //from armor class
 	private float bonusSpeed;      //from boot
-
+	
 	private GameObject weapon;
-
 
 	void Start() {
 		this.currentHealth = baseMaxHealth;

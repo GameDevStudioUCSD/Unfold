@@ -12,27 +12,19 @@ public abstract class Character : MonoBehaviour {
 
 	public bool debug_On;
 	
-	// Character HP
-
-
-	protected int currentHealth;
-	protected int baseMaxHealth;
-
-
-
+	// Cooldown time between attacks
+	public float attackDelay;
 	
+	// base stats are remain with the character even after death
+	public int baseDamage;
+	public int baseMaxHealth;
+	protected int currentHealth;
+	public float baseMoveSpeed;
+	
+	/*total stats for character, initialized to base stats*/
 	protected int damage;
 	protected int maxHealth;
 	protected float moveSpeed;
-	// Amount of damage the character deals
-	public int baseDamage;
-
-
-	// Cooldown time between attacks
-	public float attackDelay;
-
-	// How fast the character can navigate the maze
-	public float baseMoveSpeed;
 	
 	// Hitbox of the opposing target character
 	protected Collider attackCollider;
@@ -43,6 +35,13 @@ public abstract class Character : MonoBehaviour {
 	// When the next attack time is available after attackDelay seconds
 	protected float nextAttackTime = 0;
 
+	void Start()
+	{
+		damage = baseDamage;
+		maxHealth = baseMaxHealth;
+		moveSpeed = baseMoveSpeed;
+	}
+	
 	/**
 	 * Controls character attack patterns
      * Returns true if target takes damage

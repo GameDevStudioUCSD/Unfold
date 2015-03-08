@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: f48ea41689b4749b3838542d3c958271
-timeCreated: 1425777331
+guid: 6bbcbe79a5a484909932b7753da6d508
+timeCreated: 1425773409
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - mazeGen: {fileID: 11400000, guid: 19b54c0c4dfa4e54fa14a8edd72ceb46, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
