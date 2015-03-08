@@ -40,10 +40,10 @@ public class PlayerCharacter : Character {
 	void FixedUpdate() {
 
 		if (Time.time > nextAttackTime) {
-			ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
+			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
 			if (Input.GetMouseButton(0)) {
-				p.move(Input.mousePosition);
+				//p.move(Input.mousePosition);
 			}
 
 			foreach (Touch t in Input.touches) {

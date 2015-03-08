@@ -7,10 +7,7 @@ public class ParticleMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	/*Ray r = Camera.main.ScreenPointToRay (Input.mousePosition);
-		Vector3 pos = r.GetPoint (Distance);
-		transform.position = pos;
-	*/
+	
 	}
 
 	public void move (Vector3 mouse) {
