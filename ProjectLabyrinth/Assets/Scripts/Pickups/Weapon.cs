@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour {
 	public AudioClip pickUpSound;
 	public int itemVal; 
 	public int bonusDamage;
-	public int bonusMaxHealth;
 	public int bonusHealth;
 	public float bonusSpeed;
 

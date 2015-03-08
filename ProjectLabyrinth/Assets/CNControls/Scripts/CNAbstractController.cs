@@ -362,7 +362,7 @@ public abstract class CNAbstractController : MonoBehaviour
 	/// Check for return value to see whether it was captured
 	/// </param>
 	/// <returns>Whether any touch was captured</returns>
-	protected virtual bool IsTouchCaptured(out Touch capturedTouch)
+	public virtual bool IsTouchCaptured(out Touch capturedTouch)
 	{
 		// Some optimization things
 		int touchCount = Input.touchCount;
