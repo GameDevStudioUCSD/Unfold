@@ -6,11 +6,7 @@ public class Weapon : MonoBehaviour {
 	public AudioClip pickUpSound;
 	public int itemVal; 
 	public int bonusDamage;
-<<<<<<< HEAD
-	public int bonusMaxHealth;
-=======
 	public int bonusHealth;
->>>>>>> 7ac953f42af214c8bc08f5723cc5659212430c1e
 	public float bonusSpeed;
 
 	public bool debug_On;
@@ -36,11 +32,7 @@ public class Weapon : MonoBehaviour {
 	}
 
 	void pickedUp(){
-<<<<<<< HEAD
-		this.player.changeItem(bonusDamage,bonusMaxHealth, bonusSpeed);
-=======
 		player.changeItem (bonusDamage, bonusHealth, bonusSpeed);
->>>>>>> 7ac953f42af214c8bc08f5723cc5659212430c1e
 	}
 
 }

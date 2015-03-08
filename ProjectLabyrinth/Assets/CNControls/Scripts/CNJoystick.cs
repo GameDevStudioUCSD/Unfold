@@ -5,7 +5,7 @@
 [ExecuteInEditMode]
 public class CNJoystick : CNAbstractController
 {
-    public bool debugMessagesOn;
+    public bool debugMessagesOn = true;
     // ---------------------------------
     // Editor visible public properties
     // ---------------------------------
