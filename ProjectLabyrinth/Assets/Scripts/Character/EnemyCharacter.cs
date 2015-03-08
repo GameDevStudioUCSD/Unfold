@@ -69,7 +69,7 @@ public class EnemyCharacter : Character {
 	
 	public override void Die() {
 		Destroy(this.gameObject);
-		dropper.dropItem();
+		dropper.dropItem(transform.position.x, transform.position.z);
 		/*System.Random rnd = new System.Random();
 		int rand = rnd.Next(0,4);
 		//int rand = 1;

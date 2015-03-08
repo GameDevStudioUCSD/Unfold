@@ -124,7 +124,7 @@ public class MazeGeneratorController : MonoBehaviour {
     {
         ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
         Square curr;
-        for (int i = 0; i < corridors.Count; i++ )
+        for (int i = 0; i < corridors.Count; i++)
         {
             curr = (Square)corridors[i];
             GameObject monsterToSpawn = Spawner.NextSpawn(curr, spawnList);
@@ -135,7 +135,8 @@ public class MazeGeneratorController : MonoBehaviour {
             if (monsterToSpawn != null)
             {
 				float monsterHeight = 0;
-				if( monsterToSpawn.GetComponent<BirdMovement> () != null) {
+				if(monsterToSpawn.GetComponent<BirdMovement> () != null)
+				{
 					monsterHeight = 4;
 				}
 

@@ -23,7 +23,7 @@ public class PlayerCharacter : Character {
 	/*bonus stats are temporary upgrades that are gained from items, are removed once item changes or player dies*/
 	private int bonusDamage;       //from weapon class
 	private int bonusMaxHealth;        //from armor class
-	private float bonusSpeed;      //from boot
+	private float bonusMoveSpeed;      //from boot
 
 	private GameObject weapon;
 
@@ -34,7 +34,7 @@ public class PlayerCharacter : Character {
 		this.baseMoveSpeed = 10;
 		this.bonusDamage = 0;
 		this.bonusMaxHealth = 0;
-		this.bonusSpeed = 0;
+		this.bonusMoveSpeed = 0;
 	}
 
 	void FixedUpdate() {
@@ -137,27 +137,32 @@ public class PlayerCharacter : Character {
 
 	public void addMaxHealth(int mh) {
 		baseMaxHealth += mh;
-		maxHealth += mh;
+		currentHealth += mh;
 	}
 
 	public void addDamage(int d) {
 		baseDamage += d;
 	}
 
-	public void changeItem(int bonusDamage, int bonusMaxHealth, float bonusSpeed) {
+	public void changeItem(int bonusDamage, int bonusMaxHealth, float bonusMoveSpeed) {
 		this.bonusDamage = bonusDamage;
 		this.bonusMaxHealth = bonusMaxHealth;
-		this.bonusSpeed = bonusSpeed;
-		this.bonusMaxHealth = bonusMaxHealth;
+		this.bonusMoveSpeed = bonusMoveSpeed;
 		this.damage = this.baseDamage + this.bonusDamage;
-		this.maxHealth = this.baseMaxHealth + bonusMaxHealth;
-		this.moveSpeed = this.baseMoveSpeed - this.bonusSpeed + bonusSpeed;
-
+		this.maxHealth = this.baseMaxHealth + this.bonusMaxHealth;
+		this.moveSpeed = this.baseMoveSpeed + this.bonusMoveSpeed;
 	}
 
 	public void setWeapon(GameObject newWeapon) {
 		this.weapon = newWeapon;
 	}
+	
+	public void updateStats()
+	{
+		damage = baseDamage + bonusDamage;
+		maxHealth = baseMaxHealth + bonusMaxHealth;
+		moveSpeed = baseMoveSpeed + bonusMoveSpeed;
+	}	
 }
 
 

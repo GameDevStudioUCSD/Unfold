@@ -91,9 +91,4 @@ public abstract class Character : MonoBehaviour {
 	public int getCurrentHealth() {
 		return this.currentHealth;
 	}
-
-	public void setCurrentHealth(int h) {
-		this.currentHealth = h;
-	}
-	
 }
