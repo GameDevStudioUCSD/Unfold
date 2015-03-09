@@ -79,8 +79,8 @@ public class MazeGeneratorController : MonoBehaviour {
         GameObject child;
         Transform trans;
         Renderer wallRenderer;
-        child = (GameObject)Network.Instantiate(Floor, new Vector3(Rows * wallSize / 2, 0 , Cols * wallSize / 2), Quaternion.identity, 0);
-        child.transform.localScale  += new Vector3(wallSize * Rows/10, 0, wallSize * Cols/10);
+        child = (GameObject)Network.Instantiate(Floor, new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2)), Quaternion.identity, 0);
+        child.transform.localScale  += new Vector3((wallSize*Rows/10), 0, (wallSize*Cols/10));
         child.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
         for (int r = 0; r < Rows; r++)
         {
