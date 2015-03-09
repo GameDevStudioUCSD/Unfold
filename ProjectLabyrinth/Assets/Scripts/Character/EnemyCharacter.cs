@@ -21,7 +21,7 @@ public class EnemyCharacter : Character {
 	public int weakness;
 
 	// The particular item this enemy drops when killed
-	public ItemDropper dropper;
+	public PickupDropper dropper;
 	
 	void Start() {
 		this.currentHealth = baseMaxHealth;
