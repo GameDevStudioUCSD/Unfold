@@ -4,9 +4,7 @@ using System.Collections;
 
 public class ExitCollision : AbstractGUI {
 
-	//private GameObject player;
     public GameObject loadResult;
-	private Collider collider;
     private bool hasReached;
 	private PlayerCharacter player;
 
@@ -27,7 +25,7 @@ public class ExitCollision : AbstractGUI {
     {
         if (hasReached)
         {
-            if (GUI.Button(win, "Win the Game!"))
+            if (GUI.Button(win, "Victory!"))
             {
                 Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
             }
