@@ -18,10 +18,7 @@ public class ParticleGenerator : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			Touch t;
 			if (!joystick.IsTouchCaptured(out t)) {
-				Ray r = Camera.main.ScreenPointToRay (Input.mousePosition);
-				Vector3 pos = r.GetPoint (1);
-				ParticleMovement trail = (ParticleMovement) GameObject.Instantiate(trailObject, pos, Quaternion.identity);
-				trail.transform.SetParent (GameObject.Find("Player Avatar/Canvas").transform, false);
+				createPath (Input.mousePosition);
 				count = 1;
 			}
 		}
@@ -47,5 +44,14 @@ public class ParticleGenerator : MonoBehaviour {
 		if (Input.GetMouseButtonUp(0)) {
 			Destroy (GameObject.Find ("Trail(Clone)"));
 		} 
+	}
+
+	public ParticleMovement createPath (Vector3 start)
+	{
+		Ray r = Camera.main.ScreenPointToRay (start);
+		Vector3 pos = r.GetPoint (1);
+		ParticleMovement trail = (ParticleMovement)GameObject.Instantiate (trailObject, pos, Quaternion.identity);
+		trail.transform.SetParent (transform, false);
+		return trail;
 	}
 }

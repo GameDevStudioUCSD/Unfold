@@ -17,6 +17,8 @@ public class PlayerCharacter : Character {
 	// Player health bar object
 	public Slider healthBar;
 
+	public ParticleMovement trail;
+
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
 
@@ -42,9 +44,6 @@ public class PlayerCharacter : Character {
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if (Input.GetMouseButton(0)) {
-				//p.move(Input.mousePosition);
-			}
 
 			foreach (Touch t in Input.touches) {
 
@@ -78,6 +77,7 @@ public class PlayerCharacter : Character {
 			if (Input.GetKeyUp(KeyCode.Alpha1)) {
 				this.attackType = 1;
 				this.Attack();
+				this.createPath ();
 			} else if (Input.GetKeyUp(KeyCode.Alpha2)) {
 				this.attackType = 2;
 				this.Attack();
@@ -99,6 +99,20 @@ public class PlayerCharacter : Character {
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
 		return hasAttacked;
 	}
+
+	public void createPath() {
+		ParticleGenerator p = (ParticleGenerator)GetComponentInChildren<ParticleGenerator> ();
+		if (attackType == 1) {
+			ParticleMovement slash = p.createPath (new Vector3(Screen.width / 8.0f, Screen.height / 2.0f));
+			//Debug.Log (slash.transform.position);
+			slash.move (new Vector3(Screen.width * 7 / 8.0f, Screen.height / 2.0f));
+			//Debug.Log (slash.transform.position);
+
+			Destroy (slash);
+		}
+
+	}
+
 	public override void TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
 			enDamage = enDamage * 2;
