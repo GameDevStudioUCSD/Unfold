@@ -22,9 +22,9 @@ public abstract class Character : MonoBehaviour {
 	public float baseMoveSpeed;
 	
 	/*total stats for character, initialized to base stats*/
-	protected int damage;
-	protected int maxHealth;
-	protected float moveSpeed;
+	public int damage;
+	public int maxHealth;
+	public float moveSpeed;
 	
 	// Hitbox of the opposing target character
 	protected Collider attackCollider;

@@ -17,8 +17,8 @@ public class ExitCollision : AbstractGUI {
 	{
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
-			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
-			hasReached = true;
+			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
+			this.hasReached = true;
 		}
 	}
     void OnGUI()
