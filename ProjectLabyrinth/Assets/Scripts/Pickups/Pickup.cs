@@ -17,16 +17,13 @@ public class Pickup : MonoBehaviour {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
-			//if(player && !hasPickedUp) {
-                if (debug_On)
-                    Debug.Log("Tried to play pickup sound!");
-                SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
-                GetComponent<MeshRenderer>().enabled = false;
-                hasPickedUp = !hasPickedUp;
-				pickedUp();
-			//}
-            //else if(player && hasPickedUp)
-                Destroy(this.gameObject);
+            if (debug_On)
+                Debug.Log("Tried to play pickup sound!");
+            SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
+            GetComponent<MeshRenderer>().enabled = false;
+            hasPickedUp = !hasPickedUp;
+			pickedUp();
+            Destroy(this.gameObject);
 		}
 	}
 	

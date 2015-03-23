@@ -71,23 +71,5 @@ public class EnemyCharacter : Character {
 		Destroy(this.gameObject);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
 		dropperScript.dropItem(transform.position.x, transform.position.z);
-		/*System.Random rnd = new System.Random();
-		int rand = rnd.Next(0,4);
-		//int rand = 1;
-		switch (rand)
-		{
-			case 0:
-				Instantiate(healthGlobe, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
-				break;
-			case 1:
-				Instantiate(upgradeSpeed, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
-				break;
-			case 2:
-				Instantiate(upgradeMaxHealth, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
-				break;
-			case 3:
-				Instantiate(upgradeDamage, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
-				break;
-		}*/
 	}
 }
