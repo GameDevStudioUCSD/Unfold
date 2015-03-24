@@ -4,7 +4,7 @@ using System.Collections;
 public class PickupDropper : MonoBehaviour {
 	
 	public GameObject[] pickupList;
-	public bool debug_On;
+	public bool debug_On = false;
 	
 	// Use this for initialization
 	public void dropItem(float x, float z) {

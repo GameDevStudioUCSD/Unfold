@@ -191,9 +191,9 @@ public class PlayerCharacter : Character {
 	
 	public void updateStats()
 	{
-		maxDamage = baseDamage + bonusDamage;
+		this.damage = baseDamage + bonusDamage;
 		maxHealth = baseMaxHealth + bonusMaxHealth;
-		maxMoveSpeed = baseMoveSpeed + bonusMoveSpeed;
+		this.moveSpeed = baseMoveSpeed + bonusMoveSpeed;
 	}
 	
 	public void updateBonusStats()

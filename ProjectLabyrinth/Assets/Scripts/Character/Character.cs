@@ -10,7 +10,7 @@ using UnityEngine;
  */
 public abstract class Character : MonoBehaviour {
 
-	public bool debug_On;
+	public bool debug_On = false;
 	
 	// Cooldown time between attacks
 	public float attackDelay;
@@ -22,9 +22,9 @@ public abstract class Character : MonoBehaviour {
 	public float baseMoveSpeed;
 	
 	/*total stats for character, initialized to base stats*/
-	public int maxDamage;
+	public int damage;
 	public int maxHealth;
-	public float maxMoveSpeed;
+	public float moveSpeed;
 	
 	// Hitbox of the opposing target character
 	protected Collider attackCollider;
@@ -37,9 +37,9 @@ public abstract class Character : MonoBehaviour {
 
 	void Start()
 	{
-		maxDamage = baseDamage;
+		this.damage = baseDamage;
 		maxHealth = baseMaxHealth;
-		maxMoveSpeed = baseMoveSpeed;
+		this.moveSpeed = baseMoveSpeed;
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public abstract class Character : MonoBehaviour {
             }
 
 			if (target) {
-				target.TakeDamage(this.maxDamage, this.attackType);
+				target.TakeDamage(this.damage, this.attackType);
                 hasAttacked = true;
 			}
 			this.nextAttackTime = Time.time + attackDelay;

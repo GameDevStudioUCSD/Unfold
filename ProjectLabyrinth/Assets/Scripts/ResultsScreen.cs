@@ -33,7 +33,7 @@ public class ResultsScreen : MonoBehaviour {
 
 		if (this.player) {
 			this.playerMaxHealth.text = "Your max health: " + this.player.maxHealth;
-			this.playerDamage.text = "Your damage: " + this.player.maxDamage;
+			this.playerDamage.text = "Your damage: " + this.player.damage;
 		}
 	}
 }
