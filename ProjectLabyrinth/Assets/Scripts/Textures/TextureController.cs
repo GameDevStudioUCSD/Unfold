@@ -20,6 +20,7 @@ public class TextureController : MonoBehaviour {
     private const string str_error = "Error inside TextureController.cs: ";
     private string textureText;
     private int[] wallMaximums;
+    private bool debugOn = false;
     private SortedDictionary<string, Texture> db = TextureDB.GetDB();
     public TextureController() : this(TextureChoice.Corn)
     {
@@ -67,6 +68,10 @@ public class TextureController : MonoBehaviour {
      */
     public void SetNWallMax(int wallNumber, int maxNum)
     {
+        if(debugOn)
+        {
+            Debug.Log("MaxNum: " + maxNum);
+        }
         if(wallNumber > TextureDB.NumberOfWallTextures(textureType))
         {
             Debug.LogError(str_error + "Tried to modify a wall that doesn't exist");
@@ -81,9 +86,13 @@ public class TextureController : MonoBehaviour {
         Texture retVal = null;
         bool hasFoundValidValue = false;
         int index = 0;
-        while(hasFoundValidValue)
+        while(!hasFoundValidValue)
         {
             index = (int)Mathf.Floor(Random.Range(0, wallMaximums.Length));
+            if(debugOn)
+            {
+                Debug.Log("Random wall chosen: " + index);
+            }
             if (wallMaximums[index] > 0)
             {
                 hasFoundValidValue = true;

@@ -14,6 +14,8 @@ public class TextureDB : MonoBehaviour {
         db.Add("forest_floor", AssetDatabase.LoadAssetAtPath("Assets/Textures/forest_floor.png", typeOfDB) as Texture);
         db.Add("forest_wall_1", AssetDatabase.LoadAssetAtPath("Assets/Textures/forest_wall_1.png", typeOfDB) as Texture);
         db.Add("corn_wall_1", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_1.png", typeOfDB) as Texture);
+        db.Add("corn_wall_2", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_2.png", typeOfDB) as Texture);
+        db.Add("corn_wall_3", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_3.png", typeOfDB) as Texture);
         db.Add("corn_floor", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_floor.png", typeOfDB) as Texture);
         return db;
     }
@@ -23,7 +25,7 @@ public class TextureDB : MonoBehaviour {
         switch(texture)
         {
             case TextureController.TextureChoice.Corn:
-                retVal = 1;
+                retVal = 3;
                 break;
             case TextureController.TextureChoice.Cave:
                 retVal = 1;
