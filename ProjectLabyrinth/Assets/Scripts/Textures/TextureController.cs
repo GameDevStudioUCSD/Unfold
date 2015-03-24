@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TextureController : MonoBehaviour {
+public class TextureController {
     /* @author: Michael Gonzalez
      * This class allows developers to control a level's theme. More 
      * specifically, it allows the developer to pick a texture group for any
