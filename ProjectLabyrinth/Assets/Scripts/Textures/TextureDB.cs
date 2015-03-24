@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,14 +8,14 @@ public class TextureDB : MonoBehaviour {
     public static SortedDictionary<string, Texture> GetDB()
     {
         SortedDictionary<string, Texture> db = new SortedDictionary<string, Texture>();
-        db.Add("cave_floor", AssetDatabase.LoadAssetAtPath("Assets/Textures/cave_floor.png", typeOfDB) as Texture);
-        db.Add("cave_wall_1", AssetDatabase.LoadAssetAtPath("Assets/Textures/cave_wall_1.png", typeOfDB) as Texture);
-        db.Add("forest_floor", AssetDatabase.LoadAssetAtPath("Assets/Textures/forest_floor.png", typeOfDB) as Texture);
-        db.Add("forest_wall_1", AssetDatabase.LoadAssetAtPath("Assets/Textures/forest_wall_1.png", typeOfDB) as Texture);
-        db.Add("corn_wall_1", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_1.png", typeOfDB) as Texture);
-        db.Add("corn_wall_2", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_2.png", typeOfDB) as Texture);
-        db.Add("corn_wall_3", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_wall_3.png", typeOfDB) as Texture);
-        db.Add("corn_floor", AssetDatabase.LoadAssetAtPath("Assets/Textures/corn_floor.png", typeOfDB) as Texture);
+        db.Add("cave_floor", Resources.Load("Textures/cave_floor", typeOfDB) as Texture);
+        db.Add("cave_wall_1", Resources.Load("Textures/cave_wall_1", typeOfDB) as Texture);
+        db.Add("forest_floor", Resources.Load("Textures/forest_floor", typeOfDB) as Texture);
+        db.Add("forest_wall_1", Resources.Load("Textures/forest_wall_1", typeOfDB) as Texture);
+        db.Add("corn_wall_1", Resources.Load("Textures/corn_wall_1", typeOfDB) as Texture);
+        db.Add("corn_wall_2", Resources.Load("Textures/corn_wall_2", typeOfDB) as Texture);
+        db.Add("corn_wall_3", Resources.Load("Textures/corn_wall_3", typeOfDB) as Texture);
+        db.Add("corn_floor", Resources.Load("Textures/corn_floor", typeOfDB) as Texture);
         return db;
     }
     public static int NumberOfWallTextures(TextureController.TextureChoice texture)
