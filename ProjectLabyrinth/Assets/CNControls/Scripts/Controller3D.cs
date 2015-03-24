@@ -83,7 +83,7 @@ public class Controller3D : MonoBehaviour
     {
         movement = _mainCameraTransform.TransformDirection(movement);
         movement.y = 0f;
-        movement.Normalize();// Allow movement sensitivity
+        //movement.Normalize();// Allow movement sensitivity
 
         FaceDirection(movement);
         _characterController.Move(movement * movementSpeed * Time.deltaTime);
