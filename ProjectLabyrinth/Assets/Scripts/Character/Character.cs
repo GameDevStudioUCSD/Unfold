@@ -22,9 +22,9 @@ public abstract class Character : MonoBehaviour {
 	public float baseMoveSpeed;
 	
 	/*total stats for character, initialized to base stats*/
-	public int damage;
+	public int maxDamage;
 	public int maxHealth;
-	public float moveSpeed;
+	public float maxMoveSpeed;
 	
 	// Hitbox of the opposing target character
 	protected Collider attackCollider;
@@ -37,9 +37,9 @@ public abstract class Character : MonoBehaviour {
 
 	void Start()
 	{
-		damage = baseDamage;
+		maxDamage = baseDamage;
 		maxHealth = baseMaxHealth;
-		moveSpeed = baseMoveSpeed;
+		maxMoveSpeed = baseMoveSpeed;
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public abstract class Character : MonoBehaviour {
             }
 
 			if (target) {
-				target.TakeDamage(this.damage, this.attackType);
+				target.TakeDamage(this.maxDamage, this.attackType);
                 hasAttacked = true;
 			}
 			this.nextAttackTime = Time.time + attackDelay;

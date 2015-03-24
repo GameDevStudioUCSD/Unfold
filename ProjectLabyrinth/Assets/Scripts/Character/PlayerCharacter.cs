@@ -129,7 +129,7 @@ public class PlayerCharacter : Character {
 
 		this.currentHealth = this.currentHealth - enDamage;
 		if (debug_On)
-			Debug.Log("I've been got!");
+			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
 			this.Die();
 		}
@@ -191,9 +191,9 @@ public class PlayerCharacter : Character {
 	
 	public void updateStats()
 	{
-		damage = baseDamage + bonusDamage;
+		maxDamage = baseDamage + bonusDamage;
 		maxHealth = baseMaxHealth + bonusMaxHealth;
-		moveSpeed = baseMoveSpeed + bonusMoveSpeed;
+		maxMoveSpeed = baseMoveSpeed + bonusMoveSpeed;
 	}
 	
 	public void updateBonusStats()
