@@ -6,7 +6,7 @@ public class CorridorFinder : MonoBehaviour
 	// Walks through a maze and builds a list of Squares and their
 	// corridor's length. The length of each corridor will be used
 	// as a weight for spawning monsters.
-    public static bool debug_ON = true;
+    public static bool debug_ON;
 	public static ArrayList FindCorridors (Square[,] maze, int rows, int cols)
 	{
         ArrayList listOfCorridors = new ArrayList();
