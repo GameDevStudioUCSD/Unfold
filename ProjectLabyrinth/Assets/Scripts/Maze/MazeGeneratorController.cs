@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 /* @author: Michael Gonzalez
  * This class is used directly in the Unity Editor to generate the maze. To use 
  * it, just attach the script component to a blank Unity Game Object.
@@ -42,6 +43,7 @@ public class MazeGeneratorController : MonoBehaviour {
     private Square start;
     private Square curr;
     private MazeGenerator generator;
+    private SortedDictionary<string, GameObject> westWalls;
     public MazeGeneratorController(AlgorithmChoice algorithm)
     {
         algorithm = this.algorithm;
@@ -68,15 +70,110 @@ public class MazeGeneratorController : MonoBehaviour {
         generator.run(walls, exit);
 	
 	}
-    
+    // Removes duplicate walls from adjacent cells
+    public void DetermineWallsToSpawn()
+    {
+        for( int c = 0; c < Cols; c++ )
+        {
+            for( int r = 0; r < Rows; r++)
+            {
+                curr = walls[r, c];
+                if(curr.hasEast && c < Cols-1)
+                {
+                    walls[r, c + 1].hasWest = true;
+                    curr.hasEast = false;
+                }
+                if(curr.hasSouth && r < Rows-1)
+                {
+                    walls[r + 1, c].hasNorth = true;
+                    curr.hasSouth = false;
+                }
+            }
+        }
+    }
+    public void DetermineLogicalWallCount()
+    {
+        for (int c = 1; c < Cols; c++)
+        {
+            for (int r = 1; r < Rows; r++)
+            {
+                curr = walls[r, c];
+                if (curr.hasWest)
+                {
+                    walls[r, c - 1].hasEast = true;
+                }
+                if (curr.hasNorth)
+                {
+                    walls[r - 1, c].hasSouth = true;
+                }
+            }
+        }
+    }
+    public void FixWallIssues()
+    {
+        // The cells directly to the south and south east to curr
+        Square sCell, swCell;
+        GameObject innerWall;
+        Transform wallTransform;
+        bool inBounds;
+        for (int c = 0; c < Cols; c++)
+        {
+            for (int r = 0; r < Rows; r++)
+            {
+                curr = walls[r, c];
+                if (r < Rows - 1)
+                    sCell = walls[r + 1, c];
+                else
+                    sCell = curr;
+                if (c > 0 && r < Rows - 1)
+                    swCell = walls[r + 1, c - 1];
+                else
+                    swCell = curr;
+                //First, fix any flickering issues
+                if(curr.hasWest && curr.hasNorth)
+                {
+                    if(debug_ON)
+                    {
+                        Debug.Log("Tried to fix flickering");
+                    }
+                    if (westWalls.TryGetValue(curr.ToString(), out innerWall))
+                    {
+                        wallTransform = innerWall.transform.Find("InnerWall");
+                        wallTransform.localScale -= Vector3.forward;
+                        wallTransform.localPosition += (Vector3.right * (.5f));
+                       // continue;
+                    }
+                }
+                inBounds = (r < Rows - 1 && c > 0);
+                if (inBounds && curr.hasWest && !sCell.hasNorth && !sCell.hasWest && swCell.hasNorth)
+                {
+                    if(debug_ON)
+                    {
+                        Debug.Log("Found a missing corner!");
+                    }
+                    if(westWalls.TryGetValue(curr.ToString(), out innerWall))
+                    {
+                        wallTransform = innerWall.transform.Find("InnerWall");
+                        wallTransform.localScale += Vector3.forward;
+                        wallTransform.localPosition += (Vector3.right * (.5f));
+                    }
+                }
+                
+            }
+        }
+    }
+
     // Creates the walls flagged for creation
     public void createWalls()
     {
+        DetermineWallsToSpawn();
         Stack children = new Stack();
         TextureController textureController = new TextureController(levelType);
         GameObject child;
         Transform trans;
         Renderer wallRenderer;
+        GameObject westWall;
+        westWalls = new SortedDictionary<string, GameObject>();
         child = (GameObject)Network.Instantiate(Floor, new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2)), Quaternion.identity, 0);
         child.transform.localScale  += new Vector3((wallSize*Rows/10), 0, (wallSize*Cols/10));
         child.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
@@ -84,6 +181,16 @@ public class MazeGeneratorController : MonoBehaviour {
         {
             for (int c = 0; c < Cols; c++)
             {
+                if(debug_ON)
+                {
+                    GameObject indexSphere = (GameObject)Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 15, c * wallSize), Quaternion.identity, 0);
+                    float red = ((float)r / Rows);
+                    float blue = ((float)c / Cols);
+                //    Debug.Log("Red: " + red + " Blue: " + blue);
+                    Color indexColor = new Color(red, 0, blue);
+                    indexSphere.GetComponent<Renderer>().material.SetColor("_Color", indexColor);
+
+                }
                 curr = walls[r, c];
                 if(curr.hasNorth)
                     children.Push(Network.Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
@@ -92,7 +199,11 @@ public class MazeGeneratorController : MonoBehaviour {
                 if (curr.hasEast)
                     children.Push(Network.Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
                 if (curr.hasWest)
-                    children.Push(Network.Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
+                {
+                    westWall = (GameObject)Network.Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity, 0);
+                    westWalls.Add(curr.ToString(), westWall);
+                    children.Push(westWall);
+                }
                 if (curr.start)
                 {
                     start = curr;
@@ -105,8 +216,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     trans = child.transform.Find("InnerWall");
                     if(trans != null)
                     {
-                        if (debug_ON)
-                            Debug.Log("Trying to set texture at: " + r + ", " + c);
+                        //if (debug_ON)
+                            //Debug.Log("Trying to set texture at: " + r + ", " + c);
                         wallRenderer = trans.gameObject.GetComponent<Renderer>();
                         wallRenderer.material.mainTexture = textureController.GetRandomWall();
                     }
@@ -116,6 +227,8 @@ public class MazeGeneratorController : MonoBehaviour {
                 }
             }
         }
+        FixWallIssues();
+        DetermineLogicalWallCount();
         
     }
     public void SetSpawnLocations()
