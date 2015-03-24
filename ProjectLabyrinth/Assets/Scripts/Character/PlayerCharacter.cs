@@ -47,6 +47,8 @@ public class PlayerCharacter : Character {
 	}
 
 	void FixedUpdate() {
+		// dirty solution to players being pushed around by enemies
+		transform.position = new Vector3 (transform.position.x, 1.5f, transform.position.z);
 
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();

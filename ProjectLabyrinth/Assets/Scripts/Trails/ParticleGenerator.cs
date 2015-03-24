@@ -42,7 +42,7 @@ public class ParticleGenerator : MonoBehaviour {
 	
 
 		if (Input.GetMouseButtonUp(0)) {
-			Destroy (GameObject.Find ("Trail(Clone)"));
+			//Destroy (GameObject.Find ("Trail(Clone)"));
 		} 
 	}
 
