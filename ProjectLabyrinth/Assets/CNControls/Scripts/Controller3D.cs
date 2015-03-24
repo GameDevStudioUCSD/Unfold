@@ -107,26 +107,5 @@ public class Controller3D : MonoBehaviour
         }
         while ((direction - _playerTransform.forward).sqrMagnitude > 0.2f);
     }
-    
-    /*void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-    	Vector3 syncPosition = Vector3.zero;
-    	if (stream.isWriting)
-    	{
-    		syncPosition = rigidbody.position;
-    		stream.Serialize(ref syncPosition);
-    	}
-    	else
-    	{
-    		stream.Serialize (ref syncPosition);
-    		
-    		syncTime = 0f;
-    		syncDelay = Time.time - lastSynchronizationTime;
-    		lastSynchronizationTime = Time.time;
-    		
-    		syncStartPosition = rigidbody.position;
-    		syncEndPosition = syncPosition;
-    	}
-    }*/
 
 }

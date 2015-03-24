@@ -8,8 +8,6 @@ public class ExitCollision : AbstractGUI {
     private bool hasReached;
 	private PlayerCharacter player;
 
-    static float frameX = Screen.width * (1 - wRatio) / 2;
-
     Rect win = new Rect(frameX + frameWidth/2, frameHeight / 2, 100, 100);
 
 	
