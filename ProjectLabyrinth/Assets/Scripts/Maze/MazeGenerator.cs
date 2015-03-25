@@ -17,6 +17,7 @@ public abstract class MazeGenerator
 
     protected int Rows, Cols;
     protected Square[,] walls;
+    protected Square start;
     protected Square exit;
 
     /* This function is to be overrided by the different algorithms. 

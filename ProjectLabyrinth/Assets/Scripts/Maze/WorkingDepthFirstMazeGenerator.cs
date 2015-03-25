@@ -9,10 +9,12 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 
     private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
+    private float diagonalLength;
 	public WorkingDepthFirstMazeGenerator(int r, int c)
 	{
         this.Rows = r;
         this.Cols = c;
+        this.diagonalLength = Mathf.Sqrt(r * r + c * c);
 	}
 
     override public void run(Square[,] cells, Square end)
@@ -21,6 +23,8 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         this.walls = cells;
         createSquares(true);
         selectEntrance();
+        if (exit == start)
+            EnsureExitExists();
     }
 
     //Function determines the entrance to start building the maze
@@ -57,7 +61,12 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         //Debug.Log("Generating Maze!\n Current cell is R: " + r + " C: " + c);
         Square curr = walls[r, c];
         curr.visited = true;
-        curr.start = started;
+        if (started)
+        {
+            curr.start = started;
+            exit = curr;
+            start = curr;
+        }
         destroyWall(curr, wallToDestroy);
         //Debug.Log("Curr: Wall To Destroy: " + wallToDestroy)
         if (curr.start) //Base Case 
@@ -80,6 +89,7 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             }
         }
         Stack neighbors = checkNeighbors(r, c);
+        bool hasFoundExit = start == exit;
         while (neighbors.Count > 0)
         {
             Square next = (Square)neighbors.Pop();
@@ -88,10 +98,14 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 				continue;
 			}
             //Debug.Log("Depth: " + depth);
-            if (depth == 0)
+            float endDist = Square.DistanceBetween(start, curr);
+            
+            if (hasFoundExit && endDist > .7f * (diagonalLength))
             {
-                next.exit = true;
-                curr.exit = false;
+                exit.exit = false;
+                Debug.Log(exit == start);
+                curr.exit = true;
+                exit = curr;
             }
             generateMaze(next.getRow(), next.getCol(), next.getWallToDestroy(), false);
             depth++;
@@ -113,6 +127,27 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
                     break;
             }
         }
+    }
+
+    private void EnsureExitExists()
+    {
+        int startQuadrant = Square.DetermineQuadrant(start, walls);
+        switch(startQuadrant)
+        {
+            case 1:
+                exit = walls[Rows - 1, 0];
+                break;
+            case 2:
+                exit = walls[Rows - 1, Cols - 1];
+                break;
+            case 3:
+                exit = walls[0, 0];
+                break;
+            case 4:
+                exit = walls[0, Cols - 1];
+                break;
+        }
+        exit.exit = true;
     }
 
     Stack checkNeighbors(int r, int c)

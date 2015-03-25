@@ -45,6 +45,31 @@ public class Square
         weight = 1;
 
     }
+    public static float DistanceBetween( Square A, Square B)
+    {
+        float returnVal, row, col;
+        col = A.getCol() - B.getCol();
+        row = A.getRow() - B.getRow();
+        col *= col;
+        row *= row;
+        returnVal = (float)Math.Sqrt(row + col);
+        return returnVal;
+    }
+    // Returns an int that signifies which quadrant a cell in a cell matrix is
+    // Quadrants will be defined as such:
+    // 0,0 [2] [1] 0,C
+    // R,0 [3] [4] R,C
+    public static int DetermineQuadrant( Square cell, Square[,] cells )
+    {
+        int retVal = 1;
+        if (cell.getRow() > cells.GetLength(1) / 2 && cell.getCol() > cells.GetLength(0) / 2)
+            retVal = 4;
+        if (cell.getRow() > cells.GetLength(1) / 2 && cell.getCol() < cells.GetLength(0) / 2)
+            retVal = 3;
+        if (cell.getRow() < cells.GetLength(1) / 2 && cell.getCol() < cells.GetLength(0) / 2)
+            retVal = 2;
+        return retVal;
+    }
     public override string ToString()
     {
         return "Cell: " + row.ToString() + " , " + col.ToString();

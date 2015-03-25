@@ -8,10 +8,12 @@ public class DepthFirstMazeGenerator : MazeGenerator
 {
     private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
+    private float diagonalLength;
 	public DepthFirstMazeGenerator(int r, int c)
 	{
         this.Rows = r;
         this.Cols = c;
+        this.diagonalLength = Mathf.Sqrt(r * r + c * c);
 	}
 
     override public void run(Square[,] cells, Square end)
@@ -56,7 +58,12 @@ public class DepthFirstMazeGenerator : MazeGenerator
         //Debug.Log("Generating Maze!\n Current cell is R: " + r + " C: " + c);
         Square curr = walls[r, c];
         curr.visited = true;
-        curr.start = started;
+        if(started)
+        {
+            curr.start = started;
+            exit = curr;
+            start = curr;
+        }
         destroyWall(curr, wallToDestroy);
         //Debug.Log("Curr: Wall To Destroy: " + wallToDestroy)
         if (curr.start) //Base Case 
@@ -83,10 +90,13 @@ public class DepthFirstMazeGenerator : MazeGenerator
         {
             Square next = (Square)neighbors.Pop();
             Debug.Log("Depth: " + depth);
-            if (depth == 0)
+            float endDist = Square.DistanceBetween(start, curr);
+            Debug.Log("Distance between end and curr:" + endDist);
+            if ( endDist > .7f * (diagonalLength))
             {
-                next.exit = true;
-                curr.exit = false;
+                exit.exit = false;
+                curr.exit = true;
+                exit = curr;
             }
             generateMaze(next.getRow(), next.getCol(), next.getWallToDestroy(), false);
             depth++;
