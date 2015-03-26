@@ -9,6 +9,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour {
     public AudioClip pickUpSound;
     public bool debug_On;
+    public GameObject particles;
     public int type;
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
@@ -19,6 +20,14 @@ public class Pickup : MonoBehaviour {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
             if (debug_On)
                 Debug.Log("Tried to play pickup sound!");
+            if(particles != null)
+            {
+                Color objColor = GetComponent<Renderer>().material.color;
+                GameObject particleObj;
+                particleObj = (GameObject)Network.Instantiate(particles, transform.position + Vector3.up, Quaternion.identity, 0);
+                particleObj.GetComponent<Transform>().parent = player.GetComponent<Transform>();
+                particleObj.GetComponent<ParticleSystem>().startColor = objColor;
+            }
             SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
             GetComponent<MeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
