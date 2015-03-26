@@ -1,11 +1,9 @@
-#define FOR_MOUSE
-
 using System;
 using UnityEngine;
-using System.Reflection;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using System.Reflection;
 #endif
 
 /// <summary>
@@ -194,11 +192,11 @@ public abstract class CNAbstractController : MonoBehaviour
 	{
 		TransformCache = GetComponent<Transform>();
 		
-		#if UNITY_EDITOR
+#if UNITY_EDITOR
 		// If we've instantiated the prefab but haven't parented it to a camera
 		// Editor only issue
 		if (TransformCache.parent == null) return;
-		#endif
+#endif
 		
 		ParentCamera = TransformCache.parent.GetComponent<Camera>();
 		
@@ -212,14 +210,14 @@ public abstract class CNAbstractController : MonoBehaviour
 	/// <returns>null if no touch found, returns a Touch if it's found</returns>
 	protected virtual Touch? GetTouchByFingerId(int fingerId)
 	{
-		#if FOR_MOUSE
+#if UNITY_EDITOR
 		// If we're in the editor, we also take our mouse as input
 		// Let's say it's fingerId is 255;
 		if (fingerId == 255)
 		{
 			return ConstructTouchFromMouseInput();
 		}
-		#endif
+#endif
 		
 		int touchCount = Input.touchCount;
 		
@@ -273,19 +271,19 @@ public abstract class CNAbstractController : MonoBehaviour
 	/// <returns>Calculated position</returns>
 	protected Vector3 InitializePosition()
 	{
-		#if !UNITY_EDITOR
+#if !UNITY_EDITOR
 		// If we're not in the editor, we don't need to recalculate it every time we call this method
 		if (CalculatedPosition != null)
 			return CalculatedPosition.Value;
-		#endif
+#endif
 		
-		#if UNITY_EDITOR
+#if UNITY_EDITOR
 		// Editor error "handling"
 		// Happens when you duplicate the joystick in the editor window
 		// causes a bit of recursion, but it's ok, it will just try to calculate joystick position twice
 		if (ParentCamera == null)
 			OnEnable();
-		#endif
+#endif
 		// Camera based calculations (different aspect ratios)
 		float halfHeight = ParentCamera.orthographicSize;
 		float halfWidth = halfHeight * ParentCamera.aspect;
@@ -362,28 +360,28 @@ public abstract class CNAbstractController : MonoBehaviour
 	/// Check for return value to see whether it was captured
 	/// </param>
 	/// <returns>Whether any touch was captured</returns>
-	public virtual bool IsTouchCaptured(out Touch capturedTouch)
+	protected virtual bool IsTouchCaptured(out Touch capturedTouch)
 	{
 		// Some optimization things
 		int touchCount = Input.touchCount;
 		
-		#if FOR_MOUSE
+#if UNITY_EDITOR
 		// If we're in the editor, we add another touch to the list - the mouse cursor
 		int actualTouchCount = touchCount;
 		touchCount++;
-		#endif
+#endif
 		
 		// For every touch out there
 		for (int i = 0; i < touchCount; i++)
 		{
-			#if FOR_MOUSE
+#if UNITY_EDITOR
 			// If we got all touches from Input.GetTouch, we need to feed a new touch based on mouse input
 			// Check ConstructTouchFromMouseInput() method for more info
 			Touch currentTouch = i >= actualTouchCount ? ConstructTouchFromMouseInput() : Input.GetTouch(i);
-			#else
+#else
 			// God bless local variables of value types
 			Touch currentTouch = Input.GetTouch(i);
-			#endif
+	#endif
 			// Check if we're interested in this touch
 			if (currentTouch.phase == TouchPhase.Began && IsTouchInZone(currentTouch.position))
 			{
@@ -429,13 +427,12 @@ public abstract class CNAbstractController : MonoBehaviour
 	protected abstract void TweakControl(Vector2 touchPosition);
 	
 	// Some editor-only stuff. It won't compile to any of the builds
-	#if FOR_MOUSE
+#if UNITY_EDITOR
 	/// <summary>
 	/// Your old DrawGizmosSelected method
 	/// It allows you to change properties of the control in the inspector 
 	/// - it will recalculate all needed properties
 	/// </summary>
-	#if UNITY_EDITOR
 	protected virtual void OnDrawGizmosSelected()
 	{
 		TransformCache = GetComponent<Transform>();
@@ -462,7 +459,6 @@ public abstract class CNAbstractController : MonoBehaviour
 		// It's rarely an issue though
 		Gizmos.color = color;
 	}
-	#endif
 	
 	/// <summary>
 	/// Utility method. It gets current MouseInput (left mouse button) 
@@ -497,5 +493,5 @@ public abstract class CNAbstractController : MonoBehaviour
 		
 		return (Touch)mouseAsTouch;
 	}
-	#endif
+#endif
 }

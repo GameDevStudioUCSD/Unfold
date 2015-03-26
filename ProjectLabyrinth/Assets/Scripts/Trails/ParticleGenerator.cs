@@ -16,11 +16,11 @@ public class ParticleGenerator : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetMouseButtonDown(0)) {
-			Touch t;
-			if (!joystick.IsTouchCaptured(out t)) {
-				createPath (Input.mousePosition);
-				count = 1;
-			}
+//			Touch t;
+//			if (!joystick.IsTouchCaptured(out t)) {
+//				createPath (Input.mousePosition);
+//				count = 1;
+//			}
 		}
 
 
