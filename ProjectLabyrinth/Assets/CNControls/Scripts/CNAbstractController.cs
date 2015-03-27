@@ -381,7 +381,7 @@ public abstract class CNAbstractController : MonoBehaviour
 #else
 			// God bless local variables of value types
 			Touch currentTouch = Input.GetTouch(i);
-	#endif
+#endif
 			// Check if we're interested in this touch
 			if (currentTouch.phase == TouchPhase.Began && IsTouchInZone(currentTouch.position))
 			{

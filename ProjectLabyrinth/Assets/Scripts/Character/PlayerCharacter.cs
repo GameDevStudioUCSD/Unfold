@@ -12,7 +12,8 @@ public class PlayerCharacter : Character {
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
 
-	public Controller3D movementController;
+	private const float ROTATE_SPEED = 2.5f;
+	public Animator animator;
 
 	// Player health bar object
 	public Slider healthBar;
@@ -37,6 +38,7 @@ public class PlayerCharacter : Character {
 	private int abilityLevel = 0;
 
 	void Start() {
+		this.animator.SetBool("Walking", false);
 		this.currentHealth = baseMaxHealth;
 		this.baseDamage = 10;
 		this.attackDelay = 1;
@@ -102,6 +104,44 @@ public class PlayerCharacter : Character {
 		this.healthBar.value = this.currentHealth;
 	}
 
+	public void Idle(CNAbstractController joystick) {
+		this.animator.SetBool("Walking", false);
+		this.StopCoroutine("RotateCoroutine");
+	}
+
+	/// <summary>
+	/// Causes this player character to move.
+	/// </summary>
+	/// <param name="input">Input movement vector.</param>
+	/// <param name="joystick">Joystick controlling player movement.</param>
+	public void Move(Vector3 input, CNAbstractController joystick) {
+		this.animator.SetBool("Walking", true);
+		Vector3 movement = new Vector3(input.x, 0f, input.y);
+		Debug.Log(movement);
+		movement = Camera.main.transform.TransformDirection(movement);
+		movement.y = 0f;
+//		movement.Normalize();	// Allow movement sensitivity
+
+		StopCoroutine("RotateCoroutine");
+		StartCoroutine("RotateCoroutine", movement);
+		this.GetComponent<CharacterController>().Move(Time.deltaTime * moveSpeed * movement);
+	}
+
+	private IEnumerator RotateCoroutine(Vector3 direction) {
+		if (direction == Vector3.zero) {
+			yield break;
+		}
+
+		do {
+			this.transform.rotation = Quaternion.Lerp(
+				this.transform.rotation,
+				Quaternion.LookRotation(direction),
+				Time.deltaTime * PlayerCharacter.ROTATE_SPEED
+			);
+			yield return null;
+		} while ((direction - this.transform.forward).sqrMagnitude > 0.2f);
+	}
+
 	public override bool Attack() {
 		bool hasAttacked = base.Attack();
 		if (hasAttacked)
@@ -160,7 +200,6 @@ public class PlayerCharacter : Character {
 
 	public void addSpeed(float s) {
 		this.baseMoveSpeed += s;
-		movementController.setMovementSpeed(this.baseMoveSpeed);
 	}
 
 	public void addMaxHealth(int mh) {

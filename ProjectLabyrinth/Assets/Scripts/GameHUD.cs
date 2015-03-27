@@ -19,9 +19,21 @@ public class GameHUD : MonoBehaviour {
 	/// <value>The user interface camera.</value>
 	public Camera UICamera { get; set; }
 
+	/// <summary>
+	/// The player controller.
+	/// </summary>
+	public CharacterController playerController;
+
+	/// <summary>
+	/// The actual player character.
+	/// </summary>
+	public PlayerCharacter player;
+
 	void Start() {
 		this.UICamera = this.GetComponent<Canvas>().worldCamera;
 		this.Joystick = this.GetComponentInChildren<CustomJoystick>();
+		this.Joystick.ControllerMovedEvent += this.player.Move;
+		this.Joystick.FingerLiftedEvent += this.player.Idle;
 	}
 
 	void Update() {

@@ -77,7 +77,7 @@ public class CustomJoystick : CNAbstractController {
 	/// Function for joystick tweaking (moving with the finger)
 	/// The values of the Axis are also calculated here
 	/// </summary>
-	/// <param name="touchPosition">Current touch position in screen cooridnates (pixels)
+	/// <param name="touchPosition">Current touch position in screen coordinates (pixels)
 	/// It's recalculated in units so it's resolution-independent</param>
 	protected override void TweakControl(Vector2 touchPosition) {
 		// First, let's find our current touch position in world space
