@@ -29,7 +29,7 @@ public class Item : MonoBehaviour {
 		if (hitDetector) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
 			if (debug_On)
-				Debug.Log("Tried to play pickup sound!");
+				Debug.Log("Item Trigger Reached");
 			SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
 			GetComponent<MeshRenderer>().enabled = false;
 			hasPickedUp = !hasPickedUp;

@@ -19,7 +19,7 @@ public class Pickup : MonoBehaviour {
 		if (hitDetector) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
             if (debug_On)
-                Debug.Log("Tried to play pickup sound!");
+                Debug.Log("Pickup Trigger Reached");
             if(particles != null)
             {
                 Color objColor = GetComponent<Renderer>().material.color;
@@ -43,7 +43,7 @@ public class Pickup : MonoBehaviour {
 			/*health*/
 			case 0:
 				if (debug_On)
-					Debug.Log("Adding health");
+					Debug.Log("Healing health");
 				player.addHealth(5);
 				break;
 			/*speed upgrade*/

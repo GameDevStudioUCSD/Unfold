@@ -6,6 +6,7 @@ using System.Collections;
  */
 public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
+	public bool debug_On = false;
 
     private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
@@ -103,7 +104,8 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             if (hasFoundExit && endDist > .7f * (diagonalLength))
             {
                 exit.exit = false;
-                Debug.Log(exit == start);
+                if (debug_On)
+                	Debug.Log(exit == start);
                 curr.exit = true;
                 exit = curr;
             }

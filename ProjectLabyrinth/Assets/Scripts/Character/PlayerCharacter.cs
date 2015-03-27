@@ -46,6 +46,7 @@ public class PlayerCharacter : Character {
 		this.bonusDamage = 0;
 		this.bonusMaxHealth = 0;
 		this.bonusMoveSpeed = 0;
+		updateStats();
 	}
 
 	void FixedUpdate() {
@@ -117,7 +118,8 @@ public class PlayerCharacter : Character {
 	public void Move(Vector3 input, CNAbstractController joystick) {
 		this.animator.SetBool("Walking", true);
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
-		Debug.Log(movement);
+		if (debug_On)
+			Debug.Log(movement);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
 //		movement.Normalize();	// Allow movement sensitivity
