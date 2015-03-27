@@ -15,9 +15,6 @@ public class PlayerCharacter : Character {
 	private const float ROTATE_SPEED = 2.5f;
 	public Animator animator;
 
-	// Player health bar object
-	public Slider healthBar;
-
 	public ParticleMovement trail;
 
 	// Helps correlate user input to attack calculation
@@ -101,8 +98,6 @@ public class PlayerCharacter : Character {
 				this.Attack();
 			}
 		}
-
-		this.healthBar.value = this.currentHealth;
 	}
 
 	public void Idle(CNAbstractController joystick) {
@@ -118,8 +113,6 @@ public class PlayerCharacter : Character {
 	public void Move(Vector3 input, CNAbstractController joystick) {
 		this.animator.SetBool("Walking", true);
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
-		if (debug_On)
-			Debug.Log(movement);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
 //		movement.Normalize();	// Allow movement sensitivity

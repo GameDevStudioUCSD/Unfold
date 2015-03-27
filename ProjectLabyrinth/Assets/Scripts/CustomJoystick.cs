@@ -107,6 +107,14 @@ public class CustomJoystick : CNAbstractController {
 		OnControllerMoved(differenceVector);
 	}
 
+	/// <summary>
+	/// Determines whether the stick is active.
+	/// </summary>
+	/// <returns><c>true</c> if the stick is active; otherwise, <c>false</c>.</returns>
+	public bool IsStickActive() {
+		return this.IsCurrentlyTweaking;
+	}
+
 	// Some editor-only stuff. It won't compile to any of the builds
 #if UNITY_EDITOR
 	/// <summary>
