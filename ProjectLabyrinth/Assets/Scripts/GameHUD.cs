@@ -20,11 +20,6 @@ public class GameHUD : MonoBehaviour {
 	public Camera UICamera { get; set; }
 
 	/// <summary>
-	/// The player controller.
-	/// </summary>
-	public CharacterController playerController;
-
-	/// <summary>
 	/// The actual player character.
 	/// </summary>
 	public PlayerCharacter player;
