@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// 
+/// Used to prevent UI overlap during networked play.
+/// 
+/// </summary>
 public class NetworkCNCamera : MonoBehaviour {
 
-	// Use this for initialization
-    private AudioListener audio;
 	void Start () {
-        //audio = GetComponent<AudioListener>();
-		if (GetComponent<NetworkView>().isMine)
+		if (!GetComponent<NetworkView>().isMine)
 		{
-			GetComponent<Camera>().enabled = true;
-            //audio.enabled = true;
-		}
-		else
-		{
-			GetComponent<Camera>().enabled = false;
-			//audio.enabled = false;
+            /* Get the transform of the parent object */
+            Transform parentObject = transform.parent;
+
+            /* Turn off the UI children in the player prefab if they are not yours */
+            parentObject.FindChild("UICanvas").gameObject.SetActive(false);
+            parentObject.FindChild("UICamera").gameObject.SetActive(false);
 		}
 	}
 	
