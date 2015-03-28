@@ -164,6 +164,17 @@ public class MazeGeneratorController : MonoBehaviour {
     }
 
     // Creates the walls flagged for creation
+    public void CreateFloor(TextureController textureController)
+    {
+        GameObject floor;
+        NetworkView nView;
+        Vector3 position = new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2));
+        floor = (GameObject)Network.Instantiate(Floor, position, Quaternion.identity, 0);
+        nView = floor.GetComponent<NetworkView>();
+        nView.RPC( "ModifyFloorSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
+        nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
+        //floor.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
+    }
     public void createWalls()
     {
         DetermineWallsToSpawn();
@@ -174,9 +185,7 @@ public class MazeGeneratorController : MonoBehaviour {
         Renderer wallRenderer;
         GameObject westWall;
         westWalls = new SortedDictionary<string, GameObject>();
-        child = (GameObject)Network.Instantiate(Floor, new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2)), Quaternion.identity, 0);
-        child.transform.localScale  += new Vector3((wallSize*Rows/10), 0, (wallSize*Cols/10));
-        child.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
+        CreateFloor(textureController);
         for (int r = 0; r < Rows; r++)
         {
             for (int c = 0; c < Cols; c++)
