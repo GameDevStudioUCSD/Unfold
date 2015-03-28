@@ -164,81 +164,98 @@ public class MazeGeneratorController : MonoBehaviour {
     }
 
     // Creates the walls flagged for creation
-    public void CreateFloor(TextureController textureController)
+    public void CreateFloor()
     {
         GameObject floor;
         NetworkView nView;
         Vector3 position = new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2));
         floor = (GameObject)Network.Instantiate(Floor, position, Quaternion.identity, 0);
+        RemoveCloneFromName(floor);
         nView = floor.GetComponent<NetworkView>();
         nView.RPC( "ModifyFloorSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
         nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
         //floor.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
     }
+    public void ApplyWallTexture( GameObject currentWall)
+    {
+        NetworkView nView = currentWall.GetComponent<NetworkView>();
+        nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
+    }
     public void createWalls()
     {
         DetermineWallsToSpawn();
-        Stack children = new Stack();
-        TextureController textureController = new TextureController(levelType);
-        GameObject child;
-        Transform trans;
-        Renderer wallRenderer;
-        GameObject westWall;
+        Stack instatiationList = new Stack();
+        //TextureController textureController = new TextureController(levelType);
+        GameObject objToInstantiate = null;
+        Vector3 pos;
+        Quaternion rot = Quaternion.identity;
         westWalls = new SortedDictionary<string, GameObject>();
-        CreateFloor(textureController);
+        CreateFloor();
         for (int r = 0; r < Rows; r++)
         {
             for (int c = 0; c < Cols; c++)
             {
+                // Displays indexing spheres
                 if(debug_ON)
                 {
-                    GameObject indexSphere = (GameObject)Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 15, c * wallSize), Quaternion.identity, 0);
+                    GameObject indexSphere = (GameObject)Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 15, c * wallSize), rot, 0);
                     float red = ((float)r / Rows);
                     float blue = ((float)c / Cols);
-                //    Debug.Log("Red: " + red + " Blue: " + blue);
                     Color indexColor = new Color(red, 0, blue);
                     indexSphere.GetComponent<Renderer>().material.SetColor("_Color", indexColor);
 
                 }
                 curr = walls[r, c];
+                pos = new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol());
                 if(curr.hasNorth)
-                    children.Push(Network.Instantiate(NorthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
+                {
+                    objToInstantiate = (GameObject) Network.Instantiate(NorthWall, pos, rot , 0);
+                    ApplyWallTexture(objToInstantiate);
+                    instatiationList.Push(objToInstantiate);
+                }
                 if (curr.hasSouth)
-                    children.Push(Network.Instantiate(SouthWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
+                {
+                    objToInstantiate = (GameObject)Network.Instantiate(SouthWall, pos, rot, 0);
+                    ApplyWallTexture(objToInstantiate);
+                    instatiationList.Push(objToInstantiate);
+                }
                 if (curr.hasEast)
-                    children.Push(Network.Instantiate(EastWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity,0));
+                {
+                    objToInstantiate = (GameObject)Network.Instantiate(EastWall, pos, rot, 0);
+                    ApplyWallTexture(objToInstantiate);
+                    instatiationList.Push(objToInstantiate);
+                }
                 if (curr.hasWest)
                 {
-                    westWall = (GameObject)Network.Instantiate(WestWall, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity, 0);
-                    westWalls.Add(curr.ToString(), westWall);
-                    children.Push(westWall);
+                    objToInstantiate = (GameObject)Network.Instantiate(WestWall, pos, rot, 0);
+                    ApplyWallTexture(objToInstantiate);
+                    instatiationList.Push(objToInstantiate);
+                    westWalls.Add(curr.ToString(), objToInstantiate);
                 }
                 if (curr.start)
                 {
                     start = curr;
                 }
                 if(curr.exit)
-                    children.Push(Instantiate(ExitMarker, new Vector3(curr.getRow() * wallSize, 0, wallSize * curr.getCol()), Quaternion.identity));
-                while (children.Count > 0)
                 {
-                    child = (GameObject)children.Pop();
-                    trans = child.transform.Find("InnerWall");
-                    if(trans != null)
-                    {
-                        //if (debug_ON)
-                            //Debug.Log("Trying to set texture at: " + r + ", " + c);
-                        wallRenderer = trans.gameObject.GetComponent<Renderer>();
-                        wallRenderer.material.mainTexture = textureController.GetRandomWall();
-                    }
-                    
-                    //child.transform.parent = transform;
-                    child.name = child.name.Replace("(Clone)", "");
+                    objToInstantiate = (GameObject)Network.Instantiate(ExitMarker, pos, rot, 0);
+                    instatiationList.Push(objToInstantiate);
+                }
+                
+                while (instatiationList.Count > 0)
+                {
+                    objToInstantiate = (GameObject)instatiationList.Pop();
+                    RemoveCloneFromName(objToInstantiate);
                 }
             }
         }
         FixWallIssues();
         DetermineLogicalWallCount();
         
+    }
+    public static void RemoveCloneFromName(GameObject obj)
+    {
+        obj.name = obj.name.Replace("(Clone)", "");
     }
     public void SetSpawnLocations()
     {

@@ -24,6 +24,15 @@ public class EnemyCharacter : Character {
 	public GameObject dropper;
 	
 	void Start() {
+        // This places the monsters underneath a parent object labeled 
+        // "Monsters"
+        GameObject monsterRoot = GameObject.Find("Monsters");
+        if( monsterRoot != null )
+        {
+            Transform monsterTransform;
+            monsterTransform = GetComponent<Transform>();
+            monsterTransform.parent = monsterRoot.GetComponent<Transform>();
+        }
 		this.currentHealth = baseMaxHealth;
 		this.baseDamage = 5;
 		this.attackDelay = 2;
