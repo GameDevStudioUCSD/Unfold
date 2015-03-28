@@ -24,7 +24,8 @@ public class Pickup : MonoBehaviour {
             {
                 Color objColor = GetComponent<Renderer>().material.color;
                 GameObject particleObj;
-                particleObj = (GameObject)Network.Instantiate(particles, transform.position + Vector3.up, Quaternion.identity, 0);
+                Quaternion rot = new Quaternion(270, 0, 0, 0);
+                particleObj = (GameObject)Network.Instantiate(particles, transform.position + Vector3.up, rot, 0);
                 particleObj.GetComponent<Transform>().parent = player.GetComponent<Transform>();
                 particleObj.GetComponent<ParticleSystem>().startColor = objColor;
             }
