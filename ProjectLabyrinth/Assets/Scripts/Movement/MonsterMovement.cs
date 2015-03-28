@@ -9,8 +9,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 	private Square[,] walls;
 	protected bool canTurn = false;
 	protected int direction;
+	protected int detectionRange;
 	public int stunTime;
 	private int stunned = 0;
+	private bool playerDetected;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +22,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);;
 
 		direction = 3;
+		detectionRange = 5;
+		playerDetected = false;
 
 		bool found = false;
 		while (!found) {
@@ -75,7 +79,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 		} */
 
 		if (stunned == 0) {
-			AI ();
+			approachPlayer();
+			if(!playerDetected) {
+				AI ();
+			}
 			maneuver ();
 		} else {
 			stunned -= 1;
@@ -84,6 +91,51 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	abstract public void maneuver ();
 	abstract public void AI ();
+
+	/*protected void detectPlayer() {
+		int checkingDir = direction;
+		bool turnCheck = false;
+		Vector3 checkingPos = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+		for (int i=0; i<detectionRange; i++) {
+			if (turnCheck && isInCenter ()) {
+				Square curr = getCurrSquare (checkingPos.x, checkingPos.z);
+				bool[] sides = getSides (curr, checkingPos.x, checkingPos.z);
+				if (isFork (sides)) {
+					return;
+				} else if (isCorner (sides)) {
+					return;
+				} else if (isDeadEnd (sides)) {
+					return;
+				}
+				turnCheck = false;
+			} else if (!turnCheck && movingVert () && Mathf.Abs (checkingPos.x - Mathf.Round (checkingPos.x)) < .2 && 
+				Mathf.Round (checkingPos.x) % mazeGen.wallSize == Mathf.Round (mazeGen.wallSize / 2)) {
+			
+				turnCheck = true;
+			} else if (!turnCheck && movingHoriz () && Mathf.Abs (checkingPos.z - Mathf.Round (checkingPos.z)) < .2 && 
+				Mathf.Round (checkingPos.z) % mazeGen.wallSize == Mathf.Round (mazeGen.wallSize / 2)) {
+			
+				turnCheck = true;
+			}
+		}
+	}
+	*/
+
+	protected void approachPlayer() {
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		Transform playerTransform = player.transform;
+		float distance = Vector3.Distance (playerTransform.position, transform.position);
+		if (distance >= 1 && distance <= detectionRange) {
+			detectionRange = 10;
+			transform.LookAt (playerTransform);
+			playerDetected = true;
+		} else {
+			detectionRange=5;
+			playerDetected=false;
+		}
+		//transform.position =  Vector3.MoveTowards(transform.position, playerTransform.position, step);
+
+	}
 
 	protected bool isInCenter() {
 		if (Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .25 &&
@@ -99,7 +151,6 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	protected bool isFork(bool[] sides) {
 		int falseCount = sideCount (sides);
-
 		return falseCount > 2;
 	}
 
