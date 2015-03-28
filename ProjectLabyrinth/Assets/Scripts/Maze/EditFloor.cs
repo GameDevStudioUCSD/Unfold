@@ -2,6 +2,16 @@
 using System.Collections;
 
 public class EditFloor : MonoBehaviour {
+    private Transform floorTransform;
+    void Start()
+    {
+        GameObject mazeRoot = GameObject.Find("Maze");
+        if (mazeRoot != null)
+        {
+            floorTransform = GetComponent<Transform>();
+            floorTransform.parent = mazeRoot.GetComponent<Transform>();
+        }
+    }
     [RPC]
     public void ModifyFloorSize(float wallSize, int rows, int cols)
     {

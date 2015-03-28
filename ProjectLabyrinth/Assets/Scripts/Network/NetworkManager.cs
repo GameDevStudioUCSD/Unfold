@@ -88,6 +88,12 @@ public class NetworkManager : MonoBehaviour {
 
         /* Instantiate player */
 		GameObject player = (GameObject) Network.Instantiate (playerPrefab, spawnLocation, Quaternion.identity, 0);
+
+        /* Remove the "Clone" from the player's name */
+        MazeGeneratorController.RemoveCloneFromName(player);
+
+        /* Assign the player's number to their name */
+        player.name = player.name + " " + (playerNumber+1).ToString();
         
         /* Set the player's spawn location */
 		player.GetComponentInChildren<PlayerCharacter> ().setSpawn (spawnLocation);
