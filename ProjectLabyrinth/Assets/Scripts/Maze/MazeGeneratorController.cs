@@ -46,6 +46,7 @@ public class MazeGeneratorController : MonoBehaviour {
     private Square curr;
     private MazeGenerator generator;
     private SortedDictionary<string, GameObject> westWalls;
+    private GameObject innerWall;
     public MazeGeneratorController(AlgorithmChoice algorithm)
     {
         algorithm = this.algorithm;
@@ -111,12 +112,12 @@ public class MazeGeneratorController : MonoBehaviour {
             }
         }
     }
+    
     public void FixWallIssues()
     {
         // The cells directly to the south and south east to curr
         Square sCell, swCell;
-        GameObject innerWall;
-        Transform wallTransform;
+        NetworkView wallNView;
         bool inBounds;
         for (int c = 0; c < Cols; c++)
         {
@@ -140,10 +141,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     }
                     if (westWalls.TryGetValue(curr.ToString(), out innerWall))
                     {
-                        wallTransform = innerWall.transform.Find("InnerWall");
-                        wallTransform.localScale -= Vector3.forward;
-                        wallTransform.localPosition += (Vector3.right * (.5f));
-                       // continue;
+                        wallNView = innerWall.GetComponent<NetworkView>();
+                        wallNView.RPC("ShrinkWall", RPCMode.AllBuffered);
                     }
                 }
                 inBounds = (r < Rows - 1 && c > 0);
@@ -155,9 +154,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     }
                     if(westWalls.TryGetValue(curr.ToString(), out innerWall))
                     {
-                        wallTransform = innerWall.transform.Find("InnerWall");
-                        wallTransform.localScale += Vector3.forward;
-                        wallTransform.localPosition += (Vector3.right * (.5f));
+                        wallNView = innerWall.GetComponent<NetworkView>();
+                        wallNView.RPC("ExpandWall", RPCMode.AllBuffered);
                     }
                 }
                 
