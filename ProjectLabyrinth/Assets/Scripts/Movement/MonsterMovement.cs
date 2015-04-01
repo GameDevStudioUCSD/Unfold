@@ -79,10 +79,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 		} */
 
 		if (stunned == 0) {
-			approachPlayer();
-			if(!playerDetected) {
+//			approachPlayer();
+//			if(!playerDetected) {
 				AI ();
-			}
+//			}
 			maneuver ();
 		} else {
 			stunned -= 1;
