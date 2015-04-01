@@ -2,25 +2,20 @@
 using System.Collections;
 
 public class ParticleGenerator : MonoBehaviour {
-
-	private CNJoystick joystick;
+	
 	public ParticleMovement trailObject = null;
 	private int count;
 
-	// Use this for initialization
-	void Start () {
-		joystick = (CNJoystick) GameObject.Find("Joystick").GetComponent<CNJoystick>();
-	}
-	
 	// Update is called once per frame
-	void Update () {
+	void Update () {}
 
+	public void handleInput(CustomJoystick joystick) {
 		if (Input.GetMouseButtonDown(0)) {
-//			Touch t;
-//			if (!joystick.IsTouchCaptured(out t)) {
-//				createPath (Input.mousePosition);
-//				count = 1;
-//			}
+
+			if (!joystick.IsStickActive()) {
+				createPath (Input.mousePosition);
+				count = 1;
+			}
 		}
 
 
@@ -42,7 +37,7 @@ public class ParticleGenerator : MonoBehaviour {
 	
 
 		if (Input.GetMouseButtonUp(0)) {
-			//Destroy (GameObject.Find ("Trail(Clone)"));
+			Destroy (GameObject.Find ("Trail(Clone)"));
 		} 
 	}
 

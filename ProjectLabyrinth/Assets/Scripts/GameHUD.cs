@@ -38,7 +38,7 @@ public class GameHUD : MonoBehaviour
     /// Gets or sets the particle generator.
     /// </summary>
     /// <value>The particle generator.</value>
-    public ParticleGenerator particles { get; set; }
+	public ParticleGenerator particles;
 
     /// <summary>
     /// Object initialization method.
@@ -55,7 +55,7 @@ public class GameHUD : MonoBehaviour
             this.Joystick.ControllerMovedEvent += this.player.Move;
             this.Joystick.FingerLiftedEvent += this.player.Idle;
         }
-        this.particles = this.GetComponent<ParticleGenerator>();
+
     }
 
     // Update is called once per frame
@@ -63,14 +63,20 @@ public class GameHUD : MonoBehaviour
     {
         if (networkView.isMine)
         {
-            if (this.Joystick != null)
-            {
+            if (this.Joystick != null) 
+			{
                 this.Joystick.handleInput(this.UICamera);
+				if (this.particles != null) {
+					this.particles.handleInput(this.Joystick);
+				}
             }
+
             if (this.healthSystem != null)
             {
                 this.healthSystem.display(this.player);
             }
+		
+
             foreach (Touch currentTouch in Input.touches)
             {
                 if (currentTouch.phase == TouchPhase.Began)
