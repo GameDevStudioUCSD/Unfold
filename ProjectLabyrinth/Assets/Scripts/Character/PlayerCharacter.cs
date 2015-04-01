@@ -159,14 +159,14 @@ public class PlayerCharacter : Character {
 
 	public void createPath() {
 		ParticleGenerator p = (ParticleGenerator)GetComponentInChildren<ParticleGenerator> ();
-		if (attackType == 1) {
+		/*if (attackType == 1) {
 			ParticleMovement slash = p.createPath (new Vector3(Screen.width / 8.0f, Screen.height / 2.0f));
 			//Debug.Log (slash.transform.position);
 			slash.move (new Vector3(Screen.width * 7 / 8.0f, Screen.height / 2.0f));
 			//Debug.Log (slash.transform.position);
 
 			Destroy (slash);
-		}
+		}*/
 
 	}
 
