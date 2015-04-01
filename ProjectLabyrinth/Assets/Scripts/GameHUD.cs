@@ -41,31 +41,24 @@ public class GameHUD : MonoBehaviour {
 	/// <summary>
     /// Object initialization method.
     /// </summary>
-    void OnEnable()
-    {
-        this.UICamera = this.GetComponent<Canvas>().worldCamera;
-        if (this.player == null)
-        {
-            this.player = this.transform.root.GetComponentInChildren<PlayerCharacter>();
-        }
-        if (this.Joystick != null)
-        {
-            this.Joystick.ControllerMovedEvent += this.player.Move;
-            this.Joystick.FingerLiftedEvent += this.player.Idle;
-        }
-
-    }
+	void OnEnable() {
+		this.UICamera = this.GetComponent<Canvas>().worldCamera;
+		if (this.Joystick != null && this.player != null) {
+			this.Joystick.ControllerMovedEvent += this.player.Move;
+			this.Joystick.FingerLiftedEvent += this.player.Idle;
+		}
+	}
 
     // Update is called once per frame
-    void Update() {
+	void Update() {
+		if (this.healthSystem != null) {
+			this.healthSystem.display(this.player);
+		}
 		if (this.Joystick != null) {
 			this.Joystick.handleInput(this.UICamera);
 			if (this.particles != null) {
 				this.particles.handleInput(this.Joystick);
 			}
-		}
-		if (this.healthSystem != null) {
-			this.healthSystem.display(this.player);
 		}
 		foreach (Touch currentTouch in Input.touches) {
 			if (currentTouch.phase == TouchPhase.Began) {

@@ -41,7 +41,7 @@ public class HealthSystem : MonoBehaviour {
 	public virtual void display(PlayerCharacter player) {
 		this.player = player;
 		this.healthBar.maxValue = player.maxHealth;
-		this.healthBar.value = player.getCurrentHealth();
-		this.healthText.text = player.getCurrentHealth().ToString() + "/" + player.maxHealth.ToString();
+		this.healthBar.value = player.currentHealth;
+		this.healthText.text = player.currentHealth.ToString() + "/" + player.maxHealth.ToString();
 	}
 }

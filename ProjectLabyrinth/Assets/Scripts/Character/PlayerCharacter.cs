@@ -29,10 +29,18 @@ public class PlayerCharacter : Character {
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
 
-	/*bonus stats are temporary upgrades that are gained from items, are removed once item changes or player dies*/
-	private int bonusDamage;       //from weapon class
-	private int bonusMaxHealth;        //from armor class
-	private float bonusMoveSpeed;      //from boot
+	// Statistics that persist regardless of equippable items in player's inventory
+	public int baseDamage;
+	public int baseMaxHealth;
+	public float baseMoveSpeed;
+
+	// Mutable player max health, which depends on baseMaxHealth and bonusMaxHealth
+	public int maxHealth;
+
+	// Player statistics gained from equippable items
+	private int bonusDamage;
+	private int bonusMaxHealth;
+	private float bonusMoveSpeed;
 
 	private Item weapon = null;
 	private Item armor = null;
@@ -45,18 +53,12 @@ public class PlayerCharacter : Character {
 	private GameObject floor;
 
 	void Start() {
-		this.animator.SetBool("Walking", false);
-		this.currentHealth = baseMaxHealth;
-		//this.baseDamage = 10;
-		this.attackDelay = 1;
-		//this.baseMoveSpeed;
-		//this.bonusDamage = 0;
-		//this.bonusMaxHealth = 0;
-		//this.bonusMoveSpeed = 0;
 		updateStats();
-		data  = new PlayerData();
-		data.win = false;
-		data.name = "Squiddie";
+		this.animator.SetBool("Walking", false);
+		this.currentHealth = this.maxHealth;
+		this.data = new PlayerData();
+		this.data.win = false;
+		this.data.name = "Squiddie";
 	}
 
 	void FixedUpdate() {
@@ -210,15 +212,18 @@ public class PlayerCharacter : Character {
 
 	public void addSpeed(float s) {
 		this.baseMoveSpeed += s;
+		updateStats ();
 	}
 
 	public void addMaxHealth(int mh) {
 		baseMaxHealth += mh;
 		currentHealth += mh;
+		updateStats ();
 	}
 
 	public void addDamage(int d) {
 		baseDamage += d;
+		updateStats ();
 	}
 
 	public void equipItem(Item newItem) {
@@ -238,11 +243,10 @@ public class PlayerCharacter : Character {
 		checkItemsForSet();
 	}
 	
-	public void updateStats()
-	{
-		this.damage = baseDamage + bonusDamage;
-		maxHealth = baseMaxHealth + bonusMaxHealth;
-		this.moveSpeed = baseMoveSpeed + bonusMoveSpeed;
+	public void updateStats() {
+		this.damage = this.baseDamage + this.bonusDamage;
+		this.maxHealth = this.baseMaxHealth + this.bonusMaxHealth;
+		this.moveSpeed = this.baseMoveSpeed + this.bonusMoveSpeed;
 	}
 	
 	public void updateBonusStats()
