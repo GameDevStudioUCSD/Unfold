@@ -15,11 +15,25 @@ public class ParticleGenerator : MonoBehaviour {
 			}
 		}
 
+		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
+			if (!joystick.IsStickActive ()) {
+				createPath (touchToMouse (Input.GetTouch (0).position));
+				count = 1;
+			}
+		}
 
-		if (Input.GetMouseButton(0)) {
+
+		if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Moved)) {
 			ParticleMovement p = (ParticleMovement) this.GetComponentInChildren<ParticleMovement> ();
 			if(p != null) {
-				p.move (Input.mousePosition);
+				if(Input.GetMouseButton (0)) {
+					p.move (Input.mousePosition);
+				}
+
+				else {
+					p.move (touchToMouse (Input.GetTouch (0).position));
+				}
+
 				ParticleSystem s = (ParticleSystem) p.GetComponent<ParticleSystem>();
 				if(count > 0) {
 					count--;
@@ -33,9 +47,9 @@ public class ParticleGenerator : MonoBehaviour {
 		}
 	
 
-		if (Input.GetMouseButtonUp(0)) {
+		if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Ended)) {
 			Destroy (GameObject.Find ("Trail(Clone)"));
-		} 
+		}
 	}
 
 	public ParticleMovement createPath (Vector3 start)
@@ -46,4 +60,9 @@ public class ParticleGenerator : MonoBehaviour {
 		trail.transform.SetParent (transform, false);
 		return trail;
 	}
+
+	public Vector3 touchToMouse (Vector2 pos) {
+		return new Vector3 (pos.x, pos.y);
+	}
+
 }
