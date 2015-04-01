@@ -61,35 +61,32 @@ public class GameHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (networkView.isMine)
-        {
-            if (this.Joystick != null) 
+	    if (this.Joystick != null) 
 			{
-                this.Joystick.handleInput(this.UICamera);
+	        this.Joystick.handleInput(this.UICamera);
 				if (this.particles != null) {
 					this.particles.handleInput(this.Joystick);
 				}
-            }
+	    }
 
-            if (this.healthSystem != null)
-            {
-                this.healthSystem.display(this.player);
-            }
+	    if (this.healthSystem != null)
+	    {
+	        this.healthSystem.display(this.player);
+	    }
 		
 
-            foreach (Touch currentTouch in Input.touches)
-            {
-                if (currentTouch.phase == TouchPhase.Began)
-                {
-                    Vector3 worldPosition = this.UICamera.ScreenToWorldPoint(currentTouch.position);
+	    foreach (Touch currentTouch in Input.touches)
+	    {
+	        if (currentTouch.phase == TouchPhase.Began)
+	        {
+	            Vector3 worldPosition = this.UICamera.ScreenToWorldPoint(currentTouch.position);
 
-                    // TODO: Add pause button functionality
-                    if (!this.Joystick.IsStickActive())
-                    {
+	            // TODO: Add pause button functionality
+	            if (!this.Joystick.IsStickActive())
+	            {
 
-                    }
-                }
-            }
-        }
-    }
+	            }
+	        }
+	    }
+	}
 }
