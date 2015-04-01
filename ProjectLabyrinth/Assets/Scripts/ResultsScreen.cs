@@ -20,8 +20,10 @@ public class ResultsScreen : MonoBehaviour {
 	/// <summary>
 	/// TextUI elements displaying player statistics.
 	/// </summary>
-	public Text playerMaxHealth;
-	public Text playerDamage;
+	/// 
+	//public Text playerScore;
+
+	public Text playerWinLose;
 
 	void Start() {
 		// Format the time in seconds into an appropriate string
@@ -29,11 +31,13 @@ public class ResultsScreen : MonoBehaviour {
 		string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}",
 		                                timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
-		this.timeWasted.text = "Time wasted on this game: " + timeText;
+		this.timeWasted.text = "Time: " + timeText;
+		this.playerWinLose.text = "Thank you for playing our game!";
 
 		if (this.player) {
-			this.playerMaxHealth.text = "Your max health: " + this.player.maxHealth;
-			this.playerDamage.text = "Your damage: " + this.player.damage;
+			//this.playerScore.text = "Score: " + this.player.calculateScore();
+			//this.playerWinLose.text = (player.data.win) ? "Huzzah! You Hath Bested Fellow Squids!":
+			//											"Derp... You lost.";
 		}
 	}
 }

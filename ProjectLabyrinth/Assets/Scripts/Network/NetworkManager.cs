@@ -14,12 +14,15 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
     public GameObject spawnSquare;
 	public GameObject mazeGenerator;
+	public GameObject skPrefab;
 
 	private MazeGeneratorController mapCreator;
     private NetworkView nView;
+	private ScoreKeeper sk;
     
     void Start()
     {
+		sk = new ScoreKeeper ();
         /* Check if single or multiplayer */
         if(Network.isServer)
         {
@@ -65,7 +68,7 @@ public class NetworkManager : MonoBehaviour {
         else if(!isMultiplayer)
         {
             /*Spawn the player non-multiplayer*/
-            GameObject player = (GameObject) Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
+			GameObject player = (GameObject) Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
 
             player.GetComponentInChildren<PlayerCharacter>().setSpawn(spawnPoint);
         }
@@ -95,9 +98,9 @@ public class NetworkManager : MonoBehaviour {
         /* Assign the player's number to their name */
         player.name = player.name + " " + (playerNumber+1).ToString();
         
+		player.GetComponentInChildren<PlayerCharacter>().data.name = player.name; 
+
         /* Set the player's spawn location */
 		player.GetComponentInChildren<PlayerCharacter> ().setSpawn (spawnLocation);
 	}
-	
-	
 }

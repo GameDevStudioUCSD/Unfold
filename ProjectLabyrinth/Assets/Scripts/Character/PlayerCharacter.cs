@@ -3,12 +3,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class PlayerData
+{
+	public bool win;
+	public string name;
+}
+
 /**
  * PlayerCharacter class
  *
  * Represents player stats and things the player can do
  */
 public class PlayerCharacter : Character {
+
+	public PlayerData data;
+	
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
 
@@ -45,6 +54,9 @@ public class PlayerCharacter : Character {
 		this.bonusMaxHealth = 0;
 		this.bonusMoveSpeed = 0;
 		updateStats();
+		data  = new PlayerData();
+		data.win = false;
+		data.name = "Squiddie";
 	}
 
 	void FixedUpdate() {
@@ -158,7 +170,7 @@ public class PlayerCharacter : Character {
 
 	}
 
-	public override void TakeDamage(int enDamage, int enAttackType) {
+	public override bool TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
 			enDamage = enDamage * 2;
 		}
@@ -168,7 +180,9 @@ public class PlayerCharacter : Character {
 			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
 			this.Die();
+			return true;
 		}
+		return false;
 	}
 
 	public override void Die() {
@@ -294,6 +308,11 @@ public class PlayerCharacter : Character {
 				abilityLevel = 2;
 			}
 		}
+	}
+
+	public int calculateScore()
+	{
+		return kills * 1000 + bonusDamage * 100 + bonusMaxHealth * 50 + (int)bonusMoveSpeed * 25;
 	}
 }
 

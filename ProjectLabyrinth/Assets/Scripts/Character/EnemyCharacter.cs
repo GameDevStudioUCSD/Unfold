@@ -61,7 +61,7 @@ public class EnemyCharacter : Character {
 		this.attackCollider = null;
 	}
 	
-	public override void TakeDamage(int enDamage, int enAttackType) {
+	public override bool TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == this.weakness) {
 			enDamage = enDamage * 2;
 		}
@@ -69,11 +69,14 @@ public class EnemyCharacter : Character {
 		this.currentHealth = this.currentHealth - enDamage;
 		if (this.currentHealth <= 0) {
 			this.Die();
+			Debug.Log("Damage: " + enDamage);
+			return true;
 		}
 
 		MonsterMovement mov = (MonsterMovement)GetComponent<MonsterMovement> ();
 		mov.stun ();
 		Debug.Log("Damage: " + enDamage);
+		return false;
 	}
 	
 	public override void Die() {

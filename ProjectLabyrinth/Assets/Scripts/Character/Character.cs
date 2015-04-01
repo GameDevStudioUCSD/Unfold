@@ -11,7 +11,10 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour {
 
 	public bool debug_On = false;
-	
+
+	//Number of enemies killed. Used only for player but implemented here for access to Attack function
+	protected int kills;
+
 	// Cooldown time between attacks
 	public float attackDelay;
 	
@@ -40,6 +43,7 @@ public abstract class Character : MonoBehaviour {
 		this.damage = baseDamage;
 		maxHealth = baseMaxHealth;
 		this.moveSpeed = baseMoveSpeed;
+		this.kills = 0;
 	}
 	
 	/**
@@ -62,7 +66,8 @@ public abstract class Character : MonoBehaviour {
             }
 
 			if (target) {
-				target.TakeDamage(this.damage, this.attackType);
+				if (target.TakeDamage(this.damage, this.attackType))
+					kills++;
                 hasAttacked = true;
 			}
 			this.nextAttackTime = Time.time + attackDelay;
@@ -77,7 +82,7 @@ public abstract class Character : MonoBehaviour {
 	 * <param name="enDamage">Damage dealt by an enemy.</param>
 	 * <param name="enAttackType">Type of attack dealt by an enemy.</param>
 	 */
-	public abstract void TakeDamage(int enDamage, int enAttackType);
+	public abstract bool TakeDamage(int enDamage, int enAttackType);
 
 	/**
 	 * Controls character death behavior
