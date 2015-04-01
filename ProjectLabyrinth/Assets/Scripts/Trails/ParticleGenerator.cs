@@ -6,9 +6,6 @@ public class ParticleGenerator : MonoBehaviour {
 	public ParticleMovement trailObject = null;
 	private int count;
 
-	// Update is called once per frame
-	void Update () {}
-
 	public void handleInput(CustomJoystick joystick) {
 		if (Input.GetMouseButtonDown(0)) {
 
