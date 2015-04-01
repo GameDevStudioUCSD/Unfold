@@ -47,12 +47,12 @@ public class PlayerCharacter : Character {
 	void Start() {
 		this.animator.SetBool("Walking", false);
 		this.currentHealth = baseMaxHealth;
-		this.baseDamage = 10;
+		//this.baseDamage = 10;
 		this.attackDelay = 1;
-		this.baseMoveSpeed = 10;
-		this.bonusDamage = 0;
-		this.bonusMaxHealth = 0;
-		this.bonusMoveSpeed = 0;
+		//this.baseMoveSpeed;
+		//this.bonusDamage = 0;
+		//this.bonusMaxHealth = 0;
+		//this.bonusMoveSpeed = 0;
 		updateStats();
 		data  = new PlayerData();
 		data.win = false;
