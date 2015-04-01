@@ -42,6 +42,7 @@ public class PlayerCharacter : Character {
 	private int abilityType = 0;
 	/*0 for no ability, 1 for basic ability, 2 for adept ability*/
 	private int abilityLevel = 0;
+	private GameObject floor;
 
 	void Start() {
 		this.animator.SetBool("Walking", false);
