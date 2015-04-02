@@ -6,7 +6,7 @@ using System.Collections;
  */
 public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
-	public bool debug_On = false;
+	public bool debug_On = true;
 
     private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
@@ -133,7 +133,7 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 
     private void EnsureExitExists()
     {
-        int startQuadrant = Square.DetermineQuadrant(start, walls);
+        /**int startQuadrant = Square.DetermineQuadrant(start, walls);
         switch(startQuadrant)
         {
             case 1:
@@ -148,6 +148,25 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             case 4:
                 exit = walls[0, Cols - 1];
                 break;
+        }
+        exit.exit = true;**/
+        ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
+        float dist = 0;
+        float newDist = 1;
+        exit = start;
+        
+        foreach (Square s in corridors)
+        {
+            if(debug_On)
+            {
+                Debug.Log(Square.DistanceBetween(s, start));
+            }
+            newDist = Square.DistanceBetween(s, start);
+            if(  newDist > dist)
+            {
+                exit = s;
+                dist = newDist;
+            }
         }
         exit.exit = true;
     }
