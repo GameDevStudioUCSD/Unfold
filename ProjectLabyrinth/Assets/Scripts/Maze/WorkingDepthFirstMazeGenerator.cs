@@ -24,7 +24,7 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         this.walls = cells;
         createSquares(true);
         selectEntrance();
-        if (exit == start)
+        //if (exit == start)
             EnsureExitExists();
     }
 
@@ -101,14 +101,14 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             //Debug.Log("Depth: " + depth);
             float endDist = Square.DistanceBetween(start, curr);
             
-            if (hasFoundExit && endDist > .7f * (diagonalLength))
+            /**if (hasFoundExit && endDist > .7f * (diagonalLength))
             {
                 exit.exit = false;
                 if (debug_On)
                 	Debug.Log(exit == start);
                 curr.exit = true;
                 exit = curr;
-            }
+            }**/
             generateMaze(next.getRow(), next.getCol(), next.getWallToDestroy(), false);
             depth++;
             //Switch statement destroys the wall inside the current cell which
