@@ -33,6 +33,8 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
     {
         //Debug.Log("Trying to make entrance");
         int edge = randomEdge();
+        start = walls[Rows / 2, Cols / 2];
+        start.start = true;
         //Debug.Log("The random edge is: " + edge);
         switch (edge)
         {
@@ -62,12 +64,12 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         //Debug.Log("Generating Maze!\n Current cell is R: " + r + " C: " + c);
         Square curr = walls[r, c];
         curr.visited = true;
-        if (started)
+        /**if (started)
         {
             curr.start = started;
             exit = curr;
             start = curr;
-        }
+        }**/
         destroyWall(curr, wallToDestroy);
         //Debug.Log("Curr: Wall To Destroy: " + wallToDestroy)
         if (curr.start) //Base Case 
