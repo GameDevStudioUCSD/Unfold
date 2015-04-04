@@ -115,13 +115,17 @@ public class PlayerCharacter : Character {
 		}
 	}
 
+	/// <summary>
+	/// Actions that the player performs while in a state of idleness.
+	/// </summary>
+	/// <param name="joystick">Joystick controlling player movement.</param>
 	public void Idle(CNAbstractController joystick) {
 		this.animator.SetBool("Walking", false);
 		this.StopCoroutine("RotateCoroutine");
 	}
 
 	/// <summary>
-	/// Causes this player character to move.
+	/// Actions that the player performs while in a state of motion.
 	/// </summary>
 	/// <param name="input">Input movement vector.</param>
 	/// <param name="joystick">Joystick controlling player movement.</param>
@@ -137,6 +141,11 @@ public class PlayerCharacter : Character {
 		this.GetComponent<CharacterController>().Move(Time.deltaTime * moveSpeed * movement);
 	}
 
+	/// <summary>
+	/// Controls rotation of the player character based on an input vector.
+	/// </summary>
+	/// <returns>The coroutine.</returns>
+	/// <param name="direction">Input vector for direction of rotation.</param>
 	private IEnumerator RotateCoroutine(Vector3 direction) {
 		if (direction == Vector3.zero) {
 			yield break;
