@@ -7,6 +7,7 @@ public class ExitCollision : AbstractGUI {
     public GameObject loadResult;
     private bool hasReached;
 	private PlayerCharacter player;
+	public GameObject skPrefab;
 
     Rect win = new Rect(frameX + frameWidth/2, frameHeight / 2, 100, 100);
 
@@ -17,7 +18,7 @@ public class ExitCollision : AbstractGUI {
 		if (hitDetector) {
 			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
 			this.hasReached = true;
-			player.data.win = true;
+			skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
 		}
 	}
     void OnGUI()
