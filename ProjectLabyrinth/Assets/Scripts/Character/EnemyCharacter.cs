@@ -33,10 +33,6 @@ public class EnemyCharacter : Character {
             monsterTransform = GetComponent<Transform>();
             monsterTransform.parent = monsterRoot.GetComponent<Transform>();
         }
-		this.currentHealth = baseMaxHealth;
-		this.baseDamage = 5;
-		this.attackDelay = 2;
-		this.baseMoveSpeed = 8;
 	}
 	
 	void FixedUpdate() {

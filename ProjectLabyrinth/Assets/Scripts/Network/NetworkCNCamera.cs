@@ -1,22 +1,28 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
+
 /// <summary>
-/// 
 /// Used to prevent UI overlap during networked play.
-/// 
 /// </summary>
 public class NetworkCNCamera : MonoBehaviour {
 
-	void Start () {
-		if (!GetComponent<NetworkView>().isMine)
-		{
-            /* Get the transform of the parent object */
-            Transform parentObject = transform.parent;
+	/// <summary>
+	/// The camera for rendering elements of the user interface.
+	/// </summary>
+	public Camera UICamera;
 
-            /* Turn off the UI children in the player prefab if they are not yours */
-            parentObject.FindChild("UICanvas").gameObject.SetActive(false);
-            parentObject.FindChild("UICamera").gameObject.SetActive(false);
+	/// <summary>
+	/// The canvas for displaying elements of the user interface.
+	/// </summary>
+	public Canvas UICanvas;
+
+	/// <summary>
+	/// Object initialization method.
+	/// </summary>
+	void OnEnable() {
+		if (!this.GetComponent<NetworkView>().isMine) {
+			this.UICamera.gameObject.SetActive(false);
+			this.UICanvas.gameObject.SetActive(false);
 		}
 	}
-	
 }

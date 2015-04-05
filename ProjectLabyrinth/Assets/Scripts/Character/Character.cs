@@ -13,20 +13,14 @@ public abstract class Character : MonoBehaviour {
 	public bool debug_On = false;
 
 	//Number of enemies killed. Used only for player but implemented here for access to Attack function
-	protected int kills;
+	protected int kills = 0;
 
 	// Cooldown time between attacks
 	public float attackDelay;
-	
-	// base stats are remain with the character even after death
-	public int baseDamage;
-	public int baseMaxHealth;
-	protected int currentHealth;
-	public float baseMoveSpeed;
-	
-	/*total stats for character, initialized to base stats*/
+
+	// Statistics shared amongst all characters
 	public int damage;
-	public int maxHealth;
+	public int currentHealth;
 	public float moveSpeed;
 	
 	// Hitbox of the opposing target character
@@ -37,14 +31,6 @@ public abstract class Character : MonoBehaviour {
 
 	// When the next attack time is available after attackDelay seconds
 	protected float nextAttackTime = 0;
-
-	void Start()
-	{
-		this.damage = baseDamage;
-		maxHealth = baseMaxHealth;
-		this.moveSpeed = baseMoveSpeed;
-		this.kills = 0;
-	}
 	
 	/**
 	 * Controls character attack patterns
