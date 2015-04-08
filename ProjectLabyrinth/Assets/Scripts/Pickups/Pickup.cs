@@ -14,8 +14,14 @@ public class Pickup : MonoBehaviour {
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
+	float t = 0f;
+	float del = .005f;
+    
     void Update() {
     	transform.Rotate(Vector3.down * 100 * Time.deltaTime);
+		float change = del * Mathf.Sin (t);
+		transform.Translate(Vector3.up * change);
+		t += .03f;
     }
     
 	void OnTriggerEnter(Collider other) {
