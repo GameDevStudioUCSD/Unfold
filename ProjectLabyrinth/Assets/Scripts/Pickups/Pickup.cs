@@ -14,6 +14,10 @@ public class Pickup : MonoBehaviour {
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
+    void Update() {
+    	transform.Rotate(Vector3.down * 100 * Time.deltaTime);
+    }
+    
 	void OnTriggerEnter(Collider other) {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
