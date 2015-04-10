@@ -18,11 +18,9 @@ public class NetworkManager : MonoBehaviour {
 
 	private MazeGeneratorController mapCreator;
     private NetworkView nView;
-	private ScoreKeeper sk;
     
     void Start()
     {
-		sk = new ScoreKeeper ();
         /* Check if single or multiplayer */
         if(Network.isServer)
         {
@@ -31,7 +29,7 @@ public class NetworkManager : MonoBehaviour {
 
             BuildMaze(true);
         }
-
+		DontDestroyOnLoad(skPrefab);
     }
 	
 	
@@ -97,6 +95,8 @@ public class NetworkManager : MonoBehaviour {
 
         /* Assign the player's number to their name */
         player.name = player.name + " " + (playerNumber+1).ToString();
+
+		skPrefab.GetComponent<ScoreKeeper> ().addPlayer(player.name);
         
 		player.GetComponentInChildren<PlayerCharacter>().data.name = player.name; 
 

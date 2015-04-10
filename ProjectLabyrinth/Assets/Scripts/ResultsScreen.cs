@@ -15,7 +15,6 @@ public class ResultsScreen : MonoBehaviour {
 	/// <summary>
 	/// The player viewing this results screen.
 	/// </summary>
-	public PlayerCharacter player;
 
 	/// <summary>
 	/// TextUI elements displaying player statistics.
@@ -24,6 +23,7 @@ public class ResultsScreen : MonoBehaviour {
 	//public Text playerScore;
 
 	public Text playerWinLose;
+	public GameObject sk;
 
 	void Start() {
 		// Format the time in seconds into an appropriate string
@@ -34,10 +34,10 @@ public class ResultsScreen : MonoBehaviour {
 		this.timeWasted.text = "Time: " + timeText;
 		this.playerWinLose.text = "Thank you for playing our game!";
 
-		if (this.player) {
+		if (this.sk) {
 			//this.playerScore.text = "Score: " + this.player.calculateScore();
-			//this.playerWinLose.text = (player.data.win) ? "Huzzah! You Hath Bested Fellow Squids!":
-			//											"Derp... You lost.";
+			this.playerWinLose.text = (sk.GetComponent<ScoreKeeper>().stats[0].win)
+				? "Huzzah! You Hath Bested Fellow Squids!":"Derp... You lost.";
 		}
 	}
 }
