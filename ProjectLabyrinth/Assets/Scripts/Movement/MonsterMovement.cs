@@ -19,7 +19,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 		walls = mazeGen.getWalls ();
 		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);;
+		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
 
 		direction = 3;
 		detectionRange = 5;
@@ -79,10 +79,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 		} */
 
 		if (stunned == 0) {
-//			approachPlayer();
-//			if(!playerDetected) {
+			approachPlayer();
+			if(!playerDetected) {
 				AI ();
-//			}
+			}
 			maneuver ();
 		} else {
 			stunned -= 1;
@@ -131,6 +131,23 @@ abstract public class MonsterMovement : MonoBehaviour {
 			playerDetected = true;
 		} else {
 			detectionRange=5;
+			if(playerDetected) {
+				Square curr = getCurrSquare(transform.position.x, transform.position.z);
+				transform.position = new Vector3(curr.getRow() * mazeGen.wallSize, transform.position.y, curr.getCol() * mazeGen.wallSize);
+				transform.rotation = Quaternion.identity;
+
+				direction = 3;
+				bool[] sides = getSides (curr, transform.position.x, transform.position.z);
+				bool found = false;
+				while (!found) {
+					int side = Random.Range (0, 4); // Anhquan thinks this is gonna be a problem, if he's right then he wins
+					found = !sides [side];
+					
+					if (found) {
+						turn (side);
+					}
+				}
+			}
 			playerDetected=false;
 		}
 		//transform.position =  Vector3.MoveTowards(transform.position, playerTransform.position, step);
