@@ -16,22 +16,13 @@ public class ExitCollision : AbstractGUI {
 	{
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
+            Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
 			this.hasReached = true;
 			skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
-            Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 			player.data.win = true;
 		}
 	}
-    void OnGUI()
-    {
-        if (hasReached)
-        {
-            if (GUI.Button(win, "Victory!"))
-            {
-                
-            }
-        }
-    }
+    
 
 }
