@@ -22,6 +22,7 @@ public class EnemyCharacter : Character {
 
 	// The particular item this enemy drops when killed
 	public GameObject dropper;
+	public GameObject arrow;
 	
 	void Start() {
         // This places the monsters underneath a parent object labeled 
@@ -33,6 +34,7 @@ public class EnemyCharacter : Character {
             monsterTransform = GetComponent<Transform>();
             monsterTransform.parent = monsterRoot.GetComponent<Transform>();
         }
+        arrow.SetActive(false);
 	}
 	
 	void FixedUpdate() {
