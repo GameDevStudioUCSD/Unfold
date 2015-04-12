@@ -42,10 +42,10 @@ public class MasterServerManager : MonoBehaviour {
         }
     }
 
-    void MasterServer.OnFailedToConnectToMasterServer(NetworkConnectionError err)
+    /**void MasterServer.OnFailedToConnectToMasterServer(NetworkConnectionError err)
     {
         Debug.Log("Error connecting to Unity Master Server: " + err);
-    }
+    }**/
     public TextureController.TextureChoice DetermineGameType(int hostIndex)
     {
         TextureController.TextureChoice retVal;
