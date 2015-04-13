@@ -21,6 +21,7 @@ public class ExitCollision : AbstractGUI {
 			this.hasReached = true;
 			skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
             Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
+
 			player.data.win = true;
 		}
 	}
