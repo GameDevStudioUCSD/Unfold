@@ -17,13 +17,10 @@ public class ExitCollision : AbstractGUI {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
 			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
-<<<<<<< HEAD:ProjectLabyrinth/Assets/Scripts/Combat/ExitCollision.cs
 			this.hasReached = true;
 			skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
-=======
             Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 			player.data.win = true;
->>>>>>> f22564604e3b67fdb3e732919359f0e01524f4ac:ProjectLabyrinth/Assets/Scripts/Maze/ExitCollision.cs
 		}
 	}
     void OnGUI()
