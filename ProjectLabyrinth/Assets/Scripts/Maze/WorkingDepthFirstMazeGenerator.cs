@@ -6,7 +6,7 @@ using System.Collections;
  */
 public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
-	public bool debug_On = true;
+	public bool debug_On = false;
 
     private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
