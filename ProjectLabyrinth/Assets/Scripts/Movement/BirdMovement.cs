@@ -7,7 +7,7 @@ public class BirdMovement : MonsterMovement {
 	float del = .07f;
 
 	bool forward = true;
-	float counter = 0f;
+	int counter = 0;
 
 	public override void maneuver()
 	{
@@ -70,19 +70,19 @@ public class BirdMovement : MonsterMovement {
 	public override void doAttack() {
 		if(this.forward) {
 			this.transform.Translate (Vector3.forward * .2f);
-			this.counter += .2f;
+			this.counter += 2;
 		}
 		
-		if(this.counter == 1f) {
+		if(this.counter == 10) {
 			this.forward = false;
 		}
 		
 		if(!this.forward) {
 			this.transform.Translate (Vector3.back * .1f);
-			this.counter -= .1f;
+			this.counter -= 1;
 		}
 		
-		if(!this.forward && counter == 0f) {
+		if(!this.forward && counter == 0) {
 			this.attacking = false;
 			this.forward = true;
 		}

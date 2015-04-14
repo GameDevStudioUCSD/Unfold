@@ -143,12 +143,12 @@ abstract public class MonsterMovement : MonoBehaviour {
 		Transform playerTransform = player.transform;
 		float distance = Vector3.Distance (new Vector3(playerTransform.position.x, 0, playerTransform.position.z), 
 		                                   new Vector3(transform.position.x, 0, transform.position.z));
-		if (distance >= 1 && distance <= detectionRange) {
+		if (distance >= 1.5 && distance <= detectionRange) {
 			isClose = false;
 			detectionRange = 10;
 			transform.LookAt (new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 			playerDetected = true;
-		} else if(distance < 1) {
+		} else if(distance < 1.5) {
 			isClose = true;
 			doClose (playerTransform);
 		} else {
@@ -181,7 +181,9 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	public void setAttacking(bool state) {
-		attacking = state;
+		if(this.isClose) {
+			attacking = state;
+		}
 	}
 
 	// Sees if a monster is approximately in the center of a square (for turning purposes)
