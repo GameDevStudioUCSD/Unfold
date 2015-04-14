@@ -45,6 +45,7 @@ public class EnemyCharacter : Character {
 				this.attackType = 15;
 			}
 			this.Attack();
+			this.GetComponent<MonsterMovement>().setAttacking (true);
 		}
 	}
 	

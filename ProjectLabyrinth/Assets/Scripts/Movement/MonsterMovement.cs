@@ -13,6 +13,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 	public int stunTime;
 	private int stunned = 0;
 	private bool playerDetected;
+	private bool isClose;
+	protected bool attacking;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 		direction = 3; // Quaternion.identity
 		detectionRange = 5;
 		playerDetected = false;
+		isClose = false;
+		attacking = false;
 
 		bool found = false;
 		while (!found) {
@@ -80,11 +84,21 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 		// Stunned is a countdown - once the countdown is up, continue moving towards the player
 		if (stunned == 0) {
-			approachPlayer();
-			if(!playerDetected) {
-				AI ();
+			if(!attacking) {
+				approachPlayer();
+				if(!playerDetected) {
+					AI ();
+				}
+
+				if(!isClose) {
+					maneuver ();
+				}
 			}
-			maneuver ();
+
+			else {
+				doAttack();
+			}
+
 		} else {
 			stunned -= 1;
 		}
@@ -92,6 +106,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	abstract public void maneuver ();
 	abstract public void AI ();
+	abstract public void doClose (Transform player);
+	abstract public void doAttack();
 
 	/*protected void detectPlayer() {
 		int checkingDir = direction;
@@ -125,11 +141,16 @@ abstract public class MonsterMovement : MonoBehaviour {
 	protected void approachPlayer() {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		Transform playerTransform = player.transform;
-		float distance = Vector3.Distance (playerTransform.position, transform.position);
+		float distance = Vector3.Distance (new Vector3(playerTransform.position.x, 0, playerTransform.position.z), 
+		                                   new Vector3(transform.position.x, 0, transform.position.z));
 		if (distance >= 1 && distance <= detectionRange) {
+			isClose = false;
 			detectionRange = 10;
-			transform.LookAt (playerTransform);
+			transform.LookAt (new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 			playerDetected = true;
+		} else if(distance < 1) {
+			isClose = true;
+			doClose (playerTransform);
 		} else {
 			detectionRange=5;
 
@@ -157,6 +178,10 @@ abstract public class MonsterMovement : MonoBehaviour {
 		}
 		//transform.position =  Vector3.MoveTowards(transform.position, playerTransform.position, step);
 
+	}
+
+	public void setAttacking(bool state) {
+		attacking = state;
 	}
 
 	// Sees if a monster is approximately in the center of a square (for turning purposes)

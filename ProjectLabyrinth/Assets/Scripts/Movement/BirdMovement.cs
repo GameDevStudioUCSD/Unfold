@@ -6,6 +6,9 @@ public class BirdMovement : MonsterMovement {
 	float t = 0f;
 	float del = .07f;
 
+	bool forward = true;
+	float counter = 0f;
+
 	public override void maneuver()
 	{
 		/*if (transform.position.y < 4.0f)
@@ -16,11 +19,11 @@ public class BirdMovement : MonsterMovement {
 		float change = del * Mathf.Cos (t);
 		transform.Translate(Vector3.up * change);
 		t += .03f;
+		transform.Translate (Vector3.forward * SPEED);
 	}
 
 	public override void AI()
 	{
-		transform.Translate (Vector3.forward * SPEED);
 		
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
@@ -59,4 +62,30 @@ public class BirdMovement : MonsterMovement {
 			canTurn = true;
 		}
 	}
+
+	public override void doClose(Transform player) {
+		transform.LookAt (player.position);
+	}
+
+	public override void doAttack() {
+		if(this.forward) {
+			this.transform.Translate (Vector3.forward * .2f);
+			this.counter += .2f;
+		}
+		
+		if(this.counter == 1f) {
+			this.forward = false;
+		}
+		
+		if(!this.forward) {
+			this.transform.Translate (Vector3.back * .1f);
+			this.counter -= .1f;
+		}
+		
+		if(!this.forward && counter == 0f) {
+			this.attacking = false;
+			this.forward = true;
+		}
+	}
+
 }
