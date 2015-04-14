@@ -42,16 +42,20 @@ public abstract class Character : MonoBehaviour {
 	 */
 	public virtual bool Attack() {
         bool hasAttacked = false;
-		foreach (Collider ac in this.attackCollider) {
+
+		// long name is long
+		ArrayList ac = this.attackCollider;
+
+		for(int i = ac.Count - 1; i >= 0; i--) {
 			/*
 			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
 			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			*/
             
-			Character target = (Character)ac.gameObject.GetComponent("Character");
+			Character target = (Character)((Collider) ac[i]).gameObject.GetComponent("Character");
             if (!target)
             {
-                target = (Character)ac.GetComponentInParent<Character>(); 
+                target = (Character) ((Collider) ac[i]).GetComponentInParent<Character>(); 
             }
 
 			if (target) {
