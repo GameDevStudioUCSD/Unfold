@@ -14,14 +14,23 @@ public class AttackDetector : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.GetComponent<MonsterMovement> () != null) {
+		if (other.GetComponent<EnemyCharacter> () != null) {
+			EnemyCharacter enemy = (EnemyCharacter) other.GetComponent<EnemyCharacter>();
 			PlayerCharacter chr = GetComponentInParent<PlayerCharacter> ();
 			chr.setAttackCollider (other);
+			enemy.setAttacker (chr);
+			enemy.setActive (true);
+
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
-		PlayerCharacter chr = GetComponentInParent<PlayerCharacter>();
-		chr.setAttackCollider(null);
+		if(other.GetComponent<EnemyCharacter>() != null) {
+			EnemyCharacter enemy = (EnemyCharacter) other.GetComponent<EnemyCharacter>();
+			PlayerCharacter chr = GetComponentInParent<PlayerCharacter>();
+			chr.removeAttackCollider(other);
+			enemy.removeAttacker (chr);
+			enemy.setActive (false);
+		}
 	}
 }

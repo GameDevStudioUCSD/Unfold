@@ -51,12 +51,17 @@ public class EnemyCharacter : Character {
 	void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<HitDetector> () != null) {
 			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
-			this.attackCollider = other;
+			this.attackCollider.Add (other);
+			chr.setAttacker (this);
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-		this.attackCollider = null;
+		if (other.GetComponent<HitDetector> () != null) {
+			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
+			this.attackCollider.Remove (other);
+			chr.removeAttacker (this);
+		}
 	}
 	
 	public override bool TakeDamage(int enDamage, int enAttackType) {
@@ -78,8 +83,16 @@ public class EnemyCharacter : Character {
 	}
 	
 	public override void Die() {
+		foreach(Character chr in attackers) {
+			chr.removeAttackCollider (this.GetComponent<Collider>());
+		}
 		Destroy(this.gameObject);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
 		dropperScript.dropItem(transform.position.x, transform.position.z);
+	}
+
+	// Turns the arrow on/off
+	public void setActive(bool state) {
+		this.arrow.SetActive (state);
 	}
 }

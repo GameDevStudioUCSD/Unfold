@@ -61,7 +61,7 @@ public class Pickup : MonoBehaviour {
 			case 1:
 				if (debug_On)
 					Debug.Log("Adding speed");
-				player.addSpeed(5);
+				player.addSpeed(2);
 				break;
 			/*max health upgrade*/
 			case 2:
