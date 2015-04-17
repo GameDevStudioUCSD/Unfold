@@ -281,7 +281,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	// Gets the current square.
-	public static Square getCurrSquare(float x, float z) {
+	protected Square getCurrSquare(float x, float z) {
 		int initRow = (int) Mathf.Round (x / mazeGen.wallSize);
 		int initCol = (int) Mathf.Round (z / mazeGen.wallSize);
 		return walls [initRow, initCol];
