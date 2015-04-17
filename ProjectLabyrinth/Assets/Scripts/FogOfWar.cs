@@ -7,7 +7,16 @@ public class FogOfWar : MonoBehaviour {
 
 	public PlayerCharacter player;
 
+	public MazeInfo mi;
+
+
 	void Update() {
-		Light.Instantiate(this.playerHasSeen, player.transform.position, Quaternion.identity);
+		int initRow = (int) Mathf.Round (player.transform.position.x / mi.getWallSize());
+		int initCol = (int) Mathf.Round (player.transform.position.z / mi.getWallSize());
+		Square currWalls = mi.getWalls()[initRow,initCol];
+		if (!currWalls.playerVisited) {
+			Light.Instantiate (this.playerHasSeen, new Vector3 (initRow, 5, initCol), Quaternion.identity);
+			currWalls.playerVisited = true;
+		}
 	}
 }
