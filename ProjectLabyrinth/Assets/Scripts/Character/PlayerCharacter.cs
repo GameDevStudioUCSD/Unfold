@@ -21,7 +21,7 @@ public class PlayerCharacter : Character {
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
 
-	private const float ROTATE_SPEED = 2.5f;
+	public float rotateSpeed;
 	public Animator animator;
 
 	public ParticleMovement trail;
@@ -155,7 +155,7 @@ public class PlayerCharacter : Character {
 			this.transform.rotation = Quaternion.Lerp(
 				this.transform.rotation,
 				Quaternion.LookRotation(direction),
-				Time.deltaTime * PlayerCharacter.ROTATE_SPEED
+				Time.deltaTime * this.rotateSpeed
 			);
 			yield return null;
 		} while ((direction - this.transform.forward).sqrMagnitude > 0.2f);

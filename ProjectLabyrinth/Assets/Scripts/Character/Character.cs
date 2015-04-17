@@ -23,8 +23,11 @@ public abstract class Character : MonoBehaviour {
 	public int currentHealth;
 	public float moveSpeed;
 	
-	// Hitbox of the opposing target character
-	protected Collider attackCollider;
+	// Hitboxes of the opposing target characters
+	protected ArrayList attackCollider = new ArrayList();
+
+	// Those who are currently attacking this character
+	protected ArrayList attackers = new ArrayList();
 
 	// Type of attack performed by this character
 	protected int attackType;
@@ -39,16 +42,20 @@ public abstract class Character : MonoBehaviour {
 	 */
 	public virtual bool Attack() {
         bool hasAttacked = false;
-		if (this.attackCollider) {
+
+		// long name is long
+		ArrayList ac = this.attackCollider;
+
+		for(int i = ac.Count - 1; i >= 0; i--) {
 			/*
 			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
 			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			*/
             
-			Character target = (Character)this.attackCollider.gameObject.GetComponent("Character");
+			Character target = (Character)((Collider) ac[i]).gameObject.GetComponent("Character");
             if (!target)
             {
-                target = (Character)this.attackCollider.GetComponentInParent<Character>(); 
+                target = (Character) ((Collider) ac[i]).GetComponentInParent<Character>(); 
             }
 
 			if (target) {
@@ -76,7 +83,19 @@ public abstract class Character : MonoBehaviour {
 	public abstract void Die();
 
 	public void setAttackCollider(Collider col) {
-		this.attackCollider = col;
+		this.attackCollider.Add (col);
+	}
+
+	public void removeAttackCollider(Collider col) {
+		this.attackCollider.Remove (col);
+	}
+
+	public void setAttacker(Character chr) {
+		this.attackers.Add (chr);
+	}
+
+	public void removeAttacker(Character chr) {
+		this.attackers.Remove (chr);
 	}
 
 	public int getCurrentHealth() {

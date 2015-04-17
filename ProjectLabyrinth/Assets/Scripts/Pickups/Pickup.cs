@@ -14,6 +14,16 @@ public class Pickup : MonoBehaviour {
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
+	float t = 0f;
+	float del = .005f;
+    
+    void Update() {
+    	transform.Rotate(Vector3.down * 100 * Time.deltaTime);
+		float change = del * Mathf.Sin (t);
+		transform.Translate(Vector3.up * change);
+		t += .03f;
+    }
+    
 	void OnTriggerEnter(Collider other) {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
@@ -51,7 +61,7 @@ public class Pickup : MonoBehaviour {
 			case 1:
 				if (debug_On)
 					Debug.Log("Adding speed");
-				player.addSpeed(5);
+				player.addSpeed(2);
 				break;
 			/*max health upgrade*/
 			case 2:

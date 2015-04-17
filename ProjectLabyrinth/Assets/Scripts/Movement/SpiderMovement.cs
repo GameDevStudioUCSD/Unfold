@@ -3,14 +3,17 @@ using System.Collections;
 
 public class SpiderMovement : MonsterMovement {
 
+	bool forward = true;
+	int counter = 0;
+
 	public override void maneuver()
 	{
-		//Think of something creative
+		transform.Translate (Vector3.forward * SPEED);
 	}
 
 	public override void AI()
 	{
-		transform.Translate (Vector3.forward * SPEED);
+
 		
 		if (canTurn && isInCenter ()) {
 			Square curr = getCurrSquare(transform.position.x, transform.position.z);
@@ -48,4 +51,32 @@ public class SpiderMovement : MonsterMovement {
 			canTurn = true;
 		}
 	}
+
+	// For when the monster is really close
+	public override void doClose(Transform player) {
+		transform.LookAt (player.position);
+	}
+
+	public override void doAttack() {
+		if(this.forward) {
+			this.transform.Translate (Vector3.forward * .2f);
+			this.counter += 2;
+		}
+
+		if(this.counter == 10) {
+			this.forward = false;
+		}
+
+		if(!this.forward) {
+			this.transform.Translate (Vector3.back * .1f);
+			this.counter -= 1;
+		}
+
+		if(!this.forward && counter == 0) {
+			this.attacking = false;
+			this.forward = true;
+		}
+
+	}
+
 }

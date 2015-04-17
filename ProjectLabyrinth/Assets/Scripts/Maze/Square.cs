@@ -22,6 +22,8 @@ public class Square
     public float weight; // Value to help determine type and chance within the
                           // spawning methods
 
+	public float light;
+
     // You can be creative with this one. It ensures both adjacent walls are
     // destroyed in the DepthFirst algorithm. For example, say the next wall to 
     // destroy is to the North of the current square. In this algorithm, this 
