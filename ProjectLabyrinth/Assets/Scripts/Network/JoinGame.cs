@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class JoinGame : MonoBehaviour {
 
-	// Use this for initialization
     private HostData[] gameList;
     private MasterServerManager masterServer;
     private Transform buttonParent;
@@ -20,14 +19,12 @@ public class JoinGame : MonoBehaviour {
         {
             return;
         }
-        for (int i = 0; i < gameList.Length; i++ )
+        for ( int i = 0; i < gameList.Length; i++ )
         {
             currentButtonObj = (GameObject)Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity);
             currentButtonObj.transform.SetParent(buttonParent);
             currentButton = currentButtonObj.GetComponent<Button>();
-            //currentButton.onClick.AddListener().onClick.AddListener()
-            
-            //currentButton.
+            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i));
         }
 	}
 	
