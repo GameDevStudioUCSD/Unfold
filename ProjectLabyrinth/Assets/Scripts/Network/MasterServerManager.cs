@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MasterServerManager : MonoBehaviour {
+public class MasterServerManager {
     /// <summary>
     /// @author: Michael Gonzalez
     /// This class implements the Unity Master Server to allow users to easily
     /// connect to one another. It provides the framework for both hosts and 
     /// clients.
     /// </summary>
-    private const string gameTitle = "Unfold";
+    private const string gameTitle = "UnfoldX";
     private HostData[] gameList;
     private string clientConnectErr = "Error while connecting to host: ";
     private int portNumber = 26500;
+    private string[] lastConnectionAttempt;
 
     public bool debugOn = true;
     public HostData[] GetHostData()
     {
+        if (debugOn)
+        {
+            Debug.Log("Entering GetHostData()");
+        }
         if( gameList == null )
         {
             MasterServer.ClearHostList();
@@ -26,8 +31,16 @@ public class MasterServerManager : MonoBehaviour {
     }
     public void RegisterServer(string gameName, TextureController.TextureChoice gameType)
     {
+        if (debugOn)
+        {
+            Debug.Log("Entering RegisterServer()");
+        }
         string levelType = gameType.ToString();
         MasterServer.RegisterHost(gameTitle, gameName, levelType);
+        if (debugOn)
+        {
+            Debug.Log("Trying to register game as type (" + gameTitle + ") under name (" + gameType + ")");
+        }
     }
     public void ConnectToGame(int hostIndex)
     {
@@ -35,11 +48,16 @@ public class MasterServerManager : MonoBehaviour {
         {
             return;
         }
-        Network.Connect(gameList[hostIndex].ip, portNumber);
+        lastConnectionAttempt = gameList[hostIndex].ip;
+        Network.Connect(lastConnectionAttempt, portNumber);
         if(debugOn)
         {
             Debug.Log("Host IP: " + gameList[hostIndex].ip);
         }
+    }
+    public void RetryConnection()
+    {
+        Network.Connect(lastConnectionAttempt, portNumber);
     }
 
     /**void MasterServer.OnFailedToConnectToMasterServer(NetworkConnectionError err)
