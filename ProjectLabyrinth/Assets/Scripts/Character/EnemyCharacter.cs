@@ -38,7 +38,6 @@ public class EnemyCharacter : Character {
 	}
 	
 	void FixedUpdate() {
-		
 		if (Time.time > nextAttackTime && attackCollider != null) {
 			// 10% chance for critical strikes
 			if (UnityEngine.Random.Range(0, 100) < 10) {
@@ -73,13 +72,15 @@ public class EnemyCharacter : Character {
 		this.currentHealth = this.currentHealth - enDamage;
 		if (this.currentHealth <= 0) {
 			this.Die();
-			Debug.Log("Damage: " + enDamage);
+			if (debug_On)
+				Debug.Log("Damage: " + enDamage);
 			return true;
 		}
 
 		MonsterMovement mov = (MonsterMovement)GetComponent<MonsterMovement> ();
 		mov.stun ();
-		Debug.Log("Damage: " + enDamage);
+		if (debug_On)
+			Debug.Log("Damage: " + enDamage);
 		return false;
 	}
 	
@@ -87,6 +88,7 @@ public class EnemyCharacter : Character {
 		foreach(Character chr in attackers) {
 			chr.removeAttackCollider (this.GetComponent<Collider>());
 		}
+		
 		Destroy(this.gameObject);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
 		dropperScript.dropItem(transform.position.x, transform.position.z);
