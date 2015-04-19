@@ -14,6 +14,8 @@ public class Square
     public bool hasWest { get; set; } // Is there a wall to the West?
     public bool hasEast { get; set; } // Is there a wall to the East?
 
+	public bool playerVisited;
+
     //(Can only be accessed through getters)
     private int row; // R index in walls matrix 
     private int col; // C index in walls matrix
@@ -45,6 +47,7 @@ public class Square
         hasWest = wallsUp;
         hasEast = wallsUp;
         weight = 1;
+		playerVisited = false;
 
     }
     public static float DistanceBetween( Square A, Square B)
