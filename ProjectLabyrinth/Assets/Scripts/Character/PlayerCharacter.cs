@@ -183,7 +183,7 @@ public class PlayerCharacter : Character {
 
 	public override bool TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
-			enDamage = enDamage * 2;
+			enDamage = enDamage;
 		}
 
 		this.currentHealth = this.currentHealth - enDamage;

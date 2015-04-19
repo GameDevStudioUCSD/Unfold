@@ -7,6 +7,7 @@ using System.Collections;
  */
 public class GameSelectionGUI : AbstractGUI {
 
+    public bool debug_On = false;
     public GameObject loadRecMaze;
     public GameObject loadDepthFirstMaze;
     public GameObject loadMainMenu;
@@ -20,7 +21,9 @@ public class GameSelectionGUI : AbstractGUI {
 	// Use this for initialization
     void OnGUI()
     {
-        Debug.Log("Height " + hRatio + " Width " + wRatio);
+        if (debug_On)
+        	Debug.Log("Height " + hRatio + " Width " + wRatio);
+        	
         GUI.Box(gameFrame, "Mode Selection");
 
         //Results screen buttons
