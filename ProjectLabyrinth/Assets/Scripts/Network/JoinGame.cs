@@ -59,9 +59,18 @@ public class JoinGame : MonoBehaviour {
         MasterServer.UnregisterHost();
     }
 
-    // Custom methods
-    private void BuildButtons()
+    void OnFailedToConnectToMasterServer(NetworkConnectionError info)
     {
+        Debug.Log("Could not connect to master server: " + info);
+    }
+
+    // Custom methods
+    public void BuildButtons()
+    {
+        if(buttonParent == null)
+        {
+            return;
+        }
         if (debugOn)
         {
             Debug.Log("Entering BuildButtons()");
@@ -85,6 +94,10 @@ public class JoinGame : MonoBehaviour {
         }
         for (int i = 0; i < gameList.Length; i++)
         {
+            if(debugOn)
+            {
+                Debug.Log("Creating button " + i);
+            }
             CreateNewButton(gameList[i].gameName);
             currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i));
         }
@@ -107,16 +120,19 @@ public class JoinGame : MonoBehaviour {
         {
             Debug.Log("Entering ClearButtons()");
         }
-        foreach (Transform child in buttonParent)
+        if (buttonParent != null)
         {
-            GameObject.Destroy(child.gameObject);
+            foreach (Transform child in buttonParent)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
     }
 
     private void SpoofServer()
     {
         Network.InitializeServer(1, 26500, !Network.HavePublicAddress());
-        masterServer.RegisterServer("Spoof Server3!", TextureController.TextureChoice.Corn);
+        masterServer.RegisterServer("Spoof dsdfasdfsdfsdfsdhjServer3!", TextureController.TextureChoice.Corn);
     }
 
 }
