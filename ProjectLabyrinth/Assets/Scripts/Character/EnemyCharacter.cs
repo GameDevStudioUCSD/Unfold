@@ -23,6 +23,7 @@ public class EnemyCharacter : Character {
 	// The particular item this enemy drops when killed
 	public GameObject dropper;
 	public GameObject arrow;
+	public GameObject particles;
 	
 	void Start() {
         // This places the monsters underneath a parent object labeled 
@@ -89,8 +90,20 @@ public class EnemyCharacter : Character {
 			chr.removeAttackCollider (this.GetComponent<Collider>());
 		}
 		
+		if(particles != null)
+		{
+			//Color objColor = GetComponent<Renderer>().material.color;
+			GameObject particleObj = (GameObject)Network.Instantiate(particles, new Vector3(0, 0, 0), Quaternion.identity, 0);
+			particleObj.GetComponent<Transform>().parent = this.GetComponent<Transform>();
+			if (debug_On)
+				Debug.Log(particleObj.transform.position);
+			//particleObj.GetComponent<ParticleSystem>().startColor = objColor;
+		}
+		
 		Destroy(this.gameObject);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
+        if (debug_On)
+        	Debug.Log(transform.position);
 		dropperScript.dropItem(transform.position.x, transform.position.z);
 	}
 

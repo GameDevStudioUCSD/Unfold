@@ -19,7 +19,7 @@ public class Item : MonoBehaviour {
 	public int bonusMaxHealth;
 	public float bonusMoveSpeed;
 
-	public bool debug_On;
+	public bool debug_On = false;
 	protected bool hasPickedUp = false;
 	protected PlayerCharacter player;
 	

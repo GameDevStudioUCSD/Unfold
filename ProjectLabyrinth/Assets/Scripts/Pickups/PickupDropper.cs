@@ -36,7 +36,7 @@ public class PickupDropper : MonoBehaviour {
                 if (debug_On)
                     Debug.Log("Dropped an Item of type: " + itemToSpawn);
                 if (itemToSpawn != null)
-                    Instantiate(itemToSpawn, new Vector3(x, 1, z), Quaternion.identity);
+                    Network.Instantiate(itemToSpawn, new Vector3(x, 1, z), Quaternion.identity, 0);
             }
         }
 		
