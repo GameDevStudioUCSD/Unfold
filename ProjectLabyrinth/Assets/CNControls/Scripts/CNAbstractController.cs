@@ -459,8 +459,7 @@ public abstract class CNAbstractController : MonoBehaviour
 		// It's rarely an issue though
 		Gizmos.color = color;
 	}
-#endif
-	
+
 	/// <summary>
 	/// Utility method. It gets current MouseInput (left mouse button) 
 	/// and constructs a Touch with it
@@ -494,4 +493,5 @@ public abstract class CNAbstractController : MonoBehaviour
 		
 		return (Touch)mouseAsTouch;
 	}
+#endif
 }
