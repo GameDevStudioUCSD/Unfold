@@ -18,7 +18,7 @@ public class CustomJoystick : CNAbstractController {
 	/// The farthest away from the base one can move the stick.
 	/// </summary>
 	private const float DRAG_RADIUS = 1.5f;
-	
+
 	// Runtime used fields
 	/// <summary>
 	/// Transform component of a stick
@@ -32,16 +32,16 @@ public class CustomJoystick : CNAbstractController {
 	/// <summary>
 	/// Neat initialization method
 	/// </summary>
-	public override void OnEnable() {		
+	public override void OnEnable() {
 		// Getting needed components
 		// Hardcoded names. We have no need of renaming these objects anyway
 		this.stickTransform = this.transform.FindChild("Stick").GetComponent<Transform>();
 		this.baseTransform = this.transform.FindChild("Base").GetComponent<Transform>();
-		
+
 		this.stickTransform.gameObject.gameObject.SetActive(true);
 		this.baseTransform.gameObject.gameObject.SetActive(true);
 	}
-	
+
 	/// <summary>
 	/// In this method we also need to set the stick and base local transforms back to zero
 	/// </summary>
@@ -50,7 +50,7 @@ public class CustomJoystick : CNAbstractController {
 		// Setting the stick and base local positions back to local zero
 		this.stickTransform.localPosition = Vector3.zero;
 	}
-	
+
 	/// <summary>
 	/// Handles user input for the joystick.
 	/// </summary>
@@ -72,7 +72,7 @@ public class CustomJoystick : CNAbstractController {
 		Touch currentTouch;
 		this.IsTouchCaptured(out currentTouch);
 	}
-	
+
 	/// <summary>
 	/// Function for joystick tweaking (moving with the finger)
 	/// The values of the Axis are also calculated here
@@ -82,16 +82,16 @@ public class CustomJoystick : CNAbstractController {
 	protected override void TweakControl(Vector2 touchPosition) {
 		// First, let's find our current touch position in world space
 		Vector3 worldTouchPosition = ParentCamera.ScreenToWorldPoint(touchPosition);
-		
+
 		// Now we need to find a directional vector from the center of the joystick
 		// to the touch position
 		Vector3 differenceVector = (worldTouchPosition - this.baseTransform.position);
-		
+
 		// If we're out of the drag range
 		if (differenceVector.sqrMagnitude > Mathf.Pow(CustomJoystick.DRAG_RADIUS, 2) ) {
 			// Normalize this directional vector
 			differenceVector.Normalize();
-			
+
 			//  And place the stick to it's extremum position
 			this.stickTransform.position = this.baseTransform.position +
 				differenceVector * CustomJoystick.DRAG_RADIUS;
@@ -99,10 +99,10 @@ public class CustomJoystick : CNAbstractController {
 			// If we're inside the drag range, just place it under the finger
 			this.stickTransform.position = worldTouchPosition;
 		}
-		
+
 		// Store calculated axis values to our private variable
 		CurrentAxisValues = differenceVector;
-		
+
 		// We also fire our event if there are subscribers
 		OnControllerMoved(differenceVector);
 	}
@@ -119,7 +119,7 @@ public class CustomJoystick : CNAbstractController {
 #if UNITY_EDITOR
 	/// <summary>
 	/// Your old DrawGizmosSelected method
-	/// It allows you to change properties of the control in the inspector 
+	/// It allows you to change properties of the control in the inspector
 	/// - it will recalculate all needed properties
 	/// </summary>
 	protected override void OnDrawGizmosSelected(){}

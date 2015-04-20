@@ -24,9 +24,9 @@ public class GameHUD : MonoBehaviour {
 	public PlayerCharacter player;
 
 	/// <summary>
-	/// The health system for the player.
+	/// System to control heads-up display of player statistics.
 	/// </summary>
-	public HealthSystem healthSystem;
+	public PlayerStatsHUD playerStats;
 
 	/// <summary>
     /// The joystick used for determining user input.
@@ -51,8 +51,8 @@ public class GameHUD : MonoBehaviour {
 
     // Update is called once per frame
 	void Update() {
-		if (this.healthSystem != null) {
-			this.healthSystem.display(this.player);
+		if (this.playerStats != null) {
+			this.playerStats.display(this.player);
 		}
 		if (this.Joystick != null) {
 			this.Joystick.handleInput(this.UICamera);

@@ -1,9 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Wrapper for Application.LoadLevel() to load the next scene
+/// Class to hold miscellanous functions and wrappers that do not
+/// belong to any particular prefab or object.
 /// </summary>
-public class LoadScene : MonoBehaviour {
+public class MiscFunctions : MonoBehaviour {
 
 	/// <summary>
 	/// Load the scene specified by sceneName.
