@@ -92,11 +92,17 @@ public class EnemyCharacter : Character {
 		
 		if(particles != null)
 		{
+            Transform monsterTransform;
+            monsterTransform = GetComponent<Transform>();
 			//Color objColor = GetComponent<Renderer>().material.color;
-			GameObject particleObj = (GameObject)Network.Instantiate(particles, new Vector3(0, 0, 0), Quaternion.identity, 0);
-			particleObj.GetComponent<Transform>().parent = this.GetComponent<Transform>();
+            GameObject particleObj = (GameObject)Network.Instantiate(particles, monsterTransform.position + Vector3.up, Quaternion.identity, 0);
+			//particleObj.GetComponent<Transform>().parent = this.GetComponent<Transform>();
 			if (debug_On)
-				Debug.Log(particleObj.transform.position);
+            {
+                Debug.Log(transform.position);
+                Debug.Log(particleObj.transform.position);
+            }
+				
 			//particleObj.GetComponent<ParticleSystem>().startColor = objColor;
 		}
 		
