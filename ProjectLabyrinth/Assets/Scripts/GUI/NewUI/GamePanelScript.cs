@@ -13,9 +13,6 @@ public class GamePanelScript : MonoBehaviour {
     public GameObject createGameMenu;
     public GameObject joinGameMenu;
 
-    public void CreateGame()
-    {
-    }
 
     /// <summary>
     /// Transitions the menu to the join game menu by turning this panel off and turning the other one on.
@@ -27,5 +24,16 @@ public class GamePanelScript : MonoBehaviour {
 
         /* Turn on the join game panel */
         joinGameMenu.SetActive(true);
+    }
+    /// <summary>
+    /// Transitions the menu to the create game menu by turning this panel off and turning the other one on.
+    /// </summary>
+    public void CreateGame()
+    {
+        /* Turns this panel off */
+        this.transform.parent.gameObject.SetActive(false);
+
+        /* Turn on the create game panel */
+        createGameMenu.SetActive(true);
     }
 }
