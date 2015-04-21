@@ -17,9 +17,9 @@ public class MenuSystem : MonoBehaviour {
 	public Button mainMenuButton;
 
 	/// <summary>
-	/// Button to allow the player to control the game's sound effects.
+	/// Slider to allow the player to adjust the game's volume.
 	/// </summary>
-	public Button muteSoundButton;
+	public Slider volumeSlider;
 
 	/// <summary>
 	/// Button to exit this application.
@@ -37,26 +37,16 @@ public class MenuSystem : MonoBehaviour {
 				Application.LoadLevel("MainMenu");
 			});
 		}
-		if (this.muteSoundButton != null) {
-			Text muteSoundButtonText = (Text)this.muteSoundButton.GetComponentInChildren<Text>();
-			this.muteSoundButton.onClick.AddListener(delegate() {
-				if (AudioListener.volume > 0) {
-					AudioListener.volume = 0;
-					if (muteSoundButtonText) {
-						muteSoundButtonText.text = "Unmute Sounds";
-					}
-				} else {
-					AudioListener.volume = 1;
-					if (muteSoundButtonText) {
-						muteSoundButtonText.text = "Mute Sounds";
-					}
-				}
-			} );
-		}
 		if (this.exitButton != null) {
 			this.exitButton.onClick.AddListener(delegate() {
 				Application.Quit();
 			});
+		}
+	}
+
+	void Update() {
+		if (this.volumeSlider != null) {
+			AudioListener.volume = this.volumeSlider.value;
 		}
 	}
 }
