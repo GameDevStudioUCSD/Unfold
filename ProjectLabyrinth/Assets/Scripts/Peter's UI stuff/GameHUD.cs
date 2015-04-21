@@ -30,19 +30,14 @@ public class GameHUD : MonoBehaviour {
 	public PlayerStatsHUD playerStats;
 
 	/// <summary>
-	/// Player menu system canvas for heads-up display.
+	/// Player menu system interface for heads-up display.
 	/// </summary>
-	public Canvas menuSystem;
+	public MenuSystem menuSystem;
 
 	/// <summary>
-	/// Controls whether or not the menu system is currently active.
+	/// Button to bring up the menu system on the player's HUD.
 	/// </summary>
-	public bool menuSystemActive;
-
-	/// <summary>
-	/// Button to bring up the "pause" menu system on the player's HUD.
-	/// </summary>
-	public Button pauseButton;
+	public Button optionsButton;
 
 	/// <summary>
     /// The joystick used for determining user input.
@@ -63,9 +58,9 @@ public class GameHUD : MonoBehaviour {
 			this.Joystick.ControllerMovedEvent += this.player.Move;
 			this.Joystick.FingerLiftedEvent += this.player.Idle;
 		}
-		if (this.pauseButton != null && this.menuSystem != null) {
-			this.pauseButton.onClick.AddListener(delegate() {
-				this.menuSystem.gameObject.SetActive((this.menuSystemActive = !this.menuSystemActive));
+		if (this.optionsButton != null && this.menuSystem != null) {
+			this.optionsButton.onClick.AddListener(delegate() {
+				this.menuSystem.gameObject.SetActive(true);
 			} );
 		}
 	}
