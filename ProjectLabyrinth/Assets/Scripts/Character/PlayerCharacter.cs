@@ -52,6 +52,8 @@ public class PlayerCharacter : Character {
 	private int abilityLevel = 0;
 	private GameObject floor;
 
+	private bool walking = false;
+
 	void Start() {
 		updateStats();
 		this.animator.SetBool("Walking", false);
@@ -68,33 +70,34 @@ public class PlayerCharacter : Character {
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
+			if(!walking) {
+				foreach (Touch t in Input.touches) {
 
-			foreach (Touch t in Input.touches) {
 
+					if (t.phase == TouchPhase.Began) {
+						this.initialTouch = t;
+					} else if (t.phase == TouchPhase.Moved) {
+						float deltaX = this.initialTouch.position.x - t.position.x;
+						float deltaY = this.initialTouch.position.y - t.position.y;
+						float distance = Mathf.Sqrt(Mathf.Pow(deltaX, 2) + Mathf.Pow(deltaY, 2));
+						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < .2f;
+						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 5f;
 
-				if (t.phase == TouchPhase.Began) {
-					this.initialTouch = t;
-				} else if (t.phase == TouchPhase.Moved) {
-					float deltaX = this.initialTouch.position.x - t.position.x;
-					float deltaY = this.initialTouch.position.y - t.position.y;
-					float distance = Mathf.Sqrt(Mathf.Pow(deltaX, 2) + Mathf.Pow(deltaY, 2));
-					bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < .2f;
-					bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 5f;
-
-					if (distance > 100f) {
-						if (horizontalAttack) {
-							this.attackType = 1;
-						} else if (verticalAttack) {
-							this.attackType = 2;
-						} else if (deltaX <= 0) {
-							this.attackType = 4;
-						} else if (deltaX > 0) {
-							this.attackType = 8;
+						if (distance > 100f) {
+							if (horizontalAttack) {
+								this.attackType = 1;
+							} else if (verticalAttack) {
+								this.attackType = 2;
+							} else if (deltaX <= 0) {
+								this.attackType = 4;
+							} else if (deltaX > 0) {
+								this.attackType = 8;
+							}
+							this.Attack();
 						}
-						this.Attack();
+					} else if (t.phase == TouchPhase.Ended) {
+						this.initialTouch = new Touch();
 					}
-				} else if (t.phase == TouchPhase.Ended) {
-					this.initialTouch = new Touch();
 				}
 			}
 
@@ -122,6 +125,7 @@ public class PlayerCharacter : Character {
 	public void Idle(CNAbstractController joystick) {
 		this.animator.SetBool("Walking", false);
 		this.StopCoroutine("RotateCoroutine");
+		this.walking = false;
 	}
 
 	/// <summary>
@@ -131,6 +135,7 @@ public class PlayerCharacter : Character {
 	/// <param name="joystick">Joystick controlling player movement.</param>
 	public void Move(Vector3 input, CNAbstractController joystick) {
 		this.animator.SetBool("Walking", true);
+		this.walking = true;
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
