@@ -39,13 +39,16 @@ public class MasterServerManager {
         MasterServer.RegisterHost(gameTitle, gameName, levelType);
         if (debugOn)
         {
-            Debug.Log("Trying to register game as type (" + gameTitle + ") under name (" + gameType + ")");
+            Debug.Log("Trying to register game as type (" + gameTitle + ") under name (" + gameName + ")");
         }
     }
     public void ConnectToGame(int hostIndex)
     {
-        if(!IndexInRange(hostIndex, gameList.Length, "ConnectToGame"))
+        if(!IndexInRange(--hostIndex, gameList.Length, "ConnectToGame"))
         {
+            Debug.Log("Game Index: " + hostIndex);
+            Debug.Log("Game List: " + gameList);
+            Debug.Log("Game List Length: " + gameList.Length);
             return;
         }
         lastConnectionAttempt = gameList[hostIndex].ip;

@@ -1,0 +1,16 @@
+using UnityEngine;
+
+/// <summary>
+/// Class to hold miscellanous functions and wrappers that do not
+/// belong to any particular prefab or object.
+/// </summary>
+public class MiscFunctions : MonoBehaviour {
+
+	/// <summary>
+	/// Load the scene specified by sceneName.
+	/// </summary>
+	/// <param name="sceneName">The scene name.</param>
+	public void Load(string sceneName) {
+		Application.LoadLevel(sceneName);
+	}
+}
