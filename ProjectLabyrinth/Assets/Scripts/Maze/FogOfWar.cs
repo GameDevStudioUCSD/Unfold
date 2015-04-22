@@ -24,6 +24,13 @@ public class FogOfWar : MonoBehaviour {
 		Gizmos.color = color;
 	}
 
+	void OnEnable() {
+		GameObject mazeRoot = GameObject.Find("Maze");
+		if (mazeRoot) {
+			this.transform.SetParent(mazeRoot.transform);
+		}
+	}
+
 	void OnTriggerEnter(Collider other) {
 		if (this.networkView == null || this.networkView.isMine) {
 			if (other.GetComponent<PlayerCharacter>()) {
