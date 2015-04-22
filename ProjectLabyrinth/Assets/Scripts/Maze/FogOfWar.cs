@@ -1,35 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Controls the "fog of war" lights in the game.
+/// </summary>
 public class FogOfWar : MonoBehaviour {
 
-	public Light playerHasSeen;
+	/// <summary>
+	/// The network view controlling each player.
+	/// </summary>
+	public NetworkView networkView;
 
-	public PlayerCharacter player;
+	void OnDrawGizmosSelected() {
+		Color color = Gizmos.color;
+		Gizmos.color = Color.blue;
 
-	public MazeInfo mi;
+		Rect square = this.GetComponent<RectTransform>().rect;
+		Gizmos.DrawWireCube(
+			this.transform.position,
+			new Vector3(square.width, 0, square.height)
+		);
 
-    void Start()
-    {
-        if(mi == null )
-        {
-            Debug.LogError("Error: MazeInfo not set");
-        }
-    }
-	void Update() {
-        if (!mi.exists)
-        {
-            return;
-        }
-        int initRow = (int)Mathf.Round(player.transform.position.x / mi.getWallSize());
-        int initCol = (int)Mathf.Round(player.transform.position.z / mi.getWallSize());
-        Square currWalls = mi.getWalls()[initRow, initCol];
-        if (!currWalls.playerVisited)
-        {
-            Light.Instantiate(this.playerHasSeen, new Vector3(initRow * mi.wallSize, 5, initCol * mi.wallSize), Quaternion.identity);
-            currWalls.playerVisited = true;
-        }
-        
-		
+		Gizmos.color = color;
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (this.networkView == null || this.networkView.isMine) {
+			if (other.GetComponent<PlayerCharacter>()) {
+				this.GetComponent<Light>().enabled = true;
+			}
+		}
 	}
 }

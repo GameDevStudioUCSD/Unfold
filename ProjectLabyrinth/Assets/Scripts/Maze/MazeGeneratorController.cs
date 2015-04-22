@@ -36,6 +36,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public TextureController.TextureChoice levelType;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Player, ExitMarker, DebugSphere;
     public GameObject[] spawnList;
+	public FogOfWar light;
     public bool debug_ON = false;
     [Range (1, 100)]
     public int spawningRate = 1;
@@ -190,7 +191,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public void createWalls()
     {
         DetermineWallsToSpawn();
-        Stack instatiationList = new Stack();
+        Stack instantiationList = new Stack();
         //TextureController textureController = new TextureController(levelType);
         GameObject objToInstantiate = null;
         Vector3 pos;
@@ -217,25 +218,25 @@ public class MazeGeneratorController : MonoBehaviour {
                 {
                     objToInstantiate = (GameObject) Network.Instantiate(NorthWall, pos, rot , 0);
                     ApplyWallTexture(objToInstantiate);
-                    instatiationList.Push(objToInstantiate);
+                    instantiationList.Push(objToInstantiate);
                 }
                 if (curr.hasSouth)
                 {
                     objToInstantiate = (GameObject)Network.Instantiate(SouthWall, pos, rot, 0);
                     ApplyWallTexture(objToInstantiate);
-                    instatiationList.Push(objToInstantiate);
+                    instantiationList.Push(objToInstantiate);
                 }
                 if (curr.hasEast)
                 {
                     objToInstantiate = (GameObject)Network.Instantiate(EastWall, pos, rot, 0);
                     ApplyWallTexture(objToInstantiate);
-                    instatiationList.Push(objToInstantiate);
+                    instantiationList.Push(objToInstantiate);
                 }
                 if (curr.hasWest)
                 {
                     objToInstantiate = (GameObject)Network.Instantiate(WestWall, pos, rot, 0);
                     ApplyWallTexture(objToInstantiate);
-                    instatiationList.Push(objToInstantiate);
+                    instantiationList.Push(objToInstantiate);
                     westWalls.Add(curr.ToString(), objToInstantiate);
                 }
                 if (curr.start)
@@ -245,12 +246,16 @@ public class MazeGeneratorController : MonoBehaviour {
                 if(curr.exit)
                 {
                     objToInstantiate = (GameObject)Network.Instantiate(ExitMarker, pos, rot, 0);
-                    instatiationList.Push(objToInstantiate);
+                    instantiationList.Push(objToInstantiate);
                 }
+				if (this.light != null) {
+					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos, rot, 0);
+					instantiationList.Push(objToInstantiate);
+				}
                 
-                while (instatiationList.Count > 0)
+                while (instantiationList.Count > 0)
                 {
-                    objToInstantiate = (GameObject)instatiationList.Pop();
+                    objToInstantiate = (GameObject)instantiationList.Pop();
                     RemoveCloneFromName(objToInstantiate);
                 }
             }

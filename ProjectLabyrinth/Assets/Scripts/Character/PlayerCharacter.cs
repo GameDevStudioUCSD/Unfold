@@ -52,8 +52,6 @@ public class PlayerCharacter : Character {
 	private int abilityLevel = 0;
 	private GameObject floor;
 
-	private bool walking = false;
-
 	void Start() {
 		updateStats();
 		this.animator.SetBool("Walking", false);
@@ -70,7 +68,7 @@ public class PlayerCharacter : Character {
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if(!walking) {
+			if(!this.animator.GetBool("Walking")) {
 				foreach (Touch t in Input.touches) {
 
 
@@ -125,7 +123,6 @@ public class PlayerCharacter : Character {
 	public void Idle(CNAbstractController joystick) {
 		this.animator.SetBool("Walking", false);
 		this.StopCoroutine("RotateCoroutine");
-		this.walking = false;
 	}
 
 	/// <summary>
@@ -135,7 +132,6 @@ public class PlayerCharacter : Character {
 	/// <param name="joystick">Joystick controlling player movement.</param>
 	public void Move(Vector3 input, CNAbstractController joystick) {
 		this.animator.SetBool("Walking", true);
-		this.walking = true;
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
