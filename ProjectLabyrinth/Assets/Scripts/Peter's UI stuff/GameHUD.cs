@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class to control the behavior of all aspects of the player's interface
@@ -29,6 +30,16 @@ public class GameHUD : MonoBehaviour {
 	public PlayerStatsHUD playerStats;
 
 	/// <summary>
+	/// Player menu system interface for heads-up display.
+	/// </summary>
+	public MenuSystem menuSystem;
+
+	/// <summary>
+	/// Button to bring up the menu system on the player's HUD.
+	/// </summary>
+	public Button optionsButton;
+
+	/// <summary>
     /// The joystick used for determining user input.
     /// </summary>
     public CustomJoystick Joystick;
@@ -46,6 +57,11 @@ public class GameHUD : MonoBehaviour {
 		if (this.Joystick != null && this.player != null) {
 			this.Joystick.ControllerMovedEvent += this.player.Move;
 			this.Joystick.FingerLiftedEvent += this.player.Idle;
+		}
+		if (this.optionsButton != null && this.menuSystem != null) {
+			this.optionsButton.onClick.AddListener(delegate() {
+				this.menuSystem.gameObject.SetActive(true);
+			} );
 		}
 	}
 
