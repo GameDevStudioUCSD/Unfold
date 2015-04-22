@@ -3,18 +3,17 @@ using System.Collections;
 
 public class MazeInfo : MonoBehaviour {
 	public MazeGeneratorController maze;
-	Square[,] walls;
-	float wallSize;
+	public Square[,] walls { get; set; }
+	public float wallSize { get; set; }
 	public bool debug;
+
+	public bool exists {get; set;}
 
 
 	// Use this for initialization
 	void Start () {
 		if (debug)
 			Debug.Log ("I was called!");
-
-		this.wallSize = maze.wallSize;
-		this.walls = maze.getWalls ();
 	}
 	
 	// Update is called once per frame
@@ -23,8 +22,16 @@ public class MazeInfo : MonoBehaviour {
 			Debug.Log ("I was called too!");
 	}
 
+	public void setWalls(Square[,] walls) {
+		this.walls = walls;
+	}
+
 	public Square[,] getWalls() {
 		return this.walls;
+	}
+
+	public void setWallSize(float size) {
+		this.wallSize = size;
 	}
 
 	public Square getCurrSquare(float x, float z) {

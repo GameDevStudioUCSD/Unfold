@@ -51,6 +51,9 @@ public class MazeGeneratorController : MonoBehaviour {
     {
         algorithm = this.algorithm;
     }
+
+	public MazeInfo mi;
+
 	// Use this for initialization
 	public void Start () {
         //Creates the walls matrix
@@ -71,7 +74,10 @@ public class MazeGeneratorController : MonoBehaviour {
         }
         //generator = new WorkingDepthFirstMazeGenerator(Rows,Cols);
         generator.run(walls, exit);
-	
+
+		mi.walls = walls;
+		mi.wallSize = wallSize;
+		mi.exists = true;
 	}
     // Removes duplicate walls from adjacent cells
     public void DetermineWallsToSpawn()
