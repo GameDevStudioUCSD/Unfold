@@ -83,8 +83,16 @@ public class PlayerCharacter : Character {
 
 						if (distance > 100f) {
 							if (horizontalAttack) {
+								if (deltaX > 0)
+									this.animator.SetInteger("Attack", 2);
+								else
+									this.animator.SetInteger("Attack", 1);
 								this.attackType = 1;
 							} else if (verticalAttack) {
+								if (deltaY > 0)
+									this.animator.SetInteger ("Attack", 4);
+								else
+									this.animator.SetInteger("Attack", 3);
 								this.attackType = 2;
 							} else if (deltaX <= 0) {
 								this.attackType = 4;
@@ -92,6 +100,7 @@ public class PlayerCharacter : Character {
 								this.attackType = 8;
 							}
 							this.Attack();
+							this.animator.SetInteger("Attack", 0);
 						}
 					} else if (t.phase == TouchPhase.Ended) {
 						this.initialTouch = new Touch();
