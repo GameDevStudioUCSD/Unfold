@@ -12,14 +12,24 @@ public class PlayerStatsHUD : MonoBehaviour {
 	public Slider health;
 
 	/// <summary>
-	/// Slider displaying the player's potential damage.
+	/// Text to display the player's damage amount on the game HUD.
 	/// </summary>
-	public Slider damage;
+	public Text damageText;
 
 	/// <summary>
-	/// Slider displaying the player's speed.
+	/// Symbol representing the damage token collected in game.
 	/// </summary>
-	public Slider speed;
+	public Transform damageSymbol;
+	
+	/// <summary>
+	/// Text to display the player's speed amount on the game HUD.
+	/// </summary>
+	public Text speedText;
+	
+	/// <summary>
+	/// Symbol representing the speed token collected in game.
+	/// </summary>
+	public Transform speedSymbol;
 
 	public virtual void display(PlayerCharacter player) {
 		if (this.health != null) {
@@ -36,30 +46,17 @@ public class PlayerStatsHUD : MonoBehaviour {
 			}
 		}
 
-		if (this.damage != null) {
-			this.damage.maxValue = player.damage;
-			this.damage.value = player.damage;
-			Transform damageText = this.damage.transform.Find("Damage text");
-			if (damageText) {
-				damageText.GetComponent<Text>().text = player.damage.ToString();
-			}
-			Transform damageSymbol = this.damage.transform.Find("Damage symbol");
-			if (damageSymbol) {
-				damageSymbol.Rotate(Vector3.down);
-			}
+		if (this.damageText != null) {
+			this.damageText.text = "Damage: " + player.damage;
 		}
-
-		if (this.speed != null) {
-			this.speed.maxValue = player.moveSpeed;
-			this.speed.value = player.moveSpeed;
-			Transform speedText = this.speed.transform.Find("Speed text");
-			if (speedText) {
-				speedText.GetComponent<Text>().text = player.moveSpeed.ToString();
-			}
-			Transform speedSymbol = this.speed.transform.Find("Speed symbol");
-			if (speedSymbol) {
-				speedSymbol.Rotate(Vector3.down);
-			}
+		if (this.damageSymbol != null) {
+			this.damageSymbol.Rotate(Vector3.down);
+		}
+		if (this.speedText != null) {
+			this.speedText.text = "Speed: " + player.moveSpeed;
+		}
+		if (this.speedSymbol != null) {
+			this.speedSymbol.Rotate(Vector3.down);
 		}
 	}
 }
