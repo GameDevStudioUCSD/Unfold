@@ -7,9 +7,14 @@ using UnityEngine.UI;
 public class PlayerStatsHUD : MonoBehaviour {
 
 	/// <summary>
-	/// Slider displaying the player's health.
+	/// Text to display the player's health amount on the game HUD.
 	/// </summary>
-	public Slider health;
+	public Text healthText;
+
+	/// <summary>
+	/// Symbol representing the health token collected in game.
+	/// </summary>
+	public Transform healthSymbol;
 
 	/// <summary>
 	/// Text to display the player's damage amount on the game HUD.
@@ -32,28 +37,21 @@ public class PlayerStatsHUD : MonoBehaviour {
 	public Transform speedSymbol;
 
 	public virtual void display(PlayerCharacter player) {
-		if (this.health != null) {
-			this.health.maxValue = player.maxHealth;
-			this.health.value = player.currentHealth;
-			Transform healthText = this.health.transform.Find("Health text");
-			if (healthText) {
-				healthText.GetComponent<Text>().text = player.currentHealth.ToString() +
-					"/" + player.maxHealth.ToString();
-			}
-			Transform healthSymbol = this.health.transform.Find("Health symbol");
-			if (healthSymbol) {
-				healthSymbol.Rotate(Vector3.down);
-			}
+		if (this.healthText != null) {
+			this.healthText.text = "Health: " + player.currentHealth.ToString() +
+				"/" + player.maxHealth.ToString();
 		}
-
+		if (this.healthSymbol != null) {
+			this.healthSymbol.Rotate(Vector3.down);
+		}
 		if (this.damageText != null) {
-			this.damageText.text = "Damage: " + player.damage;
+			this.damageText.text = "Damage: " + player.damage.ToString();
 		}
 		if (this.damageSymbol != null) {
 			this.damageSymbol.Rotate(Vector3.down);
 		}
 		if (this.speedText != null) {
-			this.speedText.text = "Speed: " + player.moveSpeed;
+			this.speedText.text = "Speed: " + player.moveSpeed.ToString();
 		}
 		if (this.speedSymbol != null) {
 			this.speedSymbol.Rotate(Vector3.down);
