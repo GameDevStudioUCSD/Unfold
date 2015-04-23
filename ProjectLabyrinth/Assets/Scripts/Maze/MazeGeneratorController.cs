@@ -48,6 +48,7 @@ public class MazeGeneratorController : MonoBehaviour {
     private MazeGenerator generator;
     private SortedDictionary<string, GameObject> westWalls;
     private GameObject innerWall;
+    private GameObject gameTypeObj;
     public MazeGeneratorController(AlgorithmChoice algorithm)
     {
         algorithm = this.algorithm;
@@ -57,6 +58,12 @@ public class MazeGeneratorController : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
+        // If the player is a host, try and set the game type to their choice
+        gameTypeObj = GameObject.Find("GameType");
+        if(gameTypeObj != null)
+        {
+            levelType = gameTypeObj.GetComponent<MazeType>().GetGameType();
+        }
         //Creates the walls matrix
         walls = new Square[Rows,Cols];
         

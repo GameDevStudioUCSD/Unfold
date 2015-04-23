@@ -14,7 +14,7 @@ public class MasterServerManager {
     private int portNumber = 26500;
     private string[] lastConnectionAttempt;
 
-    public bool debugOn = true;
+    public bool debugOn = false;
     public HostData[] GetHostData()
     {
         if (debugOn)
@@ -35,7 +35,7 @@ public class MasterServerManager {
         {
             Debug.Log("Entering RegisterServer()");
         }
-        string levelType = gameType.ToString();
+        string levelType = ((int)gameType).ToString();
         MasterServer.RegisterHost(gameTitle, gameName, levelType);
         if (debugOn)
         {
