@@ -60,6 +60,9 @@ public class PlayerCharacter : Character {
 	private int HAMMER_COOLDOWN = 100;
 	public EditWalls wall;
 
+	//used for special abilities
+	private string ability;
+
 	void Start() {
 		updateStats();
 		this.animator.SetBool("Walking", false);
@@ -67,14 +70,17 @@ public class PlayerCharacter : Character {
 		this.data = new PlayerData();
 		this.data.win = false;
 		this.data.name = "Squiddie";
+		this.ability = "None";
 	}
 
 	void FixedUpdate() {
 		// dirty solution to players being pushed around by enemies
 		transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-		if (--hammerCooldown < 0)
+		if (hammerCooldown != -1 && --hammerCooldown < 0) {
+			Debug.Log("Hammer available!");
 			hammerCooldown = 0;
+		}
 
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
@@ -132,6 +138,8 @@ public class PlayerCharacter : Character {
 			} else if (Input.GetKeyUp(KeyCode.Alpha4)) {
 				this.attackType = 8;
 				this.Attack();
+			} else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
+				this.attackType = 0;
 			}
 		}
 	}
@@ -282,6 +290,20 @@ public class PlayerCharacter : Character {
 
 	public void addFoil() {
 	}
+
+
+	public void AOE(float radius, int damage, int dmgType) {
+		Collider[] monsterColliders = Physics.OverlapSphere(this.transform.position, radius);
+		int i = 0;
+
+		while (i < monsterColliders.Length) {
+			EnemyCharacter target = monsterColliders[i].GetComponentInParent<EnemyCharacter>();
+			//Character target = monsterColliders[i].GetComponent("Character");
+			target.TakeDamage(damage, dmgType);
+			i++;
+		}
+	}
+
 
 	public void removeWeapon() {
 		this.hammerCooldown = -1;
