@@ -75,6 +75,36 @@ public class Pickup : MonoBehaviour {
 					Debug.Log("Adding damage");
 				player.addDamage(5);
 				break;
+
+			/* Start Sword (???) */
+			case 4:
+				if (debug_On)
+					Debug.Log ("Adding start sword");
+				
+				player.addStartSword ();
+				break;
+
+			/* Hammer (Break walls) */
+			case 5:
+				if(debug_On)
+					Debug.Log ("Adding hammer");
+
+				player.addHammer ();
+				break;
+
+			case 6:
+				if(debug_On)
+					Debug.Log ("Adding sword");
+
+				player.addSword ();
+				break;
+
+			case 7:
+				if(debug_On)
+					Debug.Log ("Adding foil");
+				
+				player.addFoil ();
+				break;
 		}
 	}
 }

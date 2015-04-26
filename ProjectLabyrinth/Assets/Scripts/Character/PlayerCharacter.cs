@@ -216,6 +216,8 @@ public class PlayerCharacter : Character {
 		armor = null;
 		boots = null;
 		checkItemsForSet();
+
+		removeWeapon ();
 	}
 
 	public void setSpawn(Vector3 start) {
@@ -252,15 +254,18 @@ public class PlayerCharacter : Character {
 	}
 
 	public void addSword() {
-		AttackDetector detector = GetComponentInChildren (AttackDetector);
-		//detector.transform.position = new Vector3(
+		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
+		detector.transform.localPosition = new Vector3 (0, .4f, 10);
+		detector.transform.localScale = new Vector3 (2.5f, 3.5f, 20);
 	}
 
 	public void addFoil() {
 	}
 
 	public void removeWeapon() {
-
+		AttackDetector detector = (AttackDetector) GetComponentInChildren <AttackDetector>();
+		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
+		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
 
 	public void equipItem(Item newItem) {
