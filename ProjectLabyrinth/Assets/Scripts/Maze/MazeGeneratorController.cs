@@ -256,7 +256,7 @@ public class MazeGeneratorController : MonoBehaviour {
                     instantiationList.Push(objToInstantiate);
                 }
 				if (this.light != null) {
-					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos, rot, 0);
+					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, new Vector3(pos.x, pos.y + 5, pos.z), rot, 0);
 					instantiationList.Push(objToInstantiate);
 				}
                 
