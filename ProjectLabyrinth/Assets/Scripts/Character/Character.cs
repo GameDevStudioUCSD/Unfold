@@ -10,7 +10,7 @@ using UnityEngine;
  */
 public abstract class Character : MonoBehaviour {
 
-	public bool debug_On = false;
+	public bool debug_On = true;
 
 	//Number of enemies killed. Used only for player but implemented here for access to Attack function
 	protected int kills = 0;
@@ -35,13 +35,14 @@ public abstract class Character : MonoBehaviour {
 	// When the next attack time is available after attackDelay seconds
 	protected float nextAttackTime = 0;
 	
+
 	/**
 	 * Controls character attack patterns
-     * Returns true if target takes damage
-     * Else, returns false
+	 * Returns true if target takes damage
+	 * Else, returns false
 	 */
 	public virtual bool Attack() {
-        bool hasAttacked = false;
+		bool hasAttacked = false;
 
 		// long name is long
 		ArrayList ac = this.attackCollider;
@@ -51,22 +52,24 @@ public abstract class Character : MonoBehaviour {
 			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
 			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
 			*/
-            
+
+
 			Character target = (Character)((Collider) ac[i]).gameObject.GetComponent("Character");
-            if (!target)
-            {
-                target = (Character) ((Collider) ac[i]).GetComponentInParent<Character>(); 
-            }
+			if (!target)
+			{
+				target = (Character) ((Collider) ac[i]).GetComponentInParent<Character>(); 
+			}
 
 			if (target) {
 				if (target.TakeDamage(this.damage, this.attackType))
 					kills++;
-                hasAttacked = true;
-			}
+				hasAttacked = true;
+			} 
+			
 			this.nextAttackTime = Time.time + attackDelay;
-            
+			
 		}
-        return hasAttacked;
+		return hasAttacked;
 	}
 
 	/**

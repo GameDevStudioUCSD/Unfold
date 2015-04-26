@@ -20,8 +20,14 @@ public class AttackDetector : MonoBehaviour {
 			chr.setAttackCollider (other);
 			enemy.setAttacker (chr);
 			enemy.setActive (true);
-
 		}
+		if (other.GetComponent<InnerWall>() != null) {
+			InnerWall innerWall = other.GetComponent<InnerWall>();
+			EditWalls wall = innerWall.transform.parent.GetComponent<EditWalls>();
+			PlayerCharacter chr = GetComponentInParent<PlayerCharacter>();
+			chr.setWall(wall);
+		}
+
 	}
 
 	void OnTriggerExit(Collider other) {
@@ -31,6 +37,12 @@ public class AttackDetector : MonoBehaviour {
 			chr.removeAttackCollider(other);
 			enemy.removeAttacker (chr);
 			enemy.setActive (false);
+		}
+		if (other.GetComponent<InnerWall>() != null) {
+			InnerWall innerWall = other.GetComponent<InnerWall>();
+			EditWalls wall = innerWall.transform.parent.GetComponent<EditWalls>();
+			PlayerCharacter chr = GetComponentInParent<PlayerCharacter>();
+			chr.setWall(null);
 		}
 	}
 }

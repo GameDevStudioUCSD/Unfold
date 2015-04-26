@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerData
-{
+public class PlayerData {
 	public bool win;
 	public string name;
 }
@@ -17,7 +16,7 @@ public class PlayerData
 public class PlayerCharacter : Character {
 
 	public PlayerData data;
-	
+
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
 
@@ -45,12 +44,21 @@ public class PlayerCharacter : Character {
 	private Item weapon = null;
 	private Item armor = null;
 	private Item boots = null;
-	
+
 	/*0 for no ability, other numbers for different types of abilities*/
 	private int abilityType = 0;
 	/*0 for no ability, 1 for basic ability, 2 for adept ability*/
 	private int abilityLevel = 0;
 	private GameObject floor;
+
+	/* 
+	 * The cooldown timer for breaking the wall 
+	 * Set to -1 to disable the ability
+	 * Set to 0 to activate this ability, each time hammer is used, this variable will set back to HAMMER_COOLDOWN, and decremented by 1 in each update
+	 */
+	private int hammerCooldown = 0;
+	private int HAMMER_COOLDOWN = 100;
+	public EditWalls wall;
 
 	void Start() {
 		updateStats();
@@ -63,12 +71,15 @@ public class PlayerCharacter : Character {
 
 	void FixedUpdate() {
 		// dirty solution to players being pushed around by enemies
-		transform.position = new Vector3 (transform.position.x, 1.5f, transform.position.z);
+		transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+
+		if (--hammerCooldown < 0)
+			hammerCooldown = 0;
 
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if(!this.animator.GetBool("Walking")) {
+			if (!this.animator.GetBool("Walking")) {
 				foreach (Touch t in Input.touches) {
 
 
@@ -90,7 +101,7 @@ public class PlayerCharacter : Character {
 								this.attackType = 1;
 							} else if (verticalAttack) {
 								if (deltaY > 0)
-									this.animator.SetInteger ("Attack", 4);
+									this.animator.SetInteger("Attack", 4);
 								else
 									this.animator.SetInteger("Attack", 3);
 								this.attackType = 2;
@@ -111,7 +122,7 @@ public class PlayerCharacter : Character {
 			if (Input.GetKeyUp(KeyCode.Alpha1)) {
 				this.attackType = 1;
 				this.Attack();
-				this.createPath ();
+				this.createPath();
 			} else if (Input.GetKeyUp(KeyCode.Alpha2)) {
 				this.attackType = 2;
 				this.Attack();
@@ -144,7 +155,7 @@ public class PlayerCharacter : Character {
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
-//		movement.Normalize();	// Allow movement sensitivity
+		//		movement.Normalize();	// Allow movement sensitivity
 
 		StopCoroutine("RotateCoroutine");
 		StartCoroutine("RotateCoroutine", movement);
@@ -172,6 +183,14 @@ public class PlayerCharacter : Character {
 	}
 
 	public override bool Attack() {
+		if (hammerCooldown == 0) {
+			if (this.wall != null) {
+				Debug.Log("Destroy the wall!");
+				this.wall.DestroyWall();
+				this.wall = null;
+			}
+			hammerCooldown = HAMMER_COOLDOWN;
+		}
 		bool hasAttacked = base.Attack();
 		if (hasAttacked)
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
@@ -179,7 +198,7 @@ public class PlayerCharacter : Character {
 	}
 
 	public void createPath() {
-		ParticleGenerator p = (ParticleGenerator)GetComponentInChildren<ParticleGenerator> ();
+		ParticleGenerator p = (ParticleGenerator) GetComponentInChildren<ParticleGenerator>();
 		/*if (attackType == 1) {
 			ParticleMovement slash = p.createPath (new Vector3(Screen.width / 8.0f, Screen.height / 2.0f));
 			//Debug.Log (slash.transform.position);
@@ -211,13 +230,13 @@ public class PlayerCharacter : Character {
 			Debug.Log("I am dead.");
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
-		
+
 		weapon = null;
 		armor = null;
 		boots = null;
 		checkItemsForSet();
 
-		removeWeapon ();
+		removeWeapon();
 	}
 
 	public void setSpawn(Vector3 start) {
@@ -233,44 +252,46 @@ public class PlayerCharacter : Character {
 
 	public void addSpeed(float s) {
 		this.baseMoveSpeed += s;
-		updateStats ();
+		updateStats();
 	}
 
 	public void addMaxHealth(int mh) {
 		baseMaxHealth += mh;
 		currentHealth += mh;
-		updateStats ();
+		updateStats();
 	}
 
 	public void addDamage(int d) {
 		baseDamage += d;
-		updateStats ();
+		updateStats();
 	}
 
-	public void addStartSword () {
+	public void addStartSword() {
 	}
 
 	public void addHammer() {
+		this.hammerCooldown = 0;
+		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
 	}
 
 	public void addSword() {
 		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
-		detector.transform.localPosition = new Vector3 (0, .4f, 10);
-		detector.transform.localScale = new Vector3 (2.5f, 3.5f, 20);
+		detector.transform.localPosition = new Vector3(0, .4f, 10);
+		detector.transform.localScale = new Vector3(2.5f, 3.5f, 20);
 	}
 
 	public void addFoil() {
 	}
 
 	public void removeWeapon() {
-		AttackDetector detector = (AttackDetector) GetComponentInChildren <AttackDetector>();
+		this.hammerCooldown = -1;
+		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
 		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
 		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
 
 	public void equipItem(Item newItem) {
-		switch (newItem.itemType)
-		{
+		switch (newItem.itemType) {
 			case 0:
 				this.weapon = newItem;
 				break;
@@ -284,81 +305,71 @@ public class PlayerCharacter : Character {
 		updateBonusStats();
 		checkItemsForSet();
 	}
-	
+
 	public void updateStats() {
 		this.damage = this.baseDamage + this.bonusDamage;
 		this.maxHealth = this.baseMaxHealth + this.bonusMaxHealth;
 		this.moveSpeed = this.baseMoveSpeed + this.bonusMoveSpeed;
 	}
-	
-	public void updateBonusStats()
-	{
+
+	public void updateBonusStats() {
 		bonusDamage = 0;
 		bonusMaxHealth = 0;
 		bonusMoveSpeed = 0;
-		
-		if (weapon)
-		{
+
+		if (weapon) {
 			bonusDamage += weapon.bonusDamage;
 			bonusMaxHealth += weapon.bonusMaxHealth;
 			bonusMoveSpeed += weapon.bonusMoveSpeed;
 		}
-		if (armor)
-		{
+		if (armor) {
 			bonusDamage += armor.bonusDamage;
 			bonusMaxHealth += armor.bonusMaxHealth;
 			bonusMoveSpeed += armor.bonusMoveSpeed;
 		}
-		if (boots)
-		{
+		if (boots) {
 			bonusDamage += boots.bonusDamage;
 			bonusMaxHealth += boots.bonusMaxHealth;
 			bonusMoveSpeed += boots.bonusMoveSpeed;
 		}
-		
+
 		updateStats();
 	}
-	
-	public void checkItemsForSet()
-	{	
-		if (weapon && armor)
-		{
-			if (weapon.setVal == armor.setVal)
-			{
+
+	public void checkItemsForSet() {
+		if (weapon && armor) {
+			if (weapon.setVal == armor.setVal) {
 				abilityType = weapon.setVal;
 				abilityLevel = 1;
 			}
 		}
-		if (weapon && boots)
-		{
-			if (weapon.setVal == boots.setVal)
-			{
+		if (weapon && boots) {
+			if (weapon.setVal == boots.setVal) {
 				abilityType = weapon.setVal;
 				abilityLevel = 1;
 			}
 		}
-		if (armor && boots)
-		{
-			if (armor.setVal == boots.setVal)
-			{
+		if (armor && boots) {
+			if (armor.setVal == boots.setVal) {
 				abilityType = armor.setVal;
 				abilityLevel = 1;
 			}
 		}
-	
-		if (weapon && armor && boots)
-		{
-			if (weapon.setVal == armor.setVal && weapon.setVal == boots.setVal)
-			{
+
+		if (weapon && armor && boots) {
+			if (weapon.setVal == armor.setVal && weapon.setVal == boots.setVal) {
 				abilityType = weapon.setVal;
 				abilityLevel = 2;
 			}
 		}
 	}
 
-	public int calculateScore()
-	{
-		return kills * 1000 + bonusDamage * 100 + bonusMaxHealth * 50 + (int)bonusMoveSpeed * 25;
+	public int calculateScore() {
+		return kills * 1000 + bonusDamage * 100 + bonusMaxHealth * 50 + (int) bonusMoveSpeed * 25;
+	}
+
+	public void setWall(EditWalls wall) {
+		this.wall = wall;
 	}
 }
 
