@@ -131,7 +131,8 @@ public class PlayerCharacter : Character {
 				this.attackType = 8;
 				this.Attack();
 			}else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
-				this.attackType = 0;
+				this.attackType =1;
+				this.AOE (30, damage,1);
 			}
 		}
 	}
@@ -279,9 +280,10 @@ public class PlayerCharacter : Character {
 		int i = 0;
 		
 		while (i<monsterColliders.Length) {
-			EnemyCharacter target = monsterColliders[i].GetComponentInParent<EnemyCharacter>();
-			//Character target = monsterColliders[i].GetComponent("Character");
-			target.TakeDamage(damage, dmgType);
+			if(monsterColliders[i].tag=="Monster"){
+				EnemyCharacter target = monsterColliders[i].GetComponent<EnemyCharacter>();
+				target.TakeDamage(damage, dmgType);
+			}
 			i++;
 		}
 	}
