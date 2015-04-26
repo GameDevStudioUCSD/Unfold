@@ -50,6 +50,10 @@ public class PlayerCharacter : Character {
 	private int abilityType = 0;
 	/*0 for no ability, 1 for basic ability, 2 for adept ability*/
 	private int abilityLevel = 0;
+
+	/* Is player attacking normally or with ability? */
+	private bool ability = false;
+
 	private GameObject floor;
 
 	void Start() {
@@ -260,6 +264,10 @@ public class PlayerCharacter : Character {
 	}
 
 	public void addFoil() {
+	}
+
+	public void toggleAbility() {
+		ability = !ability;
 	}
 
 	public void removeWeapon() {
