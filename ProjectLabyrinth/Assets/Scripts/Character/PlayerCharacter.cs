@@ -52,6 +52,14 @@ public class PlayerCharacter : Character {
 	private int abilityLevel = 0;
 	private GameObject floor;
 
+
+
+
+	//used for special abilities
+	private string ability;
+
+
+
 	void Start() {
 		updateStats();
 		this.animator.SetBool("Walking", false);
@@ -59,6 +67,7 @@ public class PlayerCharacter : Character {
 		this.data = new PlayerData();
 		this.data.win = false;
 		this.data.name = "Squiddie";
+		this.ability = "None";
 	}
 
 	void FixedUpdate() {
@@ -121,6 +130,8 @@ public class PlayerCharacter : Character {
 			} else if (Input.GetKeyUp(KeyCode.Alpha4)) {
 				this.attackType = 8;
 				this.Attack();
+			}else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
+				this.attackType = 0;
 			}
 		}
 	}
@@ -261,6 +272,20 @@ public class PlayerCharacter : Character {
 
 	public void addFoil() {
 	}
+
+
+	public void AOE(float radius, int damage, int dmgType){
+		Collider[] monsterColliders = Physics.OverlapSphere (this.transform.position, radius);
+		int i = 0;
+		
+		while (i<monsterColliders.Length) {
+			EnemyCharacter target = monsterColliders[i].GetComponentInParent<EnemyCharacter>();
+			//Character target = monsterColliders[i].GetComponent("Character");
+			target.TakeDamage(damage, dmgType);
+			i++;
+		}
+	}
+
 
 	public void removeWeapon() {
 		AttackDetector detector = (AttackDetector) GetComponentInChildren <AttackDetector>();
