@@ -15,33 +15,33 @@ public class PlayerData
  * Represents player stats and things the player can do
  */
 public class PlayerCharacter : Character {
-	
+
 	public PlayerData data;
 	
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
-	
+
 	public float rotateSpeed;
 	public Animator animator;
-	
+
 	public ParticleMovement trail;
-	
+
 	// Helps correlate user input to attack calculation
 	private Touch initialTouch;
-	
+
 	// Statistics that persist regardless of equippable items in player's inventory
 	public int baseDamage;
 	public int baseMaxHealth;
 	public float baseMoveSpeed;
-	
+
 	// Mutable player max health, which depends on baseMaxHealth and bonusMaxHealth
 	public int maxHealth;
-	
+
 	// Player statistics gained from equippable items
 	private int bonusDamage;
 	private int bonusMaxHealth;
 	private float bonusMoveSpeed;
-	
+
 	private Item weapon = null;
 	private Item armor = null;
 	private Item boots = null;
@@ -51,14 +51,15 @@ public class PlayerCharacter : Character {
 	/*0 for no ability, 1 for basic ability, 2 for adept ability*/
 	private int abilityLevel = 0;
 	private GameObject floor;
-	
-	
-	
+
+
+
+
 	//used for special abilities
 	private string ability;
-	
-	
-	
+
+
+
 	void Start() {
 		updateStats();
 		this.animator.SetBool("Walking", false);
@@ -68,18 +69,18 @@ public class PlayerCharacter : Character {
 		this.data.name = "Squiddie";
 		this.ability = "None";
 	}
-	
+
 	void FixedUpdate() {
 		// dirty solution to players being pushed around by enemies
 		transform.position = new Vector3 (transform.position.x, 1.5f, transform.position.z);
-		
+
 		if (Time.time > nextAttackTime) {
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
-			
+
 			if(!this.animator.GetBool("Walking")) {
 				foreach (Touch t in Input.touches) {
-					
-					
+
+
 					if (t.phase == TouchPhase.Began) {
 						this.initialTouch = t;
 					} else if (t.phase == TouchPhase.Moved) {
@@ -88,7 +89,7 @@ public class PlayerCharacter : Character {
 						float distance = Mathf.Sqrt(Mathf.Pow(deltaX, 2) + Mathf.Pow(deltaY, 2));
 						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < .2f;
 						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 5f;
-						
+
 						if (distance > 100f) {
 							if (horizontalAttack) {
 								if (deltaX > 0)
@@ -115,7 +116,7 @@ public class PlayerCharacter : Character {
 					}
 				}
 			}
-			
+
 			if (Input.GetKeyUp(KeyCode.Alpha1)) {
 				this.attackType = 1;
 				this.Attack();
@@ -130,12 +131,11 @@ public class PlayerCharacter : Character {
 				this.attackType = 8;
 				this.Attack();
 			}else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
-				this.attackType = 1;
-				this.AOE (50, damage*2, 1);
+				this.attackType = 0;
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Actions that the player performs while in a state of idleness.
 	/// </summary>
@@ -144,7 +144,7 @@ public class PlayerCharacter : Character {
 		this.animator.SetBool("Walking", false);
 		this.StopCoroutine("RotateCoroutine");
 	}
-	
+
 	/// <summary>
 	/// Actions that the player performs while in a state of motion.
 	/// </summary>
@@ -155,13 +155,13 @@ public class PlayerCharacter : Character {
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
-		//		movement.Normalize();	// Allow movement sensitivity
-		
+//		movement.Normalize();	// Allow movement sensitivity
+
 		StopCoroutine("RotateCoroutine");
 		StartCoroutine("RotateCoroutine", movement);
 		this.GetComponent<CharacterController>().Move(Time.deltaTime * moveSpeed * movement);
 	}
-	
+
 	/// <summary>
 	/// Controls rotation of the player character based on an input vector.
 	/// </summary>
@@ -171,24 +171,24 @@ public class PlayerCharacter : Character {
 		if (direction == Vector3.zero) {
 			yield break;
 		}
-		
+
 		do {
 			this.transform.rotation = Quaternion.Lerp(
 				this.transform.rotation,
 				Quaternion.LookRotation(direction),
 				Time.deltaTime * this.rotateSpeed
-				);
+			);
 			yield return null;
 		} while ((direction - this.transform.forward).sqrMagnitude > 0.2f);
 	}
-	
+
 	public override bool Attack() {
 		bool hasAttacked = base.Attack();
 		if (hasAttacked)
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
 		return hasAttacked;
 	}
-	
+
 	public void createPath() {
 		ParticleGenerator p = (ParticleGenerator)GetComponentInChildren<ParticleGenerator> ();
 		/*if (attackType == 1) {
@@ -199,14 +199,14 @@ public class PlayerCharacter : Character {
 
 			Destroy (slash);
 		}*/
-		
+
 	}
-	
+
 	public override bool TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == 15) {
 			enDamage = enDamage;
 		}
-		
+
 		this.currentHealth = this.currentHealth - enDamage;
 		if (debug_On)
 			Debug.Log("Taking Damage: -" + enDamage);
@@ -216,7 +216,7 @@ public class PlayerCharacter : Character {
 		}
 		return false;
 	}
-	
+
 	public override void Die() {
 		if (debug_On)
 			Debug.Log("I am dead.");
@@ -227,85 +227,84 @@ public class PlayerCharacter : Character {
 		armor = null;
 		boots = null;
 		checkItemsForSet();
-		
+
 		removeWeapon ();
 	}
-	
+
 	public void setSpawn(Vector3 start) {
 		spawn = start;
 	}
-	
+
 	public void addHealth(int h) {
 		if (this.currentHealth + h <= baseMaxHealth)
 			this.currentHealth += h;
 		else
 			this.currentHealth = baseMaxHealth;
 	}
-	
+
 	public void addSpeed(float s) {
 		this.baseMoveSpeed += s;
 		updateStats ();
 	}
-	
+
 	public void addMaxHealth(int mh) {
 		baseMaxHealth += mh;
 		currentHealth += mh;
 		updateStats ();
 	}
-	
+
 	public void addDamage(int d) {
 		baseDamage += d;
 		updateStats ();
 	}
-	
+
 	public void addStartSword () {
 	}
-	
+
 	public void addHammer() {
 	}
-	
+
 	public void addSword() {
 		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
 		detector.transform.localPosition = new Vector3 (0, .4f, 10);
 		detector.transform.localScale = new Vector3 (2.5f, 3.5f, 20);
 	}
-	
+
 	public void addFoil() {
 	}
-	
-	
+
+
 	public void AOE(float radius, int damage, int dmgType){
-		Collider[] monsterColliders = Physics.OverlapSphere (this.gameObject.transform.position, radius);
+		Collider[] monsterColliders = Physics.OverlapSphere (this.transform.position, radius);
 		int i = 0;
+		
 		while (i<monsterColliders.Length) {
-			if(monsterColliders[i].tag=="Monster"){
-				EnemyCharacter target = monsterColliders[i].GetComponent<EnemyCharacter>();
-				target.TakeDamage(damage, dmgType);
-				Debug.Log ("Monster " + i + " is taking AOE dmg");
-			}
+			EnemyCharacter target = monsterColliders[i].GetComponentInParent<EnemyCharacter>();
+			//Character target = monsterColliders[i].GetComponent("Character");
+			target.TakeDamage(damage, dmgType);
 			i++;
 		}
 	}
-	
-	
+
+
 	public void removeWeapon() {
 		AttackDetector detector = (AttackDetector) GetComponentInChildren <AttackDetector>();
 		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
 		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
-	
+
 	public void equipItem(Item newItem) {
 		switch (newItem.itemType)
 		{
-		case 0:
-			this.weapon = newItem;
-			break;
-		case 1:
-			this.armor = newItem;
-			break;
-		case 2:
-			this.boots = newItem;
-			break;
+			case 0:
+				this.weapon = newItem;
+				break;
+			case 1:
+				this.armor = newItem;
+				break;
+			case 2:
+				this.boots = newItem;
+				break;
 		}
 		updateBonusStats();
 		checkItemsForSet();
@@ -371,7 +370,7 @@ public class PlayerCharacter : Character {
 				abilityLevel = 1;
 			}
 		}
-		
+	
 		if (weapon && armor && boots)
 		{
 			if (weapon.setVal == armor.setVal && weapon.setVal == boots.setVal)
@@ -381,7 +380,7 @@ public class PlayerCharacter : Character {
 			}
 		}
 	}
-	
+
 	public int calculateScore()
 	{
 		return kills * 1000 + bonusDamage * 100 + bonusMaxHealth * 50 + (int)bonusMoveSpeed * 25;
