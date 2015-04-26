@@ -245,6 +245,24 @@ public class PlayerCharacter : Character {
 		updateStats ();
 	}
 
+	public void addStartSword () {
+	}
+
+	public void addHammer() {
+	}
+
+	public void addSword() {
+		AttackDetector detector = GetComponentInChildren (AttackDetector);
+		//detector.transform.position = new Vector3(
+	}
+
+	public void addFoil() {
+	}
+
+	public void removeWeapon() {
+
+	}
+
 	public void equipItem(Item newItem) {
 		switch (newItem.itemType)
 		{
