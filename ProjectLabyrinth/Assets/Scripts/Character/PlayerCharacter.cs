@@ -56,7 +56,7 @@ public class PlayerCharacter : Character {
 	 * Set to -1 to disable the ability
 	 * Set to 0 to activate this ability, each time hammer is used, this variable will set back to HAMMER_COOLDOWN, and decremented by 1 in each update
 	 */
-	private int hammerCooldown = 0;
+	private int hammerCooldown = -1;
 	private int HAMMER_COOLDOWN = 100;
 	public EditWalls wall;
 
