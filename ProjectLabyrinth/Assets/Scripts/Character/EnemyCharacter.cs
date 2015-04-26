@@ -39,7 +39,7 @@ public class EnemyCharacter : Character {
 	}
 	
 	void FixedUpdate() {
-		if (Time.time > nextAttackTime && attackCollider != null) {
+		if (Time.time > nextAttackTime && attackCollider.Count > 0) {
 			// 10% chance for critical strikes
 			if (UnityEngine.Random.Range(0, 100) < 10) {
 				this.attackType = 15;

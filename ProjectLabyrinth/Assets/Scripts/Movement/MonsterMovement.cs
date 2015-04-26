@@ -143,12 +143,12 @@ abstract public class MonsterMovement : MonoBehaviour {
 		Transform playerTransform = player.transform;
 		float distance = Vector3.Distance (new Vector3(playerTransform.position.x, 0, playerTransform.position.z), 
 		                                   new Vector3(transform.position.x, 0, transform.position.z));
-		if (distance >= 1.5 && distance <= detectionRange) {
+		if (distance >= 1 && distance <= detectionRange) {
 			isClose = false;
 			detectionRange = 10;
 			transform.LookAt (new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 			playerDetected = true;
-		} else if(distance < 1.5) {
+		} else if(distance < 1) {
 			isClose = true;
 			doClose (playerTransform);
 		} else {
