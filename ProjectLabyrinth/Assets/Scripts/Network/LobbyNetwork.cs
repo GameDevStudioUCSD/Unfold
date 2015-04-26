@@ -31,57 +31,33 @@ public class LobbyNetwork : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
         if(Network.isServer)
         {
-            UIStatus = SERVER_UI;
-
-            SpawnPlayer();
-
             SpawnPlatform();
         }
         else
         {
-            UIStatus = CLIENT_UI;
+            // Save the Host connection information
+            ipAddress = Network.connections[0].ipAddress;
+            portNumber = Network.connections[0].port;
+            // Disconnect and reconnect to ensure prefabs instantiate in the 
+            // correct location
+            Network.Disconnect();
+            Network.Connect(ipAddress, portNumber);
         }
+        SpawnPlayer();
 
 	}
 
-    void OnGUI()
-    {
-        if(UIStatus == CLIENT_UI)
-        {
-            GUILayout.Label("Player Name:");
-            playerName = GUILayout.TextField(playerName);
-
-            GUILayout.Space(5);
-
-            //User can type in IP address for the server
-            GUILayout.Label("IP Address:");
-            ipAddress = GUILayout.TextField(ipAddress);
-
-            GUILayout.Space(5);
-
-            GUILayout.Label("Port Number:");
-            portNumber = int.Parse(GUILayout.TextField(portNumber.ToString()));
-
-            GUILayout.Space(5);
-
-            if (GUILayout.Button("Connect", GUILayout.Height(50)))
-            {
-                Network.Connect(ipAddress, portNumber);
-
-                UIStatus = 0;
-            }
-        }
-    }
 
     void OnConnectedToServer()
     {
-        SpawnPlayer();
-
-        //SpawnPlatform();
+        //SpawnPlayer();
+    }
+    void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        Network.RemoveRPCs(player);
+        Network.DestroyPlayerObjects(player);
     }
 
     private void SpawnPlayer()

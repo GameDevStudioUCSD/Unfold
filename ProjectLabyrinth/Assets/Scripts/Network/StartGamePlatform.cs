@@ -45,5 +45,10 @@ public class StartGamePlatform : MonoBehaviour {
     void StartGame()
     {
         Instantiate(loadedScene, Vector3.zero, Quaternion.identity);
+        if(Network.isServer)
+        {
+            Network.maxConnections = 0;
+            MasterServer.UnregisterHost();
+        }
     }
 }
