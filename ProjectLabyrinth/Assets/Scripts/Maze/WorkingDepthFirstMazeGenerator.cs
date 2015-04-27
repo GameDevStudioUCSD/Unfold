@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 /* @author: Michael Gonzalez
  * This class generates a random maze based off a depth-first algorithm. 
  * Credit: Wikipedia http://bit.ly/145Q9PI
@@ -8,14 +9,13 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
 	public bool debug_On = false;
 
-    private int[] neighborOrder = { NORTH, SOUTH, EAST, WEST };
     private int depth = 0;
     private float diagonalLength;
 	public WorkingDepthFirstMazeGenerator(int r, int c)
 	{
         this.Rows = r;
         this.Cols = c;
-        this.diagonalLength = Mathf.Sqrt(r * r + c * c);
+        this.diagonalLength = Mathf.Sqrt(Mathf.Pow(r, 2) + Mathf.Pow(c, 2));
 	}
 
     override public void run(Square[,] cells, Square end)
@@ -24,69 +24,54 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         this.walls = cells;
         createSquares(true);
         selectEntrance();
-        //if (exit == start)
-            EnsureExitExists();
+        EnsureExitExists();
     }
 
     //Function determines the entrance to start building the maze
     void selectEntrance()
     {
-        //Debug.Log("Trying to make entrance");
-        int edge = randomEdge();
+		Direction edge = this.randomEdge();
         start = walls[Rows / 2, Cols / 2];
         start.start = true;
-        //Debug.Log("The random edge is: " + edge);
         switch (edge)
         {
-            case NORTH:
-                //Debug.Log("Runng NORTH Code");
-                generateMaze(0, Random.Range(1, Cols - 1), SOUTH, true);
+            case Direction.North:
+                generateMaze(0, UnityEngine.Random.Range(1, Cols - 1), Direction.South, true);
                 break;
-            case SOUTH:
-                //Debug.Log("Runng SOUTH Code");
-                generateMaze(Rows - 1, Random.Range(1, Cols - 1), NORTH, true);
+            case Direction.South:
+                generateMaze(Rows - 1, UnityEngine.Random.Range(1, Cols - 1), Direction.North, true);
                 break;
-            case EAST:
-                //Debug.Log("Runng EAST Code");
-                generateMaze(Random.Range(1, Rows - 1), Cols - 1, WEST, true);
+            case Direction.East:
+                generateMaze(UnityEngine.Random.Range(1, Rows - 1), Cols - 1, Direction.West, true);
                 break;
-            case WEST:
-                //Debug.Log("Runng WEST Code");
-                generateMaze(Random.Range(1, Rows - 1), 0, EAST, true);
+            case Direction.West:
+                generateMaze(UnityEngine.Random.Range(1, Rows - 1), 0, Direction.East, true);
                 break;
 
         }
     }
 
     // Recursive function to generate maze
-    void generateMaze(int r, int c, int wallToDestroy, bool started)
+    void generateMaze(int r, int c, Direction wallToDestroy, bool started)
     {
-        //Debug.Log("Generating Maze!\n Current cell is R: " + r + " C: " + c);
         Square curr = walls[r, c];
         curr.visited = true;
-        /**if (started)
-        {
-            curr.start = started;
-            exit = curr;
-            start = curr;
-        }**/
         destroyWall(curr, wallToDestroy);
-        //Debug.Log("Curr: Wall To Destroy: " + wallToDestroy)
         if (curr.start) //Base Case 
         {
             switch (wallToDestroy)
             {
-                case NORTH:
-                    generateMaze(r - 1, c, SOUTH, false);
+                case Direction.North:
+                    generateMaze(r - 1, c, Direction.South, false);
                     break;
-                case SOUTH:
-                    generateMaze(r + 1, c, NORTH, false);
+                case Direction.South:
+                    generateMaze(r + 1, c, Direction.North, false);
                     break;
-                case EAST:
-                    generateMaze(r, c + 1, WEST, false);
+                case Direction.East:
+                    generateMaze(r, c + 1, Direction.West, false);
                     break;
-                case WEST:
-                    generateMaze(r, c - 1, EAST, false);
+                case Direction.West:
+                    generateMaze(r, c - 1, Direction.East, false);
                     break;
 
             }
@@ -100,34 +85,24 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 			{
 				continue;
 			}
-            //Debug.Log("Depth: " + depth);
             float endDist = Square.DistanceBetween(start, curr);
-            
-            /**if (hasFoundExit && endDist > .7f * (diagonalLength))
-            {
-                exit.exit = false;
-                if (debug_On)
-                	Debug.Log(exit == start);
-                curr.exit = true;
-                exit = curr;
-            }**/
-            generateMaze(next.getRow(), next.getCol(), next.getWallToDestroy(), false);
+            generateMaze(next.getRow(), next.getCol(), next.wallToDestroy, false);
             depth++;
             //Switch statement destroys the wall inside the current cell which
             //leads to the next cell
-            switch (next.getWallToDestroy())
+            switch (next.wallToDestroy)
             {
-                case NORTH:
-                    destroyWall(curr, SOUTH);
+                case Direction.North:
+                    destroyWall(curr, Direction.South);
                     break;
-                case SOUTH:
-                    destroyWall(curr, NORTH);
+                case Direction.South:
+                    destroyWall(curr, Direction.North);
                     break;
-                case EAST:
-                    destroyWall(curr, WEST);
+                case Direction.East:
+                    destroyWall(curr, Direction.West);
                     break;
-                case WEST:
-                    destroyWall(curr, EAST);
+                case Direction.West:
+                    destroyWall(curr, Direction.East);
                     break;
             }
         }
@@ -135,23 +110,6 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 
     private void EnsureExitExists()
     {
-        /**int startQuadrant = Square.DetermineQuadrant(start, walls);
-        switch(startQuadrant)
-        {
-            case 1:
-                exit = walls[Rows - 1, 0];
-                break;
-            case 2:
-                exit = walls[Rows - 1, Cols - 1];
-                break;
-            case 3:
-                exit = walls[0, 0];
-                break;
-            case 4:
-                exit = walls[0, Cols - 1];
-                break;
-        }
-        exit.exit = true;**/
         ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
         float dist = 0;
         float newDist = 1;
@@ -178,54 +136,44 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
         Stack neighbors = new Stack();
         //The first part of this function shuffles the order in which the words
         //will be checked
-        int numOfNeighbors = 4;
-        int temp, i;
-        //While there remain elements to shuffle...
-        while (numOfNeighbors > 0)
+		int[] neighborArray = (int[])Enum.GetValues(typeof(Direction));
+		for (int i = neighborArray.Length; i > 0;) {
+			int j = UnityEngine.Random.Range(0, i--);
+
+			int temp = neighborArray[i];
+			neighborArray[i] = neighborArray[j];
+			neighborArray[j] = temp;
+		}
+
+		for (int i = 0; i < neighborArray.Length; i++)
         {
-            //Pick a remaining element
-            i = Random.Range(0, numOfNeighbors--);
-            //And swap it with the current element
-            temp = neighborOrder[numOfNeighbors];
-            neighborOrder[numOfNeighbors] = neighborOrder[i];
-            neighborOrder[i] = temp;
-        }
-        // Checks the valid neighbors
-        numOfNeighbors = 4;
-        for (i = 0; i < numOfNeighbors; i++)
-        {
-            //Debug.Log("Random Neighbor list: " + neighborOrder[i]);
-            switch (neighborOrder[i])
+            switch ((Direction)neighborArray[i])
             {
-                case NORTH:
+                case Direction.North:
                     if (r - 1 >= 0 && !walls[r - 1, c].visited)
                     {
-                        //walls[r - 1, c].visited = true;
-                        walls[r - 1, c].setWallToDestroy(SOUTH);
+                        walls[r - 1, c].wallToDestroy = Direction.South;
                         neighbors.Push(walls[r - 1, c]);
                     }
                     break;
-                case SOUTH:
+                case Direction.South:
                     if (r + 1 < Rows && !walls[r + 1, c].visited)
                     {
-                        //walls[r + 1, c].visited = true;
-                        walls[r + 1, c].setWallToDestroy(NORTH);
+                        walls[r + 1, c].wallToDestroy = Direction.North;
                         neighbors.Push(walls[r + 1, c]);
                     }
                     break;
-                case EAST:
+                case Direction.East:
                     if (c + 1 < Cols && !walls[r, c + 1].visited)
                     {
-                        //walls[r, c + 1].visited = true;
-                        walls[r, c + 1].setWallToDestroy(WEST);
+                        walls[r, c + 1].wallToDestroy = Direction.West;
                         neighbors.Push(walls[r, c + 1]);
                     }
                     break;
-                case WEST:
+                case Direction.West:
                     if (c - 1 >= 0 && !walls[r, c - 1].visited)
                     {
-                        //walls[r, c - 1].visited = true;
-                        walls[r, c - 1].setWallToDestroy(EAST);
+                        walls[r, c - 1].wallToDestroy = Direction.East;
                         neighbors.Push(walls[r, c - 1]);
                     }
                     break;

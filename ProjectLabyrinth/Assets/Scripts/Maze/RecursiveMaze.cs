@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class RecursiveMaze : MazeGenerator {
     private const int MINSPACE = 1;
@@ -35,8 +35,8 @@ public class RecursiveMaze : MazeGenerator {
     {
         if (((rN) - (r0)) > MINSPACE && ((cN) - (c0)) > MINSPACE)
         {
-            int rR = Random.Range(r0 + 1, rN - 1);
-            int cR = Random.Range(c0 + 1, cN - 1);
+            int rR = UnityEngine.Random.Range(r0 + 1, rN - 1);
+			int cR = UnityEngine.Random.Range(c0 + 1, cN - 1);
             for (int r = r0; r < rN; r++)
             {
                 walls[r, cR].hasWest = true;
@@ -49,21 +49,22 @@ public class RecursiveMaze : MazeGenerator {
             generateMaze(rR, c0, rN, cR);
             generateMaze(r0, cR, rR, cN);
             generateMaze(rR, cR, rN, cN);
-            int omitDoor = randomEdge();
-            if (omitDoor != NORTH) {
-				int r = Random.Range(r0, rR);
+
+            Direction omitDoor = randomEdge();
+            if (omitDoor != Direction.North) {
+				int r = UnityEngine.Random.Range(r0, rR);
                 walls[r, cR].hasWest = false;
 			}
-            if (omitDoor != SOUTH) {
-				int r = Random.Range(rR, rN);
+            if (omitDoor != Direction.South) {
+				int r = UnityEngine.Random.Range(rR, rN);
                 walls[r, cR].hasWest = false;
 			}
-            if (omitDoor != WEST) {
-				int r = Random.Range (c0, cR);
-                walls[rR, r].hasNorth = false;
+			if (omitDoor != Direction.East) {
+				int r = UnityEngine.Random.Range(cR, cN);
+				walls[rR, r].hasNorth = false;
 			}
-            if (omitDoor != EAST) {
-				int r = Random.Range (cR, cN);
+			if (omitDoor != Direction.West) {
+				int r = UnityEngine.Random.Range(c0, cR);
                 walls[rR, r].hasNorth = false;
 			}
         }

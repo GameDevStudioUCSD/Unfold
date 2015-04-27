@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections; //Inherits Random class
+﻿using System;
+using System.Collections;
+using UnityEngine;
 /* @author: Michael Gonzalez
  * This abstract class provides a basic model for each maze generation 
  * algorithm. Please override the run method to implement new algorithms.
@@ -10,11 +11,6 @@ using System.Collections; //Inherits Random class
  */
 public abstract class MazeGenerator
 {
-    protected const int NORTH = 0;
-    protected const int SOUTH = 1;
-    protected const int EAST = 2;
-    protected const int WEST = 3;
-
     protected int Rows, Cols;
     protected Square[,] walls;
     protected Square start;
@@ -41,33 +37,30 @@ public abstract class MazeGenerator
      * @param cell - Cell in which walls are stored.
      * @param wallToDestroy - Which wall to destroy
      */
-    protected void destroyWall(Square cell, int wallToDestroy)
+    protected void destroyWall(Square cell, Direction wallToDestroy)
     {
         switch (wallToDestroy)
         {
-            case NORTH:
-                //Debug.Log("Removing NORTH Wall");
+            case Direction.North:
                 cell.hasNorth = false;
                 break;
-            case SOUTH:
-                //Debug.Log("Removing SOUTH Wall");
+            case Direction.South:
                 cell.hasSouth = false;
                 break;
-            case EAST:
-                //Debug.Log("Removing EAST Wall");
+            case Direction.East:
                 cell.hasEast = false;
                 break;
-            case WEST:
-                //Debug.Log("Removing WEST Wall");
+            case Direction.West:
                 cell.hasWest = false;
                 break;
         }
     }
 
-    // Function returns an int that corrolates to a wall
-    protected int randomEdge()
-    {
-        return Random.Range(0, 3);
-    }
-
+	/// <summary>
+	/// Returns a random Direction representing a wall.
+	/// </summary>
+	/// <returns>A random direction.</returns>
+	protected Direction randomEdge() {
+		return (Direction)UnityEngine.Random.Range(0, Enum.GetNames(typeof(Direction)).Length - 1);
+	}
 }

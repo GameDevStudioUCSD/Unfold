@@ -14,27 +14,19 @@ using System.Collections.Generic;
  * @param exit - GameObject to signify the end of the maze
  */
 public class MazeGeneratorController : MonoBehaviour {
-    const int NORTH = 0;
-    const int SOUTH = 1;
-    const int EAST = 2;
-    const int WEST = 3;
-    //Define new algorithm types here
-    public const int DepthFirst = 0;
-    public const int Recursive = 1;
 
+	// Define new algorithm types here
+	public enum AlgorithmChoice {
+		DepthFirst,
+		Recursive
+	};
 
     public int Rows = 20;
     public int Cols = 20;
     public float wallSize = 10;
-    public enum AlgorithmChoice
-    {
-        DepthFirst,
-        Recursive
-    };
-    
     public AlgorithmChoice algorithm;
     public TextureController.TextureChoice levelType;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Player, ExitMarker, DebugSphere;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Player, ExitMarker;
     public GameObject[] spawnList;
 	public FogOfWar light;
     public bool debug_ON = false;
@@ -49,10 +41,6 @@ public class MazeGeneratorController : MonoBehaviour {
     private SortedDictionary<string, GameObject> westWalls;
     private GameObject innerWall;
     private GameObject gameTypeObj;
-    public MazeGeneratorController(AlgorithmChoice algorithm)
-    {
-        algorithm = this.algorithm;
-    }
 
 	public MazeInfo mi;
 
@@ -209,16 +197,6 @@ public class MazeGeneratorController : MonoBehaviour {
         {
             for (int c = 0; c < Cols; c++)
             {
-                // Displays indexing spheres
-                if(debug_ON)
-                {
-                    GameObject indexSphere = (GameObject)Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 15, c * wallSize), rot, 0);
-                    float red = ((float)r / Rows);
-                    float blue = ((float)c / Cols);
-                    Color indexColor = new Color(red, 0, blue);
-                    indexSphere.GetComponent<Renderer>().material.SetColor("_Color", indexColor);
-
-                }
                 curr = walls[r, c];
                 pos = new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol());
                 if(curr.hasNorth)
@@ -256,7 +234,7 @@ public class MazeGeneratorController : MonoBehaviour {
                     instantiationList.Push(objToInstantiate);
                 }
 				if (this.light != null) {
-					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, new Vector3(pos.x, pos.y + 5, pos.z), rot, 0);
+					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 5 * Vector3.up, rot, 0);
 					instantiationList.Push(objToInstantiate);
 				}
                 
@@ -285,8 +263,6 @@ public class MazeGeneratorController : MonoBehaviour {
             GameObject monsterToSpawn = Spawner.NextSpawn(curr, spawnList, 100 - spawningRate);
             int r = curr.getRow();
             int c = curr.getCol();
-            if(debug_ON)
-                Network.Instantiate(DebugSphere, new Vector3(r * wallSize, 10, c * wallSize), Quaternion.identity, 0);
             if (monsterToSpawn != null)
             {
 				float monsterHeight = 0;
@@ -309,11 +285,4 @@ public class MazeGeneratorController : MonoBehaviour {
 	{
 		return walls;
 	}
-
-    public void createPlayer()
-    {
-    	//GameObject child;
-		/*child = (GameObject) Network.Instantiate(Player, new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol()), Quaternion.identity, 0);
-		//child.name = child.name.Replace("(Clone)", "");*/
-    }
 }
