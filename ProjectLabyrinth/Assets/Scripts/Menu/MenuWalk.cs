@@ -31,7 +31,7 @@ public class MenuWalk : MonoBehaviour {
 	void Update () {
 		float distCovered = (Time.time - startTime) * speed;
 		float fracJourney = distCovered / journeyLength;
-		   transform.position = Vector3.Lerp(to, from, fracJourney);
+		transform.position = Vector3.Lerp(to, from, fracJourney);
 	}
 
 }

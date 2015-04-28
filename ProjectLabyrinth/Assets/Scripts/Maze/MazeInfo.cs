@@ -5,22 +5,8 @@ public class MazeInfo : MonoBehaviour {
 	public MazeGeneratorController maze;
 	public Square[,] walls { get; set; }
 	public float wallSize { get; set; }
-	public bool debug;
 
 	public bool exists {get; set;}
-
-
-	// Use this for initialization
-	void Start () {
-		if (debug)
-			Debug.Log ("I was called!");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (debug)
-			Debug.Log ("I was called too!");
-	}
 
 	public void setWalls(Square[,] walls) {
 		this.walls = walls;

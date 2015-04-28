@@ -15,7 +15,8 @@ public class EditFloor : MonoBehaviour {
     [RPC]
     public void ModifyFloorSize(float wallSize, int rows, int cols)
     {
-        transform.localScale += new Vector3((wallSize * rows / 10), 0, (wallSize * cols / 10));
+		this.transform.position -= new Vector3(wallSize / 2, 0, wallSize / 2);
+        transform.localScale += new Vector3((wallSize * rows / 10) - 1, 0, (wallSize * cols / 10) - 1);
     }
     [RPC]
     public void UpdateTexture( int texture)

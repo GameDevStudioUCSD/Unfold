@@ -32,7 +32,7 @@ public class Square
     // variable provides space to store the fact the north wall in the current
     // square can be destroyed and the south wall in the square above it is 
     // destroyed as well.
-    private int wallToDestroy;
+	public Direction wallToDestroy { get; set; }
 	public Square(int r, int c)
         :this(r,c,true)
 	{
@@ -81,8 +81,6 @@ public class Square
     }
     public int getRow() { return row; }
     public int getCol() { return col; }
-    public int getWallToDestroy() { return wallToDestroy;  }
-    public void setWallToDestroy(int w2d) { wallToDestroy = w2d; }
     public static void ResetVisitedFlags( Square cell )
     {
         cell.visited = false;

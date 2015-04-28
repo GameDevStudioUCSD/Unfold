@@ -14,7 +14,7 @@ public class CreateGame : MonoBehaviour {
     public int portNumber = 26500;
     public Text gameNameInputField;
     public Transform gameTypeToggleGroup;
-    public delegate void LoadWaitingRoom();
+    public GameObject errorMessage;
 
     private enum HostError
     {
@@ -76,6 +76,11 @@ public class CreateGame : MonoBehaviour {
         {
             retVal = false;
             Debug.LogError("Please define a Game Type Toggle Group");
+        }
+        if(errorMessage == null )
+        {
+            retVal = false;
+            Debug.LogError("Please define the error message prefab");
         }
         return retVal;
     }
@@ -164,10 +169,28 @@ public class CreateGame : MonoBehaviour {
     }
     private void HandleError(HostError error)
     {
+        ErrorText errorText = null;
         if(error != HostError.AlreadyMakingGame)
         {
+            GameObject errorPanel;
             isTryingToCreateGame = false;
+            errorPanel = (GameObject)Instantiate(errorMessage, Vector3.zero, Quaternion.identity);
+            errorPanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            errorText = errorPanel.GetComponent<ErrorText>();
         }
+        switch (error)
+        {
+            case HostError.GameNameInvalid:
+                errorText.SetErrorText("Please enter a game name!");
+                break;
+            case HostError.ServerFailedToInstantiate:
+                errorText.SetErrorText("Could not create server!\nAre you connected to the internet?");
+                break;
+            case HostError.FailedToConnectToMasterServer:
+                errorText.SetErrorText("Could not connect to Unfold master server");
+                break;
+        }
+        
     }
     private void EnterGame()
     {
