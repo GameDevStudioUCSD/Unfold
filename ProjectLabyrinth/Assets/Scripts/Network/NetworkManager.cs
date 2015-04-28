@@ -96,7 +96,9 @@ public class NetworkManager : MonoBehaviour {
         /* Assign the player's number to their name */
         player.name = player.name + " " + (playerNumber+1).ToString();
 
-		skPrefab.GetComponent<ScoreKeeper> ().addPlayer(player.name);
+		/* Causes a null pointer exception. Commenting out to prevent it right now */
+		/* TODO: Fix this! */
+		// skPrefab.GetComponent<ScoreKeeper> ().addPlayer(player.name);
         
 		player.GetComponentInChildren<PlayerCharacter>().data.name = player.name; 
 
