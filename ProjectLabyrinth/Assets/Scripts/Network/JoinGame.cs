@@ -17,7 +17,7 @@ public class JoinGame : MonoBehaviour {
     private SpriteController spriteController;
     private GameObject playerLocal, uiMenu;
 
-    public GameObject buttonPrefab;
+    public GameObject buttonPrefab, connectionInfo;
     public int connectionRetryAttempts = 2;
     public bool debugOn = true;
     public bool isSpoofingServer = false;
@@ -31,6 +31,11 @@ public class JoinGame : MonoBehaviour {
         if(buttonPrefab == null)
         {
             Debug.LogError("ButtonPrefab not set to a value");
+            return;
+        }
+        if(connectionInfo == null)
+        {
+            Debug.LogError("ConnectionInfo not set to a value");
             return;
         }
         spriteController = new SpriteController();
@@ -116,7 +121,8 @@ public class JoinGame : MonoBehaviour {
             gameType = (TextureController.TextureChoice)gameTypeInt;
             numberOfConnectedPlayers = gameList[i].connectedPlayers;
             CreateNewButton(gameList[i].gameName, gameType);
-            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i));
+            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i, connectionInfo));
+            currentButton.onClick.AddListener(() => EnterGame());
         }
         
     }

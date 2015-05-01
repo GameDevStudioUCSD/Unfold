@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MasterServerManager {
+public class MasterServerManager : MonoBehaviour{
     /// <summary>
     /// @author: Michael Gonzalez
     /// This class implements the Unity Master Server to allow users to easily
@@ -42,7 +42,7 @@ public class MasterServerManager {
             Debug.Log("Trying to register game as type (" + gameTitle + ") under name (" + gameName + ")");
         }
     }
-    public void ConnectToGame(int hostIndex)
+    public void ConnectToGame(int hostIndex, GameObject connectionInfo)
     {
         if(!IndexInRange(--hostIndex, gameList.Length, "ConnectToGame"))
         {
@@ -52,7 +52,10 @@ public class MasterServerManager {
             return;
         }
         lastConnectionAttempt = gameList[hostIndex].ip;
-        Network.Connect(lastConnectionAttempt, portNumber);
+        GameObject cInfo = (GameObject)Instantiate(connectionInfo);
+        ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();
+        cInfoScript.setInfo(lastConnectionAttempt, portNumber);
+        //Network.Connect(lastConnectionAttempt, portNumber);
         if(debugOn)
         {
             Debug.Log("Host IP: " + gameList[hostIndex].ip);

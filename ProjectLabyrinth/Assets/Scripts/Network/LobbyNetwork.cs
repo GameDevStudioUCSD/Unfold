@@ -36,19 +36,23 @@ public class LobbyNetwork : MonoBehaviour {
         if(Network.isServer)
         {
             SpawnPlatform();
+        SpawnPlayer();
         }
         else
         {
-            // Save the Host connection information
+            /*// Save the Host connection information
             ipAddress = Network.connections[0].ipAddress;
             portNumber = Network.connections[0].port;
             // Disconnect and reconnect to ensure prefabs instantiate in the 
             // correct location
             Network.Disconnect();
             isReconnecting = true;
-            timeToReconnect = (Time.time + 1);
+            timeToReconnect = (Time.time + 1);*/
+            GameObject cInfo = GameObject.Find("ConnectionInfo");
+            ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();
+            Debug.Log(cInfoScript.ipAddress[0]);
+            Network.Connect(cInfoScript.ipAddress, cInfoScript.portNumber);
         }
-        SpawnPlayer();
 
 	}
 
@@ -65,6 +69,7 @@ public class LobbyNetwork : MonoBehaviour {
     void OnConnectedToServer()
     {
         //SpawnPlayer();
+        SpawnPlayer();
     }
     void OnPlayerDisconnected(NetworkPlayer player)
     {
