@@ -297,6 +297,27 @@ public class PlayerCharacter : Character {
 	}
 	
 	public void toggleAbility() {
+		if(usingAbility) {
+			removeWeapon ();
+		}
+		else {
+			if(ability.Equals ("hammer")) {
+				addHammer ();
+			}
+
+			else if(ability.Equals ("sword")) {
+				addSword ();
+			}
+
+			else if(ability.Equals("foil")) {
+				addFoil ();
+			}
+
+			else if(ability.Equals ("startsword")) {
+				addStartSword ();
+			}
+		}
+
 		usingAbility = !usingAbility;
 	}
 

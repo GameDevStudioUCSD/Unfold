@@ -100,7 +100,8 @@ public class NetworkManager : MonoBehaviour {
 		/* TODO: Fix this! */
 		// skPrefab.GetComponent<ScoreKeeper> ().addPlayer(player.name);
         
-		player.GetComponentInChildren<PlayerCharacter>().data.name = player.name; 
+		/* TODO: this doesn't work either */
+		// player.GetComponentInChildren<PlayerCharacter>().data.name = player.name; 
 
         /* Set the player's spawn location */
 		player.GetComponentInChildren<PlayerCharacter> ().setSpawn (spawnLocation);
