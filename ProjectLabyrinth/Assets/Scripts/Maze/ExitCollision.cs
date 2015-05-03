@@ -14,8 +14,10 @@ public class ExitCollision : AbstractGUI {
 	
 	void OnTriggerEnter (Collider other)
 	{
-		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
-		if (hitDetector) {
+        GameObject gameObj = other.gameObject;
+        HitDetector hitDetector = gameObj.GetComponent<HitDetector>();
+		NetworkView nView = gameObj.GetComponentInParent<NetworkView>();
+		if (hitDetector && nView && nView.isMine) {
             Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
 			this.hasReached = true;

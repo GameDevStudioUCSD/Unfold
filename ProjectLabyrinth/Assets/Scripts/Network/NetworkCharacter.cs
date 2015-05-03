@@ -8,6 +8,7 @@ public class NetworkCharacter : MonoBehaviour {
     RectTransform trans;
     NetworkView nView;
     Animator animator;
+    private bool hasStarted = false;
 	// Use this for initialization
     public enum PlayerAnimation 
     {
@@ -15,6 +16,7 @@ public class NetworkCharacter : MonoBehaviour {
         Walking 
     }
 	void Start () {
+        hasStarted = true;
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
         animator = this.GetComponentInChildren<Animator>();
@@ -23,6 +25,8 @@ public class NetworkCharacter : MonoBehaviour {
 	// Update is called once per frame
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
+        if (stream == null || !hasStarted)
+            return;
         if(stream.isWriting)
         { //Sending
             truePosition = trans.position;
@@ -44,13 +48,17 @@ public class NetworkCharacter : MonoBehaviour {
 	}
     void UpdatePosition(Vector3 a, Vector3 b)
     {
-        if (Vector3.Distance(a, b) < .5f)
+        if (a == null || b == null)
+            return;
+        if (Vector3.Distance(a, b) < .1f)
             return;
         trans.position = Vector3.Lerp(a, b, Time.deltaTime * 5);
     }
     void UpdateRotation(Quaternion a, Quaternion b)
     {
-        if (Quaternion.Angle(a, b) < 10)
+        if (a == null || b == null)
+            return;
+        if (Quaternion.Angle(a, b) < 1)
             return;
         trans.rotation = Quaternion.Slerp(a, b, Time.deltaTime * 5);
     }
