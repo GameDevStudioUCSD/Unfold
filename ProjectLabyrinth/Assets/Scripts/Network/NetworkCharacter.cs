@@ -17,7 +17,7 @@ public class NetworkCharacter : MonoBehaviour {
 	void Start () {
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
-        animator = this.GetComponent<Animator>();
+        animator = this.GetComponentInChildren<Animator>();
 	}
 	
 	// Update is called once per frame
