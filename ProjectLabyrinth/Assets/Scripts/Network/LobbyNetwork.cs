@@ -36,7 +36,7 @@ public class LobbyNetwork : MonoBehaviour {
         if(Network.isServer)
         {
             SpawnPlatform();
-        SpawnPlayer();
+            SpawnPlayer();
         }
         else
         {

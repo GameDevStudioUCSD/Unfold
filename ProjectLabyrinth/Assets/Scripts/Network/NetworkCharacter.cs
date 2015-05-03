@@ -14,13 +14,16 @@ public class NetworkCharacter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if(nView.isMine)
-        {
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        if(stream.isWriting)
+        { //Sending
             truePosition = trans.position;
+            stream.Serialize(ref truePosition);
         }
         else
-        {
+        { // Receiving
+            stream.Serialize(ref truePosition);
             UpdatePosition(trans.position, truePosition);
         }
 	}
