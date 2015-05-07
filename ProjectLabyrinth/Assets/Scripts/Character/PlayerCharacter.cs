@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +56,8 @@ public class PlayerCharacter : Character {
 
 	private GameObject floor;
 
+	public GameObject[] weaponList;
+
 	/* 
 	 * The cooldown timer for breaking the wall 
 	 * Set to -1 to disable the ability
@@ -81,7 +84,7 @@ public class PlayerCharacter : Character {
 		// dirty solution to players being pushed around by enemies
 		transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-		if (hammerCooldown != -1 && --hammerCooldown < 0) {
+		if (debug_On && hammerCooldown != -1 && --hammerCooldown < 0) {
 			Debug.Log("Hammer available!");
 			hammerCooldown = 0;
 		}
@@ -302,19 +305,19 @@ public class PlayerCharacter : Character {
 
 		switch(weaponType) {
 			case "hammer":
-				// stuff
+				weaponList[0].SetActive (true);
 				break;
 
 			case "sword":
-				// stuff
+				weaponList[1].SetActive (true);
 				break;
 
 			case "foil":
-				// stuff
+				weaponList[2].SetActive (true);
 				break;
 
 			case "startsword":
-				// stuff
+				weaponList[3].SetActive (true);
 				break;
 
 			default:
@@ -326,6 +329,17 @@ public class PlayerCharacter : Character {
 		if(valid) {
 			ability = weaponType;
 		}
+	}
+
+	// Removes the player's ability.
+	public void removeAbility() {
+		removeWeapon ();
+
+		for(int i = 0; i < weaponList.Length; i++) {
+			weaponList[i].SetActive (false);
+		}
+
+		ability = "";
 	}
 	
 	public void toggleAbility() {

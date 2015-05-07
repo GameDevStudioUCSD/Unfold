@@ -81,8 +81,8 @@ public class Pickup : MonoBehaviour {
 				if (debug_On)
 					Debug.Log ("Adding start sword");
 				
-				player.removeWeapon();
-				player.addStartSword ();
+				player.removeAbility();
+				player.addAbility ("startsword");
 				break;
 
 			/* Hammer (Break walls) */
@@ -90,24 +90,24 @@ public class Pickup : MonoBehaviour {
 				if(debug_On)
 					Debug.Log ("Adding hammer");
 
-				player.removeWeapon ();
-				player.addHammer ();
+				player.removeAbility ();
+				player.addAbility ("hammer");
 				break;
 
 			case 6:
 				if(debug_On)
 					Debug.Log ("Adding sword");
 
-				player.removeWeapon ();
-				player.addSword ();
+				player.removeAbility ();
+				player.addAbility ("sword");
 				break;
 
 			case 7:
 				if(debug_On)
 					Debug.Log ("Adding foil");
 				
-				player.removeWeapon ();
-				player.addFoil ();
+				player.removeAbility ();
+				player.addAbility ("foil");
 				break;
 		}
 	}
