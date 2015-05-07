@@ -295,8 +295,41 @@ public class PlayerCharacter : Character {
 
 	public void addFoil() {
 	}
+
+	// 
+	public void addAbility(string weaponType) {
+		bool valid = true;
+
+		switch(weaponType) {
+			case "hammer":
+				// stuff
+				break;
+
+			case "sword":
+				// stuff
+				break;
+
+			case "foil":
+				// stuff
+				break;
+
+			case "startsword":
+				// stuff
+				break;
+
+			default:
+				Debug.Log ("that wasn't a valid weapon, friend");
+				valid = false;
+				break;
+		}
+
+		if(valid) {
+			ability = weaponType;
+		}
+	}
 	
 	public void toggleAbility() {
+		Debug.Log ("Click");
 		if(usingAbility) {
 			removeWeapon ();
 		}
