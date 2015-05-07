@@ -21,6 +21,8 @@ public class LobbyNetwork : MonoBehaviour {
     private string playerName = "Default Player";
     private string ipAddress = "127.0.0.1";
     private int portNumber = 26500;
+    private bool isReconnecting = false;
+    private float timeToReconnect;
 
     private int UIStatus = 0;
 
@@ -34,25 +36,40 @@ public class LobbyNetwork : MonoBehaviour {
         if(Network.isServer)
         {
             SpawnPlatform();
+            SpawnPlayer();
         }
         else
         {
-            // Save the Host connection information
+            /*// Save the Host connection information
             ipAddress = Network.connections[0].ipAddress;
             portNumber = Network.connections[0].port;
             // Disconnect and reconnect to ensure prefabs instantiate in the 
             // correct location
             Network.Disconnect();
-            Network.Connect(ipAddress, portNumber);
+            isReconnecting = true;
+            timeToReconnect = (Time.time + 1);*/
+            GameObject cInfo = GameObject.Find("ConnectionInfo");
+            ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();
+            Debug.Log(cInfoScript.ipAddress[0]);
+            Network.Connect(cInfoScript.ipAddress, cInfoScript.portNumber);
         }
-        SpawnPlayer();
 
 	}
+
+    void Update()
+    {
+        if(isReconnecting && Time.time > timeToReconnect)
+        {
+            Network.Connect(ipAddress, portNumber);
+            isReconnecting = false;
+        }
+    }
 
 
     void OnConnectedToServer()
     {
         //SpawnPlayer();
+        SpawnPlayer();
     }
     void OnPlayerDisconnected(NetworkPlayer player)
     {
