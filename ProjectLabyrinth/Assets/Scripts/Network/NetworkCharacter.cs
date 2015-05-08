@@ -5,11 +5,13 @@ public class NetworkCharacter : MonoBehaviour {
     Vector3 truePosition;
     Quaternion trueRotation;
     int animationState;
+    float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
+    float startTime, endTime, currentTime;
     RectTransform trans;
     NetworkView nView;
+        
     Animator animator;
     private bool hasStarted = false;
-	// Use this for initialization
     public enum PlayerAnimation 
     {
         Idle,
@@ -20,9 +22,10 @@ public class NetworkCharacter : MonoBehaviour {
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
         animator = this.GetComponentInChildren<Animator>();
+        lastNetworkMessage = Time.time;
+        timeBetweenNetworkMessage = lastNetworkMessage;
 	}
-	
-	// Update is called once per frame
+
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
         if (stream == null || !hasStarted)
@@ -35,17 +38,36 @@ public class NetworkCharacter : MonoBehaviour {
             stream.Serialize(ref truePosition);
             stream.Serialize(ref trueRotation);
             stream.Serialize(ref animationState);
+        
         }
         else
         { // Receiving
+            float tempTime = Time.time;
+            timeBetweenNetworkMessage = tempTime;
+            timeBetweenNetworkMessage -= lastNetworkMessage;
+            lastNetworkMessage = tempTime;
+            SetTimes();
             stream.Serialize(ref truePosition);
             stream.Serialize(ref trueRotation);
             stream.Serialize(ref animationState);
+        }
+	}
+    void Update()
+    {
+        if(!nView.isMine)
+        {
+            currentTime = (Time.time - lastNetworkMessage);
+            lerpVal = (currentTime / endTime);
             UpdatePosition(trans.position, truePosition);
             UpdateRotation(trans.rotation, trueRotation);
             UpdateAnimationState((PlayerAnimation)animationState);
         }
-	}
+    }
+    void SetTimes()
+    {
+        startTime = Time.time - lastNetworkMessage;
+        endTime = startTime + timeBetweenNetworkMessage;
+    }
     void UpdatePosition(Vector3 a, Vector3 b)
     {
         if (a == null || b == null)
@@ -54,6 +76,7 @@ public class NetworkCharacter : MonoBehaviour {
             return;
         trans.position = Vector3.Lerp(a, b, Time.deltaTime * 5);
     }
+        
     void UpdateRotation(Quaternion a, Quaternion b)
     {
         if (a == null || b == null)
