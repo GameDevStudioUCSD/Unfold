@@ -11,7 +11,7 @@ public class SpiderMovement : MonsterMovement {
 		transform.Translate (Vector3.forward * SPEED);
 	}
 
-	public override void AI()
+	public override void idleManeuver()
 	{
 
 		
