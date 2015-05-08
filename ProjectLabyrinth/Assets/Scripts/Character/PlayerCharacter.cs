@@ -57,6 +57,7 @@ public class PlayerCharacter : Character {
 	private GameObject floor;
 
 	public GameObject[] weaponList;
+	public WeaponButton weaponButton;
 
 	/* 
 	 * The cooldown timer for breaking the wall 
@@ -343,7 +344,10 @@ public class PlayerCharacter : Character {
 	}
 	
 	public void toggleAbility() {
-		Debug.Log ("Click");
+		if(ability == "") {
+			return;
+		}
+
 		if(usingAbility) {
 			removeWeapon ();
 		}
@@ -363,6 +367,7 @@ public class PlayerCharacter : Character {
 			else if(ability.Equals ("startsword")) {
 				addStartSword ();
 			}
+
 		}
 
 		usingAbility = !usingAbility;
