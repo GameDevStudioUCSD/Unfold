@@ -49,7 +49,7 @@ public class Pickup : MonoBehaviour {
 	
 	void pickedUp()
 	{
-		WeaponButton button = player.transform.parent.GetComponentInChildren<WeaponButton> ();
+		WeaponButton button = player.weaponButton;
 		switch (type)
 		{
 			/*health*/
@@ -84,7 +84,7 @@ public class Pickup : MonoBehaviour {
 				
 //				player.removeAbility();
 //				player.addAbility ("startsword");
-				button.setWeapon (new StartSword(), 3);
+				button.setWeapon (3);
 				break;
 
 			/* Hammer (Break walls) */
@@ -94,7 +94,7 @@ public class Pickup : MonoBehaviour {
 
 //				player.removeAbility ();
 //				player.addAbility ("hammer");
-				button.setWeapon (new Hammer(), 0);
+				button.setWeapon (0);
 				break;
 
 			case 6:
@@ -103,7 +103,7 @@ public class Pickup : MonoBehaviour {
 
 //				player.removeAbility ();
 //				player.addAbility ("sword");
-				button.setWeapon(new Sword(), 1);
+				button.setWeapon(1);
 				break;
 
 			case 7:
@@ -112,7 +112,7 @@ public class Pickup : MonoBehaviour {
 				
 //				player.removeAbility ();
 //				player.addAbility ("foil");
-				button.setWeapon (new Foil(), 2);
+				button.setWeapon (2);
 				break;
 		}
 	}

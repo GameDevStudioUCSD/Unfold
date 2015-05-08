@@ -13,7 +13,7 @@ public class WeaponButton : MonoBehaviour {
 	public bool cooldown { get; set; }
 
 	public Weapon weapon { get; set; }
-	public GameObject[] weaponList;
+	public Weapon[] weaponList;
 
 	private int cooldownCount = 0;
 
@@ -35,20 +35,20 @@ public class WeaponButton : MonoBehaviour {
 		}
 	}
 
-	public void setWeapon(Weapon w, int num) {
+	public void setWeapon(int num) {
 		gameObject.SetActive (true);
-		weapon = w;
 		for(int i = 0; i < weaponList.Length; i++) {
-			weaponList[i].SetActive(false);
+			weaponList[i].gameObject.SetActive(false);
 		}
 
-		weaponList [num].SetActive (true);
+		weaponList [num].gameObject.SetActive (true);
+		weapon = weaponList [num];
 	}
 
 	public void removeWeapon() {
 		gameObject.SetActive (false);
 		for(int i = 0; i < weaponList.Length; i++) {
-			weaponList[i].SetActive (false);
+			weaponList[i].gameObject.SetActive (false);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class WeaponButton : MonoBehaviour {
 			deactivate ();
 		}
 
-		if(!active && !cooldown) {
+		else if(!active && !cooldown) {
 			activate();
 		}
 	}

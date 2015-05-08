@@ -248,6 +248,8 @@ public class PlayerCharacter : Character {
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
 
+		weaponButton.removeWeapon ();
+
 		weapon = null;
 		armor = null;
 		boots = null;
@@ -389,9 +391,9 @@ public class PlayerCharacter : Character {
 
 	public void removeWeapon() {
 		this.hammerCooldown = -1;
-		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
-		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
-		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
+//		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
+//		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
+//		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
 
 	public void equipItem(Item newItem) {
