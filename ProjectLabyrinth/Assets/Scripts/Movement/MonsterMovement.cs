@@ -41,71 +41,43 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-            /*
-		transform.Translate (Vector3.forward * SPEED);
+    void Update()
+    {
+        // Stunned is a countdown - once the countdown is up, continue moving towards the player
+        if (Network.isServer)
+        {
+            planMovement();
+        }
 
-		if (canTurn && isInCenter ()) {
-			Square curr = getCurrSquare(transform.position.x, transform.position.z);
-			bool[] sides = getSides (curr);
-			if (isFork (sides)) {
-				bool found = false;
-				sides[(direction + 2) % 4] = true; // Don't want to turn around
-
-				while (!found) {
-					int side = Random.Range (0, 4);
-					found = !sides[side];
-
-					if (found) {
-						turn (side);
-					}
-				}
-			} else if (isCorner(sides)) {
-				sides[(direction + 2) % 4] = true;
-
-				if(sides[(direction + 1) % 4]) {
-					turn ((direction + 3) % 4);
-				} else {
-					turn ((direction + 1) % 4);
-				}
-			} else if (isDeadEnd(sides)) {
-				turn ((direction + 2) % 4);
-			}
-			canTurn = false;
-		} else if (!canTurn && movingVert () && Mathf.Abs (transform.position.x - Mathf.Round (transform.position.x)) < .2 && 
-			Mathf.Round (transform.position.x) % mazeGen.wallSize == Mathf.Round(mazeGen.wallSize / 2)) {
-
-			canTurn = true;
-		} else if (!canTurn && movingHoriz () && Mathf.Abs (transform.position.z - Mathf.Round (transform.position.z)) < .2 && 
-			Mathf.Round (transform.position.z) % mazeGen.wallSize == Mathf.Round(mazeGen.wallSize / 2)) {
-
-			canTurn = true;
-		} */
-
-		// Stunned is a countdown - once the countdown is up, continue moving towards the player
-		if (stunned == 0) {
-			if(!attacking) {
-				approachPlayer();
-				if(!playerDetected) {
-					AI ();
-				}
-
-				if(!isClose) {
-					maneuver ();
-				}
-			}
-
-			else {
-				doAttack();
-			}
-
-		} else {
-			stunned -= 1;
-		}
-	}
-
+    }
+    private void planMovement()
+    {
+        if (stunned == 0)
+        {
+            if (!attacking)
+            {
+                approachPlayer();
+                if (!playerDetected)
+                {
+                    idleManeuver();
+                }
+                if (!isClose)
+                {
+                    maneuver();
+                }
+            }
+            else
+            {
+                doAttack();
+            }
+        }
+        else
+        {
+            stunned -= 1;
+        }
+    }
 	abstract public void maneuver ();
-	abstract public void AI ();
+	abstract public void idleManeuver ();
 	abstract public void doClose (Transform player);
 	abstract public void doAttack();
 
