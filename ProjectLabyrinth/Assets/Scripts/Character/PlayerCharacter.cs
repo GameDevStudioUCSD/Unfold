@@ -201,7 +201,7 @@ public class PlayerCharacter : Character {
 
 	public override bool Attack() {
 		// Test if the weapon is hammer
-		if (weaponButton.weapon == weaponButton.weaponList[0] || true) {
+		if (weaponButton.weapon == weaponButton.weaponList[0]) {
 			if (weaponButton.wall != null) {
 				Debug.Log("Destroy the wall!");
 				weaponButton.wall.DestroyWall();
