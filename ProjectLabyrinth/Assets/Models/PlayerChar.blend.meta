@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 703a8201cb9234b4f9c9fcadce646555
-timeCreated: 1431060297
+timeCreated: 1431212559
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -55,8 +55,9 @@ ModelImporter:
     7400004: AttackLR
     7400006: AttackRL
     7400008: AttackUD
-    7400010: Moving
-    7400012: Standing
+    7400010: Idling
+    7400012: Moving
+    7400014: Standing
     9500000: //RootNode
     13700000: PlayerModel
   materials:
