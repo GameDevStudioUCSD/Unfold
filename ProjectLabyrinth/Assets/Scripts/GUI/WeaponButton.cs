@@ -50,6 +50,7 @@ public class WeaponButton : MonoBehaviour {
 		for(int i = 0; i < weaponList.Length; i++) {
 			weaponList[i].gameObject.SetActive (false);
 		}
+		weapon = null;
 	}
 
 	void deactivate() {

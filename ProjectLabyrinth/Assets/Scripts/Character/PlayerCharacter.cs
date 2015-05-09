@@ -209,8 +209,10 @@ public class PlayerCharacter : Character {
 			hammerCooldown = HAMMER_COOLDOWN;
 		}
 		bool hasAttacked = base.Attack();
-		if (hasAttacked)
+		if (hasAttacked && weaponButton.active) {
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
+			weaponButton.setCooldown ();
+		}
 		return hasAttacked;
 	}
 
