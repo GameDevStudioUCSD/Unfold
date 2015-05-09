@@ -5,14 +5,13 @@ public class EditWalls : MonoBehaviour {
 	public bool debugOn = false;
 	//public GameObject container;
 	private Transform wallTransform;
-	public int health;
+	public int health = 3;
 	void Start() {
 		GameObject mazeRoot = GameObject.Find("Maze");
 		if (mazeRoot != null) {
 			wallTransform = GetComponent<Transform>();
 			wallTransform.parent = mazeRoot.GetComponent<Transform>();
 		}
-		this.health = 3;
 	}
 	private void FindInnerWall() {
 		wallTransform = GetComponent<Transform>();

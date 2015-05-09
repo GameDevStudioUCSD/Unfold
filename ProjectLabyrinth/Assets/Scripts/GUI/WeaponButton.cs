@@ -17,38 +17,41 @@ public class WeaponButton : MonoBehaviour {
 
 	private int cooldownCount = 0;
 
+	/* The wall marked for hammer */
+	public EditWalls wall { get; set; }
+
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		image = (Image) gameObject.GetComponent<Image>();
 		active = false;
 		cooldown = false;
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if(cooldownCount > 0) {
+	void Update() {
+		if (cooldownCount > 0) {
 			cooldownCount--;
-			if(cooldownCount == 0) {
+			if (cooldownCount == 0) {
 				cooldown = false;
-				deactivate ();
+				deactivate();
 			}
 		}
 	}
 
 	public void setWeapon(int num) {
-		gameObject.SetActive (true);
-		for(int i = 0; i < weaponList.Length; i++) {
+		gameObject.SetActive(true);
+		for (int i = 0; i < weaponList.Length; i++) {
 			weaponList[i].gameObject.SetActive(false);
 		}
 
-		weaponList [num].gameObject.SetActive (true);
-		weapon = weaponList [num];
+		weaponList[num].gameObject.SetActive(true);
+		weapon = weaponList[num];
 	}
 
 	public void removeWeapon() {
-		gameObject.SetActive (false);
-		for(int i = 0; i < weaponList.Length; i++) {
-			weaponList[i].gameObject.SetActive (false);
+		gameObject.SetActive(false);
+		for (int i = 0; i < weaponList.Length; i++) {
+			weaponList[i].gameObject.SetActive(false);
 		}
 		weapon = null;
 	}
@@ -57,16 +60,16 @@ public class WeaponButton : MonoBehaviour {
 		active = false;
 		image.color = disabledColor;
 
-		if(weapon != null)
-			weapon.deactivate ();
+		if (weapon != null)
+			weapon.deactivate();
 	}
 
 	void activate() {
 		active = true;
 		image.color = enabledColor;
 
-		if(weapon != null)
-			weapon.activate ();
+		if (weapon != null)
+			weapon.activate();
 	}
 
 	public void setCooldown() {
@@ -75,17 +78,23 @@ public class WeaponButton : MonoBehaviour {
 		cooldownCount = weapon.cooldown;
 		image.color = cooldownColor;
 
-		if(weapon != null)
-			weapon.deactivate ();
+		if (weapon != null)
+			weapon.deactivate();
 	}
 
 	public void onClick() {
-		if(active) {
-			deactivate ();
-		}
-
-		else if(!active && !cooldown) {
+		if (active) {
+			deactivate();
+		} else if (!active && !cooldown) {
 			activate();
 		}
+	}
+
+	public void setWall(EditWalls wall) {
+		this.wall = wall;
+	}
+
+	public EditWalls getWall() {
+		return this.wall;
 	}
 }
