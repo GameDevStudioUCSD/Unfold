@@ -1,0 +1,122 @@
+fileFormatVersion: 2
+guid: aca48164a93884963b34977308bb1277
+timeCreated: 1431217768
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|Body
+    100004: Armature|Head
+    100006: Armature|Leg L1 Lower
+    100008: Armature|Leg L1 Upper
+    100010: Armature|Leg L2 Lower
+    100012: Armature|Leg L2 Upper
+    100014: Armature|Leg L3 Lower
+    100016: Armature|Leg L3 Upper
+    100018: Armature|Leg L4 Lower
+    100020: Armature|Leg L4 Upper
+    100022: Armature|Leg R1 Lower
+    100024: Armature|Leg R1 Upper
+    100026: Armature|Leg R2 Lower
+    100028: Armature|Leg R2 Upper
+    100030: Armature|Leg R3 Lower
+    100032: Armature|Leg R3 Upper
+    100034: Armature|Leg R4 Lower
+    100036: Armature|Leg R4 Upper
+    100038: Armature|Mouth L
+    100040: Armature|Mouth R
+    100042: Armature|Pincer L
+    100044: Armature|Pincer R
+    100046: Armature|Web Back
+    100048: Cube.009
+    100050: //RootNode
+    400000: Armature
+    400002: Armature|Body
+    400004: Armature|Head
+    400006: Armature|Leg L1 Lower
+    400008: Armature|Leg L1 Upper
+    400010: Armature|Leg L2 Lower
+    400012: Armature|Leg L2 Upper
+    400014: Armature|Leg L3 Lower
+    400016: Armature|Leg L3 Upper
+    400018: Armature|Leg L4 Lower
+    400020: Armature|Leg L4 Upper
+    400022: Armature|Leg R1 Lower
+    400024: Armature|Leg R1 Upper
+    400026: Armature|Leg R2 Lower
+    400028: Armature|Leg R2 Upper
+    400030: Armature|Leg R3 Lower
+    400032: Armature|Leg R3 Upper
+    400034: Armature|Leg R4 Lower
+    400036: Armature|Leg R4 Upper
+    400038: Armature|Mouth L
+    400040: Armature|Mouth R
+    400042: Armature|Pincer L
+    400044: Armature|Pincer R
+    400046: Armature|Web Back
+    400048: Cube.009
+    400050: //RootNode
+    4300000: Cube.009
+    7400000: Armature|Attack
+    7400002: Armature|Walking
+    9500000: //RootNode
+    13700000: Cube.009
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

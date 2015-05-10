@@ -25,6 +25,8 @@ public class EnemyCharacter : Character {
 	public GameObject arrow;
 	public GameObject particles;
 	
+	public Animator animator;
+	
 	void Start() {
         // This places the monsters underneath a parent object labeled 
         // "Monsters"
@@ -39,7 +41,12 @@ public class EnemyCharacter : Character {
 	}
 	
 	void FixedUpdate() {
+		if (Time.time > nextAttackTime)
+		{
+			this.animator.SetInteger("Status", 1);
+		}
 		if (Time.time > nextAttackTime && attackCollider.Count > 0) {
+			this.animator.SetInteger("Status", 2);
 			// 10% chance for critical strikes
 			if (UnityEngine.Random.Range(0, 100) < 10) {
 				this.attackType = 15;

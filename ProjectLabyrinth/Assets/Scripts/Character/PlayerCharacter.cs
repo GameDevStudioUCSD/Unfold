@@ -91,6 +91,7 @@ public class PlayerCharacter : Character {
 		}
 
 		if (Time.time > nextAttackTime) {
+			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
 			if (!this.animator.GetBool("Walking")) {
@@ -125,7 +126,6 @@ public class PlayerCharacter : Character {
 								this.attackType = 8;
 							}
 							this.Attack();
-							this.animator.SetInteger("Attack", 0);
 						}
 					} else if (t.phase == TouchPhase.Ended) {
 						this.initialTouch = new Touch();
@@ -137,9 +137,11 @@ public class PlayerCharacter : Character {
 				this.attackType = 1;
 				this.Attack();
 				this.createPath();
+				this.animator.SetInteger("Attack", 4);
 			} else if (Input.GetKeyUp(KeyCode.Alpha2)) {
 				this.attackType = 2;
 				this.Attack();
+				this.animator.SetInteger("Attack", 2);
 			} else if (Input.GetKeyUp(KeyCode.Alpha3)) {
 				this.attackType = 4;
 				this.Attack();

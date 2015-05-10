@@ -1,61 +1,68 @@
 fileFormatVersion: 2
-guid: 3cfe34e98b22d461f9f44fdadfbed6cc
-timeCreated: 1431060886
+guid: ad92cc7e037b648baa4b20ad4c72fee2
+timeCreated: 1431217782
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Player
-    100002: //RootNode
-    100004: PlayerModel
-    100006: Player|Arm.L
-    100008: Player|Arm.R
-    100010: Player|Center
-    100012: Player|Foot.L
-    100014: Player|Foot.R
-    100016: Player|Hand.L
-    100018: Player|Hand.R
-    100020: Player|Head
-    100022: Player|Hip.L
-    100024: Player|Hip.R
-    100026: Player|Leg.L
-    100028: Player|Leg.R
-    100030: Player|Neck
-    100032: Player|Shoulder.L
-    100034: Player|Shoulder.R
-    100036: Player|Thigh.L
-    100038: Player|Thigh.R
-    100040: Player|Torso
-    100042: Player|Weapon
-    400000: Player
-    400002: //RootNode
-    400004: PlayerModel
-    400006: Player|Arm.L
-    400008: Player|Arm.R
-    400010: Player|Center
-    400012: Player|Foot.L
-    400014: Player|Foot.R
-    400016: Player|Hand.L
-    400018: Player|Hand.R
-    400020: Player|Head
-    400022: Player|Hip.L
-    400024: Player|Hip.R
-    400026: Player|Leg.L
-    400028: Player|Leg.R
-    400030: Player|Neck
-    400032: Player|Shoulder.L
-    400034: Player|Shoulder.R
-    400036: Player|Thigh.L
-    400038: Player|Thigh.R
-    400040: Player|Torso
-    400042: Player|Weapon
-    4300000: PlayerModel
-    7400000: Player|AttackLR
-    7400002: Player|AttackRL
-    7400004: Player|Moving
-    7400006: Player|Standing
+    100000: Armature
+    100002: Body
+    100004: Cube_009
+    100006: Head
+    100008: Leg_L1_Lower
+    100010: Leg_L1_Upper
+    100012: Leg_L2_Lower
+    100014: Leg_L2_Upper
+    100016: Leg_L3_Lower
+    100018: Leg_L3_Upper
+    100020: Leg_L4_Lower
+    100022: Leg_L4_Upper
+    100024: Leg_R1_Lower
+    100026: Leg_R1_Upper
+    100028: Leg_R2_Lower
+    100030: Leg_R2_Upper
+    100032: Leg_R3_Lower
+    100034: Leg_R3_Upper
+    100036: Leg_R4_Lower
+    100038: Leg_R4_Upper
+    100040: Mouth_L
+    100042: Mouth_R
+    100044: Pincer_L
+    100046: Pincer_R
+    100048: //RootNode
+    100050: Web_Back
+    400000: Armature
+    400002: Body
+    400004: Cube_009
+    400006: Head
+    400008: Leg_L1_Lower
+    400010: Leg_L1_Upper
+    400012: Leg_L2_Lower
+    400014: Leg_L2_Upper
+    400016: Leg_L3_Lower
+    400018: Leg_L3_Upper
+    400020: Leg_L4_Lower
+    400022: Leg_L4_Upper
+    400024: Leg_R1_Lower
+    400026: Leg_R1_Upper
+    400028: Leg_R2_Lower
+    400030: Leg_R2_Upper
+    400032: Leg_R3_Lower
+    400034: Leg_R3_Upper
+    400036: Leg_R4_Lower
+    400038: Leg_R4_Upper
+    400040: Mouth_L
+    400042: Mouth_R
+    400044: Pincer_L
+    400046: Pincer_R
+    400048: //RootNode
+    400050: Web_Back
+    4300000: Cube_009
+    7400000: Default Take
+    7400002: Attack
+    7400004: Walking
     9500000: //RootNode
-    13700000: PlayerModel
+    13700000: Cube_009
   materials:
     importMaterials: 1
     materialName: 0

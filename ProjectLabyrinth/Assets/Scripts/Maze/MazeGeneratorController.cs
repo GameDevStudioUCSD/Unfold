@@ -26,7 +26,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public float wallSize = 10;
     public AlgorithmChoice algorithm;
     public TextureController.TextureChoice levelType;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Player, ExitMarker;
+    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
     public GameObject[] spawnList;
 	public FogOfWar light;
     public bool debug_ON = false;
@@ -169,11 +169,16 @@ public class MazeGeneratorController : MonoBehaviour {
     public void CreateFloor()
     {
         GameObject floor;
+        //GameObject ceiling;
         NetworkView nView;
         Vector3 position = new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2));
+		Vector3 roofPosition = new Vector3((Rows*wallSize/2), 10 , (Cols*wallSize/2));
         floor = (GameObject)Network.Instantiate(Floor, position, Quaternion.identity, 0);
+        //ceiling = (GameObject)Network.Instantiate (Ceiling, roofPosition, Quaternion.identity, 0);
         RemoveCloneFromName(floor);
+        //RemoveCloneFromName(ceiling);
         nView = floor.GetComponent<NetworkView>();
+		//nView = ceiling.GetComponent<NetworkView>();	
         nView.RPC( "ModifyFloorSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
         nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
         //floor.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
@@ -234,7 +239,8 @@ public class MazeGeneratorController : MonoBehaviour {
                     instantiationList.Push(objToInstantiate);
                 }
 				if (this.light != null) {
-					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 5 * Vector3.up, rot, 0);
+					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 9 * Vector3.up, transform.rotation, 0);
+					objToInstantiate.transform.Rotate (90,0,0);
 					instantiationList.Push(objToInstantiate);
 				}
                 
