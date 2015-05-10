@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: 2fd9c2b7bc5864bfc83ca325af5fb3a2
-timeCreated: 1427875192
+timeCreated: 1431235239
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: DamageBackground
+    100004: DamageBorder
+    100006: DamageSymbol
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane
+    400002: DamageBackground
+    400004: DamageBorder
+    400006: DamageSymbol
+    2300000: DamageBackground
+    2300002: DamageBorder
+    2300004: DamageSymbol
+    3300000: DamageBackground
+    3300002: DamageBorder
+    3300004: DamageSymbol
+    4300000: DamageSymbol
+    4300002: DamageBackground
+    4300004: DamageBorder
     7400000: Default Take
     9500000: //RootNode
   materials:
