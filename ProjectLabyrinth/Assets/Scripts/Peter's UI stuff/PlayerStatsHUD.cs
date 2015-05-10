@@ -7,6 +7,11 @@ using UnityEngine.UI;
 public class PlayerStatsHUD : MonoBehaviour {
 
 	/// <summary>
+	/// Symbol representing the damage token collected in game.
+	/// </summary>
+	public Transform healthSymbol;
+	
+	/// <summary>
 	/// Slider displaying the player's health.
 	/// </summary>
 	public Slider health;
@@ -40,8 +45,7 @@ public class PlayerStatsHUD : MonoBehaviour {
 				healthText.GetComponent<Text>().text = player.currentHealth.ToString() +
 					"/" + player.maxHealth.ToString();
 			}
-			Transform healthSymbol = this.health.transform.Find("Health symbol");
-			if (healthSymbol) {
+			if (healthSymbol != null) {
 				healthSymbol.Rotate(Vector3.down);
 			}
 		}
