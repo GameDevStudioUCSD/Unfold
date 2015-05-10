@@ -9,6 +9,8 @@ public class NetworkCharacter : MonoBehaviour {
     float startTime, endTime, currentTime;
     RectTransform trans;
     NetworkView nView;
+    public int modVal = 2;
+    private int updateCounter;
         
     Animator animator;
     private bool hasStarted = false;
@@ -24,6 +26,7 @@ public class NetworkCharacter : MonoBehaviour {
         animator = this.GetComponentInChildren<Animator>();
         lastNetworkMessage = Time.time;
         timeBetweenNetworkMessage = lastNetworkMessage;
+        updateCounter = 0;
 	}
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -54,7 +57,7 @@ public class NetworkCharacter : MonoBehaviour {
 	}
     void Update()
     {
-        if(!nView.isMine)
+        if(!nView.isMine && updateCounter % modVal == 0)
         {
             currentTime = (Time.time - lastNetworkMessage);
             lerpVal = (currentTime / endTime);
@@ -62,6 +65,7 @@ public class NetworkCharacter : MonoBehaviour {
             UpdateRotation(trans.rotation, trueRotation);
             UpdateAnimationState((PlayerAnimation)animationState);
         }
+        updateCounter++;
     }
     void SetTimes()
     {
