@@ -40,7 +40,10 @@ public class Pickup : MonoBehaviour {
                 particleObj.GetComponent<ParticleSystem>().startColor = objColor;
             }
             SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
-            GetComponent<MeshRenderer>().enabled = false;
+            if (GetComponent<MeshRenderer>() != null)
+                GetComponent<MeshRenderer>().enabled = false;
+            else
+                GetComponent<SkinnedMeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
 			pickedUp();
             Destroy(this.gameObject);
