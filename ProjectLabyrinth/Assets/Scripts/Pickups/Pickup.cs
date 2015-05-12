@@ -11,6 +11,9 @@ public class Pickup : MonoBehaviour {
     public bool debug_On;
     public GameObject particles;
     public int type;
+    
+    /*used for determining what model to display in model, if not a weapon, use -1*/
+    public int modelID;
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
@@ -118,5 +121,6 @@ public class Pickup : MonoBehaviour {
 				button.setWeapon (2);
 				break;
 		}
+		player.updateWeaponModel(modelID);
 	}
 }

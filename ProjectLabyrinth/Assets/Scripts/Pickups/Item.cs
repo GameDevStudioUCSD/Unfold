@@ -42,14 +42,14 @@ public class Item : MonoBehaviour {
 			SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
 			GetComponent<MeshRenderer>().enabled = false;
 			hasPickedUp = !hasPickedUp;
-			pickedUp();
+			//pickedUp();
 
 			Destroy(this.gameObject);
 		}
 	}
 
-	void pickedUp(){
+	/*void pickedUp(){
 		player.equipItem(this);
-	}
+	}*/
 
 }
