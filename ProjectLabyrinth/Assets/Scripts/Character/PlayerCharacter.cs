@@ -254,7 +254,8 @@ public class PlayerCharacter : Character {
 		this.currentHealth = this.maxHealth;
 
 		weaponButton.removeWeapon ();
-
+		
+		updateWeaponModel(0);
 		weapon = null;
 		armor = null;
 		boots = null;
