@@ -77,7 +77,163 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Attack
+      takeName: Armature|Attack
+      firstFrame: 0
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Armature|Body
+        weight: 1
+      - path: Armature/Armature|Body/Armature|Web Back
+        weight: 1
+      - path: Armature/Armature|Head
+        weight: 1
+      - path: Armature/Armature|Leg L1 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L1 Upper/Armature|Leg L1 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L2 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L2 Upper/Armature|Leg L2 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L3 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L3 Upper/Armature|Leg L3 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L4 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L4 Upper/Armature|Leg L4 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R1 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R1 Upper/Armature|Leg R1 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R2 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R2 Upper/Armature|Leg R2 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R3 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R3 Upper/Armature|Leg R3 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R4 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R4 Upper/Armature|Leg R4 Lower
+        weight: 1
+      - path: Armature/Armature|Mouth L
+        weight: 1
+      - path: Armature/Armature|Mouth L/Armature|Pincer L
+        weight: 1
+      - path: Armature/Armature|Mouth R
+        weight: 1
+      - path: Armature/Armature|Mouth R/Armature|Pincer R
+        weight: 1
+      - path: Cube.009
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Walking
+      takeName: Armature|Walking
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Armature|Body
+        weight: 1
+      - path: Armature/Armature|Body/Armature|Web Back
+        weight: 1
+      - path: Armature/Armature|Head
+        weight: 1
+      - path: Armature/Armature|Leg L1 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L1 Upper/Armature|Leg L1 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L2 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L2 Upper/Armature|Leg L2 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L3 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L3 Upper/Armature|Leg L3 Lower
+        weight: 1
+      - path: Armature/Armature|Leg L4 Upper
+        weight: 1
+      - path: Armature/Armature|Leg L4 Upper/Armature|Leg L4 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R1 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R1 Upper/Armature|Leg R1 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R2 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R2 Upper/Armature|Leg R2 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R3 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R3 Upper/Armature|Leg R3 Lower
+        weight: 1
+      - path: Armature/Armature|Leg R4 Upper
+        weight: 1
+      - path: Armature/Armature|Leg R4 Upper/Armature|Leg R4 Lower
+        weight: 1
+      - path: Armature/Armature|Mouth L
+        weight: 1
+      - path: Armature/Armature|Mouth L/Armature|Pincer L
+        weight: 1
+      - path: Armature/Armature|Mouth R
+        weight: 1
+      - path: Armature/Armature|Mouth R/Armature|Pincer R
+        weight: 1
+      - path: Cube.009
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

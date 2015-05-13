@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkCharacter : MonoBehaviour {
-    Vector3 truePosition;
-    Quaternion trueRotation;
-    int animationState;
-    float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
-    float startTime, endTime, currentTime;
-    RectTransform trans;
-    NetworkView nView;
+public abstract class NetworkCharacter : MonoBehaviour {
+    protected Vector3 truePosition;
+    protected Quaternion trueRotation;
+    protected int animationState;
+    protected float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
+    protected float startTime, endTime, currentTime;
+    protected RectTransform trans;
+    protected NetworkView nView;
     public int modVal = 2;
-    private int updateCounter;
+    protected int updateCounter;
         
-    Animator animator;
-    private bool hasStarted = false;
+    protected Animator animator;
+    protected bool hasStarted = false;
     public enum PlayerAnimation 
     {
         Idle,
