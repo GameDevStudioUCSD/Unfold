@@ -15,7 +15,7 @@ public class CorridorFinder : MonoBehaviour
         {
             for( int c = 0; c < cols; c++)
             {
-                if( GetAdjacentWalls(maze[r,c]) == 3)
+                if( GetAdjacentWalls(maze[r,c]) == 2)
                 {
                     maze[r, c].weight = CorridorWalker(maze[r, c], maze);
                     listOfCorridors.Add(maze[r, c]);
