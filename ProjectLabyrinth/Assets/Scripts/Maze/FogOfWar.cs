@@ -6,10 +6,6 @@ using UnityEngine;
 /// </summary>
 public class FogOfWar : MonoBehaviour {
 
-	/// <summary>
-	/// The network view controlling each player.
-	/// </summary>
-	public NetworkView networkView;
 
 	void OnDrawGizmosSelected() {
 		Color color = Gizmos.color;
@@ -25,15 +21,17 @@ public class FogOfWar : MonoBehaviour {
 	}
 
 	void OnEnable() {
-		GameObject mazeRoot = GameObject.Find("Maze");
+		GameObject mazeRoot = GameObject.Find("Maze/Fog_of_War");
 		if (mazeRoot) {
 			this.transform.SetParent(mazeRoot.transform);
 		}
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (this.networkView == null || this.networkView.isMine) {
-			if (other.GetComponent<PlayerCharacter>()) {
+		if (this.GetComponent<NetworkView>() == null ) {
+            PlayerCharacter playerChar = other.GetComponent<PlayerCharacter>();
+            NetworkView nView = other.GetComponent<NetworkView>();
+			if (playerChar && nView.isMine) {
 				this.GetComponent<Light>().enabled = true;
 			}
 		}

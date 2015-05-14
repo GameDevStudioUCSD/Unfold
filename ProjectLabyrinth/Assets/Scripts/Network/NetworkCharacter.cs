@@ -31,7 +31,14 @@ public abstract class NetworkCharacter : MonoBehaviour {
         timeBetweenNetworkMessage = lastNetworkMessage;
         updateCounter = 0;
         truePosition = trans.position;
+        NormalizePosition();
 	}
+
+    private void NormalizePosition()
+    {
+        truePosition += (1.5f * Vector3.up);
+
+    }
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
@@ -57,6 +64,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
             stream.Serialize(ref truePosition);
             stream.Serialize(ref trueRotation);
             stream.Serialize(ref animationState);
+            NormalizePosition();
         }
 	}
 
