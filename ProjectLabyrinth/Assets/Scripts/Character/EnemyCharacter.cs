@@ -60,6 +60,8 @@ public class EnemyCharacter : Character {
 		if (other.GetComponent<HitDetector> () != null) {
 			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
 			this.attackCollider.Add (other);
+            GameObject target = (other.gameObject.transform.parent.gameObject);
+            GetComponent<MonsterMovement>().SetTarget(target);
 			chr.setAttacker (this);
 		}
 	}

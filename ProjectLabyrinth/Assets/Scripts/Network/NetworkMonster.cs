@@ -5,7 +5,7 @@ public class NetworkMonster :  NetworkCharacter{
 
     protected override void UpdateAnimationState(int animationState)
     {
-        if(animator == null)
+        if (animator == null || !animator.avatar.isValid)
         {
             return;
         }
@@ -13,7 +13,7 @@ public class NetworkMonster :  NetworkCharacter{
     }
     protected override int DetermineAnimationState()
     {
-        if(animator == null)
+        if(animator == null || !animator.avatar.isValid)
         {
             return 0;
         }
