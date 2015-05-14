@@ -173,14 +173,13 @@ public class JoinGame : MonoBehaviour {
                 retVal = Color.white;
                 break;
             case TextureController.TextureChoice.Corn:
-                retVal = Color.green;
+                retVal = Color.yellow;
                 break;
             case TextureController.TextureChoice.Cave:
                 retVal = Color.grey;
                 break;
             case TextureController.TextureChoice.Forest:
-                // Set the color to brown
-                retVal = new Color( .278f, .161f, .043f);
+                retVal = Color.green;
                 break;
         }
         return retVal;

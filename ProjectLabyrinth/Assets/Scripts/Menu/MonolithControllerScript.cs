@@ -12,7 +12,7 @@ public class MonolithControllerScript : MonoBehaviour {
         player = other.gameObject.GetComponent<PlayerCharacter>();
         player.animator.SetBool("Walking", false);
         Instantiate(canvasUIPrefab);
-        Destroy(this.GetComponent<Renderer>());
+        Destroy(this.gameObject);
         Destroy(title);
     }
 }
