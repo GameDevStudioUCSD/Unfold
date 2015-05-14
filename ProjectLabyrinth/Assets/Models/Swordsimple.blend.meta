@@ -8,15 +8,30 @@ ModelImporter:
     100000: Plane
     100002: Plane_002
     100004: //RootNode
+    100006: Blade
+    100008: Handle
+    100010: Hilt
     400000: Plane
     400002: Plane_002
     400004: //RootNode
+    400006: Blade
+    400008: Handle
+    400010: Hilt
     2300000: Plane
     2300002: Plane_002
+    2300004: Blade
+    2300006: Handle
+    2300008: Hilt
     3300000: Plane
     3300002: Plane_002
+    3300004: Blade
+    3300006: Handle
+    3300008: Hilt
     4300000: Plane_002
     4300002: Plane
+    4300004: Hilt
+    4300006: Blade
+    4300008: Handle
     7400000: Default Take
     9500000: //RootNode
   materials:

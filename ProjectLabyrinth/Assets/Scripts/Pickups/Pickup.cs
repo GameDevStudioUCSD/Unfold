@@ -11,6 +11,9 @@ public class Pickup : MonoBehaviour {
     public bool debug_On;
     public GameObject particles;
     public int type;
+    
+    /*used for determining what model to display in model, if not a weapon, use -1*/
+    public int modelID;
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
     
@@ -40,7 +43,10 @@ public class Pickup : MonoBehaviour {
                 particleObj.GetComponent<ParticleSystem>().startColor = objColor;
             }
             SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
-            GetComponent<MeshRenderer>().enabled = false;
+            if (GetComponent<MeshRenderer>() != null)
+                GetComponent<MeshRenderer>().enabled = false;
+            else
+                GetComponent<SkinnedMeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
 			pickedUp();
             Destroy(this.gameObject);
@@ -115,5 +121,6 @@ public class Pickup : MonoBehaviour {
 				button.setWeapon (2);
 				break;
 		}
+		player.updateWeaponModel(modelID);
 	}
 }

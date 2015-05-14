@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: a98c7d76cacdf4a3da973f3a238ae55c
-timeCreated: 1427875195
+timeCreated: 1431235251
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: HealthBackground
+    100004: HealthBorder
+    100006: HealthSymbol
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    400002: HealthBackground
+    400004: HealthBorder
+    400006: HealthSymbol
+    2300000: HealthBackground
+    2300002: HealthBorder
+    2300004: HealthSymbol
+    3300000: HealthBackground
+    3300002: HealthBorder
+    3300004: HealthSymbol
+    4300000: HealthSymbol
+    4300002: HealthBackground
+    4300004: HealthBorder
     7400000: Default Take
     9500000: //RootNode
   materials:

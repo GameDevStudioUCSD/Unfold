@@ -204,6 +204,11 @@ public class MazeGeneratorController : MonoBehaviour {
             {
                 curr = walls[r, c];
                 pos = new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol());
+				if (this.light != null) {
+					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 9 * Vector3.up, transform.rotation, 0);
+					objToInstantiate.transform.Rotate (90,0,0);
+					instantiationList.Push(objToInstantiate);
+				}
                 if(curr.hasNorth)
                 {
                     objToInstantiate = (GameObject) Network.Instantiate(NorthWall, pos, rot , 0);
@@ -232,17 +237,13 @@ public class MazeGeneratorController : MonoBehaviour {
                 if (curr.start)
                 {
                     start = curr;
+                    
                 }
                 if(curr.exit)
                 {
                     objToInstantiate = (GameObject)Network.Instantiate(ExitMarker, pos, rot, 0);
                     instantiationList.Push(objToInstantiate);
                 }
-				if (this.light != null) {
-					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 9 * Vector3.up, transform.rotation, 0);
-					objToInstantiate.transform.Rotate (90,0,0);
-					instantiationList.Push(objToInstantiate);
-				}
                 
                 while (instantiationList.Count > 0)
                 {

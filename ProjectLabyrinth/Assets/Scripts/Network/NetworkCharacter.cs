@@ -1,29 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkCharacter : MonoBehaviour {
-    Vector3 truePosition;
-    Quaternion trueRotation;
-    int animationState;
-    float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
-    float startTime, endTime, currentTime;
-    RectTransform trans;
-    NetworkView nView;
+public abstract class NetworkCharacter : MonoBehaviour {
+    protected Vector3 truePosition;
+    protected Quaternion trueRotation;
+    protected int animationState;
+    protected float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
+    protected float startTime, endTime, currentTime;
+    protected Transform trans;
+    protected NetworkView nView;
+    public int modVal = 2;
+    protected int updateCounter;
         
-    Animator animator;
-    private bool hasStarted = false;
-    public enum PlayerAnimation 
-    {
-        Idle,
-        Walking 
-    }
+    protected Animator animator;
+    protected bool hasStarted = false;
+    
+    protected abstract void UpdateAnimationState(int animationState);
+    protected abstract int DetermineAnimationState();
+
 	void Start () {
         hasStarted = true;
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
-        animator = this.GetComponentInChildren<Animator>();
+        if (trans == null)
+            this.GetComponent<Transform>();
+        animator = this.GetComponent<Animator>();
+        if(animator == null)
+            animator = this.GetComponentInChildren<Animator>();
         lastNetworkMessage = Time.time;
         timeBetweenNetworkMessage = lastNetworkMessage;
+        updateCounter = 0;
 	}
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -52,17 +58,23 @@ public class NetworkCharacter : MonoBehaviour {
             stream.Serialize(ref animationState);
         }
 	}
+
+    
+
     void Update()
     {
-        if(!nView.isMine)
+        if(!nView.isMine && updateCounter % modVal == 0)
         {
             currentTime = (Time.time - lastNetworkMessage);
             lerpVal = (currentTime / endTime);
             UpdatePosition(trans.position, truePosition);
             UpdateRotation(trans.rotation, trueRotation);
-            UpdateAnimationState((PlayerAnimation)animationState);
+            UpdateAnimationState(animationState);
         }
+        updateCounter++;
     }
+
+
     void SetTimes()
     {
         startTime = Time.time - lastNetworkMessage;
@@ -74,7 +86,7 @@ public class NetworkCharacter : MonoBehaviour {
             return;
         if (Vector3.Distance(a, b) < .1f)
             return;
-        trans.position = Vector3.Lerp(a, b, Time.deltaTime * 5);
+        trans.position = Vector3.Lerp(a, b, lerpVal);
     }
         
     void UpdateRotation(Quaternion a, Quaternion b)
@@ -83,27 +95,7 @@ public class NetworkCharacter : MonoBehaviour {
             return;
         if (Quaternion.Angle(a, b) < 1)
             return;
-        trans.rotation = Quaternion.Slerp(a, b, Time.deltaTime * 5);
+        trans.rotation = Quaternion.Slerp(a, b, lerpVal);
     }
-    void UpdateAnimationState(PlayerAnimation animation)
-    {
-        switch (animation)
-        {
-            case PlayerAnimation.Idle:
-                animator.SetBool("Walking", false);
-                break;
-            case PlayerAnimation.Walking:
-                animator.SetBool("Walking", true);
-                break;
-        }
-    }
-    PlayerAnimation DetermineAnimationState()
-    {
-        PlayerAnimation retVal = PlayerAnimation.Idle;
-        if(animator.GetBool("Walking"))
-        {
-            retVal = PlayerAnimation.Walking;
-        }
-        return retVal;
-    }
+    
 }

@@ -57,6 +57,7 @@ public class PlayerCharacter : Character {
 	private GameObject floor;
 
 	public GameObject[] weaponList;
+	public GameObject[] WeaponModelList;
 	public WeaponButton weaponButton;
 
 	/* 
@@ -79,6 +80,7 @@ public class PlayerCharacter : Character {
 		this.data.win = false;
 		this.data.name = "Squiddie";
 		this.ability = "None";
+		updateWeaponModel(0);
 	}
 
 	void FixedUpdate() {
@@ -254,7 +256,8 @@ public class PlayerCharacter : Character {
 		this.currentHealth = this.maxHealth;
 
 		weaponButton.removeWeapon ();
-
+		
+		updateWeaponModel(0);
 		weapon = null;
 		armor = null;
 		boots = null;
@@ -401,7 +404,7 @@ public class PlayerCharacter : Character {
 //		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
 
-	public void equipItem(Item newItem) {
+	/*public void equipItem(Item newItem) {
 		switch (newItem.itemType) {
 			case 0:
 				this.weapon = newItem;
@@ -415,6 +418,19 @@ public class PlayerCharacter : Character {
 		}
 		updateBonusStats();
 		checkItemsForSet();
+	}*/
+	
+	public void updateWeaponModel(int modelID)
+	{
+		if (modelID < 0)
+			return;
+		
+		for (int i = 0; i < WeaponModelList.Length; i++)
+		{
+			WeaponModelList[i].SetActive(false);
+			if (i == modelID)
+				WeaponModelList[i].SetActive(true);
+		}
 	}
 
 	public void updateStats() {

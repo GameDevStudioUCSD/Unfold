@@ -1,15 +1,32 @@
 fileFormatVersion: 2
 guid: 6fcfab1d6e68a4d8a99be60fdaaacfbd
-timeCreated: 1427875194
+timeCreated: 1431235248
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: SpeedBackground
+    100004: SpeedBorder
+    100006: SpeedLines
+    100008: SpeedSymbol
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane
+    400002: SpeedBackground
+    400004: SpeedBorder
+    400006: SpeedLines
+    400008: SpeedSymbol
+    2300000: SpeedBackground
+    2300002: SpeedBorder
+    2300004: SpeedLines
+    2300006: SpeedSymbol
+    3300000: SpeedBackground
+    3300002: SpeedBorder
+    3300004: SpeedLines
+    3300006: SpeedSymbol
+    4300000: SpeedLines
+    4300002: SpeedBackground
+    4300004: SpeedSymbol
+    4300006: SpeedBorder
     7400000: Default Take
     9500000: //RootNode
   materials:

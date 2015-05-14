@@ -75,7 +75,567 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: AttackDU
+      takeName: AttackDU
+      firstFrame: -1
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: AttackLR
+      takeName: AttackLR
+      firstFrame: -1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: AttackRL
+      takeName: AttackRL
+      firstFrame: -1
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: AttackUD
+      takeName: AttackUD
+      firstFrame: -1
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idling
+      takeName: Idling
+      firstFrame: -1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Moving
+      takeName: Moving
+      firstFrame: -1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Standing
+      takeName: Standing
+      firstFrame: -1
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Player
+        weight: 1
+      - path: Player/Center
+        weight: 1
+      - path: Player/Center/Hip_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L
+        weight: 1
+      - path: Player/Center/Hip_L/Thigh_L/Leg_L/Foot_L
+        weight: 1
+      - path: Player/Center/Hip_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Player/Center/Hip_R/Thigh_R/Leg_R/Foot_R
+        weight: 1
+      - path: Player/Center/Torso
+        weight: 1
+      - path: Player/Center/Torso/Neck
+        weight: 1
+      - path: Player/Center/Torso/Neck/Head
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_L/Arm_L/Hand_L
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R
+        weight: 1
+      - path: Player/Center/Torso/Shoulder_R/Arm_R/Hand_R/Weapon
+        weight: 1
+      - path: PlayerModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
