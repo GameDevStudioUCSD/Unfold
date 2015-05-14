@@ -22,7 +22,9 @@ public abstract class NetworkCharacter : MonoBehaviour {
         hasStarted = true;
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
-        animator = this.GetComponentInChildren<Animator>();
+        animator = this.GetComponent<Animator>();
+        if(animator == null)
+            animator = this.GetComponentInChildren<Animator>();
         lastNetworkMessage = Time.time;
         timeBetweenNetworkMessage = lastNetworkMessage;
         updateCounter = 0;
