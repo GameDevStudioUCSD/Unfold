@@ -14,11 +14,10 @@ public abstract class NetworkCharacter : MonoBehaviour {
         
     protected Animator animator;
     protected bool hasStarted = false;
-    public enum PlayerAnimation 
-    {
-        Idle,
-        Walking 
-    }
+    
+    protected abstract void UpdateAnimationState(int animationState);
+    protected abstract int DetermineAnimationState();
+
 	void Start () {
         hasStarted = true;
         nView = this.GetComponent<NetworkView>();
@@ -55,6 +54,9 @@ public abstract class NetworkCharacter : MonoBehaviour {
             stream.Serialize(ref animationState);
         }
 	}
+
+    
+
     void Update()
     {
         if(!nView.isMine && updateCounter % modVal == 0)
@@ -63,10 +65,12 @@ public abstract class NetworkCharacter : MonoBehaviour {
             lerpVal = (currentTime / endTime);
             UpdatePosition(trans.position, truePosition);
             UpdateRotation(trans.rotation, trueRotation);
-            UpdateAnimationState((PlayerAnimation)animationState);
+            UpdateAnimationState(animationState);
         }
         updateCounter++;
     }
+
+
     void SetTimes()
     {
         startTime = Time.time - lastNetworkMessage;
@@ -89,25 +93,5 @@ public abstract class NetworkCharacter : MonoBehaviour {
             return;
         trans.rotation = Quaternion.Slerp(a, b, Time.deltaTime * 5);
     }
-    void UpdateAnimationState(PlayerAnimation animation)
-    {
-        switch (animation)
-        {
-            case PlayerAnimation.Idle:
-                animator.SetBool("Walking", false);
-                break;
-            case PlayerAnimation.Walking:
-                animator.SetBool("Walking", true);
-                break;
-        }
-    }
-    PlayerAnimation DetermineAnimationState()
-    {
-        PlayerAnimation retVal = PlayerAnimation.Idle;
-        if(animator.GetBool("Walking"))
-        {
-            retVal = PlayerAnimation.Walking;
-        }
-        return retVal;
-    }
+    
 }
