@@ -82,7 +82,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
             return;
         if (Vector3.Distance(a, b) < .1f)
             return;
-        trans.position = Vector3.Lerp(a, b, Time.deltaTime * 5);
+        trans.position = Vector3.Lerp(a, b, lerpVal);
     }
         
     void UpdateRotation(Quaternion a, Quaternion b)
@@ -91,7 +91,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
             return;
         if (Quaternion.Angle(a, b) < 1)
             return;
-        trans.rotation = Quaternion.Slerp(a, b, Time.deltaTime * 5);
+        trans.rotation = Quaternion.Slerp(a, b, lerpVal);
     }
     
 }
