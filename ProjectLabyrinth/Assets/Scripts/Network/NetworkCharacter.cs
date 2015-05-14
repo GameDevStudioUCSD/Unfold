@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class NetworkCharacter : MonoBehaviour {
-    protected Vector3 truePosition;
+    public Vector3 truePosition;
     protected Quaternion trueRotation;
     protected int animationState;
     protected float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
@@ -21,7 +21,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
 	void Start () {
         hasStarted = true;
         nView = this.GetComponent<NetworkView>();
-        trans = this.GetComponent<RectTransform>();
+        trans = this.GetComponent<Transform>();
         if (trans == null)
             this.GetComponent<Transform>();
         animator = this.GetComponent<Animator>();
@@ -30,6 +30,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
         lastNetworkMessage = Time.time;
         timeBetweenNetworkMessage = lastNetworkMessage;
         updateCounter = 0;
+        truePosition = trans.position;
 	}
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
