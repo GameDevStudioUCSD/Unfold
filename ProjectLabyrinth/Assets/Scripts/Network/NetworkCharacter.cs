@@ -7,7 +7,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
     protected int animationState;
     protected float lastNetworkMessage, timeBetweenNetworkMessage, lerpVal;
     protected float startTime, endTime, currentTime;
-    protected RectTransform trans;
+    protected Transform trans;
     protected NetworkView nView;
     public int modVal = 2;
     protected int updateCounter;
@@ -22,6 +22,8 @@ public abstract class NetworkCharacter : MonoBehaviour {
         hasStarted = true;
         nView = this.GetComponent<NetworkView>();
         trans = this.GetComponent<RectTransform>();
+        if (trans == null)
+            this.GetComponent<Transform>();
         animator = this.GetComponent<Animator>();
         if(animator == null)
             animator = this.GetComponentInChildren<Animator>();
