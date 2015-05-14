@@ -24,6 +24,10 @@ public class FogOfWar : MonoBehaviour {
 		GameObject mazeRoot = GameObject.Find("Maze/Fog_of_War");
 		if (mazeRoot) {
 			this.transform.SetParent(mazeRoot.transform);
+            if (Network.isClient)
+            {
+                mazeRoot.transform.position -= Vector3.up;
+            } 
 		}
 	}
 

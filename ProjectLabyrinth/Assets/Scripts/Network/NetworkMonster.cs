@@ -20,5 +20,9 @@ public class NetworkMonster :  NetworkCharacter{
         int retVal = animator.GetInteger("Status");
         return retVal;
     }
+    protected override void NormalizePosition()
+    {
+        return;
+    }
     
 }

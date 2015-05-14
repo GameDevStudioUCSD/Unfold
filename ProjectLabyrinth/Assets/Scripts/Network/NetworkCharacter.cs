@@ -17,6 +17,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
     
     protected abstract void UpdateAnimationState(int animationState);
     protected abstract int DetermineAnimationState();
+    protected abstract void NormalizePosition();
 
 	void Start () {
         hasStarted = true;
@@ -34,11 +35,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
         NormalizePosition();
 	}
 
-    private void NormalizePosition()
-    {
-        truePosition += (1.5f * Vector3.up);
 
-    }
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
