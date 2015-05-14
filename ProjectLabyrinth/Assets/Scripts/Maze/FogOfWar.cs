@@ -24,20 +24,16 @@ public class FogOfWar : MonoBehaviour {
 		GameObject mazeRoot = GameObject.Find("Maze/Fog_of_War");
 		if (mazeRoot) {
 			this.transform.SetParent(mazeRoot.transform);
-            if (Network.isClient)
-            {
-                mazeRoot.transform.position -= Vector3.up;
-            } 
 		}
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (this.GetComponent<NetworkView>() == null ) {
-            PlayerCharacter playerChar = other.GetComponent<PlayerCharacter>();
-            NetworkView nView = other.GetComponent<NetworkView>();
-			if (playerChar && nView.isMine) {
-				this.GetComponent<Light>().enabled = true;
-			}
-		}
-	}
+    void OnTriggerEnter(Collider other)
+    {
+        PlayerCharacter playerChar = other.GetComponent<PlayerCharacter>();
+        NetworkView nView = other.GetComponent<NetworkView>();
+        if (playerChar && nView.isMine)
+        {
+            this.GetComponent<Light>().enabled = true;
+        }
+    }
 }
