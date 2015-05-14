@@ -32,7 +32,6 @@ public abstract class NetworkCharacter : MonoBehaviour {
         timeBetweenNetworkMessage = lastNetworkMessage;
         updateCounter = 0;
         truePosition = trans.position;
-        NormalizePosition();
 	}
 
 
