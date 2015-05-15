@@ -98,7 +98,25 @@ public class JoinGame : MonoBehaviour {
         {
             Debug.Log("GameList: " + gameList.Length);
         }
-        if (gameList.Length == 0)
+        int gameTypeInt;
+        int numberOfGames = 0;
+        for (int i = 0; i < gameList.Length; i++)
+        {
+            if (debugOn)
+            {
+                Debug.Log("Creating button " + i);
+            }
+            gameTypeInt = int.Parse(gameList[i].comment);
+            if ((gameTypeInt & MasterServerManager.CANCONNECT) != MasterServerManager.CANCONNECT)
+                continue;
+            numberOfGames++;
+            gameType = (TextureController.TextureChoice)(MasterServerManager.CANCONNECT ^ gameTypeInt);
+            numberOfConnectedPlayers = gameList[i].connectedPlayers;
+            CreateNewButton(gameList[i].gameName, gameType);
+            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i, connectionInfo));
+            currentButton.onClick.AddListener(() => EnterGame());
+        }
+        if (numberOfGames == 0)
         {
             gameType = TextureController.TextureChoice.Mansion;
             numberOfConnectedPlayers = 0;
@@ -110,20 +128,7 @@ public class JoinGame : MonoBehaviour {
             }
             return;
         }
-        int gameTypeInt;
-        for (int i = 0; i < gameList.Length; i++)
-        {
-            if(debugOn)
-            {
-                Debug.Log("Creating button " + i);
-            }
-            gameTypeInt = int.Parse(gameList[i].comment);
-            gameType = (TextureController.TextureChoice)gameTypeInt;
-            numberOfConnectedPlayers = gameList[i].connectedPlayers;
-            CreateNewButton(gameList[i].gameName, gameType);
-            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i, connectionInfo));
-            currentButton.onClick.AddListener(() => EnterGame());
-        }
+        
         
     }
     private void CreateNewButton(string text, TextureController.TextureChoice tc)

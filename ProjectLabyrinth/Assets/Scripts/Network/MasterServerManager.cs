@@ -8,11 +8,12 @@ public class MasterServerManager : MonoBehaviour{
     /// connect to one another. It provides the framework for both hosts and 
     /// clients.
     /// </summary>
-    private const string gameTitle = "UnfoldX";
+    public const string gameTitle = "UnfoldX";
     private HostData[] gameList;
     private string clientConnectErr = "Error while connecting to host: ";
     private int portNumber = 26500;
     private string[] lastConnectionAttempt;
+    public const uint CANCONNECT = 0x8000000;
 
     public bool debugOn = false;
     public HostData[] GetHostData()
@@ -35,8 +36,9 @@ public class MasterServerManager : MonoBehaviour{
         {
             Debug.Log("Entering RegisterServer()");
         }
-        string levelType = ((int)gameType).ToString();
-        MasterServer.RegisterHost(gameTitle, gameName, levelType);
+        uint levelType = (uint)gameType;
+        levelType |= CANCONNECT;
+        MasterServer.RegisterHost(gameTitle, gameName, levelType.ToString());
         if (debugOn)
         {
             Debug.Log("Trying to register game as type (" + gameTitle + ") under name (" + gameName + ")");

@@ -43,6 +43,8 @@ public class NetworkManager : MonoBehaviour {
             Debug.Log("Running Start() on MazeGeneratorController");
             
 		mapCreator.Start();
+        GameObject connectionInfo = GameObject.Find("GameType");
+        connectionInfo.GetComponent<MazeType>().DisconnectMasterServer();
 		
         if (debug_On)
             Debug.Log("Running createWalls() on MazeGeneratorController");
