@@ -24,6 +24,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public int Rows = 20;
     public int Cols = 20;
     public float wallSize = 10;
+    public float wallHeight = 10;
     public AlgorithmChoice algorithm;
     public TextureController.TextureChoice levelType;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
@@ -169,19 +170,21 @@ public class MazeGeneratorController : MonoBehaviour {
     public void CreateFloor()
     {
         GameObject floor;
-        //GameObject ceiling;
-        NetworkView nView;
+        GameObject ceiling;
+        NetworkView nViewFloor, nViewCeiling;
         Vector3 position = new Vector3((Rows*wallSize/2), 0 , (Cols*wallSize/2));
-		Vector3 roofPosition = new Vector3((Rows*wallSize/2), 10 , (Cols*wallSize/2));
+		Vector3 roofPosition = new Vector3((Rows*wallSize/2), wallHeight , (Cols*wallSize/2));
         floor = (GameObject)Network.Instantiate(Floor, position, Quaternion.identity, 0);
-        //ceiling = (GameObject)Network.Instantiate (Ceiling, roofPosition, Quaternion.identity, 0);
+        ceiling = (GameObject)Network.Instantiate (Ceiling, roofPosition, Quaternion.identity, 0);
+        ceiling.transform.Rotate(0, 0, 180);
         RemoveCloneFromName(floor);
-        //RemoveCloneFromName(ceiling);
-        nView = floor.GetComponent<NetworkView>();
-		//nView = ceiling.GetComponent<NetworkView>();	
-        nView.RPC( "ModifyFloorSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
-        nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
-        //floor.GetComponent<Renderer>().material.mainTexture = textureController.GetFloorTexture();
+        RemoveCloneFromName(ceiling);
+        nViewFloor = floor.GetComponent<NetworkView>();
+		nViewCeiling = ceiling.GetComponent<NetworkView>();	
+        nViewFloor.RPC( "ModifyFloorSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
+        nViewFloor.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
+        nViewCeiling.RPC( "ModifyCeilingSize", RPCMode.AllBuffered, wallSize, Rows, Cols );
+        nViewCeiling.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
     }
     public void ApplyWallTexture( GameObject currentWall)
     {
