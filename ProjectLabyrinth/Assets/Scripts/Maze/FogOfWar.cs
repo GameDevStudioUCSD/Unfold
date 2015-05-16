@@ -6,7 +6,8 @@ using UnityEngine;
 /// </summary>
 public class FogOfWar : MonoBehaviour {
 
-
+	public GameObject roofLight;
+	
 	void OnDrawGizmosSelected() {
 		Color color = Gizmos.color;
 		Gizmos.color = Color.blue;
@@ -33,6 +34,7 @@ public class FogOfWar : MonoBehaviour {
         NetworkView nView = other.GetComponent<NetworkView>();
         if (playerChar && nView.isMine)
         {
+        	roofLight.SetActive(true);
             this.GetComponent<Light>().enabled = true;
         }
     }
