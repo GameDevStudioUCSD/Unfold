@@ -98,7 +98,25 @@ public class JoinGame : MonoBehaviour {
         {
             Debug.Log("GameList: " + gameList.Length);
         }
-        if (gameList.Length == 0)
+        int gameTypeInt;
+        int numberOfGames = 0;
+        for (int i = 0; i < gameList.Length; i++)
+        {
+            if (debugOn)
+            {
+                Debug.Log("Creating button " + i);
+            }
+            gameTypeInt = int.Parse(gameList[i].comment);
+            if ((gameTypeInt & MasterServerManager.CANCONNECT) != MasterServerManager.CANCONNECT)
+                continue;
+            numberOfGames++;
+            gameType = (TextureController.TextureChoice)(MasterServerManager.CANCONNECT ^ gameTypeInt);
+            numberOfConnectedPlayers = gameList[i].connectedPlayers;
+            CreateNewButton(gameList[i].gameName, gameType);
+            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i, connectionInfo));
+            currentButton.onClick.AddListener(() => EnterGame());
+        }
+        if (numberOfGames == 0)
         {
             gameType = TextureController.TextureChoice.Mansion;
             numberOfConnectedPlayers = 0;
@@ -110,20 +128,7 @@ public class JoinGame : MonoBehaviour {
             }
             return;
         }
-        int gameTypeInt;
-        for (int i = 0; i < gameList.Length; i++)
-        {
-            if(debugOn)
-            {
-                Debug.Log("Creating button " + i);
-            }
-            gameTypeInt = int.Parse(gameList[i].comment);
-            gameType = (TextureController.TextureChoice)gameTypeInt;
-            numberOfConnectedPlayers = gameList[i].connectedPlayers;
-            CreateNewButton(gameList[i].gameName, gameType);
-            currentButton.onClick.AddListener(() => masterServer.ConnectToGame(i, connectionInfo));
-            currentButton.onClick.AddListener(() => EnterGame());
-        }
+        
         
     }
     private void CreateNewButton(string text, TextureController.TextureChoice tc)
@@ -173,14 +178,13 @@ public class JoinGame : MonoBehaviour {
                 retVal = Color.white;
                 break;
             case TextureController.TextureChoice.Corn:
-                retVal = Color.green;
+                retVal = Color.yellow;
                 break;
             case TextureController.TextureChoice.Cave:
                 retVal = Color.grey;
                 break;
             case TextureController.TextureChoice.Forest:
-                // Set the color to brown
-                retVal = new Color( .278f, .161f, .043f);
+                retVal = Color.green;
                 break;
         }
         return retVal;

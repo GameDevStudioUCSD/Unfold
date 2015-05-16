@@ -15,6 +15,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	private bool playerDetected;
 	private bool isClose;
 	protected bool attacking;
+    private GameObject target;
 
 	// Use this for initialization
 	void Start () {
@@ -110,8 +111,18 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 	*/
 
+    public void SetTarget(GameObject t)
+    {
+        target = t;
+    }
 	protected void approachPlayer() {
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player;
+        if (target == null) {
+            //player = GameObject.FindGameObjectWithTag("Player");
+            return;
+        }
+        else
+            player = target;
 		Transform playerTransform = player.transform;
 		float distance = Vector3.Distance (new Vector3(playerTransform.position.x, 0, playerTransform.position.z), 
 		                                   new Vector3(transform.position.x, 0, transform.position.z));

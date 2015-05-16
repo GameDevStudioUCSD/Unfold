@@ -16,6 +16,12 @@ public class NetworkUser : NetworkCharacter{
     {
         UpdateAnimationState((PlayerAnimation)animationState);
     }
+    protected override void NormalizePosition()
+    {
+        if (Network.isClient)
+            truePosition += (1.5f * Vector3.up);
+
+    }
     protected override int DetermineAnimationState()
     {
         PlayerAnimation retVal = PlayerAnimation.Idle;

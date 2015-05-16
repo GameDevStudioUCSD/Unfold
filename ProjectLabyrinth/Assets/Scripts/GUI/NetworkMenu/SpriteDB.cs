@@ -20,6 +20,14 @@ public class SpriteDB : MonoBehaviour {
         db.Add("doodle10", Resources.Load("Sprites/Doodles/doodle10", typeOfDB) as Sprite);
         return db;
     }
+    public static SortedDictionary<string, Sprite> GetSlipDB()
+    {
+        SortedDictionary<string, Sprite> db = new SortedDictionary<string, Sprite>();
+        db.Add("slip1", Resources.Load("Sprites/Slips/slipv201", typeOfDB) as Sprite);
+        db.Add("slip2", Resources.Load("Sprites/Slips/slipv202", typeOfDB) as Sprite);
+        db.Add("slip3", Resources.Load("Sprites/Slips/slipv203", typeOfDB) as Sprite);
+        return db;
+    }
 	// Use this for initialization
 	void Start () {
 	

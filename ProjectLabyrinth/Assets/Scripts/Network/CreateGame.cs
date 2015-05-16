@@ -198,6 +198,7 @@ public class CreateGame : MonoBehaviour {
         MenuWalk walkScript = playerLocal.GetComponent<MenuWalk>();
         walkScript.DefineLerp(walkScript.endMarker, walkScript.portal);
         gameTypeObj.GetComponent<MazeType>().SetGameType(gameType);
+        gameTypeObj.GetComponent<MazeType>().SetGameName(gameName);
     }
     void Start()
     {

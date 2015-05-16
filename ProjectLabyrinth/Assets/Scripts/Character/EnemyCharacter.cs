@@ -60,6 +60,8 @@ public class EnemyCharacter : Character {
 		if (other.GetComponent<HitDetector> () != null) {
 			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
 			this.attackCollider.Add (other);
+            GameObject target = (other.gameObject.transform.parent.gameObject);
+            GetComponent<MonsterMovement>().SetTarget(target);
 			chr.setAttacker (this);
 		}
 	}
@@ -113,7 +115,7 @@ public class EnemyCharacter : Character {
 			//particleObj.GetComponent<ParticleSystem>().startColor = objColor;
 		}
 		
-		Destroy(this.gameObject);
+		Network.Destroy(GetComponent<NetworkView>().viewID);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
         if (debug_On)
         	Debug.Log(transform.position);
