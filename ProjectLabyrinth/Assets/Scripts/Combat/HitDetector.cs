@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HitDetector : MonoBehaviour {
-
+    public bool isDetectionSphere;
 	// Use this for initialization
 	void Start () {
 	

@@ -54,7 +54,7 @@ public class SpiderMovement : MonsterMovement {
 
 	// For when the monster is really close
 	public override void doClose(Transform player) {
-		transform.LookAt (player.position);
+		transform.LookAt (new Vector3(player.position.x, 0, player.position.z));
 	}
 
 	public override void doAttack() {

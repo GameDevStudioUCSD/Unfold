@@ -205,17 +205,22 @@ public class PlayerCharacter : Character {
 
 	public override bool Attack() {
 		// Test if the weapon is hammer
-		if (weaponButton.weapon == weaponButton.weaponList[0]) {
+		if (weaponButton.weapon == weaponButton.weaponList[0] && weaponButton.active) {
 			if (weaponButton.wall != null) {
 				Debug.Log("Destroy the wall!");
 				weaponButton.wall.DestroyWall();
 				weaponButton.wall = null;
+				weaponButton.setCooldown ();
 				// Add code here for cooldown reset
 			}
 		}
 		bool hasAttacked = base.Attack();
-		if (hasAttacked)
+		if (hasAttacked) {
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
+			if (weaponButton.active) {
+				weaponButton.setCooldown ();
+			}
+		}
 		return hasAttacked;
 	}
 
