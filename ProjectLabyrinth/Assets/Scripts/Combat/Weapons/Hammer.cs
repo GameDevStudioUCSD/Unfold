@@ -11,7 +11,7 @@ using System.Collections;
 public class Hammer : Weapon {
 	
 	public Hammer() {
-		cooldown = 20;
+		cooldown = 1000;
 	}
 	
 	public override void activate () {

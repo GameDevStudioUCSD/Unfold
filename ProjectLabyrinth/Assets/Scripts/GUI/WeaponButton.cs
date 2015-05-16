@@ -46,6 +46,8 @@ public class WeaponButton : MonoBehaviour {
 
 		weaponList[num].gameObject.SetActive(true);
 		weapon = weaponList[num];
+		cooldown = false;
+		deactivate ();
 	}
 
 	public void removeWeapon() {
