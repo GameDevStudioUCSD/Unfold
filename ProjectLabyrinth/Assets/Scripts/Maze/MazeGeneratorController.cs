@@ -28,7 +28,7 @@ public class MazeGeneratorController : MonoBehaviour {
     public TextureController.TextureChoice levelType;
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
     public GameObject[] spawnList;
-	public FogOfWar light;
+	public FogOfWar fogOfWar;
     public bool debug_ON = false;
     [Range (1, 100)]
     public int spawningRate = 1;
@@ -204,8 +204,8 @@ public class MazeGeneratorController : MonoBehaviour {
             {
                 curr = walls[r, c];
                 pos = new Vector3(curr.getRow() * wallSize, 1, wallSize * curr.getCol());
-				if (this.light != null) {
-					objToInstantiate = (GameObject)Network.Instantiate(this.light.gameObject, pos + 9 * Vector3.up, transform.rotation, 0);
+				if (this.fogOfWar != null) {
+					objToInstantiate = (GameObject)Network.Instantiate(this.fogOfWar.gameObject, pos + 9 * Vector3.up, transform.rotation, 0);
 					objToInstantiate.transform.Rotate (90,0,0);
 					instantiationList.Push(objToInstantiate);
 				}
