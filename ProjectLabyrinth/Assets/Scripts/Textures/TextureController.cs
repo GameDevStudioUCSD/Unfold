@@ -123,7 +123,7 @@ public class TextureController {
 		Texture retVal = null;
 		if (!db.TryGetValue(textureText + "_ceiling" , out retVal))
 		{
-			Debug.LogError(str_error + "Error indexing ceiling in GetFloorTexture()");
+			//Debug.LogError(str_error + "Error indexing ceiling in GetFloorTexture()");
 		}
 		
 		return retVal;

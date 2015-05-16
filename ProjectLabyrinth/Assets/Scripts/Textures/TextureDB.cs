@@ -9,6 +9,7 @@ public class TextureDB : MonoBehaviour {
     {
         SortedDictionary<string, Texture> db = new SortedDictionary<string, Texture>();
         db.Add("cave_floor", Resources.Load("Textures/cave_floor", typeOfDB) as Texture);
+        db.Add("cave_ceiling", Resources.Load("Textures/cave_ceiling", typeOfDB) as Texture);
         db.Add("cave_wall_1", Resources.Load("Textures/cave_wall_1", typeOfDB) as Texture);
         db.Add("forest_floor", Resources.Load("Textures/forest_floor", typeOfDB) as Texture);
         db.Add("forest_wall_1", Resources.Load("Textures/forest_wall_1", typeOfDB) as Texture);
