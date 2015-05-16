@@ -16,6 +16,7 @@ public class Pickup : MonoBehaviour {
     public int modelID;
     protected bool hasPickedUp = false;
     protected PlayerCharacter player;
+    private double deleteTime;
     
 	float t = 0f;
 	float del = .005f;
@@ -25,11 +26,15 @@ public class Pickup : MonoBehaviour {
 		float change = del * Mathf.Sin (t);
 		transform.Translate(Vector3.up * change);
 		t += .03f;
+		if (hasPickedUp && Time.time > deleteTime)
+		{
+			Destroy(this.gameObject);	
+		}
     }
     
 	void OnTriggerEnter(Collider other) {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
-		if (hitDetector) {
+		if (hitDetector && !hasPickedUp) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
             if (debug_On)
                 Debug.Log("Pickup Trigger Reached");
@@ -48,8 +53,8 @@ public class Pickup : MonoBehaviour {
             else
                 GetComponent<SkinnedMeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
+            deleteTime = Time.time+1;
 			pickedUp();
-            Destroy(this.gameObject);
 		}
 	}
 	
