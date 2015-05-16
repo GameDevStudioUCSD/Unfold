@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 54da4eea75e39b04fa90587e7249d12e
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: Armature
     100002: Body
@@ -27,6 +27,7 @@ ModelImporter:
     400020: Armature_001
     2300000: WGT-root
     3300000: WGT-root
+    4300000: WGT-root
     4300002: Cube_001
     7400000: Default Take
     7400002: ArmatureAction_001
@@ -151,11 +152,13 @@ ModelImporter:
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
@@ -178,3 +181,5 @@ ModelImporter:
   animationType: 2
   additionalBone: 0
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
