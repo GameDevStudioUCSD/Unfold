@@ -6,7 +6,7 @@ public class Sword : Weapon {
 	public AttackDetector detector;
 	
 	public Sword() {
-		cooldown = 20;
+		cooldown = 200;
 	}
 	
 	public override void activate () {
