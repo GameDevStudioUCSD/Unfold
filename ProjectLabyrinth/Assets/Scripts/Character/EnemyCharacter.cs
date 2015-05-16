@@ -59,10 +59,16 @@ public class EnemyCharacter : Character {
 	void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<HitDetector> () != null) {
 			PlayerCharacter chr = other.GetComponentInParent<PlayerCharacter>();
-			this.attackCollider.Add (other);
-            GameObject target = (other.gameObject.transform.parent.gameObject);
-            GetComponent<MonsterMovement>().SetTarget(target);
-			chr.setAttacker (this);
+            if (other.GetComponent<HitDetector>().isDetectionSphere)
+            {
+                GameObject target = (other.gameObject.transform.parent.gameObject);
+                GetComponent<MonsterMovement>().SetTarget(target);
+            }
+            else
+            {
+                this.attackCollider.Add(other);
+                chr.setAttacker(this);
+            }
 		}
 	}
 	
