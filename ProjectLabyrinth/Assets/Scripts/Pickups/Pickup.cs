@@ -28,7 +28,18 @@ public class Pickup : MonoBehaviour {
 		t += .03f;
 		if (hasPickedUp)
 		{
-			GetComponent<MeshRenderer>().enabled = false;
+            if (GetComponent<MeshRenderer>() != null)
+                GetComponent<MeshRenderer>().enabled = false;
+            foreach( Transform child in transform)
+            {
+                if (child.gameObject.GetComponent<MeshRenderer>() != null)
+                    child.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                foreach (Transform subchild in child)
+                {
+                    if (subchild.gameObject.GetComponent<MeshRenderer>() != null)
+                        subchild.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
 			if (Time.time > deleteTime)
 			{
 				Destroy(this.gameObject);
