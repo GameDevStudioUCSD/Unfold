@@ -246,10 +246,15 @@ public class PlayerCharacter : Character {
 		if (debug_On)
 			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
-			this.Die();
+			StartCoroutine(waitBeforeDie ());
 			return true;
 		}
 		return false;
+	}
+
+	public IEnumerator waitBeforeDie() {
+		yield return new WaitForSeconds (1.5f);
+		this.Die();
 	}
 
 	public override void Die() {
