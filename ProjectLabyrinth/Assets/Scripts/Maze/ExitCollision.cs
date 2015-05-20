@@ -5,7 +5,6 @@ using System.Collections;
 public class ExitCollision : AbstractGUI {
 
     public GameObject loadResult;
-    private bool hasReached;
 	private PlayerCharacter player;
 	//public GameObject skPrefab;
 
@@ -20,7 +19,6 @@ public class ExitCollision : AbstractGUI {
 		if (hitDetector && nView && nView.isMine) {
             Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 			this.player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
-			this.hasReached = true;
 			//skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
             //Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
 
