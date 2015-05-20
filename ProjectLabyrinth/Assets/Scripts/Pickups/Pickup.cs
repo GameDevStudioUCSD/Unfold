@@ -26,9 +26,13 @@ public class Pickup : MonoBehaviour {
 		float change = del * Mathf.Sin (t);
 		transform.Translate(Vector3.up * change);
 		t += .03f;
-		if (hasPickedUp && Time.time > deleteTime)
+		if (hasPickedUp)
 		{
-			Destroy(this.gameObject);	
+			GetComponent<MeshRenderer>().enabled = false;
+			if (Time.time > deleteTime)
+			{
+				Destroy(this.gameObject);
+			}	
 		}
     }
     
