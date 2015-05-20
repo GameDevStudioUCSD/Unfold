@@ -9,7 +9,7 @@ public abstract class NetworkCharacter : MonoBehaviour {
     protected float startTime, endTime, currentTime;
     protected Transform trans;
     protected NetworkView nView;
-    public int modVal = 2;
+    public int modVal = 7;
     protected int updateCounter;
         
     protected Animator animator;
