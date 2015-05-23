@@ -6,6 +6,7 @@ public enum Monster { Spanter, Bird, Miniman, SpinnyTop }
 [System.Serializable]
 public class SpawnRate  {
 
+	public bool debug_On = false;
     public int spanterRate;
     public int birdRate;
     public int minimanRate;
@@ -21,13 +22,15 @@ public class SpawnRate  {
         if (!hasSetup)
             Setup();
         Monster retVal = Monster.Bird;
-        Debug.Log("Total Weight " + totalWeight);
+        if (debug_On)
+        	Debug.Log("Total Weight " + totalWeight);
         for (int i = 0; i < probs.Length; i++)
         {
             int rand = Random.Range(0, totalWeight);
             for (int j = 0; j < probs.Length; j++)
             {
-                Debug.Log(rand);
+                if (debug_On)
+                	Debug.Log(rand);
                 if (probWeightSummed[j] > rand)
                 {
                     retVal = (Monster)j;
@@ -48,11 +51,13 @@ public class SpawnRate  {
 
     private void CalculateTotalWeight()
     {
-        Debug.Log("Running CalculateTotalWeight()");
+        if (debug_On)
+        	Debug.Log("Running CalculateTotalWeight()");
         totalWeight = 0;
         for (int i = 0; i < probs.Length; i++)
         {
-            Debug.Log("Weight at i: " + i + " = " + probs[i]);
+        	if (debug_On)
+            	Debug.Log("Weight at i: " + i + " = " + probs[i]);
             totalWeight += probs[i];
             probWeightSummed[i] = probs[i];
             if (i > 0)

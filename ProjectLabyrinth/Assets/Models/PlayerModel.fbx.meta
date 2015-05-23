@@ -1,38 +1,38 @@
 fileFormatVersion: 2
-guid: 54da4eea75e39b04fa90587e7249d12e
+guid: 3e0e68e27ad014a82bea7badf40b2d60
+timeCreated: 1432415496
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: Armature
-    100002: Body
-    100004: Cube_001
-    100006: Head
-    100008: Left_Arm
-    100010: Left_Leg
-    100012: //RootNode
-    100014: Right_Arm
-    100016: Right_Leg
+    100002: Armature|Body
+    100004: Armature|Head
+    100006: Armature|Left Arm
+    100008: Armature|Left Leg
+    100010: Armature|Right Arm
+    100012: Armature|Right Leg
+    100014: Cube.001
+    100016: //RootNode
     100018: WGT-root
-    100020: Armature_001
     400000: Armature
-    400002: Body
-    400004: Cube_001
-    400006: Head
-    400008: Left_Arm
-    400010: Left_Leg
-    400012: //RootNode
-    400014: Right_Arm
-    400016: Right_Leg
+    400002: Armature|Body
+    400004: Armature|Head
+    400006: Armature|Left Arm
+    400008: Armature|Left Leg
+    400010: Armature|Right Arm
+    400012: Armature|Right Leg
+    400014: Cube.001
+    400016: //RootNode
     400018: WGT-root
-    400020: Armature_001
     2300000: WGT-root
     3300000: WGT-root
     4300000: WGT-root
-    4300002: Cube_001
-    7400000: Default Take
-    7400002: ArmatureAction_001
+    4300002: Cube.001
+    7400000: Armature|Attack
+    7400002: Armature|Walking
     9500000: //RootNode
-    13700000: Cube_001
+    13700000: Cube.001
   materials:
     importMaterials: 1
     materialName: 0
@@ -50,10 +50,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Default Take
-      takeName: Default Take
-      firstFrame: 15
-      lastFrame: 75
+      name: Armature|Attack
+      takeName: Armature|Attack
+      firstFrame: 0
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -77,29 +77,29 @@ ModelImporter:
         weight: 1
       - path: Armature
         weight: 1
-      - path: Armature/Body
+      - path: Armature/Armature|Body
         weight: 1
-      - path: Armature/Body/Head
+      - path: Armature/Armature|Body/Armature|Head
         weight: 1
-      - path: Armature/Left_Arm
+      - path: Armature/Armature|Left Arm
         weight: 1
-      - path: Armature/Left_Leg
+      - path: Armature/Armature|Left Leg
         weight: 1
-      - path: Armature/Right_Arm
+      - path: Armature/Armature|Right Arm
         weight: 1
-      - path: Armature/Right_Leg
+      - path: Armature/Armature|Right Leg
         weight: 1
-      - path: Cube_001
+      - path: Cube.001
         weight: 1
       - path: WGT-root
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: ArmatureAction_001
-      takeName: ArmatureAction_001
+      name: Armature|Walking
+      takeName: Armature|Walking
       firstFrame: 0
-      lastFrame: 75
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -123,19 +123,19 @@ ModelImporter:
         weight: 1
       - path: Armature
         weight: 1
-      - path: Armature/Body
+      - path: Armature/Armature|Body
         weight: 1
-      - path: Armature/Body/Head
+      - path: Armature/Armature|Body/Armature|Head
         weight: 1
-      - path: Armature/Left_Arm
+      - path: Armature/Armature|Left Arm
         weight: 1
-      - path: Armature/Left_Leg
+      - path: Armature/Armature|Left Leg
         weight: 1
-      - path: Armature/Right_Arm
+      - path: Armature/Armature|Right Arm
         weight: 1
-      - path: Armature/Right_Leg
+      - path: Armature/Armature|Right Leg
         weight: 1
-      - path: Cube_001
+      - path: Cube.001
         weight: 1
       - path: WGT-root
         weight: 1
@@ -158,7 +158,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
