@@ -22,7 +22,7 @@ public class Pickup : MonoBehaviour {
 	float del = .005f;
     
     void Update() {
-    	transform.Rotate(Vector3.down * 100 * Time.deltaTime);
+		transform.Rotate(Vector3.down * 100 * Time.deltaTime);
 		float change = del * Mathf.Sin (t);
 		transform.Translate(Vector3.up * change);
 		t += .03f;
@@ -42,15 +42,16 @@ public class Pickup : MonoBehaviour {
             }
 			if (Time.time > deleteTime)
 			{
+				Debug.Log ("Deleting");
 				Destroy(this.gameObject);
 			}	
 		}
     }
     
 	void OnTriggerEnter(Collider other) {
-		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
-		if (hitDetector && !hasPickedUp) {
-			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
+		PickupDetector PickupDetector = (PickupDetector)other.gameObject.GetComponent("PickupDetector");
+		if (PickupDetector && !hasPickedUp) {
+			player = (PlayerCharacter) PickupDetector.GetComponentInParent<PlayerCharacter>();
             if (debug_On)
                 Debug.Log("Pickup Trigger Reached");
             if(particles != null)
@@ -69,12 +70,14 @@ public class Pickup : MonoBehaviour {
                 GetComponent<SkinnedMeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
             deleteTime = Time.time+1;
+            Debug.Log(modelID);
 			pickedUp();
 		}
 	}
 	
 	void pickedUp()
 	{
+		Debug.Log(modelID);
 		WeaponButton button = player.weaponButton;
 		switch (type)
 		{
@@ -141,6 +144,7 @@ public class Pickup : MonoBehaviour {
 				button.setWeapon (2);
 				break;
 		}
+		Debug.Log(modelID);
 		player.updateWeaponModel(modelID);
 	}
 }
