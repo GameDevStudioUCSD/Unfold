@@ -1,17 +1,39 @@
 fileFormatVersion: 2
-guid: ea4a6822d358f4872a57f66a5da053f0
-timeCreated: 1432363493
+guid: 63d7ec1206ea545ef9f299e5d971bb25
+timeCreated: 1432361694
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Handle
+    100000: Armature
+    100002: Body
+    100004: Cube_001
+    100006: Head
+    100008: Left_Arm
+    100010: Left_Leg
+    100012: //RootNode
+    100014: Right_Arm
+    100016: Right_Leg
+    100018: WGT-root
+    400000: Armature
+    400002: Body
+    400004: Cube_001
+    400006: Head
+    400008: Left_Arm
+    400010: Left_Leg
+    400012: //RootNode
+    400014: Right_Arm
+    400016: Right_Leg
+    400018: WGT-root
+    2300000: WGT-root
+    3300000: WGT-root
+    4300000: WGT-root
+    4300002: Cube_001
     7400000: Default Take
+    7400002: Attack
+    7400004: Walking
     9500000: //RootNode
+    13700000: Cube_001
   materials:
     importMaterials: 1
     materialName: 0
