@@ -430,6 +430,9 @@ public class PlayerCharacter : Character {
 	
 	public void updateWeaponModel(int modelID)
 	{
+		if (debug_On)
+			Debug.Log ("updating weapon model " + modelID);
+		
 		if (modelID < 0)
 			return;
 		

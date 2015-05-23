@@ -42,7 +42,7 @@ public class Pickup : MonoBehaviour {
             }
 			if (Time.time > deleteTime)
 			{
-				Debug.Log ("Deleting");
+				Debug.Log ("Deleting" + modelID);
 				Destroy(this.gameObject);
 			}	
 		}
@@ -70,43 +70,42 @@ public class Pickup : MonoBehaviour {
                 GetComponent<SkinnedMeshRenderer>().enabled = false;
             hasPickedUp = !hasPickedUp;
             deleteTime = Time.time+1;
-            Debug.Log(modelID);
 			pickedUp();
 		}
 	}
 	
 	void pickedUp()
 	{
-		Debug.Log(modelID);
 		WeaponButton button = player.weaponButton;
+		player.updateWeaponModel(modelID);
 		switch (type)
 		{
-			/*health*/
+			//health
 			case 0:
 				if (debug_On)
 					Debug.Log("Healing health");
 				player.addHealth(5);
 				break;
-			/*speed upgrade*/
+			//speed upgrade
 			case 1:
 				if (debug_On)
 					Debug.Log("Adding speed");
 				player.addSpeed(2);
 				break;
-			/*max health upgrade*/
+			//max health upgrade
 			case 2:
 				if (debug_On)
 					Debug.Log("Adding maxHealth");
 				player.addMaxHealth(5);
 				break;
-			/*damage upgrade*/
+			//damage upgrade
 			case 3:
 				if (debug_On)
 					Debug.Log("Adding damage");
 				player.addDamage(5);
 				break;
 
-			/* Start Sword (???) */
+			//Start Sword (???)
 			case 4:
 				if (debug_On)
 					Debug.Log ("Adding start sword");
@@ -116,7 +115,7 @@ public class Pickup : MonoBehaviour {
 				button.setWeapon (3);
 				break;
 
-			/* Hammer (Break walls) */
+			//Hammer (Break walls)
 			case 5:
 				if(debug_On)
 					Debug.Log ("Adding hammer");
@@ -144,7 +143,6 @@ public class Pickup : MonoBehaviour {
 				button.setWeapon (2);
 				break;
 		}
-		Debug.Log(modelID);
-		player.updateWeaponModel(modelID);
+		
 	}
 }
