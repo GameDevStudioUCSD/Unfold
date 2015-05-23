@@ -13,4 +13,12 @@ public class MiscFunctions : MonoBehaviour {
 	public void Load(string sceneName) {
 		Application.LoadLevel(sceneName);
 	}
+    public void DeleteGameObject(string objectName)
+    {
+        GameObject obj = GameObject.Find(objectName);
+        if (obj)
+        {
+            GameObject.Destroy(obj);
+        }
+    }
 }
