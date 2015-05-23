@@ -12,8 +12,8 @@ abstract public class MonsterMovement : MonoBehaviour {
 	protected int detectionRange;
 	public int stunTime;
 	private int stunned = 0;
-	private bool playerDetected;
-	private bool isClose;
+	protected bool playerDetected;
+	protected bool isClose;
 	protected bool attacking;
     private GameObject target;
 
@@ -55,18 +55,20 @@ abstract public class MonsterMovement : MonoBehaviour {
     {
         if (stunned == 0)
         {
+			// Move if not attacking
             if (!attacking)
             {
+				// Move towards the player if in sight
                 approachPlayer();
                 if (!playerDetected)
                 {
+					// Navigates the maze
                     idleManeuver();
                 }
-                if (!isClose)
-                {
-                    maneuver();
-                }
+                maneuver();
             }
+
+			// Attack if not moving
             else
             {
                 doAttack();

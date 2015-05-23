@@ -278,7 +278,7 @@ public class MazeGeneratorController : MonoBehaviour {
 				float monsterHeight = 0;
 				if(monsterToSpawn.GetComponent<BirdMovement> () != null)
 				{
-					monsterHeight = 4;
+					monsterHeight = 6;
 				}
                 if(!curr.start)
                     Network.Instantiate(monsterToSpawn, new Vector3(r * wallSize, monsterHeight, c * wallSize), Quaternion.identity, 0);
