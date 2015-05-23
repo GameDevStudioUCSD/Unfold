@@ -30,6 +30,17 @@ public class MazeInfo : MonoBehaviour {
 		return wallSize;
 	}
 
+	public bool removeWall(EditWalls wall) {
+		int row = wall.transform.position.x / 11;
+		int col = wall.transform.position.z / 11;
+
+		InnerWall iwall = (InnerWall)wall.GetComponentInChildren<InnerWall> ();
+		float x = iwall.transform.position.x;
+		float z = iwall.transform.position.z;
+
+
+	}
+
 	// In order: south, west, north, east.
 	public bool[] getSquareWalls(Square s) {
 		bool south, west, north, east;
