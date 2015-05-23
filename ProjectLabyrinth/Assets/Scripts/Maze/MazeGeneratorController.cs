@@ -44,6 +44,7 @@ public class MazeGeneratorController : MonoBehaviour {
     private GameObject gameTypeObj;
 
 	public MazeInfo mi;
+    public Spawner spawner;
 
 	// Use this for initialization
 	public void Start () {
@@ -270,7 +271,7 @@ public class MazeGeneratorController : MonoBehaviour {
         for (int i = 0; i < corridors.Count; i++)
         {
             curr = (Square)corridors[i];
-            GameObject monsterToSpawn = Spawner.NextSpawn(curr, spawnList, 100 - spawningRate);
+            GameObject monsterToSpawn = spawner.NextSpawn(curr, spawnList, 100 - spawningRate, levelType);
             int r = curr.getRow();
             int c = curr.getCol();
             if (monsterToSpawn != null)
