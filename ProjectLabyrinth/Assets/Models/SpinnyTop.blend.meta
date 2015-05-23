@@ -12,6 +12,10 @@ ModelImporter:
     100008: Right_Arm
     100010: //RootNode
     100012: Third_arm
+    100014: Armature
+    100016: Bone
+    100018: Bone_001
+    100020: Bone_002
     400000: Body
     400002: Feet
     400004: Head
@@ -19,6 +23,10 @@ ModelImporter:
     400008: Right_Arm
     400010: //RootNode
     400012: Third_arm
+    400014: Armature
+    400016: Bone
+    400018: Bone_001
+    400020: Bone_002
     2300000: Body
     2300002: Feet
     2300004: Head
@@ -39,6 +47,7 @@ ModelImporter:
     4300010: Body
     7400000: Default Take
     9500000: //RootNode
+    13700000: Head
   materials:
     importMaterials: 1
     materialName: 0

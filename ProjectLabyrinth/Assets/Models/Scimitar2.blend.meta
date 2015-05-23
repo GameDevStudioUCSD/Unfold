@@ -1,34 +1,39 @@
 fileFormatVersion: 2
-guid: 807e1f9ccbeb747aa9a15a601d6297f6
-timeCreated: 1427135447
+guid: c07d58f58303b4f14ad24e6314c11c58
+timeCreated: 1432423502
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Armature
-    100002: Bone
-    100004: Cube
-    100006: //RootNode
-    100008: Hammer
-    100010: Handle
-    100012: Spike
-    400000: Armature
-    400002: Bone
-    400004: Cube
-    400006: //RootNode
-    400008: Hammer
-    400010: Handle
-    400012: Spike
-    4300000: Cube
-    4300002: Hammer
-    4300004: Handle
-    4300006: Spike
+    100000: Blade
+    100002: Edge
+    100004: Handle
+    100006: Hilt
+    100008: //RootNode
+    100010: Sphere
+    400000: Blade
+    400002: Edge
+    400004: Handle
+    400006: Hilt
+    400008: //RootNode
+    400010: Sphere
+    2300000: Blade
+    2300002: Edge
+    2300004: Handle
+    2300006: Hilt
+    2300008: Sphere
+    3300000: Blade
+    3300002: Edge
+    3300004: Handle
+    3300006: Hilt
+    3300008: Sphere
+    4300000: Edge
+    4300002: Sphere
+    4300004: Hilt
+    4300006: Handle
+    4300008: Blade
     7400000: Default Take
     9500000: //RootNode
-    13700000: Cube
-    13700002: Hammer
-    13700004: Handle
-    13700006: Spike
   materials:
     importMaterials: 1
     materialName: 0

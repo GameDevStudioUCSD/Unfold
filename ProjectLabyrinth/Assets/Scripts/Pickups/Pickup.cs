@@ -42,7 +42,6 @@ public class Pickup : MonoBehaviour {
             }
 			if (Time.time > deleteTime)
 			{
-				Debug.Log ("Deleting" + modelID);
 				Destroy(this.gameObject);
 			}	
 		}
