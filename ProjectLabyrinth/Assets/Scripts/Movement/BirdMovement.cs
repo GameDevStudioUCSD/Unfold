@@ -16,10 +16,26 @@ public class BirdMovement : MonsterMovement {
 
 		else if (transform.position.y > 5.0f)
 			transform.Translate (Vector3.up * SPEED);*/
-		float change = del * Mathf.Cos (t);
-		transform.Translate(Vector3.up * change);
-		t += .03f;
-		transform.Translate (Vector3.forward * SPEED);
+
+		if(playerDetected) {
+			if(transform.position.y > 2) {
+				float change = -del * Mathf.Sin (t);
+				transform.Translate(Vector3.up * change);
+				t += .03f;
+			}
+		}
+
+		if(!playerDetected) {
+			if(transform.position.y < 6) {
+				float change = -del * Mathf.Sin (t);
+				transform.Translate(Vector3.up * change);
+				t += .03f;
+			}
+		}
+
+		if(!isClose) {
+			transform.Translate (Vector3.forward * SPEED);
+		}
 	}
 
     public override void idleManeuver()
@@ -64,7 +80,7 @@ public class BirdMovement : MonsterMovement {
 	}
 
 	public override void doClose(Transform player) {
-		transform.LookAt (player.position);
+		transform.LookAt (new Vector3(player.position.x, transform.position.y, player.position.z));
 	}
 
 	public override void doAttack() {

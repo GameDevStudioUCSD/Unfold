@@ -59,19 +59,23 @@ public class WeaponButton : MonoBehaviour {
 	}
 
 	void deactivate() {
-		active = false;
-		image.color = disabledColor;
+		if (image == null)
+			image = (Image) gameObject.GetComponent<Image>();
 
-		if (weapon != null)
+		if (weapon != null) {
+			active = false;
+			image.color = disabledColor;
+
 			weapon.deactivate();
+		}
 	}
 
 	void activate() {
-		active = true;
-		image.color = enabledColor;
-
-		if (weapon != null)
+		if (weapon != null) {
+			active = true;
+			image.color = enabledColor;
 			weapon.activate();
+		}
 	}
 
 	public void setCooldown() {

@@ -8,7 +8,8 @@ public class SpiderMovement : MonsterMovement {
 
 	public override void maneuver()
 	{
-		transform.Translate (Vector3.forward * SPEED);
+		if(!isClose)
+			transform.Translate (Vector3.forward * SPEED);
 	}
 
 	public override void idleManeuver()
