@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Monster { Spanter, Bird, Miniman, SpinnyTop }
+public enum Monster { Spanter, Robird, Inhabitant, Steward, Master }
 
 [System.Serializable]
 public class SpawnRate  {
 
 	public bool debug_On = false;
     public int spanterRate;
-    public int birdRate;
-    public int minimanRate;
-    public int spinnyTop;
+    public int robirdRate;
+    public int inhabitantRate;
+    public int stewardRate;
+    public int masterRate;
 
     private int[] probs;
     private int[] probWeightSummed;
@@ -21,7 +22,7 @@ public class SpawnRate  {
     {
         if (!hasSetup)
             Setup();
-        Monster retVal = Monster.Bird;
+        Monster retVal = Monster.Robird;
         if (debug_On)
         	Debug.Log("Total Weight " + totalWeight);
         for (int i = 0; i < probs.Length; i++)
@@ -43,7 +44,7 @@ public class SpawnRate  {
     private void Setup()
     {
         totalWeight = 0;
-        probs = new int[] { spanterRate, birdRate, minimanRate, spinnyTop };
+        probs = new int[] { spanterRate, robirdRate, inhabitantRate, stewardRate, masterRate };
         probWeightSummed = new int[probs.Length];
         CalculateTotalWeight();
         hasSetup = true;

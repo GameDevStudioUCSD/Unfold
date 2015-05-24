@@ -53,15 +53,18 @@ public class Spawner : MonoBehaviour {
                 case Monster.Spanter:
                     returnVal = spawnList[0];
                     break;
-                case Monster.Bird:
+                case Monster.Robird:
                     returnVal = spawnList[1];
                     break;
-                case Monster.SpinnyTop:
+                case Monster.Steward:
                     returnVal = spawnList[2];
                     break;
-                case Monster.Miniman:
+                case Monster.Inhabitant:
                     returnVal = spawnList[3];
                     break;
+                case Monster.Master:
+                	returnVal = spawnList[4];
+                	break;
             }
         }
         return returnVal;
