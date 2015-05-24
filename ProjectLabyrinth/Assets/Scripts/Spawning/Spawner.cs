@@ -45,6 +45,7 @@ public class Spawner : MonoBehaviour {
                 rates = mansion;
                 break;
         }
+        Debug.Log (rates);
         if (CalculateSpawnChance(s, spawnChance))
         {
             Monster monster = rates.SelectMonster();
