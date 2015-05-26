@@ -1,0 +1,3 @@
+Play around with the turning speed; seems too fast compared to the forward walking speed
+Possibly make it impossible to attack while moving
+Trail renderer displays while moving, doesn't when standing still
