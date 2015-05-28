@@ -106,8 +106,8 @@ public class PlayerCharacter : Character {
 						float deltaX = this.initialTouch.position.x - t.position.x;
 						float deltaY = this.initialTouch.position.y - t.position.y;
 						float distance = Mathf.Sqrt(Mathf.Pow(deltaX, 2) + Mathf.Pow(deltaY, 2));
-						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < .2f;
-						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 5f;
+						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < 1f;
+						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 1f;
 
 						if (distance > 100f) {
 							if (horizontalAttack) {
