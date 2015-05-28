@@ -217,6 +217,10 @@ public class PlayerCharacter : Character {
 		bool hasAttacked = base.Attack();
 		if (hasAttacked) {
 			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
+			if(weaponButton.weapon == weaponButton.weaponList[4] && weaponButton.active) {
+				nextAttackTime = Time.time;
+			}
+
 			if (weaponButton.active) {
 				weaponButton.setCooldown ();
 			}

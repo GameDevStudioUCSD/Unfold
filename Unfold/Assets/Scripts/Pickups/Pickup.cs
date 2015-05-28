@@ -141,6 +141,19 @@ public class Pickup : MonoBehaviour {
 //				player.addAbility ("foil");
 				button.setWeapon (2);
 				break;
+
+			case 8:
+				if(debug_On)
+					Debug.Log ("Adding machete");
+
+				button.setWeapon (4);
+				break;
+
+			case 9:
+				if(debug_On)
+				Debug.Log ("Adding scimitar");
+
+				break;
 		}
 		
 	}
