@@ -13,7 +13,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	public int stunTime;
 	private int stunned = 0;
 	protected bool playerDetected;
-	protected bool isClose;
+	public bool isClose { get; set; }
 	protected bool attacking;
     private GameObject target;
 

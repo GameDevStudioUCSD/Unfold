@@ -26,6 +26,8 @@ public class EnemyCharacter : Character {
 	public GameObject particles;
 	
 	public Animator animator;
+
+	private MonsterMovement mov;
 	
 	void Start() {
         // This places the monsters underneath a parent object labeled 
@@ -38,6 +40,7 @@ public class EnemyCharacter : Character {
             monsterTransform.parent = monsterRoot.GetComponent<Transform>();
         }
         arrow.SetActive(false);
+		mov = GetComponent<MonsterMovement> ();
 	}
 	
 	void FixedUpdate() {
@@ -51,8 +54,10 @@ public class EnemyCharacter : Character {
 			if (UnityEngine.Random.Range(0, 100) < 10) {
 				this.attackType = 15;
 			}
-			this.Attack();
-			this.GetComponent<MonsterMovement>().setAttacking (true);
+			if(mov.isClose) {
+				this.Attack();
+				this.GetComponent<MonsterMovement>().setAttacking (true);
+			}
 		}
 	}
 	
@@ -63,9 +68,9 @@ public class EnemyCharacter : Character {
             {
                 GameObject target = (other.gameObject.transform.parent.gameObject);
                 GetComponent<MonsterMovement>().SetTarget(target);
-            }
-            else
-            {
+//            }
+//            else
+//            {
                 this.attackCollider.Add(other);
                 chr.setAttacker(this);
             }
