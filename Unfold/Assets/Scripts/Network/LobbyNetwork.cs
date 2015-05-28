@@ -84,6 +84,6 @@ public class LobbyNetwork : MonoBehaviour {
 
     private void SpawnPlatform()
     {
-        Network.Instantiate(startPlatformPrefab, startPlatformPoint.transform.position, Quaternion.identity, 0);
+        Network.Instantiate(startPlatformPrefab, startPlatformPoint.transform.position, Quaternion.Euler(0,180,0), 0);
     }
 }
