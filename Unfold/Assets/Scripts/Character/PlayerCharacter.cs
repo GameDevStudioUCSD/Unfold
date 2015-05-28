@@ -117,7 +117,7 @@ public class PlayerCharacter : Character {
 									this.animator.SetInteger("Attack", 1);
 								this.attackType = 1;
 							} else if (verticalAttack) {
-								if (deltaY > 0)
+								if (deltaY < 0)
 									this.animator.SetInteger("Attack", 4);
 								else
 									this.animator.SetInteger("Attack", 3);
