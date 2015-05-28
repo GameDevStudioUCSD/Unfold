@@ -31,14 +31,14 @@ public class MazeInfo : MonoBehaviour {
 	}
 
 	public bool removeWall(EditWalls wall) {
-		int row = wall.transform.position.x / 11;
-		int col = wall.transform.position.z / 11;
+		int row = (int) Mathf.Round (wall.transform.position.x / 11);
+		int col = (int) Mathf.Round (wall.transform.position.z / 11);
 
 		InnerWall iwall = (InnerWall)wall.GetComponentInChildren<InnerWall> ();
 		float x = iwall.transform.position.x;
 		float z = iwall.transform.position.z;
 
-
+		return true;
 	}
 
 	// In order: south, west, north, east.
