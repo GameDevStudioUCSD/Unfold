@@ -7,6 +7,11 @@ using UnityEngine;
 public class FogOfWar : MonoBehaviour {
 
 	public GameObject roofLight;
+
+    void Start()
+    {
+        transform.eulerAngles = new Vector3(90, 0, 0);
+    }
 	
 	void OnDrawGizmosSelected() {
 		Color color = Gizmos.color;
