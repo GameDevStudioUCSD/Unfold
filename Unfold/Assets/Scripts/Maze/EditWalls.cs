@@ -6,7 +6,12 @@ public class EditWalls : MonoBehaviour {
 	//public GameObject container;
 	private Transform wallTransform;
 	public int health = 3;
+
+	public MazeGeneratorController mazegen;
+	private MazeInfo info;
+
 	void Start() {
+		info = mazegen.mi;
 		GameObject mazeRoot = GameObject.Find("Maze");
 		if (mazeRoot != null) {
 			wallTransform = GetComponent<Transform>();
@@ -39,7 +44,7 @@ public class EditWalls : MonoBehaviour {
 	/// Try to destory the wall
 	/// </summary>
 	public void DestroyWall() {
-		if (--health <= 0) {
+		if (--health <= 0 && info.canRemoveWall(this)) {
 			Destroy(gameObject);
 		}
 	}

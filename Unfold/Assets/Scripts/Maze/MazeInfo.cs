@@ -30,13 +30,22 @@ public class MazeInfo : MonoBehaviour {
 		return wallSize;
 	}
 
-	public bool removeWall(EditWalls wall) {
-		int row = (int) Mathf.Round (wall.transform.position.x / 11);
-		int col = (int) Mathf.Round (wall.transform.position.z / 11);
+	public bool canRemoveWall(EditWalls wall) {
+		int row = (int) Mathf.Round (wall.transform.position.x / wallSize);
+		int col = (int) Mathf.Round (wall.transform.position.z / wallSize);
 
 		InnerWall iwall = (InnerWall)wall.GetComponentInChildren<InnerWall> ();
 		float x = iwall.transform.position.x;
 		float z = iwall.transform.position.z;
+
+		if (row == 0 && x == -5)
+			return false;
+		if (row == this.maze.Rows - 1 && x == 5)
+			return false;
+		if (col == 0 && z == -5)
+			return false;
+		if (col == this.maze.Cols - 1 && z == 5)
+			return false;
 
 		return true;
 	}
