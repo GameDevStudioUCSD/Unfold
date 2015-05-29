@@ -250,6 +250,7 @@ public class PlayerCharacter : Character {
 		if (debug_On)
 			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
+			this.currentHealth = 0;
 			StartCoroutine(waitBeforeDie ());
 			return true;
 		}
