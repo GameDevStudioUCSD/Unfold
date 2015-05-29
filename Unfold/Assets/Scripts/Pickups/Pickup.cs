@@ -83,7 +83,7 @@ public class Pickup : MonoBehaviour {
 			case 0:
 				if (debug_On)
 					Debug.Log("Healing health");
-				player.addHealth(5);
+				player.addHealth(4);
 				break;
 			//speed upgrade
 			case 1:
@@ -95,13 +95,13 @@ public class Pickup : MonoBehaviour {
 			case 2:
 				if (debug_On)
 					Debug.Log("Adding maxHealth");
-				player.addMaxHealth(5);
+				player.addMaxHealth(3);
 				break;
 			//damage upgrade
 			case 3:
 				if (debug_On)
 					Debug.Log("Adding damage");
-				player.addDamage(5);
+				player.addDamage(2);
 				break;
 
 			//Start Sword (???)
