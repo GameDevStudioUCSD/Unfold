@@ -64,11 +64,10 @@ public abstract class Character : MonoBehaviour {
 				if (target.TakeDamage(this.damage, this.attackType))
 					kills++;
 				hasAttacked = true;
-			} 
-			
-			this.nextAttackTime = Time.time + attackDelay;
+			}
 			
 		}
+		this.nextAttackTime = Time.time + attackDelay;
 		return hasAttacked;
 	}
 

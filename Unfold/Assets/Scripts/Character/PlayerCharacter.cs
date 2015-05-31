@@ -91,7 +91,7 @@ public class PlayerCharacter : Character {
 			Debug.Log("Hammer available!");
 			hammerCooldown = 0;
 		}
-
+		
 		if (Time.time > nextAttackTime) {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
@@ -293,6 +293,10 @@ public class PlayerCharacter : Character {
 			this.currentHealth += h;
 		else
 			this.currentHealth = baseMaxHealth;
+	}
+	
+	public void addHealth() {
+		this.currentHealth = baseMaxHealth;
 	}
 
 	public void addSpeed(float s) {
