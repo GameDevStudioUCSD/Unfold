@@ -12,6 +12,8 @@ public class GamePanelScript : MonoBehaviour {
     /* Drag the prefabs of the respective menus in the editor */
     public GameObject createGameMenu;
     public GameObject joinGameMenu;
+    public AudioClip selectionClip;
+    public AudioSource audioSource;
 
 
     /// <summary>
@@ -19,6 +21,7 @@ public class GamePanelScript : MonoBehaviour {
     /// </summary>
     public void JoinGame()
     {
+		SoundController.PlaySound(audioSource, selectionClip);
         /* Turns this panel off */
         this.transform.parent.gameObject.SetActive(false);
 
@@ -30,6 +33,7 @@ public class GamePanelScript : MonoBehaviour {
     /// </summary>
     public void CreateGame()
     {
+		SoundController.PlaySound(audioSource, selectionClip);
         /* Turns this panel off */
         this.transform.parent.gameObject.SetActive(false);
 

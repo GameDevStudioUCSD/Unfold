@@ -11,12 +11,15 @@ public class JoinGamePanelScript : MonoBehaviour {
 
     /* Drag the prefabs for the respective menus in the editor */
     public GameObject gameMenu;
+    public AudioClip selectionClip;
+    public AudioSource audioSource;
 
     /// <summary>
     /// Goes back to the previous menu by turning this menu off and turning the other one on.
     /// </summary>
     public void GoBack()
     {
+		SoundController.PlaySound(audioSource, selectionClip);
         /* Turn off this panel */
         this.transform.parent.gameObject.SetActive(false);        
 

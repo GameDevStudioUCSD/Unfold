@@ -16,6 +16,9 @@ public class CreateGame : MonoBehaviour {
     public Transform gameTypeToggleGroup;
     public GameObject errorMessage;
 
+	public AudioClip selectionClip;
+	public AudioSource audioSource;
+
     private enum HostError
     {
         AlreadyMakingGame,
@@ -53,6 +56,8 @@ public class CreateGame : MonoBehaviour {
             HandleError(HostError.ServerFailedToInstantiate);
             return;
         }
+        
+		SoundController.PlaySound(audioSource, selectionClip);
     }
     private bool IsPublicFieldsDefined()
     {

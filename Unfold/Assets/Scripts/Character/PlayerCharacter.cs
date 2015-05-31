@@ -214,9 +214,10 @@ public class PlayerCharacter : Character {
 				// Add code here for cooldown reset
 			}
 		}
+		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[0]);
 		bool hasAttacked = base.Attack();
 		if (hasAttacked) {
-			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[0]);
+			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[1]);
 			if(weaponButton.weapon == weaponButton.weaponList[4] && weaponButton.active) {
 				nextAttackTime = Time.time;
 			}
@@ -266,7 +267,7 @@ public class PlayerCharacter : Character {
 		if (debug_On)
 			Debug.Log("I am dead.");
 			
-		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[1]);
+		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[2]);
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
 
