@@ -246,6 +246,8 @@ public class PlayerCharacter : Character {
 		if (enAttackType == 15) {
 			enDamage = enDamage;
 		}
+		
+		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[3]);
 
 		this.currentHealth = this.currentHealth - enDamage;
 		if (debug_On)
