@@ -216,7 +216,7 @@ public class PlayerCharacter : Character {
 		}
 		bool hasAttacked = base.Attack();
 		if (hasAttacked) {
-			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
+			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[0]);
 			if(weaponButton.weapon == weaponButton.weaponList[4] && weaponButton.active) {
 				nextAttackTime = Time.time;
 			}
@@ -265,6 +265,8 @@ public class PlayerCharacter : Character {
 	public override void Die() {
 		if (debug_On)
 			Debug.Log("I am dead.");
+			
+		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[1]);
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
 

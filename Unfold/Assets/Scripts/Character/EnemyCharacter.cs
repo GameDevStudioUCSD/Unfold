@@ -18,6 +18,9 @@ public class EnemyCharacter : Character {
 	 * 0100 = diagonal1 weakness (topright -> bottomleft)
 	 * 1000 = diagonal2 weakness (topleft -> bottomright)
 	 */
+	 
+	public AudioClip attackSound;
+	
 	public int weakness;
 
 	// The particular item this enemy drops when killed
@@ -87,6 +90,7 @@ public class EnemyCharacter : Character {
 	
 	public override bool TakeDamage(int enDamage, int enAttackType) {
 		if (enAttackType == this.weakness) {
+			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound);
 			enDamage = enDamage * 2;
 		}
 		
