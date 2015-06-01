@@ -9,13 +9,17 @@ abstract public class MonsterMovement : MonoBehaviour {
 	private Square[,] walls;
 	protected bool canTurn = false;
 	protected int direction;
-	protected int detectionRange;
 	public int stunTime;
 	private int stunned = 0;
 	protected bool playerDetected;
+	protected int detectionRange;
+	protected int farDetectRange;
 	public bool isClose { get; set; }
 	protected bool attacking;
     private GameObject target;
+
+	public int attackRange;
+	public int closeDetectRange;
 
 	// Use this for initialization
 	void Start () {
@@ -25,10 +29,11 @@ abstract public class MonsterMovement : MonoBehaviour {
 		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
 
 		direction = 3; // Quaternion.identity
-		detectionRange = 5;
 		playerDetected = false;
 		isClose = false;
 		attacking = false;
+		detectionRange = closeDetectRange;
+		farDetectRange = closeDetectRange + 5;
 
 		bool found = false;
 		while (!found) {
@@ -83,6 +88,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	abstract public void idleManeuver ();
 	abstract public void doClose (Transform player);
 	abstract public void doAttack();
+	abstract public bool canAttack();
 
 	/*protected void detectPlayer() {
 		int checkingDir = direction;
@@ -128,16 +134,16 @@ abstract public class MonsterMovement : MonoBehaviour {
 		Transform playerTransform = player.transform;
 		float distance = Vector3.Distance (new Vector3(playerTransform.position.x, 0, playerTransform.position.z), 
 		                                   new Vector3(transform.position.x, 0, transform.position.z));
-		if (distance >= 1 && distance <= detectionRange) {
+		if (distance >= attackRange && distance <= detectionRange) {
 			isClose = false;
-			detectionRange = 10;
+			detectionRange = farDetectRange;
 			transform.LookAt (new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 			playerDetected = true;
-		} else if(distance < 1) {
+		} else if(distance < attackRange) {
 			isClose = true;
 			doClose (playerTransform);
 		} else {
-			detectionRange=5;
+			detectionRange = closeDetectRange;
 
 			// Occurs when the player moves out of the monster's range
 			if(playerDetected) {
@@ -166,7 +172,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	public void setAttacking(bool state) {
-		if(this.isClose) {
+		if(this.isClose && this.canAttack()) {
 			attacking = state;
 		}
 	}

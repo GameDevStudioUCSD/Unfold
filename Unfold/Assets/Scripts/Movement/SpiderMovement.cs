@@ -58,6 +58,11 @@ public class SpiderMovement : MonsterMovement {
 		transform.LookAt (new Vector3(player.position.x, 0, player.position.z));
 	}
 
+	// special for birds, but needs to be defined for others
+	public override bool canAttack() {
+		return true;
+	}
+
 	public override void doAttack() {
 		if(this.forward) {
 			this.transform.Translate (Vector3.forward * .2f);

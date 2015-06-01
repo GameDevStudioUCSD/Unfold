@@ -83,6 +83,10 @@ public class BirdMovement : MonsterMovement {
 		transform.LookAt (new Vector3(player.position.x, transform.position.y, player.position.z));
 	}
 
+	public override bool canAttack() {
+		return (this.transform.position.y <= 2.5f);
+	}
+
 	public override void doAttack() {
 		if(this.forward) {
 			this.transform.Translate (Vector3.forward * .2f);
