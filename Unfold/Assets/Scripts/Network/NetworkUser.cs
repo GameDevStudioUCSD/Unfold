@@ -36,7 +36,6 @@ public class NetworkUser : NetworkCharacter{
         }
         // Only normalize the vector if the on a client machine and difference
         // counter does not exceed the threshold
-        Debug.Log(differenceCounter);
         if (Network.isClient && differenceCounter < DIFFERENCETHRESHOLD)
             truePosition += (1.5f * Vector3.up);
 
