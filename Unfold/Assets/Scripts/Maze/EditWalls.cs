@@ -6,6 +6,7 @@ public class EditWalls : MonoBehaviour {
 	//public GameObject container;
 	private Transform wallTransform;
 	public int health = 3;
+    public bool canDestroy = true;
 
 	public MazeGeneratorController mazegen;
 	private MazeInfo info;
@@ -44,7 +45,7 @@ public class EditWalls : MonoBehaviour {
 	/// Try to destory the wall
 	/// </summary>
 	public void DestroyWall() {
-		if (--health <= 0 && info.canRemoveWall(this)) {
+		if (--health <= 0 && canDestroy) {
 			Destroy(gameObject);
 		}
 	}
@@ -59,4 +60,18 @@ public class EditWalls : MonoBehaviour {
 		TextureController tController = new TextureController(actualTexture);
 		rend.material.mainTexture = tController.GetRandomWall();
 	}
+
+    [RPC]
+    public void MakeIndestructable()
+    {
+		Renderer rend;
+        FindInnerWall();
+		rend = wallTransform.gameObject.GetComponent<Renderer>();
+        rend.material.mainTexture = TextureController.GetWarningWallTexture();
+        SetCanDestroy(false);
+    }
+    public void SetCanDestroy(bool val)
+    {
+        canDestroy = val;
+    }
 }

@@ -21,6 +21,7 @@ public class TextureDB : MonoBehaviour {
         db.Add("corn_wall_3", Resources.Load("Textures/corn_wall_3", typeOfDB) as Texture);
         db.Add("corn_floor", Resources.Load("Textures/GroundPlaceholder", typeOfDB) as Texture);
         db.Add("corn_ceiling", Resources.Load ("Textures/CORN_SKYv3", typeOfDB) as Texture);
+        db.Add("WarningWall", Resources.Load("Textures/Warning", typeOfDB) as Texture);
         return db;
     }
     public static int NumberOfWallTextures(TextureController.TextureChoice texture)
