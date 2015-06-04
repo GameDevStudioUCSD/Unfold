@@ -55,6 +55,29 @@ public abstract class MazeGenerator
                 break;
         }
     }
+    protected void selectEntrance()
+    {
+        start = walls[Rows / 2, Cols / 2];
+        start.start = true;
+    }
+    protected void EnsureExitExists()
+    {
+        ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
+        float dist = 0;
+        float newDist = 1;
+        exit = start;
+
+        foreach (Square s in corridors)
+        {
+            newDist = Square.DistanceBetween(s, start);
+            if (newDist > dist)
+            {
+                exit = s;
+                dist = newDist;
+            }
+        }
+        exit.exit = true;
+    }
 
 	/// <summary>
 	/// Returns a random Direction representing a wall.
