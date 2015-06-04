@@ -4,7 +4,7 @@ using System.Collections;
 public class PickupDropper: MonoBehaviour {
 	
 	public GameObject[] pickupList;
-	public uint[] weightedProbability; //Should be one index longer than pickupList
+	public uint[] weightedProbability; //Should be one index longer than pickupList and last element should be 0
 	public int maxDrop;
 	public bool debug_On = false;
 	private System.Random rnd;
@@ -13,11 +13,12 @@ public class PickupDropper: MonoBehaviour {
 	// Use this for initialization
 	public void Start()
 	{
-		rnd = new System.Random(System.Guid.NewGuid().GetHashCode());   	
+		   	
 	}
 
 	public void dropItem(float x, float z) {
-		int numberOfDrops = rnd.Next(maxDrop + 1);
+		rnd = new System.Random(System.Guid.NewGuid().GetHashCode());
+		int numberOfDrops = rnd.Next(maxDrop);
 		if (debug_On)
 			numberOfDrops = 100;
 		for(int i = 0; i < numberOfDrops; i++)
