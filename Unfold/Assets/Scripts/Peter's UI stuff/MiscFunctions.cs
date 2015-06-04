@@ -5,8 +5,6 @@ using UnityEngine;
 /// belong to any particular prefab or object.
 /// </summary>
 public class MiscFunctions : MonoBehaviour {
-
-	public Object endScreenUIPrefab;
 	
 	/// <summary>
 	/// Load the scene specified by sceneName.
