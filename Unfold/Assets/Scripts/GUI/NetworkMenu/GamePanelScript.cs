@@ -14,7 +14,14 @@ public class GamePanelScript : MonoBehaviour {
     public GameObject joinGameMenu;
     public AudioClip selectionClip;
     public AudioSource audioSource;
+	private GameObject uimenu, playerLocal;
+	private NetworkCreateGame tutorial;
 
+	public void Start() {
+		playerLocal = GameObject.Find("PlayerLocal");
+		uimenu = GameObject.Find ("Prototype Book UI(Clone)");
+		tutorial = GameObject.Find ("StartTutorial").GetComponent<NetworkCreateGame>();
+	}
 
     /// <summary>
     /// Transitions the menu to the join game menu by turning this panel off and turning the other one on.
@@ -24,6 +31,7 @@ public class GamePanelScript : MonoBehaviour {
 		SoundController.PlaySound(audioSource, selectionClip);
         /* Turns this panel off */
         this.transform.parent.gameObject.SetActive(false);
+		this.tutorial.active = false;
 
         /* Turn on the join game panel */
         joinGameMenu.SetActive(true);
@@ -36,8 +44,22 @@ public class GamePanelScript : MonoBehaviour {
 		SoundController.PlaySound(audioSource, selectionClip);
         /* Turns this panel off */
         this.transform.parent.gameObject.SetActive(false);
+		this.tutorial.active = false;
 
         /* Turn on the create game panel */
         createGameMenu.SetActive(true);
     }
+
+	public void doTutorial()
+	{
+		SoundController.PlaySound (audioSource, selectionClip);
+
+		this.tutorial.active = true;
+		Destroy (uimenu);
+
+		Network.InitializeServer (0, 1337, false);
+		MenuWalk walkScript = playerLocal.GetComponent<MenuWalk>();
+		walkScript.DefineLerp(walkScript.endMarker, walkScript.portal);
+
+	}
 }

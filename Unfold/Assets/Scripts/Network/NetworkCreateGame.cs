@@ -9,13 +9,16 @@ using System.Collections;
 public class NetworkCreateGame : MonoBehaviour
 {
     public bool debug = false;
+	public bool active;
 
 
     public string nextScene = "LobbyScene";
 
     void OnTriggerEnter(Collider collider)
     {
-        Application.LoadLevel(nextScene);
+		if (active) {
+			Application.LoadLevel (nextScene);
+		}
     }
 
     void OnPlayerDisconnected(NetworkPlayer networkPlayer)
