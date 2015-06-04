@@ -17,6 +17,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	public bool isClose { get; set; }
 	protected bool attacking;
     private GameObject target;
+    private Square lastSquare;
 
 	public int attackRange;
 	public int closeDetectRange;
@@ -63,7 +64,15 @@ abstract public class MonsterMovement : MonoBehaviour {
 			// Move if not attacking
             if (!attacking)
             {
-				// Move towards the player if in sight
+                try
+                {
+                    lastSquare = getCurrSquare(transform.position.x, transform.position.z);
+                }
+                catch (System.Exception e)
+                {
+
+                }
+                // Move towards the player if in sight
                 approachPlayer();
                 if (!playerDetected && Network.isServer)
                 {
@@ -150,21 +159,38 @@ abstract public class MonsterMovement : MonoBehaviour {
 			if(playerDetected) {
 
 				// Jump to the center of the square, pick a random direction, and go!
-				Square curr = getCurrSquare(transform.position.x, transform.position.z);
-				transform.position = new Vector3(curr.getRow() * mazeGen.wallSize, transform.position.y, curr.getCol() * mazeGen.wallSize);
-				transform.rotation = Quaternion.identity;
+                try
+                {
+                    Square curr = getCurrSquare(transform.position.x, transform.position.z);
+                    lastSquare = new Square(curr);
+                    Debug.Log(lastSquare);
+                    transform.position = new Vector3(curr.getRow() * mazeGen.wallSize, transform.position.y, curr.getCol() * mazeGen.wallSize);
+                    transform.rotation = Quaternion.identity;
 
-				direction = 3;
-				bool[] sides = getSides (curr, transform.position.x, transform.position.z);
-				bool found = false;
-				while (!found) {
-					int side = Random.Range (0, 4); 
-					found = !sides [side];
-					
-					if (found) {
-						turn (side);
-					}
-				}
+                    direction = 3;
+                    bool[] sides = getSides(curr, transform.position.x, transform.position.z);
+                    bool found = false;
+                    while (!found)
+                    {
+                        int side = Random.Range(0, 4);
+                        found = !sides[side];
+
+                        if (found)
+                        {
+                            turn(side);
+                        }
+                    }
+                }
+                // Mainly used if the monster leaves the maze
+                catch (System.Exception e) 
+                {
+                    float row = lastSquare.getRow() * mazeGen.wallSize;
+                    float col = lastSquare.getCol() * mazeGen.wallSize;
+                    float y = transform.position.y;
+                    // Reset the monster's position to its last valid square
+                    transform.position = new Vector3(row, y, col);
+                }
+				
 			}
 			playerDetected = false;
 		}
