@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 34630e9b728434c4aa32a204e1776dd0
+timeCreated: 1433452095
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|Body
+    100004: Armature|Head
+    100006: Armature|Left Arm
+    100008: Armature|Left Leg
+    100010: Armature|Right Arm
+    100012: Armature|Right Leg
+    100014: //RootNode
+    100016: MiniManArms
+    100018: MiniManBody
+    100020: MiniManHead
+    100022: MiniManLegs
+    100024: WGT-root
+    400000: Armature
+    400002: Armature|Body
+    400004: Armature|Head
+    400006: Armature|Left Arm
+    400008: Armature|Left Leg
+    400010: Armature|Right Arm
+    400012: Armature|Right Leg
+    400014: //RootNode
+    400016: MiniManArms
+    400018: MiniManBody
+    400020: MiniManHead
+    400022: MiniManLegs
+    400024: WGT-root
+    2300000: WGT-root
+    3300000: WGT-root
+    4300000: WGT-root
+    4300002: MiniManArms
+    4300004: MiniManBody
+    4300006: MiniManHead
+    4300008: MiniManLegs
+    7400000: Armature|Attack
+    7400002: Armature|Walking
+    9500000: //RootNode
+    13700000: MiniManArms
+    13700002: MiniManBody
+    13700004: MiniManHead
+    13700006: MiniManLegs
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Attack
+      takeName: Armature|Attack
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Armature|Body
+        weight: 1
+      - path: Armature/Armature|Body/Armature|Head
+        weight: 1
+      - path: Armature/Armature|Left Arm
+        weight: 1
+      - path: Armature/Armature|Left Leg
+        weight: 1
+      - path: Armature/Armature|Right Arm
+        weight: 1
+      - path: Armature/Armature|Right Leg
+        weight: 1
+      - path: MiniManArms
+        weight: 1
+      - path: MiniManBody
+        weight: 1
+      - path: MiniManHead
+        weight: 1
+      - path: MiniManLegs
+        weight: 1
+      - path: WGT-root
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Walking
+      takeName: Armature|Walking
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Armature|Body
+        weight: 1
+      - path: Armature/Armature|Body/Armature|Head
+        weight: 1
+      - path: Armature/Armature|Left Arm
+        weight: 1
+      - path: Armature/Armature|Left Leg
+        weight: 1
+      - path: Armature/Armature|Right Arm
+        weight: 1
+      - path: Armature/Armature|Right Leg
+        weight: 1
+      - path: MiniManArms
+        weight: 1
+      - path: MiniManBody
+        weight: 1
+      - path: MiniManHead
+        weight: 1
+      - path: MiniManLegs
+        weight: 1
+      - path: WGT-root
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: 03ea40a5e265a4e3ba595b79283a1b11
+timeCreated: 1433454267
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Body
+    100004: Head
+    100006: Leg_L1_Lower
+    100008: Leg_L1_Upper
+    100010: Leg_L2_Lower
+    100012: Leg_L2_Upper
+    100014: Leg_L3_Lower
+    100016: Leg_L3_Upper
+    100018: Leg_L4_Lower
+    100020: Leg_L4_Upper
+    100022: Leg_R1_Lower
+    100024: Leg_R1_Upper
+    100026: Leg_R2_Lower
+    100028: Leg_R2_Upper
+    100030: Leg_R3_Lower
+    100032: Leg_R3_Upper
+    100034: Leg_R4_Lower
+    100036: Leg_R4_Upper
+    100038: Mouth_L
+    100040: Mouth_R
+    100042: Pincer_L
+    100044: Pincer_R
+    100046: //RootNode
+    100048: SpanterEyes
+    100050: SpanterFaceandBody
+    100052: SpanterFangs
+    100054: SpanterLegs
+    100056: SpanterPincers
+    100058: Web_Back
+    400000: Armature
+    400002: Body
+    400004: Head
+    400006: Leg_L1_Lower
+    400008: Leg_L1_Upper
+    400010: Leg_L2_Lower
+    400012: Leg_L2_Upper
+    400014: Leg_L3_Lower
+    400016: Leg_L3_Upper
+    400018: Leg_L4_Lower
+    400020: Leg_L4_Upper
+    400022: Leg_R1_Lower
+    400024: Leg_R1_Upper
+    400026: Leg_R2_Lower
+    400028: Leg_R2_Upper
+    400030: Leg_R3_Lower
+    400032: Leg_R3_Upper
+    400034: Leg_R4_Lower
+    400036: Leg_R4_Upper
+    400038: Mouth_L
+    400040: Mouth_R
+    400042: Pincer_L
+    400044: Pincer_R
+    400046: //RootNode
+    400048: SpanterEyes
+    400050: SpanterFaceandBody
+    400052: SpanterFangs
+    400054: SpanterLegs
+    400056: SpanterPincers
+    400058: Web_Back
+    4300000: SpanterFaceandBody
+    4300002: SpanterPincers
+    4300004: SpanterFangs
+    4300006: SpanterEyes
+    4300008: SpanterLegs
+    7400000: Default Take
+    7400002: Attack
+    7400004: Walking
+    9500000: //RootNode
+    13700000: SpanterEyes
+    13700002: SpanterFaceandBody
+    13700004: SpanterFangs
+    13700006: SpanterLegs
+    13700008: SpanterPincers
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
