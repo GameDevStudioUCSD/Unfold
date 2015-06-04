@@ -14,7 +14,6 @@ abstract public class MonsterMovement : Movement {
 	protected bool playerDetected;
 	protected int detectionRange;
 	protected int farDetectRange;
-	public bool isClose { get; set; }
 	protected bool attacking;
     private GameObject target;
     private Square lastSquare;
