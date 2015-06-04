@@ -9,9 +9,16 @@ public abstract class NetworkCharacter : MonoBehaviour {
     protected float startTime, endTime, currentTime;
     protected Transform trans;
     protected NetworkView nView;
-    public int modVal = 7;
+    public int modVal = 2;
     protected int updateCounter;
-        
+
+    // Variable used by oscillation dector for number of previous oscillations
+    protected int differenceCounter;
+    // Variable to store last y value for oscillation checks
+    protected float lastY;
+    // Constant to define greatest possible differences before we cease vector
+    // normalization
+    protected const uint DIFFERENCETHRESHOLD = 4;
     protected Animator animator;
     protected bool hasStarted = false;
     
@@ -32,6 +39,8 @@ public abstract class NetworkCharacter : MonoBehaviour {
         timeBetweenNetworkMessage = lastNetworkMessage;
         updateCounter = 0;
         truePosition = trans.position;
+        lastY = 0;
+        differenceCounter = 0;
 	}
 
 

@@ -153,6 +153,7 @@ public class Pickup : MonoBehaviour {
 				if(debug_On)
 				Debug.Log ("Adding scimitar");
 
+				button.setWeapon (5);
 				break;
 		}
 		

@@ -38,7 +38,7 @@ public class PlayerCharacter : Character {
 	public int maxHealth;
 
 	// Player statistics gained from equippable items
-	private int bonusDamage;
+	public int bonusDamage {get; set;}
 	private int bonusMaxHealth;
 	private float bonusMoveSpeed;
 

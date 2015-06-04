@@ -65,12 +65,13 @@ abstract public class MonsterMovement : MonoBehaviour {
             {
 				// Move towards the player if in sight
                 approachPlayer();
-                if (!playerDetected)
+                if (!playerDetected && Network.isServer)
                 {
 					// Navigates the maze
                     idleManeuver();
                 }
-                maneuver();
+                if( Network.isServer )
+                    maneuver();
             }
 
 			// Attack if not moving

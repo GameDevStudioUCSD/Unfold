@@ -18,7 +18,25 @@ public class NetworkUser : NetworkCharacter{
     }
     protected override void NormalizePosition()
     {
-        if (Network.isClient)
+        // Detect oscillations
+        // If the actual y value isn't equal to the current y value,
+        // then there is a strong chance there might be an oscillation
+        if(trans.position.y != lastY || differenceCounter > DIFFERENCETHRESHOLD)
+        {
+            // Increment difference counter
+            differenceCounter++;
+            // Update lastY
+            lastY = trans.position.y;
+        }
+        // Otherwise, there probably isn't any oscillations
+        else
+        {
+            // Reset difference counter
+            differenceCounter = 0;
+        }
+        // Only normalize the vector if the on a client machine and difference
+        // counter does not exceed the threshold
+        if (Network.isClient && differenceCounter < DIFFERENCETHRESHOLD)
             truePosition += (1.5f * Vector3.up);
 
     }

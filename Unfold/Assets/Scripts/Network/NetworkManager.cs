@@ -15,6 +15,7 @@ public class NetworkManager : MonoBehaviour {
     public GameObject spawnSquare;
 	public GameObject mazeGenerator;
 	public GameObject skPrefab;
+    public bool isGameScene = false;
 
 	private MazeGeneratorController mapCreator;
     private NetworkView nView;
@@ -22,14 +23,15 @@ public class NetworkManager : MonoBehaviour {
     void Start()
     {
         /* Check if single or multiplayer */
-        if(Network.isServer)
+        if(Network.isServer && isGameScene)
         {
             /* So we can use RPC calls */
             nView = GetComponent<NetworkView>();
 
             BuildMaze(true);
         }
-		DontDestroyOnLoad(skPrefab);
+        if( skPrefab != null )
+		    DontDestroyOnLoad(skPrefab);
     }
 	
 	
@@ -108,4 +110,9 @@ public class NetworkManager : MonoBehaviour {
         /* Set the player's spawn location */
 		player.GetComponentInChildren<PlayerCharacter> ().setSpawn (spawnLocation);
 	}
+    void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        Network.RemoveRPCs(player);
+        Network.DestroyPlayerObjects(player);
+    }
 }

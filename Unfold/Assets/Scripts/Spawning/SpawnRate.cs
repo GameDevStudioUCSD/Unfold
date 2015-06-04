@@ -44,7 +44,7 @@ public class SpawnRate  {
     }
     private void Setup()
     {
-    	Debug.Log ("Setup!");
+
         totalWeight = 0;
         probs = new int[] { spanterRate, robirdRate, inhabitantRate, stewardRate, masterRate };
         probWeightSummed = new int[probs.Length];

@@ -71,11 +71,7 @@ public class LobbyNetwork : MonoBehaviour {
         //SpawnPlayer();
         SpawnPlayer();
     }
-    void OnPlayerDisconnected(NetworkPlayer player)
-    {
-        Network.RemoveRPCs(player);
-        Network.DestroyPlayerObjects(player);
-    }
+   
 
     private void SpawnPlayer()
     {
