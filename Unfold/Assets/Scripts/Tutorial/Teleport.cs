@@ -17,9 +17,11 @@ public class Teleport : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		PlayerCharacter player = GetComponentInParent<PlayerCharacter> ();
-		if (player == null)
+		PickupDetector det = (PickupDetector) other.GetComponent<PickupDetector> ();
+		if (det == null)
 			return;
+
+		PlayerCharacter player = det.GetComponentInParent<PlayerCharacter> ();
 
 		player.transform.position = new Vector3 (x, 0, z);
 	}
