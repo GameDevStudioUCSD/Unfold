@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-abstract public class MonsterMovement : MonoBehaviour {
+abstract public class MonsterMovement : Movement {
 
 	public float SPEED;
 
@@ -172,7 +172,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	}
 
-	public void setAttacking(bool state) {
+	public override void setAttacking(bool state) {
 		if(this.isClose && this.canAttack()) {
 			attacking = state;
 		}
@@ -280,7 +280,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	// Stops the monster from moving.
-	public void stun() {
+	public override void stun() {
 		stunned = stunTime;
 	}
 }

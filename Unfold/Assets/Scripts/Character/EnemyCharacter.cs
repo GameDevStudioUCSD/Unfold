@@ -30,7 +30,7 @@ public class EnemyCharacter : Character {
 	
 	public Animator animator;
 
-	private MonsterMovement mov;
+	private Movement mov;
 	
 	void Start() {
         // This places the monsters underneath a parent object labeled 
@@ -43,7 +43,7 @@ public class EnemyCharacter : Character {
             monsterTransform.parent = monsterRoot.GetComponent<Transform>();
         }
         arrow.SetActive(false);
-		mov = GetComponent<MonsterMovement> ();
+		mov = GetComponent<Movement> ();
 	}
 	
 	void FixedUpdate() {
@@ -59,7 +59,7 @@ public class EnemyCharacter : Character {
 			}
 			if(mov.isClose) {
 				this.Attack();
-				this.GetComponent<MonsterMovement>().setAttacking (true);
+				this.GetComponent<Movement>().setAttacking (true);
 			}
 		}
 	}
@@ -70,7 +70,9 @@ public class EnemyCharacter : Character {
             if (other.GetComponent<HitDetector>().isDetectionSphere)
             {
                 GameObject target = (other.gameObject.transform.parent.gameObject);
-                GetComponent<MonsterMovement>().SetTarget(target);
+				if(GetComponent<MonsterMovement>() != null) {
+                	GetComponent<MonsterMovement>().SetTarget(target);
+				}
 //            }
 //            else
 //            {
@@ -102,7 +104,7 @@ public class EnemyCharacter : Character {
 			return true;
 		}
 
-		MonsterMovement mov = (MonsterMovement)GetComponent<MonsterMovement> ();
+		Movement mov = (Movement)GetComponent<Movement> ();
 		mov.stun ();
 		if (debug_On)
 			Debug.Log("Damage: " + enDamage);

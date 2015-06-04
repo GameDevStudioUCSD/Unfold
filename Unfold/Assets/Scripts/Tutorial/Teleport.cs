@@ -6,6 +6,8 @@ public class Teleport : MonoBehaviour {
 	public float x;
 	public float z;
 
+	public SpiderTutorialMovement monster;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -24,5 +26,9 @@ public class Teleport : MonoBehaviour {
 		PlayerCharacter player = det.GetComponentInParent<PlayerCharacter> ();
 
 		player.transform.position = new Vector3 (x, 0, z);
+
+		if (monster != null) {
+			this.monster.canMove = true;
+		}
 	}
 }
