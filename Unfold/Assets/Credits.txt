@@ -1,0 +1,57 @@
+Lead Project Designer				Boming Eric Cheng
+
+Lead Gameplay Designer			Alec Brickner
+
+Lead Concept and UI Artist		Mai Dinh
+
+Lead Art Designer					Gavin Badillo
+
+Modeller and Animator				Patrick Doanh Pham
+
+Lead Algorithms Designer		Michael Gonzalez
+
+Lead UI Designer						Peter Vugia
+
+Lead Composer							Julian Al-Haddad
+
+Lead AI Designer						Shaheriyar Zahed
+
+Lead Server Designer				Steven Lee
+
+Textural Artist						Fernando Granizo
+
+Conceptual Artists					Karis Loritz
+												Megan Sanders
+
+Sound Designer						Scarlet Xie
+												Ty Stahnke
+
+Gameplay Developers				Anhquan Nguyen
+												Eric Luo
+												Eswar Dhinakaran
+												Huayin Zhou
+												Kenny Yin
+												Kirill Sydykov
+												Manaf Alajmi
+												Paula Quach
+												Rachit Sengupta
+												Raghav Ravisankar
+												Richard Wan
+												Ruigang Gu
+												Runjie Guan
+												Sang Suh
+												Thomas Hou
+
+Secretary									Candice Sy
+
+Webmaster								Mehul Goel
+
+
+
+Special Thanks To:
+
+Erik Olson - Community Advisor for the Game Development Studio
+
+KumoKairo (Cyrill) - for providing a great 3rd party plugin
+
+and the Unity3D community

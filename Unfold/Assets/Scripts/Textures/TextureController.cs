@@ -128,4 +128,9 @@ public class TextureController {
 		
 		return retVal;
 	}
+    public static Texture GetWarningWallTexture()
+    {
+        SortedDictionary<string, Texture> db = TextureDB.GetDB();
+        return db["WarningWall"];
+    }
 }

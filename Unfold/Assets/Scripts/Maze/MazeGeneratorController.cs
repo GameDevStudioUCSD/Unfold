@@ -58,6 +58,13 @@ public class MazeGeneratorController : MonoBehaviour {
         walls = new Square[Rows,Cols];
         
         // Add new algorithm cases here
+        switch (levelType)
+        {
+            case TextureController.TextureChoice.Cave:
+                algorithm = AlgorithmChoice.Recursive;
+                spawningRate *= 50;
+                break;
+        }
         switch(algorithm)
         {
             case AlgorithmChoice.DepthFirst:
@@ -192,8 +199,44 @@ public class MazeGeneratorController : MonoBehaviour {
         NetworkView nView = currentWall.GetComponent<NetworkView>();
         nView.RPC("UpdateTexture", RPCMode.AllBuffered, (int)levelType);
     }
+
+    /**
+     * This method will create an indestructable outer wall layer so players
+     * cannot leave the maze.
+     */
+    public void CreateOuterWall()
+    {
+        // The position where this wall should be placed
+        Vector3 pos;
+        Quaternion rot = Quaternion.identity;
+        // The current wall being created
+        Stack outerWalls = new Stack();
+        // Create the east and west walls
+        for (int r = 0; r < Rows; r++)
+        {
+            pos = new Vector3(r * wallSize, 1, -1);
+            outerWalls.Push(Network.Instantiate(WestWall, pos, rot, 0));
+            pos = new Vector3(r * wallSize, 1, (Cols-1) * wallSize + 1 );
+            outerWalls.Push(Network.Instantiate(EastWall, pos, rot, 0));
+        }
+        // Create the north and south walls
+        for (int c = 0; c < Cols; c++)
+        {
+            pos = new Vector3(-1, 1, c * wallSize);
+            outerWalls.Push((GameObject)Network.Instantiate(NorthWall, pos, rot, 0));
+            pos = new Vector3((Rows-1)*wallSize + 1, 1, c * wallSize );
+            outerWalls.Push(Network.Instantiate(SouthWall, pos, rot, 0));
+        }
+        NetworkView nView;
+        while (outerWalls.Count > 0)
+        {
+            nView = ((GameObject)outerWalls.Pop()).GetComponent<NetworkView>();
+            nView.RPC("MakeIndestructable", RPCMode.AllBuffered);
+        }
+    }
     public void createWalls()
     {
+        CreateOuterWall();
         DetermineWallsToSpawn();
         Stack instantiationList = new Stack();
         //TextureController textureController = new TextureController(levelType);
