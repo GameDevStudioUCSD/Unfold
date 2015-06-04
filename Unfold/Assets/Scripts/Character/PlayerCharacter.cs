@@ -261,7 +261,7 @@ public class PlayerCharacter : Character {
 	}
 
 	public IEnumerator waitBeforeDie() {
-		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (/*1.5f*/0);
 		this.Die();
 	}
 
