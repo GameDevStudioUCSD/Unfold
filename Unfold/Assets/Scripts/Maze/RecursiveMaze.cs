@@ -16,17 +16,17 @@ public class RecursiveMaze : MazeGenerator {
         createSquares(false);
         constructOutterWalls();
         generateMaze(0, 0, Rows , Cols);
+        base.selectEntrance();
+        EnsureExitExists();
     }
     private void constructOutterWalls()
     {
         for(int r = 0; r < Rows; r++)
         {
-            walls[r, 0].hasWest = true;
             walls[r, Cols - 1].hasEast = true;
         }
         for(int c = 0; c < Cols; c++)
         {
-            walls[0, c].hasNorth = true;
             walls[Rows - 1, c].hasSouth = true;
         }
     }
