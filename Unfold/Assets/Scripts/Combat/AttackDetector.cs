@@ -7,8 +7,10 @@ public class AttackDetector : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<HitDetector>() != null) {
-			PlayerCharacter player = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
-			player.currentHealth = player.currentHealth - 10;
+			PlayerCharacter enemy = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
+			if (enemy.Attack()) {
+				this.GetComponentInParent<PlayerCharacter>().TakeDamage(10, 0);
+			}
 		}
 		if (other.GetComponent<EnemyCharacter>() != null) {
 			EnemyCharacter enemy = (EnemyCharacter) other.GetComponent<EnemyCharacter>();

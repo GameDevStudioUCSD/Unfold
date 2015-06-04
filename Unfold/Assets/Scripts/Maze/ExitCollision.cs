@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ExitCollision : AbstractGUI {
+public class ExitCollision : MonoBehaviour {
 
     public GameObject victoryScreen;
     public GameObject failureScreen1;
@@ -32,19 +32,11 @@ public class ExitCollision : AbstractGUI {
         else if(!hasGameEnded && hitDetector)
         {
             GameObject youLose = Instantiate(victoryScreen);
-            foreach (Transform childTrans in youLose.transform)
-            {
-            	System.Random rnd = new Random();
-            	int num = rnd.Next(0,2);
-				if (num)
-				{
-					Instantiate(failureScreen1, new Vector3(0, 0, 0), Quaternion.identity);
-				}
-				else
-				{
-					Instantiate(failureScreen2, new Vector3(0, 0, 0), Quaternion.identity);
-				}
-            }
+			if (UnityEngine.Random.Range(0, 100) % 2 == 0) {
+				Object.Instantiate(this.failureScreen1, new Vector3(), Quaternion.identity);
+			} else {
+				Object.Instantiate(this.failureScreen2, new Vector3(), Quaternion.identity);
+			}
         }
 	}
     

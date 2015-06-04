@@ -11,10 +11,7 @@ public class Credits : MonoBehaviour {
 	public float speed = 1.0f;
 
 	public void Awake() {
-		try {
-			this.creditsText.text = File.ReadAllText(Application.dataPath + this.creditsFile);
-		} catch (IOException e) {
-		}
+		this.creditsText.text = File.ReadAllText(Application.dataPath + this.creditsFile);
 	}
 
 	public void Update() {
