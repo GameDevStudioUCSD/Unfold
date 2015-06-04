@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class MiscFunctions : MonoBehaviour {
 
+	public Object endScreenUIPrefab;
+	
 	/// <summary>
 	/// Load the scene specified by sceneName.
 	/// </summary>

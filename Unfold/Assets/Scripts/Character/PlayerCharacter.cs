@@ -243,9 +243,6 @@ public class PlayerCharacter : Character {
 	}
 
 	public override bool TakeDamage(int enDamage, int enAttackType) {
-		if (enAttackType == 15) {
-			enDamage = enDamage;
-		}
 		
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[3]);
 

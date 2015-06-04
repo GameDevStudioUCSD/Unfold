@@ -10,9 +10,13 @@ public class TextureDB : MonoBehaviour {
     {
         SortedDictionary<string, Texture> db = new SortedDictionary<string, Texture>();
         db.Add("cave_floor", Resources.Load("Textures/cave_floor", typeOfDB) as Texture);
-        db.Add("cave_ceiling", Resources.Load("Textures/cave_ceiling", typeOfDB) as Texture);
-        db.Add("cave_wall_1", Resources.Load("Textures/cave_wall_1", typeOfDB) as Texture);
-        db.Add("forest_floor", Resources.Load("Textures/forest_floor", typeOfDB) as Texture);
+        db.Add("cave_ceiling", Resources.Load("Textures/Dungeon_roof", typeOfDB) as Texture);
+        db.Add("cave_wall_1", Resources.Load("Textures/Dungeon_wall_1", typeOfDB) as Texture);
+		db.Add("cave_wall_2", Resources.Load("Textures/Dungeon_wall_2", typeOfDB) as Texture);
+		db.Add("cave_wall_3", Resources.Load("Textures/Dungeon_wall_3", typeOfDB) as Texture);
+		db.Add("cave_wall_4", Resources.Load("Textures/Dungeon_wall_4", typeOfDB) as Texture);
+		db.Add("cave_wall_5", Resources.Load("Textures/Dungeon_wall_5", typeOfDB) as Texture);
+		db.Add("forest_floor", Resources.Load("Textures/forest_floor", typeOfDB) as Texture);
         db.Add("forest_ceiling", Resources.Load("Textures/Forest_canopy_v2_merged", typeOfDB) as Texture);
         db.Add("forest_wall_1", Resources.Load("Textures/forest_wall_1", typeOfDB) as Texture);
         db.Add("mansion_wall_1", Resources.Load("Textures/LOBBY_WALLv1", typeOfDB) as Texture);
@@ -41,7 +45,7 @@ public class TextureDB : MonoBehaviour {
                 retVal = 3;
                 break;
             case TextureController.TextureChoice.Cave:
-                retVal = 1;
+                retVal = 5;
                 break;
             case TextureController.TextureChoice.Forest:
                 retVal = 1;
