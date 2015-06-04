@@ -6,6 +6,10 @@ public class AttackDetector : MonoBehaviour {
 	public WeaponButton Button;
 
 	void OnTriggerEnter(Collider other) {
+		if (other.GetComponent<HitDetector>() != null) {
+			PlayerCharacter player = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
+			player.currentHealth = player.currentHealth - 10;
+		}
 		if (other.GetComponent<EnemyCharacter>() != null) {
 			EnemyCharacter enemy = (EnemyCharacter) other.GetComponent<EnemyCharacter>();
 			PlayerCharacter chr = GetComponentInParent<PlayerCharacter>();
