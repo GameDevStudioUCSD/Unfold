@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: e3ea38889f37d4fa2b0042419d947e44
+timeCreated: 1433460030
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Arm_L
+    100002: Arm_R
+    100004: Center
+    100006: Foot_L
+    100008: Foot_R
+    100010: Hand_L
+    100012: Hand_R
+    100014: Head
+    100016: Hip_L
+    100018: Hip_R
+    100020: Leg_L
+    100022: Leg_R
+    100024: Neck
+    100026: Player
+    100028: //RootNode
+    100030: PlayerModelBody
+    100032: PlayerModelFeet
+    100034: PlayerModelHead
+    100036: PlayerModelLegs
+    100038: PlayerModelNeck
+    100040: PlayerModelNeck_001
+    100042: Shoulder_L
+    100044: Shoulder_R
+    100046: Thigh_L
+    100048: Thigh_R
+    100050: Torso
+    100052: Weapon
+    400000: Arm_L
+    400002: Arm_R
+    400004: Center
+    400006: Foot_L
+    400008: Foot_R
+    400010: Hand_L
+    400012: Hand_R
+    400014: Head
+    400016: Hip_L
+    400018: Hip_R
+    400020: Leg_L
+    400022: Leg_R
+    400024: Neck
+    400026: Player
+    400028: //RootNode
+    400030: PlayerModelBody
+    400032: PlayerModelFeet
+    400034: PlayerModelHead
+    400036: PlayerModelLegs
+    400038: PlayerModelNeck
+    400040: PlayerModelNeck_001
+    400042: Shoulder_L
+    400044: Shoulder_R
+    400046: Thigh_L
+    400048: Thigh_R
+    400050: Torso
+    400052: Weapon
+    4300000: PlayerModelNeck_001
+    4300002: PlayerModelLegs
+    4300004: PlayerModelNeck
+    4300006: PlayerModelFeet
+    4300008: PlayerModelBody
+    4300010: PlayerModelHead
+    7400000: Default Take
+    7400002: AttackDownUp
+    7400004: AttackLeftRight
+    7400006: AttackRightLeft
+    7400008: AttackUpDown
+    7400010: Idle
+    7400012: Walking
+    9500000: //RootNode
+    13700000: PlayerModelBody
+    13700002: PlayerModelFeet
+    13700004: PlayerModelHead
+    13700006: PlayerModelLegs
+    13700008: PlayerModelNeck
+    13700010: PlayerModelNeck_001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

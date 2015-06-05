@@ -7,10 +7,13 @@ public class AttackDetector : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<HitDetector>() != null) {
-			PlayerCharacter enemy = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
+			PlayerCharacter enemy = (PlayerCharacter) other.GetComponentInParent<PlayerCharacter>();
+			// Prevents accidental attack sound
+			enemy.setMute(true);
 			if (enemy.Attack()) {
 				this.GetComponentInParent<PlayerCharacter>().TakeDamage(10, 0);
 			}
+			enemy.setMute(false);
 		}
 		if (other.GetComponent<EnemyCharacter>() != null) {
 			EnemyCharacter enemy = (EnemyCharacter) other.GetComponent<EnemyCharacter>();

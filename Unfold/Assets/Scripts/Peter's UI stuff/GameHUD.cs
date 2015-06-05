@@ -8,6 +8,9 @@ using UnityEngine.UI;
 /// </summary>
 public class GameHUD : MonoBehaviour {
 
+	public AudioSource audioSource;
+	public AudioClip UISound;
+
 	/// <summary>
     /// NetworkView required to check if player is mine.
     /// </summary>
@@ -60,6 +63,7 @@ public class GameHUD : MonoBehaviour {
 		}
 		if (this.optionsButton != null && this.menuSystem != null) {
 			this.optionsButton.onClick.AddListener(delegate() {
+				SoundController.PlaySound(audioSource, UISound);
 				this.menuSystem.gameObject.SetActive(true);
 			} );
 		}

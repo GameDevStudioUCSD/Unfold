@@ -25,20 +25,26 @@ public class MenuSystem : MonoBehaviour {
 	/// Button to exit this application.
 	/// </summary>
 	public Button exitButton;
+	
+	public AudioSource audioSource;
+	public AudioClip UISound;
 
 	void Start() {
 		if (this.closeButton != null) {
 			this.closeButton.onClick.AddListener(delegate() {
 				this.gameObject.SetActive(false);
+				SoundController.PlaySound(audioSource, UISound);
 			});
 		}
 		if (this.mainMenuButton != null) {
 			this.mainMenuButton.onClick.AddListener(delegate() {
 				Application.LoadLevel("MainMenu");
+				SoundController.PlaySound(audioSource, UISound);
 			});
 		}
 		if (this.exitButton != null) {
 			this.exitButton.onClick.AddListener(delegate() {
+				SoundController.PlaySound(audioSource, UISound);
 				Application.Quit();
 			});
 		}
