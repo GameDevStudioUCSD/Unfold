@@ -12,11 +12,14 @@ public class ExitCollision : MonoBehaviour {
 	private PlayerCharacter player;
 	//public GameObject skPrefab;
 
+	public GlobalStats globalStats;
+
     bool hasGameEnded = false;
 
 	
 	void OnTriggerEnter (Collider other)
 	{
+		this.updateGlobalStats(other);
         GameObject gameObj = other.gameObject;
         PickupDetector hitDetector = gameObj.GetComponent<PickupDetector>();
 		NetworkView nView = gameObj.GetComponentInParent<NetworkView>();
@@ -33,6 +36,16 @@ public class ExitCollision : MonoBehaviour {
 				Object.Instantiate(this.failureScreen2, new Vector3(), Quaternion.identity);
 			}
         }
+	}
+
+	public void updateGlobalStats(Collider other) {
+		if (other.GetComponent<HitDetector> () != null) {
+			if (!this.globalStats.gameObject.activeSelf) {
+				this.globalStats.gameObject.SetActive(true);
+				PlayerCharacter winner = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
+				this.globalStats.collectData(winner);
+			}
+		}
 	}
     
 	protected virtual void performWin(PickupDetector hitDetector) {

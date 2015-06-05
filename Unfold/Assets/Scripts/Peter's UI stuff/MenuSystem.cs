@@ -50,7 +50,7 @@ public class MenuSystem : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	public void control() {
 		if (this.volumeSlider != null) {
 			AudioListener.volume = this.volumeSlider.value;
 		}
