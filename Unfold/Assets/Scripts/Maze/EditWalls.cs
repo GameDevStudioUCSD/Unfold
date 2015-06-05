@@ -44,7 +44,7 @@ public class EditWalls : MonoBehaviour {
 	/// <summary>
 	/// Try to destory the wall
 	/// </summary>
-	public void DestroyWall() {
+	public virtual void DestroyWall() {
 		if (--health <= 0 && canDestroy) {
 			Destroy(gameObject);
 		}

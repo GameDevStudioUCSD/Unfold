@@ -18,16 +18,11 @@ public class ExitCollision : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
         GameObject gameObj = other.gameObject;
-        HitDetector hitDetector = gameObj.GetComponent<HitDetector>();
+        PickupDetector hitDetector = gameObj.GetComponent<PickupDetector>();
 		NetworkView nView = gameObj.GetComponentInParent<NetworkView>();
 		if (!hasGameEnded && hitDetector && nView && nView.isMine) {
-            Instantiate(victoryScreen, new Vector3(0, 0, 0), Quaternion.identity);
-            this.player = (PlayerCharacter)hitDetector.GetComponentInParent<PlayerCharacter>();
+			this.performWin(hitDetector);
             
-			//skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
-            //Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
-            
-			player.data.win = true;
 		}
         else if(!hasGameEnded && hitDetector)
         {
@@ -40,5 +35,14 @@ public class ExitCollision : MonoBehaviour {
         }
 	}
     
-
+	protected virtual void performWin(PickupDetector hitDetector) {
+		Instantiate(victoryScreen, new Vector3(0, 0, 0), Quaternion.identity);
+		this.player = (PlayerCharacter)hitDetector.GetComponentInParent<PlayerCharacter>();
+		
+		//skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
+		//Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
+		
+		player.data.win = true;
+		
+	}
 }

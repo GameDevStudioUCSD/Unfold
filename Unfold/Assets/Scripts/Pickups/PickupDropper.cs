@@ -42,8 +42,6 @@ public class PickupDropper: MonoBehaviour {
 				}
 			}
 		}
-		
-		
 	}
 
 	private GameObject FindSpawnItem( int i )

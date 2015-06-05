@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Teleport : MonoBehaviour {
 
@@ -7,6 +8,10 @@ public class Teleport : MonoBehaviour {
 	public float z;
 
 	public SpiderTutorialMovement monster;
+	public Text txt;
+	public string message;
+
+	public bool active;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +24,10 @@ public class Teleport : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+		if (!active) {
+			return;
+		}
+
 		PickupDetector det = (PickupDetector) other.GetComponent<PickupDetector> ();
 		if (det == null)
 			return;
@@ -30,5 +39,7 @@ public class Teleport : MonoBehaviour {
 		if (monster != null) {
 			this.monster.canMove = true;
 		}
+
+		txt.text = message;
 	}
 }
