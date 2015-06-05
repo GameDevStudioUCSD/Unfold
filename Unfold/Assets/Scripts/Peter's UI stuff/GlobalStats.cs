@@ -15,6 +15,7 @@ public class GlobalStats : MonoBehaviour {
 	}
 
 	public void collectData(PlayerCharacter winner) {
+		this.timeSpent = Time.time - this.starttime;
 		this.winner = winner;
 		this.notWinners = (PlayerCharacter[])Object.FindObjectsOfType<PlayerCharacter>();
 	}
