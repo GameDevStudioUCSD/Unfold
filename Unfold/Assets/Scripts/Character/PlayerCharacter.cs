@@ -26,6 +26,8 @@ public class PlayerCharacter : Character {
 	public float rotateSpeed;
 	public Animator animator;
 
+    private NetworkView nView;
+
 	public ParticleMovement trail;
 
 	// Helps correlate user input to attack calculation
@@ -75,6 +77,7 @@ public class PlayerCharacter : Character {
 	private string ability;
 
 	void Start() {
+        nView = GetComponent<NetworkView>();
 		updateStats();
 		this.animator.SetBool("Walking", false);
 		this.currentHealth = this.maxHealth;
@@ -111,7 +114,7 @@ public class PlayerCharacter : Character {
 						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < 1f;
 						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 1f;
 
-						if (distance > 100f) {
+						if (distance > 100f && nView.isMine ) {
 							if (horizontalAttack) {
 								if (deltaX > 0)
 									this.animator.SetInteger("Attack", 2);
@@ -207,7 +210,6 @@ public class PlayerCharacter : Character {
 	}
 
 	public override bool Attack() {
-		Debug.Log("ATTACK CALLED");
 		// Test if the weapon is hammer
 		if (weaponButton.weapon == weaponButton.weaponList[0] && weaponButton.active) {
 			if (weaponButton.wall != null) {
