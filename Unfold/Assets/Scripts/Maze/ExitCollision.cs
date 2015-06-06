@@ -25,6 +25,7 @@ public class ExitCollision : MonoBehaviour {
 		NetworkView nView = gameObj.GetComponentInParent<NetworkView>();
 		if (!hasGameEnded && hitDetector && nView && nView.isMine) {
 			this.performWin(hitDetector);
+            hasGameEnded = true;
             
 		}
         else if(!hasGameEnded && hitDetector)
@@ -35,6 +36,7 @@ public class ExitCollision : MonoBehaviour {
 			} else {
 				Object.Instantiate(this.failureScreen2, new Vector3(), Quaternion.identity);
 			}
+            hasGameEnded = true;
         }
 	}
 
