@@ -56,6 +56,14 @@ ModelImporter:
     100096: Triangleman|Shoulder.R
     100098: Triangleman|Wrist.L
     100100: Triangleman|Writst.R
+    100102: TriangleManArms
+    100104: TriangleManBody
+    100106: TriangleManFeet
+    100108: TriangleManHands
+    100110: TriangleManHead
+    100112: TriangleManLegs
+    100114: TriangleManNeck
+    100116: TriangleManShoulders
     400000: Body
     400002: Triangleman
     400004: //RootNode
@@ -107,11 +115,35 @@ ModelImporter:
     400096: Triangleman|Shoulder.R
     400098: Triangleman|Wrist.L
     400100: Triangleman|Writst.R
+    400102: TriangleManArms
+    400104: TriangleManBody
+    400106: TriangleManFeet
+    400108: TriangleManHands
+    400110: TriangleManHead
+    400112: TriangleManLegs
+    400114: TriangleManNeck
+    400116: TriangleManShoulders
     4300000: Body
+    4300002: TriangleManShoulders
+    4300004: TriangleManHands
+    4300006: TriangleManLegs
+    4300008: TriangleManFeet
+    4300010: TriangleManNeck
+    4300012: TriangleManHead
+    4300014: TriangleManBody
+    4300016: TriangleManArms
     7400000: Triangleman|Attacking
     7400002: Triangleman|Walking
     9500000: //RootNode
     13700000: Body
+    13700002: TriangleManArms
+    13700004: TriangleManBody
+    13700006: TriangleManFeet
+    13700008: TriangleManHands
+    13700010: TriangleManHead
+    13700012: TriangleManLegs
+    13700014: TriangleManNeck
+    13700016: TriangleManShoulders
   materials:
     importMaterials: 1
     materialName: 0
@@ -127,7 +159,315 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Triangleman|Attacking
+      takeName: Triangleman|Attacking
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Triangleman
+        weight: 1
+      - path: Triangleman/Triangleman|Center
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4/Triangleman|Neck5
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4/Triangleman|Neck5/Triangleman|Head
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmD.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmD.L/Triangleman|FingerD.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmL.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmL.L/Triangleman|FingerL.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmR.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmR.L/Triangleman|FingerR.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmU.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmU.L/Triangleman|FingerU.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmD.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmD.R/Triangleman|FingerD.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmL.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmL.R/Triangleman|FingerL.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmR.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmR.R/Triangleman|FingerR.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmU.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmU.R/Triangleman|FingerU.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001/Triangleman|Leg.L.003
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001/Triangleman|Leg.L.003/Triangleman|Foot.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001/Triangleman|Leg.R.003
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001/Triangleman|Leg.R.003/Triangleman|Foot.R
+        weight: 1
+      - path: TriangleManArms
+        weight: 1
+      - path: TriangleManBody
+        weight: 1
+      - path: TriangleManFeet
+        weight: 1
+      - path: TriangleManHands
+        weight: 1
+      - path: TriangleManHead
+        weight: 1
+      - path: TriangleManLegs
+        weight: 1
+      - path: TriangleManNeck
+        weight: 1
+      - path: TriangleManShoulders
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Triangleman|Walking
+      takeName: Triangleman|Walking
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Triangleman
+        weight: 1
+      - path: Triangleman/Triangleman|Center
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4/Triangleman|Neck5
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Neck1/Triangleman|Neck2/Triangleman|Neck3/Triangleman|Neck4/Triangleman|Neck5/Triangleman|Head
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmD.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmD.L/Triangleman|FingerD.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmL.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmL.L/Triangleman|FingerL.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmR.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmR.L/Triangleman|FingerR.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmU.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.L/Triangleman|Arm1.L/Triangleman|Arm2.L/Triangleman|Arm3.L/Triangleman|Wrist.L/Triangleman|Hand.L/Triangleman|PalmU.L/Triangleman|FingerU.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmD.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmD.R/Triangleman|FingerD.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmL.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmL.R/Triangleman|FingerL.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmR.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmR.R/Triangleman|FingerR.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmU.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Body/Triangleman|Shoulder.R/Triangleman|Arm1.R/Triangleman|Ar
+          m2.R/Triangleman|Arm3.R/Triangleman|Writst.R/Triangleman|Bone.019/Triangleman|PalmU.R/Triangleman|FingerU.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001/Triangleman|Leg.L.003
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.L/Triangleman|Leg.L/Triangleman|Leg.L.002/Triangleman|Leg.L.001/Triangleman|Leg.L.003/Triangleman|Foot.L
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001/Triangleman|Leg.R.003
+        weight: 1
+      - path: Triangleman/Triangleman|Center/Triangleman|Hip.R/Triangleman|Leg.R/Triangleman|Leg.R.002/Triangleman|Leg.R.001/Triangleman|Leg.R.003/Triangleman|Foot.R
+        weight: 1
+      - path: TriangleManArms
+        weight: 1
+      - path: TriangleManBody
+        weight: 1
+      - path: TriangleManFeet
+        weight: 1
+      - path: TriangleManHands
+        weight: 1
+      - path: TriangleManHead
+        weight: 1
+      - path: TriangleManLegs
+        weight: 1
+      - path: TriangleManNeck
+        weight: 1
+      - path: TriangleManShoulders
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
