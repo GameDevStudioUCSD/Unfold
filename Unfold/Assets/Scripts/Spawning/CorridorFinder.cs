@@ -6,7 +6,6 @@ public class CorridorFinder : MonoBehaviour
 	// Walks through a maze and builds a list of Squares and their
 	// corridor's length. The length of each corridor will be used
 	// as a weight for spawning monsters.
-    public static bool debug_ON = false;
 	public static ArrayList FindCorridors (Square[,] maze, int rows, int cols)
 	{
         ArrayList listOfCorridors = new ArrayList();
@@ -41,8 +40,6 @@ public class CorridorFinder : MonoBehaviour
 	*/
 	private static int CorridorWalker (Square endOfCorridor, Square[,] maze)
 	{
-        if (debug_ON)
-            Debug.Log("Running CorridorWalker(" + endOfCorridor.ToString() + ", " + maze.ToString() + ")");
 		Square current = endOfCorridor;
 		Square prev = null;
 		int corridorLength = 0;
@@ -56,8 +53,6 @@ public class CorridorFinder : MonoBehaviour
 			// Or make the booleans update with neighboring walls
 
 			// Potential issues with counting rows/columns. Double check that this is right!!!
-            if (debug_ON)
-                Debug.Log("Depth of CorridorFinder: " + visitedCells);
 			Square eastWall = null;
 			Square westWall = null;
 			Square northWall = null;
@@ -116,8 +111,6 @@ public class CorridorFinder : MonoBehaviour
 			}
             visitedCells++;
 		}
-        if (debug_ON)
-            Debug.Log("Corridor Length: " + corridorLength);
 		return corridorLength;
 	}
 

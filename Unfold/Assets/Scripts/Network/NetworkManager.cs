@@ -10,7 +10,6 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 
-	public bool debug_On;
 	public GameObject playerPrefab;
     public GameObject spawnSquare;
 	public GameObject mazeGenerator;
@@ -38,21 +37,13 @@ public class NetworkManager : MonoBehaviour {
 	private void BuildMaze(bool isMultiplayer)
 	{
         /* Generates the maze */
-        if (debug_On)
-            Debug.Log("Tried to start match\nGetting MazeGeneratorController script");
 		mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
-        if (debug_On)
-            Debug.Log("Running Start() on MazeGeneratorController");
             
 		mapCreator.Start();
         GameObject connectionInfo = GameObject.Find("GameType");
         connectionInfo.GetComponent<MazeType>().DisconnectMasterServer();
-		
-        if (debug_On)
-            Debug.Log("Running createWalls() on MazeGeneratorController");
+
 		mapCreator.createWalls();
-        if (debug_On)
-            Debug.Log("Running SetSpawnLocations() on MazeGeneratorController");
         mapCreator.SetSpawnLocations();
 
         /* Get the starting point */

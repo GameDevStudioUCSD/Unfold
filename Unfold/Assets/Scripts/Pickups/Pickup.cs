@@ -8,7 +8,6 @@ using UnityEngine;
  */
 public class Pickup : MonoBehaviour {
     public AudioClip pickUpSound;
-    public bool debug_On;
     public GameObject particles;
     public int type;
     
@@ -51,8 +50,6 @@ public class Pickup : MonoBehaviour {
 		PickupDetector PickupDetector = (PickupDetector)other.gameObject.GetComponent("PickupDetector");
 		if (PickupDetector && !hasPickedUp) {
 			player = (PlayerCharacter) PickupDetector.GetComponentInParent<PlayerCharacter>();
-            if (debug_On)
-                Debug.Log("Pickup Trigger Reached");
             if(particles != null)
             {
                 Color objColor = GetComponent<Renderer>().material.color;
@@ -81,78 +78,44 @@ public class Pickup : MonoBehaviour {
 		{
 			//health
 			case 0:
-				if (debug_On)
-					Debug.Log("Healing health");
 				player.addHealth(4);
 				break;
 			//speed upgrade
 			case 1:
-				if (debug_On)
-					Debug.Log("Adding speed");
 				player.addSpeed(2);
 				break;
 			//max health upgrade
 			case 2:
-				if (debug_On)
-					Debug.Log("Adding maxHealth");
 				player.addMaxHealth(3);
 				break;
 			//damage upgrade
 			case 3:
-				if (debug_On)
-					Debug.Log("Adding damage");
 				player.addDamage(2);
 				break;
 
 			//Start Sword (???)
 			case 4:
-				if (debug_On)
-					Debug.Log ("Adding start sword");
-				
-//				player.removeAbility();
-//				player.addAbility ("startsword");
 				button.setWeapon (3);
 				break;
 
 			//Hammer (Break walls)
 			case 5:
-				if(debug_On)
-					Debug.Log ("Adding hammer");
-
-//				player.removeAbility ();
-//				player.addAbility ("hammer");
 				button.setWeapon (0);
 				break;
 
 			case 6:
-				if(debug_On)
-					Debug.Log ("Adding sword");
-
-//				player.removeAbility ();
-//				player.addAbility ("sword");
 				button.setWeapon(1);
 				break;
 
 			case 7:
-				if(debug_On)
-					Debug.Log ("Adding foil");
-				
-//				player.removeAbility ();
-//				player.addAbility ("foil");
 				button.setWeapon (2);
 				break;
 
 			case 8:
-				if(debug_On)
-					Debug.Log ("Adding machete");
-
 				button.setWeapon (4);
 				break;
 
 			case 9:
-				if(debug_On)
-				Debug.Log ("Adding scimitar");
-
 				button.setWeapon (5);
 				break;
 		}

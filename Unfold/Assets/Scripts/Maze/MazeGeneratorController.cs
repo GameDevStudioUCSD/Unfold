@@ -30,7 +30,6 @@ public class MazeGeneratorController : MonoBehaviour {
     public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
     public GameObject[] spawnList;
 	public FogOfWar fogOfWar;
-    public bool debug_ON = false;
     [Range (1, 100)]
     public int spawningRate = 1;
 
@@ -146,10 +145,6 @@ public class MazeGeneratorController : MonoBehaviour {
                 //First, fix any flickering issues
                 if(curr.hasWest && curr.hasNorth)
                 {
-                    if(debug_ON)
-                    {
-                        Debug.Log("Tried to fix flickering");
-                    }
                     if (westWalls.TryGetValue(curr.ToString(), out innerWall))
                     {
                         wallNView = innerWall.GetComponent<NetworkView>();
@@ -159,10 +154,6 @@ public class MazeGeneratorController : MonoBehaviour {
                 inBounds = (r < Rows - 1 && c > 0);
                 if (inBounds && curr.hasWest && !sCell.hasNorth && !sCell.hasWest && swCell.hasNorth)
                 {
-                    if(debug_ON)
-                    {
-                        Debug.Log("Found a missing corner!");
-                    }
                     if(westWalls.TryGetValue(curr.ToString(), out innerWall))
                     {
                         wallNView = innerWall.GetComponent<NetworkView>();

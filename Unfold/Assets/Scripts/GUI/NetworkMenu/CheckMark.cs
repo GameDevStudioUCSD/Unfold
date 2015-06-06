@@ -8,7 +8,6 @@ using System.Collections.Generic;
 /// time the player selects a level type.
 /// </summary>
 public class CheckMark : MonoBehaviour {
-    public bool debugOn = false;
     private SpriteController spriteController;
     private Image image;
 
@@ -16,15 +15,9 @@ public class CheckMark : MonoBehaviour {
         image = this.GetComponent<Image>();
         spriteController = new SpriteController();
         image.sprite = spriteController.GetRandomDoodle();
-        if (debugOn)
-            Debug.Log(image);
 	}
     public void UpdateDoodle()
     {
-        if(debugOn)
-        {
-            Debug.Log("Trying to update the doodle!");
-        }
         image.sprite = spriteController.GetRandomDoodle();
     }
 

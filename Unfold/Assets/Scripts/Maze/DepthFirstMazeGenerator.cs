@@ -76,9 +76,7 @@ public class DepthFirstMazeGenerator : MazeGenerator
         while (neighbors.Count > 0)
         {
             Square next = (Square)neighbors.Pop();
-            Debug.Log("Depth: " + depth);
             float endDist = Square.DistanceBetween(start, curr);
-            Debug.Log("Distance between end and curr:" + endDist);
             if ( endDist > .7f * (diagonalLength))
             {
                 exit.exit = false;

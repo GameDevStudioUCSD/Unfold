@@ -9,7 +9,6 @@ using System.Collections;
 
 public class OldNetworkManager : MonoBehaviour {
 
-    public bool debug_On;
     public GameObject playerPrefab;
     public GameObject mazeGenerator;
     public NetworkView nView;
@@ -75,46 +74,14 @@ public class OldNetworkManager : MonoBehaviour {
         UIStatus = LOBBYHOST_UI;
     }
 
-    /* Only used for Unity masterserver
-    private void RefreshHostList()
-    {
-        MasterServer.RequestHostList (typeName);
-        UIStatus = GAMELIST_UI;
-    }
-    
-	
-    void OnMasterServerEvent(MasterServerEvent msEvent)
-    {
-        if (msEvent == MasterServerEvent.HostListReceived)
-            hostList = MasterServer.PollHostList();
-			
-		
-    }
-
-    private void JoinServer(HostData hostData)
-    {
-        Network.Connect(hostData);
-        UIStatus = LOBBY_UI;
-    }
-     */
-
     void OnConnectedToServer()
     {
-        if (debug_On)
-            Debug.Log("Server Joined");
-
-        /*
-        * When the player connects, updatePlayerList is called for everyone.
-        * The player's name is also sent to everyone.
-        * If you want only the server to receive the RPC, then change RPCMode.
-        */
+		/**
+		 * When the player connects, updatePlayerList is called for everyone.
+		 * The player's name is also sent to everyone.
+		 * If you want only the server to receive the RPC, then change RPCMode.
+		 */
         GetComponent<NetworkView>().RPC("updatePlayerList", RPCMode.Server, playerName);
-    }
-
-    void OnServerInitialized()
-    {
-        if (debug_On)
-            Debug.Log("Server Initialized");
     }
 
     void OnGUI()
@@ -216,8 +183,6 @@ public class OldNetworkManager : MonoBehaviour {
 
             if (GUI.Button(new Rect(100, 300, 250, 100), "Start Game"))
             {
-                if (debug_On)
-                    Debug.Log("Start Game button clicked");
                 UIStatus = NONE_UI;
                 StartMatch();
             }
@@ -227,9 +192,6 @@ public class OldNetworkManager : MonoBehaviour {
     [RPC]
     private void updatePlayerList(string playerName)
     {
-        //playerList[playerCount] = Network.player;
-        Debug.Log("Player Count: " + playerCount);
-
         connectedPlayerNames[playerCount] = playerName;
         playerCount++;
     }
@@ -245,17 +207,9 @@ public class OldNetworkManager : MonoBehaviour {
 
     private void StartMatch()
     {
-        if (debug_On)
-            Debug.Log("Tried to start match\nGetting MazeGeneratorController script");
         mapCreator = (MazeGeneratorController)mazeGenerator.GetComponent(typeof(MazeGeneratorController));
-        if (debug_On)
-            Debug.Log("Running Start() on MazeGeneratorController");
         mapCreator.Start();
-        if (debug_On)
-            Debug.Log("Running createWalls() on MazeGeneratorController");
         mapCreator.createWalls();
-        if (debug_On)
-            Debug.Log("Running SetSpawnLocations() on MazeGeneratorController");
         mapCreator.SetSpawnLocations();
 
         if (Network.isServer)

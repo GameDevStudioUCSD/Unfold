@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 1371444bdb46f4354b3bed9b625906ca
+timeCreated: 1433630494
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|Bone
+    100004: Armature|Bone.001
+    100006: Armature|Bone.002
+    100008: Armature|Bone.003
+    100010: Armature|Bone.004
+    100012: Armature|Bone.005
+    100014: Armature|Bone.006
+    100016: Armature|Bone.007
+    100018: //RootNode
+    100020: Robird
+    100022: Skeleton
+    100024: Skeleton|BackJaw.D
+    100026: Skeleton|BackJaw.U
+    100028: Skeleton|Body
+    100030: Skeleton|LowerJaw
+    100032: Skeleton|Neck
+    100034: Skeleton|Tail
+    100036: Skeleton|UpperJaw
+    100038: Skeleton|Wing.L
+    100040: Skeleton|Wing.L.001
+    100042: Skeleton|Wing.L.002
+    100044: Skeleton|Wing.L.003
+    100046: Skeleton|Wing.R
+    100048: Skeleton|Wing.R.001
+    100050: Skeleton|Wing.R.002
+    100052: Skeleton|Wing.R.003
+    400000: Armature
+    400002: Armature|Bone
+    400004: Armature|Bone.001
+    400006: Armature|Bone.002
+    400008: Armature|Bone.003
+    400010: Armature|Bone.004
+    400012: Armature|Bone.005
+    400014: Armature|Bone.006
+    400016: Armature|Bone.007
+    400018: //RootNode
+    400020: Robird
+    400022: Skeleton
+    400024: Skeleton|BackJaw.D
+    400026: Skeleton|BackJaw.U
+    400028: Skeleton|Body
+    400030: Skeleton|LowerJaw
+    400032: Skeleton|Neck
+    400034: Skeleton|Tail
+    400036: Skeleton|UpperJaw
+    400038: Skeleton|Wing.L
+    400040: Skeleton|Wing.L.001
+    400042: Skeleton|Wing.L.002
+    400044: Skeleton|Wing.L.003
+    400046: Skeleton|Wing.R
+    400048: Skeleton|Wing.R.001
+    400050: Skeleton|Wing.R.002
+    400052: Skeleton|Wing.R.003
+    4300000: Robird
+    7400000: Skeleton|Attack
+    7400002: Skeleton|Flying
+    9500000: //RootNode
+    13700000: Robird
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -18,8 +18,6 @@ public class Item : MonoBehaviour {
 	public int bonusDamage;
 	public int bonusMaxHealth;
 	public float bonusMoveSpeed;
-
-	public bool debug_On = false;
 	protected bool hasPickedUp = false;
 	protected PlayerCharacter player;
 	
@@ -37,8 +35,6 @@ public class Item : MonoBehaviour {
 		HitDetector hitDetector = (HitDetector)other.gameObject.GetComponent("HitDetector");
 		if (hitDetector) {
 			player = (PlayerCharacter) hitDetector.GetComponentInParent<PlayerCharacter>();
-			if (debug_On)
-				Debug.Log("Item Trigger Reached");
 			SoundController.PlaySound(GetComponent<AudioSource>(), pickUpSound);
 			GetComponent<MeshRenderer>().enabled = false;
 			hasPickedUp = !hasPickedUp;
@@ -47,9 +43,4 @@ public class Item : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
-
-	/*void pickedUp(){
-		player.equipItem(this);
-	}*/
-
 }

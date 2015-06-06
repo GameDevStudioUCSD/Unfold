@@ -7,8 +7,6 @@ using UnityEngine;
  */
 public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
-	public bool debug_On = false;
-
     private int depth = 0;
     private float diagonalLength;
 	public WorkingDepthFirstMazeGenerator(int r, int c)
