@@ -34,6 +34,7 @@ public class MenuSystem : MonoBehaviour {
 		}
 		if (this.mainMenuButton != null) {
 			this.mainMenuButton.onClick.AddListener(delegate() {
+                Network.Disconnect();
 				Application.LoadLevel("MainMenu");
 			});
 		}
@@ -44,7 +45,7 @@ public class MenuSystem : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	public void control() {
 		if (this.volumeSlider != null) {
 			AudioListener.volume = this.volumeSlider.value;
 		}

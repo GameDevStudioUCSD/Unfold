@@ -13,10 +13,14 @@ public class EditWalls : MonoBehaviour {
 
 	void Start() {
 		info = mazegen.mi;
-		GameObject mazeRoot = GameObject.Find("Maze");
-		if (mazeRoot != null) {
+        GameObject wallRoot = null;
+        if (canDestroy)
+            wallRoot = GameObject.Find("Maze");
+        else
+            wallRoot = GameObject.Find("Maze/OuterWalls");
+		if (wallRoot != null) {
 			wallTransform = GetComponent<Transform>();
-			wallTransform.parent = mazeRoot.GetComponent<Transform>();
+			wallTransform.parent = wallRoot.GetComponent<Transform>();
 		}
 	}
 	private void FindInnerWall() {
@@ -44,7 +48,7 @@ public class EditWalls : MonoBehaviour {
 	/// <summary>
 	/// Try to destory the wall
 	/// </summary>
-	public void DestroyWall() {
+	public virtual void DestroyWall() {
 		if (--health <= 0 && canDestroy) {
 			Destroy(gameObject);
 		}

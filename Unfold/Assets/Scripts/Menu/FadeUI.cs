@@ -7,9 +7,12 @@ public class FadeUI : MonoBehaviour {
     public Graphic[] elementsToFade;
     public float lengthOfFade = 2;
     public float lengthBeforeFade = 2;
+    public bool initialLogo = false;
+    
     private Color[] originalColors;
     private Color[] endColors;
     private float startTime ;
+    
 	void Start () {
         originalColors = new Color[elementsToFade.Length];
         endColors = new Color[elementsToFade.Length];
@@ -40,6 +43,13 @@ public class FadeUI : MonoBehaviour {
             i++;
         }
         if (Time.time - startTime > lengthOfFade)
+        {
             Destroy(this.GetComponent<Transform>().gameObject);
+            if (initialLogo)
+            {
+            	Application.LoadLevel("MainMenu");
+            }
+        }
+            
 	}
 }

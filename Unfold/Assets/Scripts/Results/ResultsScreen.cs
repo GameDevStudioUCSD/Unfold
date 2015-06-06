@@ -27,6 +27,9 @@ public class ResultsScreen : MonoBehaviour {
     private GameObject scoreKeeper;
 
 	void Start() {
+        // Disconnect the player from the server to ensure their model is
+        // removed from the game
+        Network.Disconnect();
 		// Format the time in seconds into an appropriate string
         scoreKeeper = GameObject.Find("ScoreKeeper");
         double finishTime = Time.time;

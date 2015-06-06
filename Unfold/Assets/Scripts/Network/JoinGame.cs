@@ -43,7 +43,7 @@ public class JoinGame : MonoBehaviour {
         buttonParent = this.GetComponent<Transform>();
         masterServer = new MasterServerManager();
         playerLocal = GameObject.Find("PlayerLocal");
-        uiMenu = GameObject.Find("Prototype Book UI(Clone)");
+        uiMenu = GameObject.Find("Book UI(Clone)");
         BuildButtons();
         
 	}

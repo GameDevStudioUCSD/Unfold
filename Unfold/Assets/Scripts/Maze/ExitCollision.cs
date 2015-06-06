@@ -1,43 +1,63 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ExitCollision : AbstractGUI {
+public class ExitCollision : MonoBehaviour {
 
-    public GameObject loadResult;
+    public GameObject victoryScreen;
+    public GameObject failureScreen1;
+    public GameObject failureScreen2;
+    
 	private PlayerCharacter player;
 	//public GameObject skPrefab;
+
+	public GlobalStats globalStats;
 
     bool hasGameEnded = false;
 
 	
 	void OnTriggerEnter (Collider other)
 	{
+		this.updateGlobalStats(other);
         GameObject gameObj = other.gameObject;
-        HitDetector hitDetector = gameObj.GetComponent<HitDetector>();
+        PickupDetector hitDetector = gameObj.GetComponent<PickupDetector>();
 		NetworkView nView = gameObj.GetComponentInParent<NetworkView>();
 		if (!hasGameEnded && hitDetector && nView && nView.isMine) {
-            Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
-            this.player = (PlayerCharacter)hitDetector.GetComponentInParent<PlayerCharacter>();
-			//skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
-            //Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
-			player.data.win = true;
+			this.performWin(hitDetector);
+            hasGameEnded = true;
+            
 		}
         else if(!hasGameEnded && hitDetector)
         {
-            GameObject youLose = Instantiate(loadResult);
-            foreach (Transform childTrans in youLose.transform)
-            {
-                Text text = childTrans.gameObject.GetComponent<Text>();
-                if (text != null)
-                {
-                    text.fontSize = 32;
-                    text.text = "You lose...";
-                }
-            }
+            GameObject youLose = Instantiate(victoryScreen);
+			if (UnityEngine.Random.Range(0, 100) % 2 == 0) {
+				Object.Instantiate(this.failureScreen1, new Vector3(), Quaternion.identity);
+			} else {
+				Object.Instantiate(this.failureScreen2, new Vector3(), Quaternion.identity);
+			}
+            hasGameEnded = true;
         }
 	}
-    
 
+	public void updateGlobalStats(Collider other) {
+		if (other.GetComponent<HitDetector> () != null) {
+			if (!this.globalStats.gameObject.activeSelf) {
+				this.globalStats.gameObject.SetActive(true);
+				PlayerCharacter winner = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
+				this.globalStats.collectData(winner);
+			}
+		}
+	}
+    
+	protected virtual void performWin(PickupDetector hitDetector) {
+		Instantiate(victoryScreen, new Vector3(0, 0, 0), Quaternion.identity);
+		this.player = (PlayerCharacter)hitDetector.GetComponentInParent<PlayerCharacter>();
+		
+		//skPrefab.GetComponent<ScoreKeeper>().stats[0].win = true;
+		//Instantiate(loadResult, new Vector3(0, 0, 0), Quaternion.identity);
+		
+		player.data.win = true;
+		
+	}
 }

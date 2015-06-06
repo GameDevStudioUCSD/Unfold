@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-abstract public class MonsterMovement : MonoBehaviour {
+abstract public class MonsterMovement : Movement {
 
 	public float SPEED;
 
@@ -14,9 +14,9 @@ abstract public class MonsterMovement : MonoBehaviour {
 	protected bool playerDetected;
 	protected int detectionRange;
 	protected int farDetectRange;
-	public bool isClose { get; set; }
 	protected bool attacking;
     private GameObject target;
+    private Square lastSquare;
 
 	public int attackRange;
 	public int closeDetectRange;
@@ -24,9 +24,9 @@ abstract public class MonsterMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		walls = mazeGen.getWalls ();
-		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
+		lastSquare = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
+		bool[] sides = getSides (lastSquare, transform.position.x, transform.position.z);
 
 		direction = 3; // Quaternion.identity
 		playerDetected = false;
@@ -58,31 +58,49 @@ abstract public class MonsterMovement : MonoBehaviour {
     }
     private void planMovement()
     {
-        if (stunned == 0)
+        try
         {
-			// Move if not attacking
-            if (!attacking)
+            if (stunned == 0)
             {
-				// Move towards the player if in sight
-                approachPlayer();
-                if (!playerDetected && Network.isServer)
+                // Move if not attacking
+                if (!attacking)
                 {
-					// Navigates the maze
-                    idleManeuver();
-                }
-                if( Network.isServer )
-                    maneuver();
-            }
+                    try
+                    {
+                        lastSquare = getCurrSquare(transform.position.x, transform.position.z);
+                    }
+                    catch (System.Exception e)
+                    {
 
-			// Attack if not moving
+                    }
+                    // Move towards the player if in sight
+                    approachPlayer();
+                    if (!playerDetected && Network.isServer)
+                    {
+                        // Navigates the maze
+                        idleManeuver();
+                    }
+                    if (Network.isServer)
+                        maneuver();
+                }
+
+                // Attack if not moving
+                else
+                {
+                    doAttack();
+                }
+            }
             else
             {
-                doAttack();
+                stunned -= 1;
             }
         }
-        else
+        catch (System.Exception e)
         {
-            stunned -= 1;
+            float x = lastSquare.getRow() * mazeGen.wallSize;
+            float z = lastSquare.getCol() * mazeGen.wallSize;
+            Vector3 resetVector = new Vector3( x, transform.position.y, z);
+            transform.position = resetVector;
         }
     }
 	abstract public void maneuver ();
@@ -150,21 +168,38 @@ abstract public class MonsterMovement : MonoBehaviour {
 			if(playerDetected) {
 
 				// Jump to the center of the square, pick a random direction, and go!
-				Square curr = getCurrSquare(transform.position.x, transform.position.z);
-				transform.position = new Vector3(curr.getRow() * mazeGen.wallSize, transform.position.y, curr.getCol() * mazeGen.wallSize);
-				transform.rotation = Quaternion.identity;
+                try
+                {
+                    Square curr = getCurrSquare(transform.position.x, transform.position.z);
+                    lastSquare = new Square(curr);
+                    Debug.Log(lastSquare);
+                    transform.position = new Vector3(curr.getRow() * mazeGen.wallSize, transform.position.y, curr.getCol() * mazeGen.wallSize);
+                    transform.rotation = Quaternion.identity;
 
-				direction = 3;
-				bool[] sides = getSides (curr, transform.position.x, transform.position.z);
-				bool found = false;
-				while (!found) {
-					int side = Random.Range (0, 4); 
-					found = !sides [side];
-					
-					if (found) {
-						turn (side);
-					}
-				}
+                    direction = 3;
+                    bool[] sides = getSides(curr, transform.position.x, transform.position.z);
+                    bool found = false;
+                    while (!found)
+                    {
+                        int side = Random.Range(0, 4);
+                        found = !sides[side];
+
+                        if (found)
+                        {
+                            turn(side);
+                        }
+                    }
+                }
+                // Mainly used if the monster leaves the maze
+                catch (System.Exception e) 
+                {
+                    float row = lastSquare.getRow() * mazeGen.wallSize;
+                    float col = lastSquare.getCol() * mazeGen.wallSize;
+                    float y = transform.position.y;
+                    // Reset the monster's position to its last valid square
+                    transform.position = new Vector3(row, y, col);
+                }
+				
 			}
 			playerDetected = false;
 		}
@@ -172,7 +207,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 
 	}
 
-	public void setAttacking(bool state) {
+	public override void setAttacking(bool state) {
 		if(this.isClose && this.canAttack()) {
 			attacking = state;
 		}
@@ -280,7 +315,7 @@ abstract public class MonsterMovement : MonoBehaviour {
 	}
 
 	// Stops the monster from moving.
-	public void stun() {
+	public override void stun() {
 		stunned = stunTime;
 	}
 }

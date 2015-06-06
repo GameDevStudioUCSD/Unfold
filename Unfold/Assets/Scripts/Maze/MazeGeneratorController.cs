@@ -211,22 +211,26 @@ public class MazeGeneratorController : MonoBehaviour {
         Quaternion rot = Quaternion.identity;
         // The current wall being created
         Stack outerWalls = new Stack();
-        // Create the east and west walls
-        for (int r = 0; r < Rows; r++)
+        for (int i = 1; i <= 2; i++)
         {
-            pos = new Vector3(r * wallSize, 1, -1);
-            outerWalls.Push(Network.Instantiate(WestWall, pos, rot, 0));
-            pos = new Vector3(r * wallSize, 1, (Cols-1) * wallSize + 1 );
-            outerWalls.Push(Network.Instantiate(EastWall, pos, rot, 0));
-        }
-        // Create the north and south walls
-        for (int c = 0; c < Cols; c++)
-        {
-            pos = new Vector3(-1, 1, c * wallSize);
-            outerWalls.Push((GameObject)Network.Instantiate(NorthWall, pos, rot, 0));
-            pos = new Vector3((Rows-1)*wallSize + 1, 1, c * wallSize );
-            outerWalls.Push(Network.Instantiate(SouthWall, pos, rot, 0));
-        }
+
+            // Create the east and west walls
+            for (int r = 0; r < Rows; r++)
+            {
+                pos = new Vector3(r * wallSize, 1, -1 * i);
+                outerWalls.Push(Network.Instantiate(WestWall, pos, rot, 0));
+                pos = new Vector3(r * wallSize, 1, (Cols - 1) * wallSize + i);
+                outerWalls.Push(Network.Instantiate(EastWall, pos, rot, 0));
+            }
+            // Create the north and south walls
+            for (int c = 0; c < Cols; c++)
+            {
+                pos = new Vector3(-1 * i, 1, c * wallSize);
+                outerWalls.Push((GameObject)Network.Instantiate(NorthWall, pos, rot, 0));
+                pos = new Vector3((Rows - 1) * wallSize + i, 1, c * wallSize);
+                outerWalls.Push(Network.Instantiate(SouthWall, pos, rot, 0));
+            }
+        } 
         NetworkView nView;
         while (outerWalls.Count > 0)
         {

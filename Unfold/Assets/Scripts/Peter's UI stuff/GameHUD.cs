@@ -70,6 +70,9 @@ public class GameHUD : MonoBehaviour {
 		if (this.playerStats != null) {
 			this.playerStats.display(this.player);
 		}
+		if (this.menuSystem && this.menuSystem.gameObject.activeSelf) {
+			this.menuSystem.control();
+		}
 		if (this.Joystick != null) {
 			this.Joystick.handleInput(this.UICamera);
 			if (this.particles != null) {

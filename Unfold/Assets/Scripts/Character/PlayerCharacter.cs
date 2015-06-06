@@ -18,11 +18,15 @@ public class PlayerCharacter : Character {
 
 	public PlayerData data;
 
+	/* Mute the soudn  */
+	private bool mute = false;
 	public AudioClip[] attackSound;
 	private Vector3 spawn;
 
 	public float rotateSpeed;
 	public Animator animator;
+
+    private NetworkView nView;
 
 	public ParticleMovement trail;
 
@@ -38,7 +42,7 @@ public class PlayerCharacter : Character {
 	public int maxHealth;
 
 	// Player statistics gained from equippable items
-	public int bonusDamage {get; set;}
+	public int bonusDamage { get; set; }
 	private int bonusMaxHealth;
 	private float bonusMoveSpeed;
 
@@ -73,6 +77,7 @@ public class PlayerCharacter : Character {
 	private string ability;
 
 	void Start() {
+        nView = GetComponent<NetworkView>();
 		updateStats();
 		this.animator.SetBool("Walking", false);
 		this.currentHealth = this.maxHealth;
@@ -91,12 +96,12 @@ public class PlayerCharacter : Character {
 			Debug.Log("Hammer available!");
 			hammerCooldown = 0;
 		}
-		
+
 		if (Time.time > nextAttackTime) {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if (!this.animator.GetBool("Walking")) {
+			if (!this.animator.GetBool("Walking") && nView.isMine) {
 				foreach (Touch t in Input.touches) {
 
 
@@ -109,7 +114,7 @@ public class PlayerCharacter : Character {
 						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < 1f;
 						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 1f;
 
-						if (distance > 100f) {
+						if (distance > 100f && nView.isMine ) {
 							if (horizontalAttack) {
 								if (deltaX > 0)
 									this.animator.SetInteger("Attack", 2);
@@ -135,25 +140,38 @@ public class PlayerCharacter : Character {
 				}
 			}
 
-			if (Input.GetKeyUp(KeyCode.Alpha1)) {
-				this.attackType = 1;
-				this.Attack();
-				this.createPath();
-				this.animator.SetInteger("Attack", 4);
-			} else if (Input.GetKeyUp(KeyCode.Alpha2)) {
-				this.attackType = 2;
-				this.Attack();
-				this.animator.SetInteger("Attack", 2);
-			} else if (Input.GetKeyUp(KeyCode.Alpha3)) {
-				this.attackType = 4;
-				this.Attack();
-			} else if (Input.GetKeyUp(KeyCode.Alpha4)) {
-				this.attackType = 8;
-				this.Attack();
-			} else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
-				this.attackType = 1;
-				this.AOE(30, damage, 1);
-			}
+			// For testing. Walking and attacking at the same time is allowed here
+            if (nView.isMine)
+            {
+                if (Input.GetKeyUp(KeyCode.Alpha1))
+                {
+                    this.attackType = 1;
+                    this.Attack();
+                    this.createPath();
+                    this.animator.SetInteger("Attack", 4);
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha2))
+                {
+                    this.attackType = 2;
+                    this.Attack();
+                    this.animator.SetInteger("Attack", 2);
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha3))
+                {
+                    this.attackType = 4;
+                    this.Attack();
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha4))
+                {
+                    this.attackType = 8;
+                    this.Attack();
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha5))
+                {          // for special abilities
+                    this.attackType = 1;
+                    this.AOE(30, damage, 1);
+                }
+            }
 		}
 	}
 
@@ -210,20 +228,22 @@ public class PlayerCharacter : Character {
 				Debug.Log("Destroy the wall!");
 				weaponButton.wall.DestroyWall();
 				weaponButton.wall = null;
-				weaponButton.setCooldown ();
+				weaponButton.setCooldown();
 				// Add code here for cooldown reset
 			}
 		}
-		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[0]);
+		if (!mute)
+			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[0]);
 		bool hasAttacked = base.Attack();
 		if (hasAttacked) {
-			SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[1]);
-			if(weaponButton.weapon == weaponButton.weaponList[4] && weaponButton.active) {
+			if (!mute)
+				SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[1]);
+			if (weaponButton.weapon == weaponButton.weaponList[4] && weaponButton.active) {
 				nextAttackTime = Time.time;
 			}
 
 			if (weaponButton.active) {
-				weaponButton.setCooldown ();
+				weaponButton.setCooldown();
 			}
 		}
 		return hasAttacked;
@@ -243,10 +263,7 @@ public class PlayerCharacter : Character {
 	}
 
 	public override bool TakeDamage(int enDamage, int enAttackType) {
-		if (enAttackType == 15) {
-			enDamage = enDamage;
-		}
-		
+
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[3]);
 
 		this.currentHealth = this.currentHealth - enDamage;
@@ -254,27 +271,27 @@ public class PlayerCharacter : Character {
 			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
 			this.currentHealth = 0;
-			StartCoroutine(waitBeforeDie ());
+			StartCoroutine(waitBeforeDie());
 			return true;
 		}
 		return false;
 	}
 
 	public IEnumerator waitBeforeDie() {
-		yield return new WaitForSeconds (/*1.5f*/0);
+		yield return new WaitForSeconds(/*1.5f*/0);
 		this.Die();
 	}
 
 	public override void Die() {
 		if (debug_On)
 			Debug.Log("I am dead.");
-			
+
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[2]);
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
 
-		weaponButton.removeWeapon ();
-		
+		weaponButton.removeWeapon();
+
 		updateWeaponModel(0);
 		weapon = null;
 		armor = null;
@@ -294,7 +311,7 @@ public class PlayerCharacter : Character {
 		else
 			this.currentHealth = baseMaxHealth;
 	}
-	
+
 	public void addHealth() {
 		this.currentHealth = baseMaxHealth;
 	}
@@ -336,68 +353,61 @@ public class PlayerCharacter : Character {
 	public void addAbility(string weaponType) {
 		bool valid = true;
 
-		switch(weaponType) {
+		switch (weaponType) {
 			case "hammer":
-				weaponList[0].SetActive (true);
+				weaponList[0].SetActive(true);
 				break;
 
 			case "sword":
-				weaponList[1].SetActive (true);
+				weaponList[1].SetActive(true);
 				break;
 
 			case "foil":
-				weaponList[2].SetActive (true);
+				weaponList[2].SetActive(true);
 				break;
 
 			case "startsword":
-				weaponList[3].SetActive (true);
+				weaponList[3].SetActive(true);
 				break;
 
 			default:
-				Debug.Log ("that wasn't a valid weapon, friend");
+				Debug.Log("that wasn't a valid weapon, friend");
 				valid = false;
 				break;
 		}
 
-		if(valid) {
+		if (valid) {
 			ability = weaponType;
 		}
 	}
 
 	// Removes the player's ability.
 	public void removeAbility() {
-		removeWeapon ();
+		removeWeapon();
 
-		for(int i = 0; i < weaponList.Length; i++) {
-			weaponList[i].SetActive (false);
+		for (int i = 0; i < weaponList.Length; i++) {
+			weaponList[i].SetActive(false);
 		}
 
 		ability = "";
 	}
-	
+
 	public void toggleAbility() {
-		if(ability == "") {
+		if (ability == "") {
 			return;
 		}
 
-		if(usingAbility) {
-			removeWeapon ();
-		}
-		else {
-			if(ability.Equals ("hammer")) {
-				addHammer ();
-			}
-
-			else if(ability.Equals ("sword")) {
-				addSword ();
-			}
-
-			else if(ability.Equals("foil")) {
-				addFoil ();
-			}
-
-			else if(ability.Equals ("startsword")) {
-				addStartSword ();
+		if (usingAbility) {
+			removeWeapon();
+		} else {
+			if (ability.Equals("hammer")) {
+				addHammer();
+			} else if (ability.Equals("sword")) {
+				addSword();
+			} else if (ability.Equals("foil")) {
+				addFoil();
+			} else if (ability.Equals("startsword")) {
+				addStartSword();
 			}
 
 		}
@@ -421,9 +431,9 @@ public class PlayerCharacter : Character {
 
 	public void removeWeapon() {
 		this.hammerCooldown = -1;
-//		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
-//		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
-//		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
+		//		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
+		//		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
+		//		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
 
 	/*public void equipItem(Item newItem) {
@@ -441,17 +451,15 @@ public class PlayerCharacter : Character {
 		updateBonusStats();
 		checkItemsForSet();
 	}*/
-	
-	public void updateWeaponModel(int modelID)
-	{
+
+	public void updateWeaponModel(int modelID) {
 		if (debug_On)
-			Debug.Log ("updating weapon model " + modelID);
-		
+			Debug.Log("updating weapon model " + modelID);
+
 		if (modelID < 0)
 			return;
-		
-		for (int i = 0; i < WeaponModelList.Length; i++)
-		{
+
+		for (int i = 0; i < WeaponModelList.Length; i++) {
 			WeaponModelList[i].SetActive(false);
 			if (i == modelID)
 				WeaponModelList[i].SetActive(true);
@@ -522,6 +530,15 @@ public class PlayerCharacter : Character {
 
 	public void setWall(EditWalls wall) {
 		this.wall = wall;
+	}
+
+	/// <summary>
+	/// Temporarily mute the sound
+	/// </summary>
+	/// <author>Anoxic</author>
+	/// <param name="mute">The mute argument</param>
+	public void setMute(bool mute) {
+		this.mute = mute;
 	}
 }
 

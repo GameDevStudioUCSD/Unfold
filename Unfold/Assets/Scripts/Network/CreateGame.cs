@@ -208,7 +208,7 @@ public class CreateGame : MonoBehaviour {
     void Start()
     {
         playerLocal = GameObject.Find("PlayerLocal");
-        uiMenu = GameObject.Find("Prototype Book UI(Clone)");
+        uiMenu = GameObject.Find("Book UI(Clone)");
         gameTypeObj = GameObject.Find("GameType");
     }
     void OnServerInitialized()

@@ -28,6 +28,7 @@ public class DepthFirstMazeGenerator : MazeGenerator
     void selectEntrance()
     {
 		Direction edge = this.randomEdge();
+        base.selectEntrance();
         switch (edge)
         {
             case Direction.North:

@@ -31,8 +31,7 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
     void selectEntrance()
     {
 		Direction edge = this.randomEdge();
-        start = walls[Rows / 2, Cols / 2];
-        start.start = true;
+        base.selectEntrance();
         switch (edge)
         {
             case Direction.North:
@@ -107,29 +106,7 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             }
         }
     }
-
-    private void EnsureExitExists()
-    {
-        ArrayList corridors = CorridorFinder.FindCorridors(walls, Rows, Cols);
-        float dist = 0;
-        float newDist = 1;
-        exit = start;
-        
-        foreach (Square s in corridors)
-        {
-            if(debug_On)
-            {
-                Debug.Log(Square.DistanceBetween(s, start));
-            }
-            newDist = Square.DistanceBetween(s, start);
-            if(  newDist > dist)
-            {
-                exit = s;
-                dist = newDist;
-            }
-        }
-        exit.exit = true;
-    }
+    
 
     Stack checkNeighbors(int r, int c)
     {

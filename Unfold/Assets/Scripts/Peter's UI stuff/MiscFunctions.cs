@@ -5,7 +5,7 @@ using UnityEngine;
 /// belong to any particular prefab or object.
 /// </summary>
 public class MiscFunctions : MonoBehaviour {
-
+	
 	/// <summary>
 	/// Load the scene specified by sceneName.
 	/// </summary>

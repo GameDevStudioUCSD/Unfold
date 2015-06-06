@@ -44,6 +44,11 @@ public class Square
         hasEast = wallsUp;
         weight = 1;
     }
+    public Square(Square square)
+    {
+        row = square.row;
+        col = square.col;
+    }
     public static float DistanceBetween( Square A, Square B)
     {
         float returnVal, row, col;
