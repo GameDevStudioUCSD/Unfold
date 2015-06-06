@@ -9,9 +9,6 @@ using UnityEngine;
  * spawned in the game.
  */
 public abstract class Character : MonoBehaviour {
-
-	public bool debug_On = true;
-
 	//Number of enemies killed. Used only for player but implemented here for access to Attack function
 	protected int kills = 0;
 

@@ -5,8 +5,6 @@ public enum Monster { Spanter, Robird, Inhabitant, Steward, Master }
 
 [System.Serializable]
 public class SpawnRate  {
-
-	public bool debug_On = true;
 	public string levelName = "Default";
     public int spanterRate;
     public int robirdRate;
@@ -24,15 +22,11 @@ public class SpawnRate  {
     {
     	Setup ();
         Monster retVal = Monster.Robird;
-        if (debug_On)
-        	Debug.Log(levelName + "\tTotal Weight " + totalWeight);
         for (int i = 0; i < probs.Length; i++)
         {
             int rand = Random.Range(0, totalWeight);
             for (int j = 0; j < probs.Length; j++)
             {
-                if (debug_On)
-                	Debug.Log(rand);
                 if (probWeightSummed[j] > rand)
                 {
                     retVal = (Monster)j;
@@ -63,13 +57,9 @@ public class SpawnRate  {
 
     private void CalculateTotalWeight()
     {
-        if (debug_On)
-        	Debug.Log("Running CalculateTotalWeight()");
         totalWeight = 0;
         for (int i = 0; i < probs.Length; i++)
         {
-        	if (debug_On)
-            	Debug.Log("Weight at i: " + i + " = " + probs[i]);
             totalWeight += probs[i];
             probWeightSummed[i] = probs[i];
             if (i > 0)

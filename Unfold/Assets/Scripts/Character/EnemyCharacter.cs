@@ -99,15 +99,11 @@ public class EnemyCharacter : Character {
 		this.currentHealth = this.currentHealth - enDamage;
 		if (this.currentHealth <= 0) {
 			this.Die();
-			if (debug_On)
-				Debug.Log("Damage: " + enDamage);
 			return true;
 		}
 
 		Movement mov = (Movement)GetComponent<Movement> ();
 		mov.stun ();
-		if (debug_On)
-			Debug.Log("Damage: " + enDamage);
 		return false;
 	}
 	
@@ -120,22 +116,11 @@ public class EnemyCharacter : Character {
 		{
             Transform monsterTransform;
             monsterTransform = GetComponent<Transform>();
-			//Color objColor = GetComponent<Renderer>().material.color;
             GameObject particleObj = (GameObject)Network.Instantiate(particles, monsterTransform.position + Vector3.up, Quaternion.identity, 0);
-			//particleObj.GetComponent<Transform>().parent = this.GetComponent<Transform>();
-			if (debug_On)
-            {
-                Debug.Log(transform.position);
-                Debug.Log(particleObj.transform.position);
-            }
-				
-			//particleObj.GetComponent<ParticleSystem>().startColor = objColor;
 		}
 		
 		Network.Destroy(GetComponent<NetworkView>().viewID);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
-        if (debug_On)
-        	Debug.Log(transform.position);
 		dropperScript.dropItem(transform.position.x, transform.position.z);
 	}
 

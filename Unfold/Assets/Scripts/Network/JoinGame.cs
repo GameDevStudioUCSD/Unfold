@@ -24,20 +24,6 @@ public class JoinGame : MonoBehaviour {
 
     // MonoBehaviour methods
 	void Start() {
-        if (debugOn)
-        {
-            Debug.Log("Starting JoinGame.cs");
-        }
-        if(buttonPrefab == null)
-        {
-            Debug.LogError("ButtonPrefab not set to a value");
-            return;
-        }
-        if(connectionInfo == null)
-        {
-            Debug.LogError("ConnectionInfo not set to a value");
-            return;
-        }
         spriteController = new SpriteController();
         retry = 0;
         buttonParent = this.GetComponent<Transform>();
@@ -88,24 +74,12 @@ public class JoinGame : MonoBehaviour {
         {
             return;
         }
-        if (debugOn)
-        {
-            Debug.Log("Entering BuildButtons()");
-        }
         ClearButtons();
         gameList = masterServer.GetHostData();
-        if(debugOn)
-        {
-            Debug.Log("GameList: " + gameList.Length);
-        }
         int gameTypeInt;
         int numberOfGames = 0;
         for (int i = 0; i < gameList.Length; i++)
         {
-            if (debugOn)
-            {
-                Debug.Log("Creating button " + i);
-            }
             gameTypeInt = int.Parse(gameList[i].comment);
             if ((gameTypeInt & MasterServerManager.CANCONNECT) != MasterServerManager.CANCONNECT)
                 continue;
@@ -133,10 +107,6 @@ public class JoinGame : MonoBehaviour {
     }
     private void CreateNewButton(string text, TextureController.TextureChoice tc)
     {
-        if(debugOn)
-        {
-            Debug.Log("Entering CreateNewButton()");
-        }
         Sprite playerIcon;
         int index = 0;
         currentButtonObj = (GameObject)Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity);
@@ -191,10 +161,6 @@ public class JoinGame : MonoBehaviour {
     }
     private void ClearButtons()
     {
-        if(debugOn)
-        {
-            Debug.Log("Entering ClearButtons()");
-        }
         if (buttonParent != null)
         {
             foreach (Transform child in buttonParent)

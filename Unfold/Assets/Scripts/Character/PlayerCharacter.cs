@@ -92,11 +92,6 @@ public class PlayerCharacter : Character {
 		// dirty solution to players being pushed around by enemies
 		transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-		if (debug_On && hammerCooldown != -1 && --hammerCooldown < 0) {
-			Debug.Log("Hammer available!");
-			hammerCooldown = 0;
-		}
-
 		if (Time.time > nextAttackTime) {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
@@ -225,7 +220,6 @@ public class PlayerCharacter : Character {
 		// Test if the weapon is hammer
 		if (weaponButton.weapon == weaponButton.weaponList[0] && weaponButton.active) {
 			if (weaponButton.wall != null) {
-				Debug.Log("Destroy the wall!");
 				weaponButton.wall.DestroyWall();
 				weaponButton.wall = null;
 				weaponButton.setCooldown();
@@ -251,15 +245,6 @@ public class PlayerCharacter : Character {
 
 	public void createPath() {
 		ParticleGenerator p = (ParticleGenerator) GetComponentInChildren<ParticleGenerator>();
-		/*if (attackType == 1) {
-			ParticleMovement slash = p.createPath (new Vector3(Screen.width / 8.0f, Screen.height / 2.0f));
-			//Debug.Log (slash.transform.position);
-			slash.move (new Vector3(Screen.width * 7 / 8.0f, Screen.height / 2.0f));
-			//Debug.Log (slash.transform.position);
-
-			Destroy (slash);
-		}*/
-
 	}
 
 	public override bool TakeDamage(int enDamage, int enAttackType) {
@@ -267,8 +252,6 @@ public class PlayerCharacter : Character {
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[3]);
 
 		this.currentHealth = this.currentHealth - enDamage;
-		if (debug_On)
-			Debug.Log("Taking Damage: -" + enDamage);
 		if (this.currentHealth <= 0) {
 			this.currentHealth = 0;
 			StartCoroutine(waitBeforeDie());
@@ -283,9 +266,6 @@ public class PlayerCharacter : Character {
 	}
 
 	public override void Die() {
-		if (debug_On)
-			Debug.Log("I am dead.");
-
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[2]);
 		transform.position = spawn;
 		this.currentHealth = this.maxHealth;
@@ -371,7 +351,6 @@ public class PlayerCharacter : Character {
 				break;
 
 			default:
-				Debug.Log("that wasn't a valid weapon, friend");
 				valid = false;
 				break;
 		}
@@ -453,9 +432,6 @@ public class PlayerCharacter : Character {
 	}*/
 
 	public void updateWeaponModel(int modelID) {
-		if (debug_On)
-			Debug.Log("updating weapon model " + modelID);
-
 		if (modelID < 0)
 			return;
 
