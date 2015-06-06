@@ -141,25 +141,37 @@ public class PlayerCharacter : Character {
 			}
 
 			// For testing. Walking and attacking at the same time is allowed here
-			if (Input.GetKeyUp(KeyCode.Alpha1)) {
-				this.attackType = 1;
-				this.Attack();
-				this.createPath();
-				this.animator.SetInteger("Attack", 4);
-			} else if (Input.GetKeyUp(KeyCode.Alpha2)) {
-				this.attackType = 2;
-				this.Attack();
-				this.animator.SetInteger("Attack", 2);
-			} else if (Input.GetKeyUp(KeyCode.Alpha3)) {
-				this.attackType = 4;
-				this.Attack();
-			} else if (Input.GetKeyUp(KeyCode.Alpha4)) {
-				this.attackType = 8;
-				this.Attack();
-			} else if (Input.GetKeyUp(KeyCode.Alpha5)) {          // for special abilities
-				this.attackType = 1;
-				this.AOE(30, damage, 1);
-			}
+            if (nView.isMine)
+            {
+                if (Input.GetKeyUp(KeyCode.Alpha1))
+                {
+                    this.attackType = 1;
+                    this.Attack();
+                    this.createPath();
+                    this.animator.SetInteger("Attack", 4);
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha2))
+                {
+                    this.attackType = 2;
+                    this.Attack();
+                    this.animator.SetInteger("Attack", 2);
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha3))
+                {
+                    this.attackType = 4;
+                    this.Attack();
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha4))
+                {
+                    this.attackType = 8;
+                    this.Attack();
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha5))
+                {          // for special abilities
+                    this.attackType = 1;
+                    this.AOE(30, damage, 1);
+                }
+            }
 		}
 	}
 
