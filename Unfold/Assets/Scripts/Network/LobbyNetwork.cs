@@ -17,58 +17,73 @@ public class LobbyNetwork : MonoBehaviour {
 
     public GameObject startPlatformPrefab;
     public GameObject startPlatformPoint;
+    public GameObject connUIPrefab;
 
-    private string playerName = "Default Player";
+    public int reconnectLimit = 5;
     private string ipAddress = "127.0.0.1";
     private int portNumber = 26500;
     private bool isReconnecting = false;
+    private int reconnectAttempts = 0;
     private float timeToReconnect;
+    private GameObject connUIInstance, cInfo;
 
-    private int UIStatus = 0;
-
-    private const int CLIENT_UI = 1;
-
-    /* Could be used to implement a server status UI */
-    private const int SERVER_UI = 2;
 
 	// Use this for initialization
 	void Start () {
+        connUIInstance = GameObject.Find("ConnectionInfoCanvas(Clone)");
         if(Network.isServer)
         {
             SpawnPlatform();
             SpawnPlayer();
+            Destroy(connUIInstance);
         }
+        // Otherwise, treat the game as a client
         else
         {
-            /*// Save the Host connection information
-            ipAddress = Network.connections[0].ipAddress;
-            portNumber = Network.connections[0].port;
-            // Disconnect and reconnect to ensure prefabs instantiate in the 
-            // correct location
-            Network.Disconnect();
-            isReconnecting = true;
-            timeToReconnect = (Time.time + 1);*/
-            GameObject cInfo = GameObject.Find("ConnectionInfo");
+            // Find the conecting info game object that will tell us how to log
+            // onto the server
+            cInfo = GameObject.Find("ConnectionInfo");
+            // Grab the connection info script
             ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();
-            Debug.Log(cInfoScript.ipAddress[0]);
+            // Create a UI element to notify the player the game is trying to 
+            // connect to the server
+            // Attempt to connect to the server
             Network.Connect(cInfoScript.ipAddress, cInfoScript.portNumber);
+            // Set the reconnection timer
+            timeToReconnect = Time.time + 3;
         }
 
 	}
-
+    void OnFailedToConnect(NetworkConnectionError error)
+    {
+        // Setup the script to reconnect
+        isReconnecting = true;
+        reconnectAttempts++;
+    }
     void Update()
     {
+        // Try to reconnect if connection failed
         if(isReconnecting && Time.time > timeToReconnect)
         {
             Network.Connect(ipAddress, portNumber);
             isReconnecting = false;
+        }
+        // We've tried to reconnect to many times. Terminating connecting
+        else if (reconnectAttempts > reconnectLimit)
+        {
+            // Prevent multiple connection info objects from existing
+            Destroy(cInfo);  
+            MiscFunctions func = new MiscFunctions();
+            func.Load("MainMenu");
         }
     }
 
 
     void OnConnectedToServer()
     {
-        //SpawnPlayer();
+        // Destroy the UI element telling the player they're connecting and
+        // throw them into the game
+        Destroy(connUIInstance);
         SpawnPlayer();
     }
    

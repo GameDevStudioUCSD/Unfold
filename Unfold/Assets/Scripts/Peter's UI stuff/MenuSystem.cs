@@ -34,6 +34,7 @@ public class MenuSystem : MonoBehaviour {
 		}
 		if (this.mainMenuButton != null) {
 			this.mainMenuButton.onClick.AddListener(delegate() {
+                Network.Disconnect();
 				Application.LoadLevel("MainMenu");
 			});
 		}
