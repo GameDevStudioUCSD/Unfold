@@ -19,7 +19,7 @@ public class GamePanelScript : MonoBehaviour {
 
 	public void Start() {
 		playerLocal = GameObject.Find("PlayerLocal");
-		uimenu = GameObject.Find ("Prototype Book UI(Clone)");
+		uimenu = GameObject.Find ("Book UI(Clone)");
 		tutorial = GameObject.Find ("StartTutorial").GetComponent<NetworkCreateGame>();
 	}
 

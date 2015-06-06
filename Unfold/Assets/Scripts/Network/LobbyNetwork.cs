@@ -20,7 +20,7 @@ public class LobbyNetwork : MonoBehaviour {
     public GameObject connUIPrefab;
 
     public int reconnectLimit = 5;
-    private string ipAddress = "127.0.0.1";
+    private string[] ipAddress = { "127.0.0.1"} ;
     private int portNumber = 26500;
     private bool isReconnecting = false;
     private int reconnectAttempts = 0;
@@ -45,10 +45,11 @@ public class LobbyNetwork : MonoBehaviour {
             cInfo = GameObject.Find("ConnectionInfo");
             // Grab the connection info script
             ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();
-            // Create a UI element to notify the player the game is trying to 
-            // connect to the server
+            //Store the ip address and port number
+            ipAddress = cInfoScript.ipAddress;
+            portNumber = cInfoScript.portNumber;
             // Attempt to connect to the server
-            Network.Connect(cInfoScript.ipAddress, cInfoScript.portNumber);
+            Network.Connect(ipAddress, portNumber);
             // Set the reconnection timer
             timeToReconnect = Time.time + 3;
         }
@@ -72,7 +73,7 @@ public class LobbyNetwork : MonoBehaviour {
         else if (reconnectAttempts > reconnectLimit)
         {
             // Prevent multiple connection info objects from existing
-            Destroy(cInfo);  
+            GameObject.Destroy(cInfo);  
             MiscFunctions func = new MiscFunctions();
             func.Load("MainMenu");
         }

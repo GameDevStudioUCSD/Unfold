@@ -34,8 +34,8 @@ abstract public class TutorialMovement : Movement {
 		detectionRange = closeDetectRange;
 		farDetectRange = closeDetectRange + 5;
 		
-
-	}
+       
+    }
 	
 	// Update is called once per frame
 	void Update()

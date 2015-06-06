@@ -29,11 +29,12 @@ public class NetworkCreateGame : MonoBehaviour
     }
     void OnTriggerEnter(Collider collider)
     {
-		if (active) {
-            GameObject.Instantiate(connectingUI);
-            DontDestroyOnLoad(connectingUI);
+        if (active)
+        {
+            GameObject connUI = (GameObject)GameObject.Instantiate(connectingUI);
+            GameObject.DontDestroyOnLoad(connUI);
             startTime = Time.time + 0.3f;
-		}
+        }
     }
 
     void OnPlayerDisconnected(NetworkPlayer networkPlayer)
