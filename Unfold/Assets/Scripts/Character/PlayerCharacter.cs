@@ -57,6 +57,9 @@ public class PlayerCharacter : Character {
 
 	/* Is player attacking normally or with ability? */
 	private bool usingAbility = false;
+    
+    /* Used by animator to prevent multiple attacks from animating */
+    public bool lockAttackAnimation = false;
 
 	private GameObject floor;
 
@@ -96,12 +99,21 @@ public class PlayerCharacter : Character {
 			Debug.Log("Hammer available!");
 			hammerCooldown = 0;
 		}
-
+        if (!animator.GetBool("Walking") && animator.GetInteger("Attack") != 0)
+        {
+            lockAttackAnimation = true;
+            animator.SetBool("Walking", false);
+        }
+        if(!animator.GetBool("Walking") && lockAttackAnimation)
+        {
+            lockAttackAnimation = false;
+            animator.SetInteger("Attack", 0);
+        }
 		if (Time.time > nextAttackTime) {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if (!this.animator.GetBool("Walking") && nView.isMine) {
+			if (this.animator.GetInteger("Attack") == 0 && nView.isMine) {
 				foreach (Touch t in Input.touches) {
 
 
@@ -114,7 +126,7 @@ public class PlayerCharacter : Character {
 						bool horizontalAttack = Mathf.Abs(deltaY / deltaX) < 1f;
 						bool verticalAttack = Mathf.Abs(deltaY / deltaX) > 1f;
 
-						if (distance > 100f && nView.isMine ) {
+						if ( distance > 100f && nView.isMine ) {
 							if (horizontalAttack) {
 								if (deltaX > 0)
 									this.animator.SetInteger("Attack", 2);
@@ -141,7 +153,7 @@ public class PlayerCharacter : Character {
 			}
 
 			// For testing. Walking and attacking at the same time is allowed here
-            if (nView.isMine)
+            if (this.animator.GetInteger("Attack") == 0 && nView.isMine)
             {
                 if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
@@ -149,6 +161,7 @@ public class PlayerCharacter : Character {
                     this.Attack();
                     this.createPath();
                     this.animator.SetInteger("Attack", 4);
+                    Debug.Log("Running attacking animator scripts!");
                 }
                 else if (Input.GetKeyUp(KeyCode.Alpha2))
                 {
