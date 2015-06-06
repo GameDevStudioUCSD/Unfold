@@ -101,7 +101,7 @@ public class PlayerCharacter : Character {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if (!this.animator.GetBool("Walking")) {
+			if (!this.animator.GetBool("Walking") && nView.isMine) {
 				foreach (Touch t in Input.touches) {
 
 

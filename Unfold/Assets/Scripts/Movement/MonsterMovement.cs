@@ -24,9 +24,9 @@ abstract public class MonsterMovement : Movement {
 	// Use this for initialization
 	void Start () {
 		walls = mazeGen.getWalls ();
-		Square initSqr = getCurrSquare (transform.position.x, transform.position.z);
+		lastSquare = getCurrSquare (transform.position.x, transform.position.z);
 
-		bool[] sides = getSides (initSqr, transform.position.x, transform.position.z);
+		bool[] sides = getSides (lastSquare, transform.position.x, transform.position.z);
 
 		direction = 3; // Quaternion.identity
 		playerDetected = false;
@@ -58,39 +58,49 @@ abstract public class MonsterMovement : Movement {
     }
     private void planMovement()
     {
-        if (stunned == 0)
+        try
         {
-			// Move if not attacking
-            if (!attacking)
+            if (stunned == 0)
             {
-                try
+                // Move if not attacking
+                if (!attacking)
                 {
-                    lastSquare = getCurrSquare(transform.position.x, transform.position.z);
-                }
-                catch (System.Exception e)
-                {
+                    try
+                    {
+                        lastSquare = getCurrSquare(transform.position.x, transform.position.z);
+                    }
+                    catch (System.Exception e)
+                    {
 
+                    }
+                    // Move towards the player if in sight
+                    approachPlayer();
+                    if (!playerDetected && Network.isServer)
+                    {
+                        // Navigates the maze
+                        idleManeuver();
+                    }
+                    if (Network.isServer)
+                        maneuver();
                 }
-                // Move towards the player if in sight
-                approachPlayer();
-                if (!playerDetected && Network.isServer)
+
+                // Attack if not moving
+                else
                 {
-					// Navigates the maze
-                    idleManeuver();
+                    doAttack();
                 }
-                if( Network.isServer )
-                    maneuver();
             }
-
-			// Attack if not moving
             else
             {
-                doAttack();
+                stunned -= 1;
             }
         }
-        else
+        catch (System.Exception e)
         {
-            stunned -= 1;
+            float x = lastSquare.getRow() * mazeGen.wallSize;
+            float z = lastSquare.getCol() * mazeGen.wallSize;
+            Vector3 resetVector = new Vector3( x, transform.position.y, z);
+            transform.position = resetVector;
         }
     }
 	abstract public void maneuver ();
