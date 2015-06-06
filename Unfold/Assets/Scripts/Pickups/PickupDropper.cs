@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class PickupDropper: MonoBehaviour {
 	
@@ -18,15 +19,17 @@ public class PickupDropper: MonoBehaviour {
 
 	public void dropItem(float x, float z) {
 		rnd = new System.Random(System.Guid.NewGuid().GetHashCode());
-		int numberOfDrops = rnd.Next(maxDrop);
+		int numberOfDrops = rnd.Next(maxDrop + 1);
 		if (debug_On)
 			numberOfDrops = 100;
 		for(int i = 0; i < numberOfDrops; i++)
 		{
+			Debug.Log ("Dropping stuff");
 			int rand = rnd.Next(0, pickupList.Length + 1) - 1;
 			
 			if (rand == -1)
 			{
+				Debug.Log("Break Loop");
 				break;
 			}
 			else
@@ -45,6 +48,7 @@ public class PickupDropper: MonoBehaviour {
 	private GameObject FindSpawnItem( int i )
 	{
 		int random = rnd.Next(weightedProbability.Length);
-		return (weightedProbability[i] > weightedProbability[random])? pickupList[i]:pickupList[random];
+		int maxIndex = weightedProbability.ToList().IndexOf(weightedProbability.Max());
+		return (weightedProbability[i] > random)? pickupList[i]:pickupList[maxIndex];
     }
 }
