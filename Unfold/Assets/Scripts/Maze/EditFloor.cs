@@ -52,6 +52,8 @@ public class EditFloor : MonoBehaviour {
     {
 		this.transform.position -= new Vector3(wallSize / 2, 0, wallSize / 2);
         transform.localScale += new Vector3((wallSize * rows / 10) - 1, 0, (wallSize * cols / 10) - 1);
+        Renderer rend = GetComponent<Renderer>();
+        rend.material.mainTextureScale = new Vector2(rows, cols);
     }
     [RPC]
     public void UpdateTexture( int texture)
@@ -61,6 +63,7 @@ public class EditFloor : MonoBehaviour {
         this.levelType = actualTexture;
         this.isLevelSet = true;
         TextureController tController = new TextureController(actualTexture);
-        GetComponent<Renderer>().material.mainTexture = tController.GetFloorTexture();
+        Renderer rend = GetComponent<Renderer>();
+        rend.material.mainTexture = tController.GetFloorTexture();
     }
 }
