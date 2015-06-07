@@ -41,9 +41,9 @@ public class ExitCollision : MonoBehaviour {
 	}
 
 	public void updateGlobalStats(Collider other) {
-		if (other.GetComponent<HitDetector> () != null) {
-			if (!this.globalStats.gameObject.activeSelf) {
-				this.globalStats.gameObject.SetActive(true);
+		if (other.GetComponent<HitDetector>() != null) {
+			if (!this.globalStats.gameOver) {
+				this.globalStats.gameOver = true;
 				PlayerCharacter winner = (PlayerCharacter)other.GetComponentInParent<PlayerCharacter>();
 				this.globalStats.collectData(winner);
 			}

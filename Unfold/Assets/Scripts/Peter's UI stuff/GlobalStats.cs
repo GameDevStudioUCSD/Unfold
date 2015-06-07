@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GlobalStats : MonoBehaviour {
 
+	public bool gameOver { get; set; }
+
 	public PlayerCharacter winner { get; private set; }
 
 	public PlayerCharacter[] notWinners { get; private set; }
@@ -10,7 +12,8 @@ public class GlobalStats : MonoBehaviour {
 
 	private float timeSpent;
 
-	public void Start() {
+	public void OnEnable() {
+		this.gameOver = false;
 		this.starttime = Time.time;
 	}
 
@@ -18,5 +21,6 @@ public class GlobalStats : MonoBehaviour {
 		this.timeSpent = Time.time - this.starttime;
 		this.winner = winner;
 		this.notWinners = (PlayerCharacter[])Object.FindObjectsOfType<PlayerCharacter>();
+		Object.DontDestroyOnLoad(this.gameObject);
 	}
 }
