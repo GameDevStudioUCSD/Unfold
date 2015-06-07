@@ -24,10 +24,12 @@ public class RecursiveMaze : MazeGenerator {
         for(int r = 0; r < Rows; r++)
         {
             walls[r, Cols - 1].hasEast = true;
+            walls[r, 0].hasWest = true;
         }
         for(int c = 0; c < Cols; c++)
         {
             walls[Rows - 1, c].hasSouth = true;
+            walls[0, c].hasNorth = true;
         }
     }
     
