@@ -1,4 +1,5 @@
-Lead Project Designer				Boming Eric Cheng
+Lead Project Designers				Boming Eric Cheng
+														Michael Gonzalez
 
 Lead Gameplay Designer			Alec Brickner
 
@@ -7,8 +8,6 @@ Lead Concept and UI Artist		Mai Dinh
 Lead Art Designer					Gavin Badillo
 
 Modeller and Animator				Patrick Doanh Pham
-
-Lead Algorithms Designer		Michael Gonzalez
 
 Lead UI Designer						Peter Vugia
 

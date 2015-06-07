@@ -32,6 +32,13 @@ public class MasterServerManager : MonoBehaviour{
     }
     public void ConnectToGame(int hostIndex, GameObject connectionInfo)
     {
+        if (!IndexInRange(--hostIndex, gameList.Length, "ConnectToGame"))
+        {
+            Debug.Log("Game Index: " + hostIndex);
+            Debug.Log("Game List: " + gameList);
+            Debug.Log("Game List Length: " + gameList.Length);
+            return;
+        }
         lastConnectionAttempt = gameList[hostIndex].ip;
         GameObject cInfo = (GameObject)Instantiate(connectionInfo);
         ConnectionInfo cInfoScript = cInfo.GetComponent<ConnectionInfo>();

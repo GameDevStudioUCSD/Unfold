@@ -14,10 +14,13 @@ public class NetworkManager : MonoBehaviour {
     public GameObject spawnSquare;
 	public GameObject mazeGenerator;
 	public GameObject skPrefab;
+    public GameObject networkError;
     public bool isGameScene = false;
 
 	private MazeGeneratorController mapCreator;
     private NetworkView nView;
+    private bool loadMainMenu;
+    private float timer = 9000000000000;
     
     void Start()
     {
@@ -105,5 +108,25 @@ public class NetworkManager : MonoBehaviour {
     {
         Network.RemoveRPCs(player);
         Network.DestroyPlayerObjects(player);
+    }
+    void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        if(info == NetworkDisconnection.LostConnection)
+        {
+            timer = Time.time + 3;
+            loadMainMenu = true;
+            GameObject errorMsg;
+            errorMsg = (GameObject)Instantiate(networkError);
+            ErrorText errorText = errorMsg.GetComponent<ErrorText>();
+            errorText.SetErrorText("Lost connection to the server!");
+        }
+    }
+    void Update()
+    {
+        if (Time.time > timer && loadMainMenu)
+        {
+            MiscFunctions func = new MiscFunctions();
+            func.Load("MainMenu");
+        }
     }
 }
