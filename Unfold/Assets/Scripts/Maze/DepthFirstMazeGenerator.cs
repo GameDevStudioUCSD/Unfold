@@ -25,10 +25,10 @@ public class DepthFirstMazeGenerator : MazeGenerator
     }
 
     //Function determines the entrance to start building the maze
-    void selectEntrance()
-    {
+    public void selectEntrance()
+	{
+		base.selectEntrance();
 		Direction edge = this.randomEdge();
-        base.selectEntrance();
         switch (edge)
         {
             case Direction.North:

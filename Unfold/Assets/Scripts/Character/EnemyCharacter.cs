@@ -112,13 +112,6 @@ public class EnemyCharacter : Character {
 			chr.removeAttackCollider (this.GetComponent<Collider>());
 		}
 		
-		if(particles != null)
-		{
-            Transform monsterTransform;
-            monsterTransform = GetComponent<Transform>();
-            GameObject particleObj = (GameObject)Network.Instantiate(particles, monsterTransform.position + Vector3.up, Quaternion.identity, 0);
-		}
-		
 		Network.Destroy(GetComponent<NetworkView>().viewID);
         PickupDropper dropperScript = dropper.GetComponent<PickupDropper>();
 		dropperScript.dropItem(transform.position.x, transform.position.z);

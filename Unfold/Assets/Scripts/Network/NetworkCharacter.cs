@@ -96,17 +96,13 @@ public abstract class NetworkCharacter : MonoBehaviour {
     }
     void UpdatePosition(Vector3 a, Vector3 b)
     {
-        if (a == null || b == null)
-            return;
         if (Vector3.Distance(a, b) < .1f)
             return;
         trans.position = Vector3.Lerp(a, b, lerpVal);
     }
-        
+
     void UpdateRotation(Quaternion a, Quaternion b)
     {
-        if (a == null || b == null)
-            return;
         if (Quaternion.Angle(a, b) < 1)
             return;
         trans.rotation = Quaternion.Slerp(a, b, lerpVal);

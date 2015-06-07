@@ -3,16 +3,13 @@ using System.Collections;
 
 public class EditWalls : MonoBehaviour {
 	public bool debugOn = false;
-	//public GameObject container;
 	private Transform wallTransform;
 	public int health = 3;
     public bool canDestroy = true;
 
 	public MazeGeneratorController mazegen;
-	private MazeInfo info;
 
 	void Start() {
-		info = mazegen.mi;
         GameObject wallRoot = null;
         if (canDestroy)
             wallRoot = GameObject.Find("Maze");

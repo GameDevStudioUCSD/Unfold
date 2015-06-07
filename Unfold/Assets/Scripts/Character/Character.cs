@@ -45,11 +45,6 @@ public abstract class Character : MonoBehaviour {
 		ArrayList ac = this.attackCollider;
 
 		for(int i = ac.Count - 1; i >= 0; i--) {
-			/*
-			this.attackCollider.rigidbody.AddForce(Vector3.forward * 100f, ForceMode.Acceleration);
-			this.attackCollider.rigidbody.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
-			*/
-
 
 			Character target = (Character)((Collider) ac[i]).gameObject.GetComponent("Character");
 			if (!target)

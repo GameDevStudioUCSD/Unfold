@@ -16,7 +16,6 @@ public class SpawnRate  {
     private int[] probs;
     private int[] probWeightSummed;
     private int totalWeight;
-    private bool hasSetup = false;
 
     public Monster SelectMonster()
     {
@@ -43,7 +42,6 @@ public class SpawnRate  {
         probs = new int[] { spanterRate, robirdRate, inhabitantRate, stewardRate, masterRate };
         probWeightSummed = new int[probs.Length];
         CalculateTotalWeight();
-        hasSetup = true;
     }
     override public string ToString() { 
        string retVal = "Level Name: " + levelName;

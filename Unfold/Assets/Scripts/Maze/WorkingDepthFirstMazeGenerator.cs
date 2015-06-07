@@ -8,12 +8,10 @@ using UnityEngine;
 public class WorkingDepthFirstMazeGenerator : MazeGenerator
 {
     private int depth = 0;
-    private float diagonalLength;
 	public WorkingDepthFirstMazeGenerator(int r, int c)
 	{
         this.Rows = r;
         this.Cols = c;
-        this.diagonalLength = Mathf.Sqrt(Mathf.Pow(r, 2) + Mathf.Pow(c, 2));
 	}
 
     override public void run(Square[,] cells, Square end)
@@ -26,10 +24,10 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
     }
 
     //Function determines the entrance to start building the maze
-    void selectEntrance()
-    {
+	public void selectEntrance()
+	{
+		base.selectEntrance();
 		Direction edge = this.randomEdge();
-        base.selectEntrance();
         switch (edge)
         {
             case Direction.North:
@@ -74,7 +72,6 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
             }
         }
         Stack neighbors = checkNeighbors(r, c);
-        bool hasFoundExit = start == exit;
         while (neighbors.Count > 0)
         {
             Square next = (Square)neighbors.Pop();
@@ -82,7 +79,6 @@ public class WorkingDepthFirstMazeGenerator : MazeGenerator
 			{
 				continue;
 			}
-            float endDist = Square.DistanceBetween(start, curr);
             generateMaze(next.getRow(), next.getCol(), next.wallToDestroy, false);
             depth++;
             //Switch statement destroys the wall inside the current cell which

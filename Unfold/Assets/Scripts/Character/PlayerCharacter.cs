@@ -50,11 +50,6 @@ public class PlayerCharacter : Character {
 	private Item armor = null;
 	private Item boots = null;
 
-	/*0 for no ability, other numbers for different types of abilities*/
-	private int abilityType = 0;
-	/*0 for no ability, 1 for basic ability, 2 for adept ability*/
-	private int abilityLevel = 0;
-
 	/* Is player attacking normally or with ability? */
 	private bool usingAbility = false;
     
@@ -73,7 +68,6 @@ public class PlayerCharacter : Character {
 	 * Set to 0 to activate this ability, each time hammer is used, this variable will set back to HAMMER_COOLDOWN, and decremented by 1 in each update
 	 */
 	public int hammerCooldown = -1;
-	private int HAMMER_COOLDOWN = 100;
 	public EditWalls wall;
 
 	//used for special abilities
@@ -158,9 +152,7 @@ public class PlayerCharacter : Character {
                 {
                     this.attackType = 1;
                     this.Attack();
-                    this.createPath();
                     this.animator.SetInteger("Attack", 4);
-                    Debug.Log("Running attacking animator scripts!");
                 }
                 else if (Input.GetKeyUp(KeyCode.Alpha2))
                 {
@@ -206,7 +198,6 @@ public class PlayerCharacter : Character {
 		Vector3 movement = new Vector3(input.x, 0f, input.y);
 		movement = Camera.main.transform.TransformDirection(movement);
 		movement.y = 0f;
-		//		movement.Normalize();	// Allow movement sensitivity
 
 		StopCoroutine("RotateCoroutine");
 		StartCoroutine("RotateCoroutine", movement);
@@ -260,10 +251,6 @@ public class PlayerCharacter : Character {
 		return hasAttacked;
 	}
 
-	public void createPath() {
-		ParticleGenerator p = (ParticleGenerator) GetComponentInChildren<ParticleGenerator>();
-	}
-
 	public override bool TakeDamage(int enDamage, int enAttackType) {
 
 		SoundController.PlaySound(GetComponent<AudioSource>(), attackSound[3]);
@@ -293,7 +280,6 @@ public class PlayerCharacter : Character {
 		weapon = null;
 		armor = null;
 		boots = null;
-		checkItemsForSet();
 
 		removeWeapon();
 	}
@@ -334,7 +320,6 @@ public class PlayerCharacter : Character {
 
 	public void addHammer() {
 		this.hammerCooldown = 0;
-		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
 	}
 
 	public void addSword() {
@@ -427,26 +412,7 @@ public class PlayerCharacter : Character {
 
 	public void removeWeapon() {
 		this.hammerCooldown = -1;
-		//		AttackDetector detector = (AttackDetector) GetComponentInChildren<AttackDetector>();
-		//		detector.transform.localPosition = new Vector3(0, 0.4f, 2);
-		//		detector.transform.localScale = new Vector3(2.5f, 3.5f, 3.5f);
 	}
-
-	/*public void equipItem(Item newItem) {
-		switch (newItem.itemType) {
-			case 0:
-				this.weapon = newItem;
-				break;
-			case 1:
-				this.armor = newItem;
-				break;
-			case 2:
-				this.boots = newItem;
-				break;
-		}
-		updateBonusStats();
-		checkItemsForSet();
-	}*/
 
 	public void updateWeaponModel(int modelID) {
 		if (modelID < 0)
@@ -487,34 +453,6 @@ public class PlayerCharacter : Character {
 		}
 
 		updateStats();
-	}
-
-	public void checkItemsForSet() {
-		if (weapon && armor) {
-			if (weapon.setVal == armor.setVal) {
-				abilityType = weapon.setVal;
-				abilityLevel = 1;
-			}
-		}
-		if (weapon && boots) {
-			if (weapon.setVal == boots.setVal) {
-				abilityType = weapon.setVal;
-				abilityLevel = 1;
-			}
-		}
-		if (armor && boots) {
-			if (armor.setVal == boots.setVal) {
-				abilityType = armor.setVal;
-				abilityLevel = 1;
-			}
-		}
-
-		if (weapon && armor && boots) {
-			if (weapon.setVal == armor.setVal && weapon.setVal == boots.setVal) {
-				abilityType = weapon.setVal;
-				abilityLevel = 2;
-			}
-		}
 	}
 
 	public int calculateScore() {

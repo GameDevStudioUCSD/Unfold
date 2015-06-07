@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class BirdMovement : MonsterMovement {
-	Vector3 vertical = Vector3.up;
 	float t = 0f;
 	float del = .07f;
 
@@ -11,12 +10,6 @@ public class BirdMovement : MonsterMovement {
 
 	public override void maneuver()
 	{
-		/*if (transform.position.y < 4.0f)
-			transform.Translate (Vector3.up * SPEED);
-
-		else if (transform.position.y > 5.0f)
-			transform.Translate (Vector3.up * SPEED);*/
-
 		if(playerDetected) {
 			if(transform.position.y > 2) {
 				float change = -del * Mathf.Sin (t);

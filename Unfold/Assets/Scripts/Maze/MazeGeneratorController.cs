@@ -21,29 +21,29 @@ public class MazeGeneratorController : MonoBehaviour {
 		Recursive
 	};
 
-    public int Rows = 20;
-    public int Cols = 20;
-    public float wallSize = 10;
-    public float wallHeight = 10;
-    public AlgorithmChoice algorithm;
-    public TextureController.TextureChoice levelType;
-    public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
-    public GameObject[] spawnList;
+	public int Rows = 20;
+	public int Cols = 20;
+	public float wallSize = 10;
+	public float wallHeight = 10;
+	public AlgorithmChoice algorithm;
+	public TextureController.TextureChoice levelType;
+	public GameObject NorthWall, SouthWall, EastWall, WestWall, Floor, Ceiling, Player, ExitMarker;
+	public GameObject[] spawnList;
 	public FogOfWar fogOfWar;
-    [Range (1, 100)]
-    public int spawningRate = 1;
+	[Range (1, 100)]
+	public int spawningRate = 1;
 
-    private Square[,] walls;
-    private Square exit;
-    private Square start;
-    private Square curr;
-    private MazeGenerator generator;
-    private SortedDictionary<string, GameObject> westWalls;
-    private GameObject innerWall;
-    private GameObject gameTypeObj;
+	private Square[,] walls;
+	private Square exit;
+	private Square start;
+	private Square curr;
+	private MazeGenerator generator;
+	private SortedDictionary<string, GameObject> westWalls;
+	private GameObject innerWall;
+	private GameObject gameTypeObj;
 
 	public MazeInfo mi;
-    public Spawner spawner;
+	public Spawner spawner;
 
 	// Use this for initialization
 	public void Start () {

@@ -10,7 +10,6 @@ public class MasterServerManager : MonoBehaviour{
     /// </summary>
     public const string gameTitle = "UnfoldX";
     private HostData[] gameList;
-    private string clientConnectErr = "Error while connecting to host: ";
     private int portNumber = 26500;
     private string[] lastConnectionAttempt;
     public const uint CANCONNECT = 0x8000000;

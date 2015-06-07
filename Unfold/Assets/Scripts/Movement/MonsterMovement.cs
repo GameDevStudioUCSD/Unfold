@@ -109,35 +109,6 @@ abstract public class MonsterMovement : Movement {
 	abstract public void doAttack();
 	abstract public bool canAttack();
 
-	/*protected void detectPlayer() {
-		int checkingDir = direction;
-		bool turnCheck = false;
-		Vector3 checkingPos = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
-		for (int i=0; i<detectionRange; i++) {
-			if (turnCheck && isInCenter ()) {
-				Square curr = getCurrSquare (checkingPos.x, checkingPos.z);
-				bool[] sides = getSides (curr, checkingPos.x, checkingPos.z);
-				if (isFork (sides)) {
-					return;
-				} else if (isCorner (sides)) {
-					return;
-				} else if (isDeadEnd (sides)) {
-					return;
-				}
-				turnCheck = false;
-			} else if (!turnCheck && movingVert () && Mathf.Abs (checkingPos.x - Mathf.Round (checkingPos.x)) < .2 && 
-				Mathf.Round (checkingPos.x) % mazeGen.wallSize == Mathf.Round (mazeGen.wallSize / 2)) {
-			
-				turnCheck = true;
-			} else if (!turnCheck && movingHoriz () && Mathf.Abs (checkingPos.z - Mathf.Round (checkingPos.z)) < .2 && 
-				Mathf.Round (checkingPos.z) % mazeGen.wallSize == Mathf.Round (mazeGen.wallSize / 2)) {
-			
-				turnCheck = true;
-			}
-		}
-	}
-	*/
-
     public void SetTarget(GameObject t)
     {
         target = t;
@@ -145,7 +116,6 @@ abstract public class MonsterMovement : Movement {
 	protected void approachPlayer() {
         GameObject player;
         if (target == null) {
-            //player = GameObject.FindGameObjectWithTag("Player");
             return;
         }
         else

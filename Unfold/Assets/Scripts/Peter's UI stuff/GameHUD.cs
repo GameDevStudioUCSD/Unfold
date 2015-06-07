@@ -83,7 +83,6 @@ public class GameHUD : MonoBehaviour {
 			if (currentTouch.phase == TouchPhase.Began) {
 				Vector3 worldPosition = this.UICamera.ScreenToWorldPoint(currentTouch.position);
 
-				// TODO: Add pause button functionality
 				if (!this.Joystick.IsStickActive()) {
 				}
 			}
