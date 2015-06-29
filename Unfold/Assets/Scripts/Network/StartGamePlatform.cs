@@ -44,7 +44,9 @@ public class StartGamePlatform : MonoBehaviour {
     [RPC]
     void StartGame()
     {
-        Instantiate(loadedScene, Vector3.zero, Quaternion.identity);
+        //Instantiate(loadedScene, Vector3.zero, Quaternion.identity);
+        MiscFunctions peter = new MiscFunctions();
+        peter.Load("GameScene");
         if(Network.isServer)
         {
             Network.maxConnections = 0;
