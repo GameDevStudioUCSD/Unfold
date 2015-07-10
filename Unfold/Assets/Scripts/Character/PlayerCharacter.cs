@@ -106,7 +106,7 @@ public class PlayerCharacter : Character {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
 
-			if (this.animator.GetInteger("Attack") == 0 && nView.isMine) {
+			if (!this.animator.GetBool("Walking") && nView.isMine) {
 				foreach (Touch t in Input.touches) {
 
 
@@ -146,7 +146,7 @@ public class PlayerCharacter : Character {
 			}
 
 			// For testing. Walking and attacking at the same time is allowed here
-            if (this.animator.GetInteger("Attack") == 0 && nView.isMine)
+            if (!this.animator.GetBool("Walking") && this.animator.GetInteger("Attack") == 0 && nView.isMine)
             {
                 if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
