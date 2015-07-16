@@ -19,23 +19,19 @@ public class StartGamePlatform : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
-        {
+		if(other.GetComponentInParent<Transform>().gameObject.tag == "Player")
             numberOfPlayers++;
-        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player")
-        {
-            numberOfPlayers--;
-        }
+		if(other.GetComponentInParent<Transform>().gameObject.tag == "Player")
+        	numberOfPlayers--;
     }
 
     void Update()
     {
-        if(numberOfPlayers >= Network.connections.Length + 1)
+        if(numberOfPlayers > Network.connections.Length  )
         {
             GetComponent<NetworkView>().RPC("StartGame", RPCMode.All);
         }
