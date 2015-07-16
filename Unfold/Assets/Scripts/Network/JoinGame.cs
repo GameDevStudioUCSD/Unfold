@@ -16,11 +16,13 @@ public class JoinGame : MonoBehaviour {
     private TextureController.TextureChoice gameType;
     private SpriteController spriteController;
     private GameObject playerLocal, uiMenu;
+    private float startTime = 0;
+    private bool shouldRebuildButton = true;
 
     public GameObject buttonPrefab, connectionInfo;
     public int connectionRetryAttempts = 2;
     public bool debugOn = true;
-    public bool isSpoofingServer = false;
+    public bool isSpoofingServer = true;
 
     // MonoBehaviour methods
 	void Start() {
@@ -31,8 +33,22 @@ public class JoinGame : MonoBehaviour {
         playerLocal = GameObject.Find("PlayerLocal");
         uiMenu = GameObject.Find("Book UI(Clone)");
         BuildButtons();
-        
 	}
+
+    void OnEnable()
+    {
+        startTime = Time.time;
+    } 
+
+    void Update()
+    {
+        Debug.Log(shouldRebuildButton);
+        if (shouldRebuildButton && Mathf.FloorToInt(Time.time - startTime) % 30 == 1 )
+        {
+            BuildButtons();
+            shouldRebuildButton = false;
+        }
+    }
     
     void OnFailedToConnect(NetworkConnectionError error)
     {
