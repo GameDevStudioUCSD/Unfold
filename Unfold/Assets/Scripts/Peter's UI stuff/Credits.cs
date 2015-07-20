@@ -10,7 +10,6 @@ public class Credits : MonoBehaviour {
 	/// <summary>
 	/// File to read from containing credits information.
 	/// </summary>
-	public string creditsFile;
 
 	/// <summary>
 	/// Text object displaying the credits in the game UI.
@@ -23,7 +22,7 @@ public class Credits : MonoBehaviour {
 	public float speed = 1.0f;
 
 	public void Awake() {
-		this.creditsText.text = File.ReadAllText(Application.dataPath + this.creditsFile);
+		creditsText.alignment = TextAnchor.MiddleCenter;
 	}
 
 	public void Update() {
