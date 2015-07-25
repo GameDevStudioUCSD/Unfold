@@ -15,6 +15,7 @@ public class CreateGame : MonoBehaviour {
     public Text gameNameInputField;
     public Transform gameTypeToggleGroup;
     public GameObject errorMessage;
+    public GameObject singlePlayerMenu;
 
 	public AudioClip selectionClip;
 	public AudioSource audioSource;
@@ -189,9 +190,17 @@ public class CreateGame : MonoBehaviour {
                 errorText.SetErrorText("Please enter a game name!");
                 break;
             case HostError.ServerFailedToInstantiate:
+                if(singlePlayerMenu != null)
+                {
+                    Object.Instantiate(singlePlayerMenu);
+                }
                 errorText.SetErrorText("Could not create server!\nAre you connected to the internet?");
                 break;
             case HostError.FailedToConnectToMasterServer:
+                if(singlePlayerMenu != null)
+                {
+                    Object.Instantiate(singlePlayerMenu);
+                }
                 errorText.SetErrorText("Could not connect to Unfold master server");
                 break;
         }
