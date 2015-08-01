@@ -45,10 +45,6 @@ public class FadeUI : MonoBehaviour {
         if (Time.time - startTime > lengthOfFade)
         {
             Destroy(this.GetComponent<Transform>().gameObject);
-            if (initialLogo)
-            {
-            	Application.LoadLevel("MainMenu");
-            }
         }
             
 	}
