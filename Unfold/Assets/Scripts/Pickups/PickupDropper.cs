@@ -10,6 +10,7 @@ public class PickupDropper: MonoBehaviour {
 	public bool debug_On = false;
 	private System.Random rnd;
 	public int spawnOneItem;
+	public bool tutorialMode = false;
 	
 	private string probError = ": Pickup List Array Length does not have assigned probabilities";
 	// Use this for initialization
@@ -23,6 +24,8 @@ public class PickupDropper: MonoBehaviour {
 		int numberOfDrops = rnd.Next(maxDrop + 1);
 		if (debug_On)
 			numberOfDrops = 100;
+		if (tutorialMode)
+			numberOfDrops = 1;
 		for(int i = 0; i < numberOfDrops; i++)
 		{
 			Debug.Log ("Dropping stuff");

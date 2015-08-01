@@ -94,12 +94,12 @@ public class PlayerCharacter : Character {
 		}
         if (!animator.GetBool("Walking") && animator.GetInteger("Attack") != 0)
         {
-            lockAttackAnimation = true;
+            //lockAttackAnimation = true;
             animator.SetBool("Walking", false);
         }
-        if(!animator.GetBool("Walking") && lockAttackAnimation)
+        if(!animator.GetBool("Walking") ) //&& lockAttackAnimation)
         {
-            lockAttackAnimation = false;
+            //lockAttackAnimation = false;
             animator.SetInteger("Attack", 0);
         }
 		if (Time.time > nextAttackTime) {
@@ -126,18 +126,19 @@ public class PlayerCharacter : Character {
 								else
 									this.animator.SetInteger("Attack", 1);
 								this.attackType = 1;
-							} else if (verticalAttack) {
+								this.Attack();
+							} else {
 								if (deltaY < 0)
 									this.animator.SetInteger("Attack", 4);
 								else
 									this.animator.SetInteger("Attack", 3);
 								this.attackType = 2;
-							} else if (deltaX <= 0) {
-								this.attackType = 4;
-							} else if (deltaX > 0) {
-								this.attackType = 8;
+								this.Attack();
 							}
-							this.Attack();
+							//never reached {
+						
+							// }
+
 						}
 					} else if (t.phase == TouchPhase.Ended) {
 						this.initialTouch = new Touch();
