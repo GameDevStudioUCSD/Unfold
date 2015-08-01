@@ -92,7 +92,7 @@ public class PlayerCharacter : Character {
 		if (hammerCooldown != -1 && --hammerCooldown < 0) {
 			hammerCooldown = 0;
 		}
-        if (!animator.GetBool("Walking") && animator.GetInteger("Attack") != 0)
+        /**if (!animator.GetBool("Walking") && animator.GetInteger("Attack") != 0)
         {
             //lockAttackAnimation = true;
             animator.SetBool("Walking", false);
@@ -101,7 +101,7 @@ public class PlayerCharacter : Character {
         {
             //lockAttackAnimation = false;
             animator.SetInteger("Attack", 0);
-        }
+        }*/
 		if (Time.time > nextAttackTime) {
 			this.animator.SetInteger("Attack", 0);
 			//ParticleMovement p = (ParticleMovement) GetComponentInChildren<ParticleMovement>();
