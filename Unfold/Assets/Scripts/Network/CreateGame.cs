@@ -206,7 +206,7 @@ public class CreateGame : MonoBehaviour {
         }
         
     }
-    private void EnterGame()
+    public void EnterGame()
     {
         Destroy(uiMenu);
         MenuWalk walkScript = playerLocal.GetComponent<MenuWalk>();
