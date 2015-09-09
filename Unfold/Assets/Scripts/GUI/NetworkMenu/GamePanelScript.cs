@@ -63,8 +63,8 @@ public class GamePanelScript : MonoBehaviour {
 
 	}
 	
-	public void exitGame()
+	public void ExitGame()
 	{
-		
+		Application.Quit();
 	}
 }
