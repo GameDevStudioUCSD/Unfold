@@ -42,7 +42,7 @@ public class ResultsScreen : MonoBehaviour {
 		                                timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
 		this.timeWasted.text = "Time: " + timeText;
-		this.playerWinLose.text = "Thank you for playing our game!";
+		this.playerWinLose.text = "";
 
 		if (this.sk) {
 			//this.playerScore.text = "Score: " + this.player.calculateScore();

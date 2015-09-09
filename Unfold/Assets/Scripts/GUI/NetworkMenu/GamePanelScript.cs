@@ -62,4 +62,9 @@ public class GamePanelScript : MonoBehaviour {
 		walkScript.DefineLerp(walkScript.endMarker, walkScript.portal);
 
 	}
+	
+	public void exitGame()
+	{
+		
+	}
 }
