@@ -16,6 +16,7 @@ public class MenuWalk : MonoBehaviour {
         to = start.position;
         from = end.position;
 		journeyLength = Vector3.Distance(to, from);
+		speed = 5;
         foreach(Transform player in this.GetComponent<Transform>())
         {
             playerCharacter = player.GetComponent<PlayerCharacter>();
@@ -32,6 +33,9 @@ public class MenuWalk : MonoBehaviour {
 		float distCovered = (Time.time - startTime) * speed;
 		float fracJourney = distCovered / journeyLength;
 		transform.position = Vector3.Lerp(to, from, fracJourney);
+	}
+	public void SetSpeed( float speed ) {
+		this.speed = speed;
 	}
 
 }
