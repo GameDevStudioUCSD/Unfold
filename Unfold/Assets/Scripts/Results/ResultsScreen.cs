@@ -23,7 +23,9 @@ public class ResultsScreen : MonoBehaviour {
 	//public Text playerScore;
 
 	public Text playerWinLose;
-	public GameObject sk;
+	//public Sprite[3] spriteList;
+	//public Image bookImage;
+	private GameObject sk;
     private GameObject scoreKeeper;
 
 	void Start() {
@@ -32,6 +34,7 @@ public class ResultsScreen : MonoBehaviour {
         Network.Disconnect();
 		// Format the time in seconds into an appropriate string
         scoreKeeper = GameObject.Find("ScoreKeeper");
+        sk = GameObject.Find ("sk");
         double finishTime = Time.time;
         if (scoreKeeper != null)
         {
@@ -42,7 +45,9 @@ public class ResultsScreen : MonoBehaviour {
 		                                timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
 		this.timeWasted.text = "Time: " + timeText;
-		this.playerWinLose.text = "";
+		this.playerWinLose.text = "Finish!";
+		
+		
 
 		if (this.sk) {
 			//this.playerScore.text = "Score: " + this.player.calculateScore();
