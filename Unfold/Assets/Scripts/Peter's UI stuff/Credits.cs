@@ -22,10 +22,11 @@ public class Credits : MonoBehaviour {
 	public float speed = 1.0f;
 
 	public void Awake() {
-		creditsText.alignment = TextAnchor.MiddleCenter;
+		//creditsText.alignment = TextAnchor.MiddleCenter;
 	}
 
 	public void Update() {
 		this.creditsText.transform.Translate(Vector3.up * Time.deltaTime * speed);
+		Debug.Log (this.creditsText.GetComponent<RectTransform>().position.y);
 	}
 }
